@@ -51,6 +51,22 @@ Returns a list of all hashed public keys in the crypto object register for the s
 
 `/crypto/list/keys`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
@@ -100,6 +116,22 @@ Generates a new public-private key pair and stores the hashed public key in the 
 
 `/crypto/create/key`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `name` : The name of the key to create. If a key already exists in the crypto object register for this key name then the method will return an error. Accepted values are `auth`, `lisp`, `network`, `sign`, `verify`, `app1`, `app2`, and `app3`.
@@ -142,6 +174,22 @@ The certificate includes the owners genesis hash in the CN field, allowing calli
 
 `/crypto/create/certificate`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -173,6 +221,22 @@ Returns the hashed public key from the crypto object register for the specified 
 #### Endpoint:
 
 `/crypto/get/key`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -212,6 +276,22 @@ Returns the public key (as opposed to the hashed public key that is returned by 
 
 `/crypto/get/publickey`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `name` : The name of the public key to return.
@@ -246,6 +326,22 @@ Returns the private key for a key pair. This method can only be used to obtain t
 
 `/crypto/get/privatekey`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `name` : The name of the private key to return.
@@ -278,6 +374,22 @@ Returns a self-signed x509 certificate for this signature chain valid for 365 da
 
 `/crypto/get/certificate`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -305,6 +417,22 @@ Change the signature scheme used to generate the public-private keys for the use
 #### Endpoint:
 
 `/crypto/change/scheme`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -345,6 +473,22 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 #### Endpoint:
 
 `/crypto/encrypt/data`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -404,6 +548,22 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 
 `/crypto/decrypt/data`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `key` : A 256-bit (32 character) symmetric key to use to decrypt the data. Should only be provided if an external encryption key is known.
@@ -439,6 +599,22 @@ Generates a signature for the data based on the private key for the keyname/user
 #### Endpoint:
 
 `/crypto/sign/data`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -479,6 +655,22 @@ Verifies the signature is correct for the specified public key and data. This me
 
 `/crypto/verify/signature`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `publickey` : The public key to use to verify the signature, base58 encoded.
@@ -505,6 +697,22 @@ Verifies the x509 certificate that was previously obtained from the `crypto/get/
 
 `/crypto/verify/certificate`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `certificate` : The certificate data in PEM format, and base64 encoded.
@@ -526,6 +734,22 @@ The `data` must be supplied as a base64 encoded string. This will be decoded int
 #### Endpoint:
 
 `/crypto/get/hash`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 

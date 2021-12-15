@@ -50,6 +50,22 @@ This will create a new namespace. The API supports an alternative endpoint that 
 
 `/names/create/namespace`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -82,6 +98,22 @@ Retrieves a namespace object. The API supports an alternative endpoint that can 
 #### Endpoint:
 
 `/names/get/namespace`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -116,6 +148,22 @@ This will transfer ownership of an namespace . This is a generic endpoint requir
 #### Endpoint:
 
 `/names/transfer/namespace`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -158,6 +206,22 @@ Namespaces that have been transferred need to be claimed by the recipient before
 
 `/names/claim/namespace`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -194,6 +258,22 @@ This will get the history of a namespace as well as it's ownership. The API supp
 #### Endpoint:
 
 `/names/list/namespace/history`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -252,6 +332,22 @@ This will create a new name. The API supports an alternative endpoint that can i
 
 `/names/create/name`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -305,6 +401,22 @@ The API supports an alternative endpoint that can include the name in the URL. F
 
 `/names/get/name`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `name` : The name identifying the name object. The name should be in the format username:name (for local names) or name.namespace (for names in a global namespace). If the `name` parameter is provided then all other parameters are ignored.
@@ -352,6 +464,22 @@ This method allows the register\_address within a Name object to be changed . Th
 #### Endpoint:
 
 `/names/update/name`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -402,6 +530,22 @@ This will transfer ownership of a name . Only global names or names created in a
 
 `/names/transfer/name`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -443,6 +587,22 @@ Names that have been transferred need to be claimed by the recipient before the 
 
 `/names/claim/name`
 
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -479,6 +639,22 @@ This will get the history of a name as well as it's ownership. The API supports 
 #### Endpoint:
 
 `/names/list/name/history`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
