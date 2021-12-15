@@ -69,7 +69,7 @@ password for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="pin" required="true" %}
-\<pin>
+The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify a user account (such as sending or claiming transactions)
 {% endswagger-parameter %}
 
 {% swagger-response status="201: Created" description="user account created" %}
@@ -186,23 +186,15 @@ This will start a session for your user account with this specific API instance.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="username" required="true" type="" %}
-\<username>
+The username for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="Password" required="true" %}
-\<password>
+The password for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-\<pin>
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="apiuser" %}
-API authentication username
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="apipassword" %}
-API authentication password
+The pin for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="Content-Type" %}
@@ -368,23 +360,23 @@ This will unlock your signature chain and cache the PIN in encrypted memory to b
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" type="1234" %}
-pin
+The PIN for the particular user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="mining" type="true" %}
-enable mining tx's
+This boolean value determines whether the logged in users account can be used for mining.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="notifications" type="true" %}
-enable incoming credit tx's
+This boolean value determines whether the logged in users account can be used for processing notifications
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="staking" type="false" %}
-enable staking tx's
+This boolean value determines whether the logged in users account can be used for staking
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="transactions" type="false" %}
-enable debit tx's
+This boolean value determines whether the logged in users account can be used for creating or claiming transactions
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="user account unlocked" %}
@@ -498,19 +490,19 @@ This will lock your signature chain, making it unavailable for use unless it is 
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="mining" type="false" %}
-enable mining tx's 
+This boolean value locks the user account for mining
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="notifications" type="true" %}
-enable auto credit incoming tx's
+This boolean value locks the users account from processing notifications
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="staking" type="true" %}
-enable staking tx's
+This boolean value locks the users account for staking
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="transactions" type="false" %}
-enable debit tx's
+This boolean value locks the users account from claiming transactions
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="user account unlocked" %}
@@ -651,6 +643,10 @@ new recovery seed to set on this sig chain. This is optional if new_pin or new_p
 **NOTE**
 
 : the recovery seed is case sensitive
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
