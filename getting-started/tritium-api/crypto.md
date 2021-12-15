@@ -39,10 +39,6 @@ The following methods are currently supported by this API
 [`verify/certificate`](crypto.md#verify-certificate)\
 [`get/hash`](crypto.md#get-hash)
 
-***
-
-***
-
 ### `list/keys`
 
 Returns a list of all hashed public keys in the crypto object register for the specified signature chain. If no username/genesis is supplied then the method will default to listing keys for the logged in signature chain.
@@ -51,19 +47,80 @@ Returns a list of all hashed public keys in the crypto object register for the s
 
 `/crypto/list/keys`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/crypto/list/keys" baseUrl="http://api.nexus-interactions.io:8080" summary="list/keys" %}
 {% swagger-description %}
-
+Returns a list of all hashed public keys in the crypto object register for the specified signature chain
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the user account (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the user account optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+If no username/genesis is supplied, in multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to list the keys from. For single-user API mode the session should not be supplied.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="list keys" %}
+```json
+[
+    {
+        "name": "auth",
+        "scheme": "FALCON",
+        "hashkey": "017c682bd04e4f96f6d5988e7de205ea47a53ee0de21ab938bf2ff1bccb0ad2a"
+    },
+    {
+        "name": "network",
+        "scheme": "FALCON",
+        "hashkey": "0198306717f228037301b63c3de29f4e0865ccd3ec81c4a3c6a329b8131cf1b1"
+    },
+    {
+        "name": "app1",
+        "scheme": "BRAINPOOL",
+        "hashkey": "0231012604f483de2ba4e5c901563e0cfb2e0e6da69a220c407e5951ac49529d"
+    },
+  
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// list/keys
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    genesis: "YOUR_GENESIS_HASH", //optional if username is supplied
+    // username: "YOUR_USERNAME", //optional if genesis is supplied
+    // session: "YOUR_SESSION_ID", //optional 
+}
+fetch(`${SERVER_URL}/crypto/list/keys`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "genesis": "YOUR_GENESIS_HASH",  # optional if username is supplied
+    # "username": "YOUR_USERNAME", #optional if genesis is supplied
+    # "session": "YOUR_SESSION_ID", #optional
+}
+response = requests.post(f"{SERVER_URL}/crypto/list/keys", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -116,19 +173,110 @@ Generates a new public-private key pair and stores the hashed public key in the 
 
 `/crypto/create/key`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/crypto/create/key" baseUrl="http://api.nexus-interactions.io:8080" summary="create/key" %}
 {% swagger-description %}
-
+Generates a new public-private key pair and stores the hashed public key in the crypto object register. Users must be logged in to create a new key
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" type="auth" required="true" %}
+The name of the key to create. If a key already exists in the crypto object register for this key name then the method will return an error. Accepted values are 
+
+`auth`
+
+, 
+
+`lisp`
+
+, 
+
+`network`
+
+, 
+
+`sign`
+
+, 
+
+`verify`
+
+, 
+
+`app1`
+
+, 
+
+`app2`
+
+, and 
+
+`app3`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" type="1234" required="true" %}
+The PIN for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the key should be created for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="scheme" type="BRAINPOOL" %}
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
+
+`BRAINPOOL`
+
+ or 
+
+`FALCON`
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="keypair created" %}
+```json
+{
+    "name": "app1",
+    "scheme": "BRAINPOOL",
+    "hashkey": "0231012604f483de2ba4e5c901563e0cfb2e0e6da69a220c407e5951ac49529d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// create/key
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "app1", //Accepted values are auth, lisp, network, sign, verify, app1, app2, and app3.
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    // scheme: "BRAINPOOL" //optional or "FALCON"
+}
+fetch(`${SERVER_URL}/crypto/create/key`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # Accepted values are auth, lisp, network, sign, verify, app1, app2, and app3.
+    "name": "app1",
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "scheme": "BRAINPOOL" #optional or "FALCON"
+}
+response = requests.post(f"{SERVER_URL}/crypto/create/key", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -174,19 +322,71 @@ The certificate includes the owners genesis hash in the CN field, allowing calli
 
 `/crypto/create/certificate`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/crypto/create/certificate" baseUrl="http://api.nexus-interactions.io:8080" summary="create/certificate" %}
 {% swagger-description %}
+Generates a new self-signed x509 certificate for this signature chain and stores a hash of the certificate data in the 
 
+`cert`
+
+ field of the crypto object register. Users must be logged in to create a certificate
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="txid" required="true" %}
+The ID (hash) of the transaction that includes the update to the crypto object register
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="certificate" required="true" %}
+The certificate data. This is returned in PEM format, and base64 encoded. Calling applications should base64 decode the data before using/parsing the certificate
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="hashcert" required="true" %}
+The SK256 hash of the certificate data that is written to the 
+
+`cert`
+
+ field in the crypto register. This hash can be used to prove that the certificate data has not been tampered with by comparing to the value in the crypto register of the certificate owners signature chain.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "01e470379959256e2ab84feed314c6bded92766e44e0bac21ace006d2e742f4b2862493f290cc014219c2be881d288ea34780a42d50bbfbb3983ff62a57a2b0e",
+    "certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUIzakNDQVVRQ0FRRXdDUVlIS29aSXpqMEVBVEJiTVE0d0RBWURWUVFLREFWT1pYaDFjekZKTUVjR0ExVUUKQXd4QVlUSmxOVEZsWkdOa05ERmhPREUxTW1KbVpXUmlNalJsTTJNeU1tVmxOV0UyTldRMlpEZGtOVEkwTVRRMgpZak01T1RFME5XSmpaV1F5TmpsaFpXWm1NREFlRncweU1EQTNNak13TURVM05EaGFGdzB5TVRBM01qTXdNRFUzCk5EaGFNRnN4RGpBTUJnTlZCQW9NQlU1bGVIVnpNVWt3UndZRFZRUURERUJoTW1VMU1XVmtZMlEwTVdFNE1UVXkKWW1abFpHSXlOR1V6WXpJeVpXVTFZVFkxWkRaa04yUTFNalF4TkRaaU16azVNVFExWW1ObFpESTJPV0ZsWm1ZdwpNRm93RkFZSEtvWkl6ajBDQVFZSkt5UURBd0lJQVFFT0EwSUFBZ3hsY0J5Y3QxVno0NHloQkF6ZGVQdDdaY29GCnNLRTVvUzBJcUlVd1NyQlc2YlIwRXUwY3dNNVBjOGlERDlHMC84N3haay9EV091TFZ3UzdxLytjMXVVd0NRWUgKS29aSXpqMEVBUU9CaUFBd2dZUUNRR1BTZmx5WVUvdGp4N0xZYzhUQzhlNXpLNjl6V1pZTnJJeHpyZGVOZGdvcgpQOXZ1azRnWkJ6SFJrNEJKZkdlVGIzSk1FbUVzSmw5bG1UWkU3eUFDRVMwQ1FBcDdVMEYvSGJtQWNBcnNya3lrCkovTGdnQU5rUWc1cHpGT3oxdFV1WWxJWUN2aHJRT3hFVit2SHE1Qk5vUUIzWUpiemxuS1BSWHRxYmYyRUprdXUKQ2dJPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+    "hashcert": "98511ae65afb84b5ea0b10745b97634b673a0833e1cb350a23ee6a0c86d23c32"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// create/certificate
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+}
+fetch(`${SERVER_URL}/crypto/create/certificate`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+}
+response = requests.post(f"{SERVER_URL}/crypto/create/certificate", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -222,7 +422,7 @@ Returns the hashed public key from the crypto object register for the specified 
 
 `/crypto/get/key`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -276,7 +476,7 @@ Returns the public key (as opposed to the hashed public key that is returned by 
 
 `/crypto/get/publickey`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -326,7 +526,7 @@ Returns the private key for a key pair. This method can only be used to obtain t
 
 `/crypto/get/privatekey`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -374,7 +574,7 @@ Returns a self-signed x509 certificate for this signature chain valid for 365 da
 
 `/crypto/get/certificate`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -418,7 +618,7 @@ Change the signature scheme used to generate the public-private keys for the use
 
 `/crypto/change/scheme`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -474,7 +674,7 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 
 `/crypto/encrypt/data`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -548,7 +748,7 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 
 `/crypto/decrypt/data`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -600,7 +800,7 @@ Generates a signature for the data based on the private key for the keyname/user
 
 `/crypto/sign/data`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -655,7 +855,7 @@ Verifies the signature is correct for the specified public key and data. This me
 
 `/crypto/verify/signature`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -697,7 +897,7 @@ Verifies the x509 certificate that was previously obtained from the `crypto/get/
 
 `/crypto/verify/certificate`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -735,7 +935,7 @@ The `data` must be supplied as a base64 encoded string. This will be decoded int
 
 `/crypto/get/hash`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
