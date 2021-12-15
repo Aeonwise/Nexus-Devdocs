@@ -422,19 +422,73 @@ Returns the hashed public key from the crypto object register for the specified 
 
 `/crypto/get/key`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/key" %}
 {% swagger-description %}
-
+Returns the hashed public key from the crypto object register for the specified key name, from the specified signature chain
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" required="true" %}
+The name of the public key to retrieve
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain (optional if username is supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the user account (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+If no username/genesis is supplied, in multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to get the key from. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get key" %}
+```json
+{
+    "name": "auth",
+    "scheme": "FALCON",
+    "hashkey": "0231012604f483de2ba4e5c901563e0cfb2e0e6da69a220c407e5951ac49529d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// get/key
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_OF_THE_PUBLIC_KEY_TO_RETRIEVE",
+    // genesis: "YOUR_GENESIS_HASH", //optional if username is supplied
+    username: "YOUR_USERNAME", //optional if genesis is supplied
+    // session: "YOUR_SESSION_ID" //optional
+}
+fetch(`${SERVER_URL}/crypto/get/key`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_OF_THE_PUBLIC_KEY_TO_RETRIEVE",
+    # "genesis": "YOUR_GENESIS_HASH", #optional if username is supplied
+    "username": "YOUR_USERNAME",  # optional if genesis is supplied
+    # "session": "YOUR_SESSION_ID" #optional
+}
+response = requests.post(f"{SERVER_URL}/crypto/get/key", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -470,25 +524,85 @@ Returns the hashed public key from the crypto object register for the specified 
 
 ### `get/publickey`
 
-Returns the public key (as opposed to the hashed public key that is returned by get/key) for a given key name.. This can only be issued by the owner of the key, so the caller must be logged in to call this method. The un-hashed public key is required when encrypting and decrypting data, or verifying signatures, via the API.
+Returns the public key (as opposed to the hashed public key that is returned by get/key) for a given key name. This can only be issued by the owner of the key, so the caller must be logged in to call this method. The un-hashed public key is required when encrypting and decrypting data, or verifying signatures, via the API.
 
 #### Endpoint:
 
 `/crypto/get/publickey`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="get" path="/crypto/get/publickey" baseUrl="http://api.nexus-interactions.io:8080" summary="get/publickey" %}
 {% swagger-description %}
-
+Returns the public key (as opposed to the hashed public key that is returned by get/key) for a given key name
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name of the public key to return
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" %}
+The pin for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the key should be returned from. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="scheme" %}
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
+
+`BRAINPOOL`
+
+ or 
+
+`FALCON`
+
+. If no scheme parameter is provided then it will be determined from the crypto object register (for previously created keys) or taken from the users signature chain configuration
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get publickey" %}
+```json
+{
+    "publickey": "EZipQHgMrmyDo78Ahp7S7zCdpdwp6Q1abVXSv3GxiF6THvhGhvXmATrzMWwdimdrbkKS9LrbEa4foGxPNrizKrer"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```python
+// get/key
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_OF_THE_PUBLIC_KEY_TO_RETRIEVE",
+    // genesis: "YOUR_GENESIS_HASH", //optional if username is supplied
+    username: "YOUR_USERNAME", //optional if genesis is supplied
+    // session: "YOUR_SESSION_ID" //optional
+}
+fetch(`${SERVER_URL}/crypto/get/key`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_OF_THE_PUBLIC_KEY_TO_RETRIEVE",
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "scheme": "BRAINPOOL" #optional or "FALCON"
+}
+response = requests.post(f"{SERVER_URL}/crypto/get/privatekey", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
