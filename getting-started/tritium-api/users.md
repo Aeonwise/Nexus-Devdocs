@@ -617,6 +617,10 @@ This method provides the user with the ability to change the password, pin, or r
 
 {% endswagger-description %}
 
+{% swagger-parameter in="body" name="session" %}
+
+{% endswagger-parameter %}
+
 {% swagger-parameter in="body" name="password" required="true" %}
 current password
 {% endswagger-parameter %}
@@ -643,10 +647,6 @@ new recovery seed to set on this sig chain. This is optional if new_pin or new_p
 **NOTE**
 
 : the recovery seed is case sensitive
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" %}
-
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
