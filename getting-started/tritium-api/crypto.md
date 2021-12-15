@@ -39,6 +39,10 @@ The following methods are currently supported by this API
 [`verify/certificate`](crypto.md#verify-certificate)\
 [`get/hash`](crypto.md#get-hash)
 
+{% hint style="info" %}
+Signature chain and user account are used interchangeably
+{% endhint %}
+
 ### `list/keys`
 
 Returns a list of all hashed public keys in the crypto object register for the specified signature chain. If no username/genesis is supplied then the method will default to listing keys for the logged in signature chain.
@@ -530,7 +534,7 @@ Returns the public key (as opposed to the hashed public key that is returned by 
 
 `/crypto/get/publickey`
 
-{% swagger method="get" path="/crypto/get/publickey" baseUrl="http://api.nexus-interactions.io:8080" summary="get/publickey" %}
+{% swagger method="post" path="/crypto/get/publickey" baseUrl="http://api.nexus-interactions.io:8080" summary="get/publickey" %}
 {% swagger-description %}
 Returns the public key (as opposed to the hashed public key that is returned by get/key) for a given key name
 {% endswagger-description %}
@@ -640,19 +644,71 @@ Returns the private key for a key pair. This method can only be used to obtain t
 
 `/crypto/get/privatekey`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/privatekey" %}
 {% swagger-description %}
-
+Returns the private key for a key pair.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (user-account) the key should be returned from. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="scheme" %}
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
+
+`BRAINPOOL`
+
+ or 
+
+`FALCON`
+
+. If no scheme parameter is provided then it will be determined from the crypto object register (for previously created keys) or taken from the users signature chain configuration
+{% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+//// get/privatekey
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_OF_THE_PUBLIC_KEY_TO_RETRIEVE",
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    // scheme: "BRAINPOOL" //optional or "FALCON"
+}
+fetch(`${SERVER_URL}/crypto/get/privatekey`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_OF_THE_PUBLIC_KEY_TO_RETRIEVE",
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "scheme": "BRAINPOOL" #optional or "FALCON"
+}
+response = requests.post(f"{SERVER_URL}/crypto/get/privatekey", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -688,19 +744,53 @@ Returns a self-signed x509 certificate for this signature chain valid for 365 da
 
 `/crypto/get/certificate`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/get/certificate" baseUrl="http://api.nexus-interactions.io:8080" summary="get/certificate" %}
 {% swagger-description %}
-
+Returns a self-signed x509 certificate for this signature chain valid for 365 days from the time the method is called
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" type="1234" %}
+The PIN for this user account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get certificate" %}
+```json
+{
+    "certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUIzakNDQVVRQ0FRRXdDUVlIS29aSXpqMEVBVEJiTVE0d0RBWURWUVFLREFWT1pYaDFjekZKTUVjR0ExVUUKQXd4QVlUSmxOVEZsWkdOa05ERmhPREUxTW1KbVpXUmlNalJsTTJNeU1tVmxOV0UyTldRMlpEZGtOVEkwTVRRMgpZak01T1RFME5XSmpaV1F5TmpsaFpXWm1NREFlRncweU1EQTNNak13TURVM05EaGFGdzB5TVRBM01qTXdNRFUzCk5EaGFNRnN4RGpBTUJnTlZCQW9NQlU1bGVIVnpNVWt3UndZRFZRUURERUJoTW1VMU1XVmtZMlEwTVdFNE1UVXkKWW1abFpHSXlOR1V6WXpJeVpXVTFZVFkxWkRaa04yUTFNalF4TkRaaU16azVNVFExWW1ObFpESTJPV0ZsWm1ZdwpNRm93RkFZSEtvWkl6ajBDQVFZSkt5UURBd0lJQVFFT0EwSUFBZ3hsY0J5Y3QxVno0NHloQkF6ZGVQdDdaY29GCnNLRTVvUzBJcUlVd1NyQlc2YlIwRXUwY3dNNVBjOGlERDlHMC84N3haay9EV091TFZ3UzdxLytjMXVVd0NRWUgKS29aSXpqMEVBUU9CaUFBd2dZUUNRR1BTZmx5WVUvdGp4N0xZYzhUQzhlNXpLNjl6V1pZTnJJeHpyZGVOZGdvcgpQOXZ1azRnWkJ6SFJrNEJKZkdlVGIzSk1FbUVzSmw5bG1UWkU3eUFDRVMwQ1FBcDdVMEYvSGJtQWNBcnNya3lrCkovTGdnQU5rUWc1cHpGT3oxdFV1WWxJWUN2aHJRT3hFVit2SHE1Qk5vUUIzWUpiemxuS1BSWHRxYmYyRUprdXUKQ2dJPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// get/certificate
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+}
+fetch(`${SERVER_URL}/crypto/get/certificate`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+}
+response = requests.post(f"{SERVER_URL}/crypto/get/certificate", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
