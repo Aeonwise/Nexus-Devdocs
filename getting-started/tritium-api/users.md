@@ -630,7 +630,9 @@ The current pin for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="recovery" %}
+The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via 
 
+`new_recovery`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="new_password" required="true" %}
