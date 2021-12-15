@@ -1,0 +1,31 @@
+# Table of contents
+
+* [Welcome to Nexus Developer Documentation](README.md)
+* [Quick Start](quick-start.md)
+
+## Getting Started
+
+* [🛠 Testnet](getting-started/testnet/README.md)
+  * [Run a Testnet Node](getting-started/testnet/run-a-testnet-node.md)
+  * [Tritium++ Private Testnet](getting-started/testnet/tritium++-private-testnet.md)
+* [🖥 Nodes](getting-started/nodes/README.md)
+  * [Run a Mainnet Node -CLI](getting-started/nodes/run-a-mainnet-node-cli.md)
+* [⚙ Tritium API](getting-started/tritium-api/README.md)
+  * [API Overview](getting-started/tritium-api/api-overview.md)
+  * [How-to-API](getting-started/tritium-api/how-to-api.md)
+  * [SYSTEM](getting-started/tritium-api/system.md)
+  * [USERS](getting-started/tritium-api/users.md)
+  * [FINANCE](getting-started/tritium-api/finance.md)
+  * [LEDGER](getting-started/tritium-api/ledger.md)
+  * [TOKENS](getting-started/tritium-api/tokens.md)
+  * [ASSETS](getting-started/tritium-api/assets.md)
+  * [INVOICES](getting-started/tritium-api/invoices.md)
+  * [NAMES](getting-started/tritium-api/names.md)
+  * [CRYPTO](getting-started/tritium-api/crypto.md)
+  * [SUPPLY](getting-started/tritium-api/supply.md)
+  * [OBJECTS](getting-started/tritium-api/objects.md)
+* [⚙ Tritium++ API](getting-started/tritium++-api/README.md)
+  * [USERS](getting-started/tritium++-api/users.md)
+  * [FINANCE](getting-started/tritium++-api/finance.md)
+  * [REGISTER](getting-started/tritium++-api/register.md)
+  * [SYSTEM](getting-started/tritium++-api/system.md)
