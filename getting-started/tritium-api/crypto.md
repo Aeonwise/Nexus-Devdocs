@@ -932,7 +932,7 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 
 `/crypto/encrypt/data`
 
-{% swagger method="get" path="/crypto/encrypt/data" baseUrl="http://api.nexus-interactions.io:8080" summary="encrypt/data" %}
+{% swagger method="post" path="/crypto/encrypt/data" baseUrl="http://api.nexus-interactions.io:8080" summary="encrypt/data" %}
 {% swagger-description %}
 This method can be used to encrypt arbitrary data using the AES256 encryption function and a symmetric key.
 {% endswagger-description %}
@@ -1088,15 +1088,78 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 
 `/crypto/decrypt/data`
 
-{% swagger method="get" path="/crypto/decrypt/data" baseUrl="http://api.nexus-interactions.io:8080" summary="decrypt/data" %}
+{% swagger method="post" path="/crypto/decrypt/data" baseUrl="http://api.nexus-interactions.io:8080" summary="decrypt/data" %}
 {% swagger-description %}
-
+Decrypt data previously encrypted using AES256 and a symmetric key
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="key" %}
+A 256-bit (32 character) symmetric key to use to decrypt the data. Should only be provided if an external encryption key is known
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name of the private key to use to generate the decryption key. Not required if 
+
+`key`
+
+ is provided.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" %}
+The PIN for this signature chain. Not required if 
+
+`key`
+
+ is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if 
+
+`key`
+
+ is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="peerkey" %}
+Optional, the peer public key used to to generate a shared key. This should be passed in as a base58-encoded string. Should only be provided if a shared key should be generated to decrypt the data
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" required="true" %}
+The encrypted data to decrypt. This should be passed in as a base64-encoded string
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "data": "aGVsbG8gd29ybGQ="
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
 {% tab title="Javascript" %}
-
+```javascript
+// decrypt/data
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    key: "A 256-BIT (32 CHARACTER) SYMMETRIC KEY TO USE TO DECRYPT THE DATA", // Should only be provided if an external encryption key is known.
+    // name: "THE NAME OF THE PRIVATE KEY TO USE TO GENERATE THE DECRYPTION KEY", //optional if key is provided. The name parameter can not be one of the nine default keys (auth, lisp, network, sign, verify, cert, app1, app2, and app3).
+    // pin : "The PIN for this signature chain" //optional if key is provided.
+    // session: "YOUR_SESSION_ID", //optional
+    // peerkey : Optional, the public peer key used to to generate a shared key. This should be passed in as a base58-encoded string. Should only be provided if a shared key should be generated to decrypt the data.
+    data: "THE ENCRYPTED DATA TO DECRYPT", // This is a string field, so callers wishing to pass in binary data data should base64-encode the data first.
+}
+fetch(`${SERVER_URL}/crypto/decrypt/data`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
 {% tab title="Python" %}
@@ -1155,19 +1218,64 @@ Generates a signature for the data based on the private key for the keyname/user
 
 `/crypto/sign/data`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/sign/data" baseUrl="http://api.nexus-interactions.io:8080" summary="sign/data" %}
 {% swagger-description %}
-
+Generates a signature for the data based on the private key for the keyname/user/pass/pin combination
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" required="true" %}
+The name of the key in the crypto object register to use to sign the data
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The PIN for this signature chain
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) should be used to sign the data. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" required="true" %}
+The data to sign. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
+{% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// sign/data
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "THE NAME OF THE KEY IN THE CRYPTO OBJECT REGISTER TO USE TO SIGN THE DATA",
+    // pin : "The PIN for this signature chain" //optional if key is provided.
+    // session: "YOUR_SESSION_ID", //optional
+    data: "THE DATA TO SIGN", // This is a string field, so callers wishing to pass in binary data data should base64-encode the data first.
+}
+fetch(`${SERVER_URL}/crypto/sign/data`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "THE NAME OF THE KEY IN THE CRYPTO OBJECT REGISTER TO USE TO SIGN THE DATA",
+    # "pin" : "The PIN for this signature chain" #optional if key is provided.
+    # "session": "YOUR_SESSION_ID", #optional
+    # This is a string field, so callers wishing to pass in binary data data should base64-encode the data first.
+    "data": "THE DATA TO SIGN",
+}
+response = requests.post(f"{SERVER_URL}/crypto/sign/data", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1210,10 +1318,26 @@ Verifies the signature is correct for the specified public key and data. This me
 
 `/crypto/verify/signature`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/verify/signature" baseUrl="http://api.nexus-interactions.io:8080" summary="verify/signature" %}
 {% swagger-description %}
-
+Verifies the signature is correct for the specified public key and data. This method accepts the public key in either the hashed or raw formats
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="publickey" required="true" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="scheme" required="true" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="signature" required="true" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" required="true" %}
+
+{% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
