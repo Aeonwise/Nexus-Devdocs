@@ -618,15 +618,15 @@ This method provides the user with the ability to change the password, pin, or r
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="session" %}
-
+When using multi-user API mode the session parameter must be supplied to identify which user to update
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="password" required="true" %}
-current password
+The current password for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-current pin
+The current pin for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="recovery" %}
@@ -634,11 +634,11 @@ current pin
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="new_password" required="true" %}
-new password
+The new password for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="new_pin" required="true" %}
-new pin
+The new pin for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="new_recovery" %}
@@ -715,7 +715,11 @@ print(response.json())
 
 `new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
 
-`new_recovery` : The new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters. **NOTE**: the recovery seed is case sensitive.
+`new_recovery` : The new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.&#x20;
+
+{% hint style="danger" %}
+The recovery phrase is case sensitive
+{% endhint %}
 
 #### Example 1:
 
