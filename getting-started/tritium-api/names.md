@@ -747,19 +747,84 @@ The API supports an alternative endpoint that can include the name in the URL. F
 
 `/names/get/name`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/names/get/name" baseUrl="http://api.nexus-interactions.io:8080" summary="get/name" %}
 {% swagger-description %}
-
+Retrieves a name object
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" required="false" %}
+The name identifying the name object. The name should be in the format username:name (for local names) or name.namespace (for names in a global namespace). If the 
+
+`name`
+
+ parameter is provided then all other parameters are ignored
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which signature chain should be searched. For single-user API mode the session should not be supplied, and the logged in signature chain will be used. This parameter is ignored if 
+
+`name`
+
+ is provided.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="register_address" required="false" %}
+The register address to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if 
+
+`name`
+
+ is provided.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get name details" %}
+```json
+{
+    "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "created": 1565934825,
+    "modified": 1565934825,
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "name": "asset1",
+    "namespace": "somenamespace",
+    "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// get/name
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_IDENTIFYING_THE_NAME_OBJECT", // in format username:name (for local names) or name.namespace (for names in a global namespace)
+    // session: "YOUR_SESSION_ID", //optional
+    // register_address: "REGISTER_ADDRESS_TO_SEARCH_FOR" //optional if name is provided
+}
+fetch(`${SERVER_URL}/names/get/name`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # in format username:name (for local names) or name.namespace (for names in a global namespace)
+    "name": "NAME_IDENTIFYING_THE_NAME_OBJECT",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "register_address": "REGISTER_ADDRESS_TO_SEARCH_FOR" #optional if name is provided
+}
+response = requests.post(f"{SERVER_URL}/names/get/name", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -805,25 +870,89 @@ The API supports an alternative endpoint that can include the name in the URL. F
 
 ### `update/name`
 
-This method allows the register\_address within a Name object to be changed . The API supports an alternative endpoint that can include the name or register address in the URI. For example `/names/update/name/myname` will resolve to `names/update/name?name=myname`.
+This method allows the register\_address within a Name object to be changed. The API supports an alternative endpoint that can include the name or register address in the URI. For example `/names/update/name/myname` will resolve to `names/update/name?name=myname`.
 
 #### Endpoint:
 
 `/names/update/name`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/names/update/name" baseUrl="http://api.nexus-interactions.io:8080" summary="update/name" %}
 {% swagger-description %}
-
+This method allows the register_address within a Name object to be changed 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+The PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the Name object to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the name to update. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="register_address" %}
+The new register address that this Name should point to
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="updated name" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// update/name
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_IDENTIFYING_THE_NAME_OBJECT", // in format username:name (for local names) or name.namespace (for names in a global namespace)
+    // address: "REGISTER_ADDRESS_OF_THE_NAME_TO_UPDATE", // optional if name is provided
+    // register_address: "NEW_REGISTER_ADDRESS" //optional if name is provided
+}
+fetch(`${SERVER_URL}/names/udpate/name`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # in format username:name (for local names) or name.namespace (for names in a global namespace)
+    "name": "NAME_IDENTIFYING_THE_NAME_OBJECT",
+    # "address": "REGISTER_ADDRESS_OF_THE_NAME_TO_UPDATE", # optional if name is provided
+    # "register_address": "NEW_REGISTER_ADDRESS" #optional if name is provided
+}
+response = requests.post(f"{SERVER_URL}/names/udpate/name", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
