@@ -1324,29 +1324,65 @@ Verifies the signature is correct for the specified public key and data. This me
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="publickey" required="true" %}
-
+The public key to use to verify the signature, base58 encoded
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="scheme" required="true" %}
+{% swagger-parameter in="body" name="scheme" required="false" %}
+The cryptographic scheme that should be used to verify the signature. Options are 
 
+`FALCON`
+
+ or 
+
+`BRAINPOOL`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="signature" required="true" %}
-
+The signature to be verified, base64 encoded
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="data" required="true" %}
-
+The signed data. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
 {% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// verify/signature
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    publickey: "PUBLIC KEY TO USE TO VERIFY THE SIGNATURE", // base58 encoded.
+    scheme: "BRAINPOOL", // FALCON or BRAINPOOL.
+    signature: "THE SIGNATURE TO BE VERIFIED", // base64 encoded.
+    data: "THE SIGNED DATA" //This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+}
+fetch(`${SERVER_URL}/crypto/verify/signature`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # base58 encoded.
+    "publickey": "PUBLIC KEY TO USE TO VERIFY THE SIGNATURE",
+    "scheme": "BRAINPOOL",  # FALCON or BRAINPOOL.
+    "signature": "THE SIGNATURE TO BE VERIFIED",  # base64 encoded.
+    # This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+    "data": "THE SIGNED DATA"
+}
+response = requests.post(f"{SERVER_URL}/crypto/verify/signature", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1376,19 +1412,57 @@ Verifies the x509 certificate that was previously obtained from the `crypto/get/
 
 `/crypto/verify/certificate`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/verify/certificate" baseUrl="http://api.nexus-interactions.io:8080" summary="verify/certificate" %}
 {% swagger-description %}
+Verifies the x509 certificate that was previously obtained from the 
 
+`crypto/get/certificate`
+
+ method
 {% endswagger-description %}
+
+{% swagger-parameter in="body" required="true" %}
+The certificate data in PEM format, and base64 encoded
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="verify certificate" %}
+```javascript
+{
+    verified : true
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// verify/certificate
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    certificate: "THE CERTIFICATE DATA IN PEM FORMAT AND BASE64 ENCODED"
+}
+fetch(`${SERVER_URL}/crypto/verify/certificate`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "certificate": "THE CERTIFICATE DATA IN PEM FORMAT AND BASE64 ENCODED"
+}
+response = requests.post(f"{SERVER_URL}/crypto/verify/certificate", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1414,19 +1488,73 @@ The `data` must be supplied as a base64 encoded string. This will be decoded int
 
 `/crypto/get/hash`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/get/hash" baseUrl="http://api.nexus-interactions.io:8080" summary="get/hash" %}
 {% swagger-description %}
-
+Generates a hash of the data using the requested hashing function
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="data" required="true" %}
+The data to generate the hash from. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="function" %}
+Optional hashing function to use to generate the hash. Options can be 
+
+`SK256`
+
+, 
+
+`SK512`
+
+, 
+
+`ARGON2`
+
+. If no function is provided then it will default to SK256
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get hash" %}
+```json
+{
+    "hash": "73cc74e67a8b840039d992c0ec7d6637f67c3ed0ac78e8f375b292fbb23cc6c7"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// get/hash
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    data: "THE DATA TO GENERATE THE HASH FROM", // This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+    function: "SK256", //optional or can be SK256, SK512, ARGON2. If no function is provided then it will default to SK256.
+}
+fetch(`${SERVER_URL}/crypto/get/hash`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+    "data": "THE DATA TO GENERATE THE HASH FROM",
+    # optional or can be SK256, SK512, ARGON2. If no function is provided then it will default to SK256.
+    "function": "SK256",
+}
+response = requests.post(f"{SERVER_URL}/crypto/get/hash", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
