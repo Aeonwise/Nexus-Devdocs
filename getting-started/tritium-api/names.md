@@ -1005,7 +1005,7 @@ This will transfer ownership of a name . Only global names or names created in a
 
 `/names/transfer/name`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/names/transfer/name" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/name" %}
 {% swagger-description %}
 
 {% endswagger-description %}
