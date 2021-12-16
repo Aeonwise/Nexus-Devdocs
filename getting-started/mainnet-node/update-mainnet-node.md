@@ -4,11 +4,11 @@ description: How to update the mainnet node
 
 # Update Mainnet Node
 
+When there is a new version of the core you need to update your node.&#x20;
+
 {% hint style="info" %}
 This guide is tailored for ubuntu/raspian distributions
 {% endhint %}
-
-When there is a new version of the core you need to update your node.&#x20;
 
 {% hint style="info" %}
 Wallet mandatory or incremental upgrades can be understood by looking at version number of the new and old wallets. If the new core version first digit is incremented then it is a mandatory update which might be a hard fork or major protocol changes. If second or third digit is incremented then, it is an incremental upgrade. Incremental updates can be given a miss, but our recommendation is to upgrade.  &#x20;
@@ -32,7 +32,7 @@ Change to the home directory
 cd
 ```
 
-It is better to get your node operating system updated. This command may take some time
+It is recommended to get your node operating system updated. This command may take some time
 
 ```
 sudo apt update; sudo apt upgrade -y
@@ -47,7 +47,7 @@ sudo reboot
 Give two minutes for the node to restart and then log in via SSH or putty
 
 ```
-ssh ubuntu@192.168.3.144
+ssh ubuntu@<IPaddress>
 ```
 
 Rename the existing ‘LLL-TAO’ folder to ‘old-LLL’
@@ -89,7 +89,7 @@ make -f makefile.cli -j1 AMD64=1
 For raspberry pi use the below command
 
 ```
-make -f makefile.cli -j4 ARM64=1
+make -f makefile.cli -j1 ARM64=1
 ```
 
 Will show “Finished building nexus” on a successful compile.
@@ -108,6 +108,8 @@ To check the node info
 
 Check the core version is showing the new version.
 
-The nexus remote interface wallet also needs to be updated to the latest version, failing to update may cause issues with usability or functionality. Go to [https://nexus.io/wallets](https://nexus.io/wallets) to download the latest wallet
+{% hint style="info" %}
+if using the nexus interface to remote control the node, update to the latest version, failing to update may cause issues with usability or functionality. Go to [https://nexus.io/wallets](https://nexus.io/wallets) to download the latest interface
+{% endhint %}
 
 Hope this guide was helpful !!

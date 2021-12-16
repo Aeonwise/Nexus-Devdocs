@@ -4,11 +4,17 @@ This guide will help to access your wallet daemon using a remote wallet interfac
 
 On the computer which will run the interface go to [https://](https://crypto.nexus.io/wallet)[nexus.io/wallets](https://nexus.io/wallets) and download the wallet of your choice.
 
+{% hint style="danger" %}
+Always verify the wallet integrity. Follow the instructions in the link below&#x20;
+{% endhint %}
+
+{% embed url="https://nexus.io/ResourceHub/wallet-guide#download-verify-install" %}
+
 After the download is complete to verify the installer integrity go to [https://nexus.io/ResourceHub/wallet-guide#download-verify-install](https://nexus.io/ResourceHub/wallet-guide#download-verify-install) and follow the guide
 
 Run the wallet and after the wallet loads immediately go to _‘Settings’_, click on ‘_Core_‘, scroll down to the bottom and enable manual core mode using the slider button
 
-[![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Interface1.png)](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Interface1.png)
+![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Interface1.png)
 
 SSH into the node.
 
@@ -28,7 +34,7 @@ Use a unique apiusername and  apipassword and the same will be used in the usern
 
 On the interface go to ‘_File_‘ menu and click on ‘_Switch to Legacy Mode_‘ and now you will be in the legacy mode, manual core settings.
 
-[![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Interface2.png)](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Interface2.png)
+![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Interface2.png)
 
 Use a unique rpcusername and rpcpassword and the same will be used in the username and password field in the interface legacy core settings, IP address replace the default 127.0.0.1 with the daemon node IP address. Leave the default port and click save settings.
 
@@ -74,7 +80,9 @@ Check the ufw firewall status
 sudo ufw status
 ```
 
-[![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-ufw.png)](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-ufw.png)ufw status – You should see a output something like in the image above.
+ufw status – You should see a output something like in the image above.
+
+![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-ufw.png)
 
 Next start the daemon
 
@@ -84,7 +92,7 @@ Next start the daemon
 
 Wait for a few seconds and
 
-[![rpi-synched](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Sync.png)](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Sync.png)
+![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Sync.png)
 
 You should see the interface connected to the node and the information appear on the overview page.
 
