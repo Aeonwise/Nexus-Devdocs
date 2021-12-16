@@ -16,9 +16,7 @@ This guide is tailored for ubuntu/raspian distributions
 * Putty if you are using ssh via windows.
 
 {% hint style="info" %}
-To build on Raspberry Pi 3 or 4 with 1 GB of RAM you have to enable swap memory.
-
-Proceed after setting up swap.&#x20;
+To build on Raspberry Pi 3 or 4 with 1 GB RAM, enable swap memory with instructions from link below. Proceed after setting up swap.&#x20;
 {% endhint %}
 
 {% embed url="https://rayanfer32.medium.com/enable-swap-memory-on-ubuntu-on-raspberry-pi-a0f873a65e74" %}
