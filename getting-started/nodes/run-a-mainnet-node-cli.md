@@ -148,24 +148,31 @@ nano ~/.Nexus/nexus.conf
 Copy the below code into the file. Provide a user and password for RPC and API and remove the # in the #stake=1 if you intend to stake.
 
 ```
-#
 # This is an example nexus.conf. Tailor it to your deployment.
-#
+#RPC credentials, change as needed
 rpcuser=<user for RPC>
 rpcpassword=<pw for RPC>
+#API http authentication credtnials. Change as needed
 apiuser=<user for API>
 apipassword=<pw for API>
+#To run the nexus core as a daemon
 daemon=1
+#To enable mining with the node, 
 #mining=1
+#To enable staking
 #stake=1
 ```
 
 If you intend to access your wallet remotely (from a wallet interface on another machine), you’ll also need the following lines in the config file. (\<ipaddress> is your host with the interface IP from which you will remotely control you daemon)
 
 ```
-apiremote=1
-apiauth=1
+#To enable RPC remote connection
 rpcremote=1
+#To enable API credtnails for API authentication 
+apiauth=1
+#To enable remote API access. Local API access will be revoked
+apiremote=1
+# Whitelist IP address for API & RPC
 llpallowip=<ipaddress>:8080  
 llpallowip=<ipaddress>:9336
 ```
@@ -183,7 +190,7 @@ cd ~
 This will download the database to your home folder. The file is just about 5 GB in size so have patience.
 
 ```
-wget -c http://bootstrap.nexus.io/tritium.tar.gz
+wget -c https://nexus.io/bootstrap/tritium/tritium.tar.gz
 ```
 
 This will extract the database to the Nexus core data directory
