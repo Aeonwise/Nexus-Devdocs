@@ -1,5 +1,9 @@
 # Tritium++ Private Testnet
 
+{% hint style="info" %}
+This guide is to run a single or island node for testing and has nothing to with the other testnet.
+{% endhint %}
+
 ## Introduction:
 
 This guide will help to setup a private testnet for development. The private node has no consensus,   and is a private database. This node can be used to test API calls, without spending on mining or the use of coins
@@ -181,9 +185,9 @@ system/stop=<password>
 
 Ctrl+s and Ctrl+x to save and exit the editor&#x20;
 
-Note: To add an additional node to the private network, disable ‘manager’ and ‘generate’ flags. Add the ‘addnode’ flag with ipaddress referring to the first node or the one with the ‘generate’ flag and an additional line for any other node in the network
-
-This is a sample nexus.conf for a private standalone node.
+{% hint style="info" %}
+To add an additional node to the private network, disable ‘manager’ and ‘generate’ flags. Add the ‘addnode’ flag with ipaddress referring to the first node or the one with the ‘generate’ flag and an additional line for any other node in the network
+{% endhint %}
 
 ## 4. API Commands
 
@@ -201,11 +205,7 @@ sudo ufw allow 8336/tcp
 
 If the executable is in the LLL-TAO directory to start nexus core, change into the LLL-TAO folder to run all the following commands "cd LLL-TAO To start the daemon, use the path and the executable file name ./nexus If you have moved the nexus executable file to the /user/bin then use the following command from any location nexus
 
-Nexus core will be running in the background as a daemon. It will detect peers, if available and synchronize the blockchain.&#x20;
-
 To stop the daemon without password protection in config:&#x20;
-
-
 
 ```
 nexus system/stop
@@ -213,15 +213,11 @@ nexus system/stop
 
 To stop the daemon with password protection in config:
 
-
-
 ```
 nexus system/stop password=<password>
 ```
 
 To get the node info:
-
-
 
 ```
 ./nexus system/get/info
@@ -239,9 +235,28 @@ To create a user account (signature chain). Username must be a minimum of 2 char
 nexus users/create/user username=<username> password=<password> pin=<pin> 
 ```
 
-To log into your account. Multiuser mode creates a new session for every user when they log in and that session ID will be used for unlocking and other user API's. Save this session ID for future use and it will be active till the user logs out.\
-nexus users/login/user username= password= pin=&#x20;
+{% hint style="info" %}
+Multiuser mode creates a new session for every user logged in and the user has to use that particular sessionID with every API request for the particular user. Save the session ID.
+{% endhint %}
 
-To unlock the account for automatically credit incoming transactions set (notifications=1). If it's not set you will have to manually credit the incoming transactions else it will be credited to the sender's account after 24 hrs. This is the reversible transaction function working as designed. nexus users/unlock/user pin= notifications=1 session= To check the full node metrics. ./nexus system/get/metrics The API commands can be used from the browser and output in JSON is displayed. (JSON formatter extension used to parse the JSON output)
+To login the user
 
-Hope this guide was hepful !!
+```
+nexus users/login/user username=<username> password=<password> pin=<pin>
+```
+
+To unlock the account for automatically credit incoming transactions set (notifications=1). If it's not set you will have to manually credit the incoming transactions else it will be credited back to the sender's account after 24 hrs. This is the reversible transaction function working as designed.&#x20;
+
+```
+nexus users/unlock/user pin=<pin> notifications=1 session=<sessionid> 
+```
+
+To check the full node metrics.&#x20;
+
+```
+./nexus system/get/metrics 
+```
+
+The API commands can be used from the browser and output in JSON is displayed. (JSON formatter extension used to parse the JSON output)
+
+Hope this guide was helpful !!
