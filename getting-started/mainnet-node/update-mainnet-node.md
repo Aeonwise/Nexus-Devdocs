@@ -4,7 +4,7 @@ description: How to update the mainnet node
 
 # Update Mainnet Node
 
-When there is a new version of the core you need to update your node.&#x20;
+When there is a new version of the core, it needs to be updated.&#x20;
 
 {% hint style="info" %}
 This guide is tailored for ubuntu/raspian distributions
