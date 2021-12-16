@@ -1,8 +1,8 @@
 ---
-description: How to run CLI nodes
+description: How to run mainnet CLI nodes
 ---
 
-# 🖥 Nodes
+# 🖥 Mainnet Node
 
 ### How to run nodes
 

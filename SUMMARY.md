@@ -5,12 +5,13 @@
 
 ## Getting Started
 
-* [🛠 Testnet](getting-started/testnet/README.md)
-  * [Run a Testnet Node](getting-started/testnet/run-a-testnet-node.md)
-  * [Tritium++ Private Testnet](getting-started/testnet/tritium++-private-testnet.md)
-* [🖥 Mainnet Nodes](getting-started/mainnet-nodes/README.md)
-  * [Run a Mainnet Node -CLI](getting-started/mainnet-nodes/run-a-mainnet-node-cli.md)
-  * [Connect Node to Interface](getting-started/mainnet-nodes/connect-node-to-interface.md)
+* [🛠 Testnet Node](getting-started/testnet-node/README.md)
+  * [Run a Testnet Node](getting-started/testnet-node/run-a-testnet-node.md)
+  * [Tritium++ Private Testnet](getting-started/testnet-node/tritium++-private-testnet.md)
+* [🖥 Mainnet Node](getting-started/mainnet-node/README.md)
+  * [Run a Mainnet Node -CLI](getting-started/mainnet-node/run-a-mainnet-node-cli.md)
+  * [Connect Node to Interface](getting-started/mainnet-node/connect-node-to-interface.md)
+  * [Update Mainnet Node](getting-started/mainnet-node/update-mainnet-node.md)
 * [⚙ Tritium API](getting-started/tritium-api/README.md)
   * [API Overview](getting-started/tritium-api/api-overview.md)
   * [How-to-API](getting-started/tritium-api/how-to-api.md)
