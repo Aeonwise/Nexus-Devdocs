@@ -16,8 +16,8 @@ Want to test things before you bring it into the real world, we have you covered
 
 Learn how to setup a node and then you can get to play around it:
 
-{% content-ref url="getting-started/nodes/" %}
-[nodes](getting-started/nodes/)
+{% content-ref url="getting-started/mainnet-nodes/" %}
+[mainnet-nodes](getting-started/mainnet-nodes/)
 {% endcontent-ref %}
 
 ## API keys

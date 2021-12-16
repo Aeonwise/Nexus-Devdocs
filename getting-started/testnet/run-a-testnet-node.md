@@ -12,6 +12,10 @@ The node configuration will differ as per the individual application requirement
 If you need any help on the node specifications for a particular application do contact developer support
 {% endhint %}
 
+{% hint style="info" %}
+This testnet uses the merging branch and you may find some bugs or API's or
+{% endhint %}
+
 ## 1. Before you start:
 
 * A computer with a minimum of 1 CPU, 1GB RAM, 20GB hard space, Raspberry Pi 4 with 2 GB RAM.
