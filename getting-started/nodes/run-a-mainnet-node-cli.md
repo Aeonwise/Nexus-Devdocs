@@ -22,6 +22,8 @@ To build on Raspberry Pi 3 or 4 with 1 GB RAM, enable swap memory with instructi
 {% embed url="https://rayanfer32.medium.com/enable-swap-memory-on-ubuntu-on-raspberry-pi-a0f873a65e74" %}
 
 {% embed url="https://www.youtube.com/watch?t=942s&v=sA-DUX9KBNU" %}
+This is a video guide for setting up a CLI node
+{% endembed %}
 
 ## **2. Prepare The Node:**
 
@@ -131,11 +133,15 @@ Will show “Finished building nexus” on a successful compile.
 
 ## **4. Configure The wallet (nexus.conf):**
 
-Create Nexus core directory (it’s a hidden directory, Nexus daemon creates it automatically on first start. We are creating it manually to create the configuration file. If you have the directory you can skip this step.)
+Create Nexus core data directory (it’s a hidden directory, Nexus daemon creates it automatically on first start. We are creating it manually to create the configuration file. If you have the directory you can skip this step.)
 
 ```
 mkdir ~/.Nexus
 ```
+
+{% hint style="info" %}
+The wallet configuration is stored it the nexus.conf file, located in the core data directory
+{% endhint %}
 
 Create the nexus.conf file
 
@@ -161,10 +167,13 @@ daemon=1
 #stake=1
 ```
 
-If you intend to access your wallet remotely (from a wallet interface on another machine), you’ll also need the following lines in the config file. (\<ipaddress> is your host with the interface IP from which you will remotely control you daemon)
+If you intend to access your wallet remotely (from a wallet interface on another machine), you’ll also need the following lines in the config file.&#x20;
+
+{% hint style="info" %}
+\<ipaddress> is IP address of the machine connecting to your node remotely, it may be the interface or dapp server IP address. You can also use '\* to allow all computers in a particular subnet&#x20;
+{% endhint %}
 
 ```
-#To enable RPC remote connection
 rpcremote=1
 #To enable API credtnails for API authentication 
 apiauth=1
