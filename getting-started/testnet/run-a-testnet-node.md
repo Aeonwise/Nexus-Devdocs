@@ -12,6 +12,10 @@ The node configuration will differ as per the individual application requirement
 If you need any help on the node specifications for a particular application do contact developer support
 {% endhint %}
 
+{% hint style="info" %}
+This testnet uses the merging branch and you may find some bugs or API's or
+{% endhint %}
+
 ## 1. Before you start:
 
 * A computer with a minimum of 1 CPU, 1GB RAM, 20GB hard space, Raspberry Pi 4 with 2 GB RAM.
@@ -139,10 +143,16 @@ Proceed after setting up swap.&#x20;
 {% embed url="https://rayanfer32.medium.com/enable-swap-memory-on-ubuntu-on-raspberry-pi-a0f873a65e74" %}
 
 ```
+make -f makefile.cli clean
+```
+
+For x86/IA64 computers use:
+
+```
 make -f makefile.cli -j1 AMD64=1 NO_WALLET=1
 ```
 
-For the raspberry pi use the below command
+For the raspberry pi use:
 
 ```
 make -f makefile.cli -j4 ARM64=1 NO_WALLET=1

@@ -1,7 +1,7 @@
 # Tritium++ Private Testnet
 
 {% hint style="info" %}
-This guide is to run a single or island node for testing and has nothing to with the other testnet.
+This guide is to run a single or island node for testing. It does not require mining or staking to produce blocks
 {% endhint %}
 
 ## Introduction:
@@ -18,7 +18,7 @@ In a private network, throughput can be increased by adding additional nodes. In
 
 ## Before Beginning this guide:
 
-* Any computer with minimum of 1 CPU, 1GB RAM and 20GB hard disk space, Raspberry Pi 4 with 2 GB RAM
+* Any computer with minimum of 1 CPU, 2GB RAM and 20GB hard disk space, Raspberry Pi 4 with 2 GB RAM
 * Ubuntu server 20.04 LTS for AMD/IA64 or Ubuntu IOT for Raspberry Pi. (Use any linux distribution of choice, but this guide is tailored for ubuntu)&#x20;
 * USB drive or SD card to install ubuntu
 * Etcher – To burn the OS image file to USB/SD card&#x20;
@@ -108,11 +108,13 @@ Run the command to compile from source, please be patient, as this can take a ve
 make -f makefile.cli clean
 ```
 
+For x86/IA64 computers use:
+
 ```
 make -f makefile.cli -j1 AMD64=1 NO_WALLET=1
 ```
 
-For compiling on Raspberry Pi use
+For compiling on Raspberry Pi use:
 
 ```
 make -f makefile.cli -j1 ARM64=1 NO_WALLET=1
