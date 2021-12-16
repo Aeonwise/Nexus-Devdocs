@@ -2,7 +2,7 @@
 description: A place where you will find all the information needed to run testnets
 ---
 
-# 🛠 Testnet
+# 🛠 Testnet Node
 
 The Interactions arm, developer support team is running a full fledged testnet for the developer community. This testnet mimics the mainnet with three channel consensus and also mines testnet coins. The testnet only supports tritium chain and legacy support has been removed. we also provide a single multiuser node for testing and can ramp up if anyone has specific requirements
 

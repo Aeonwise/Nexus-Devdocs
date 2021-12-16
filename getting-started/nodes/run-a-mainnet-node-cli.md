@@ -21,6 +21,8 @@ To build on Raspberry Pi 3 or 4 with 1 GB of ram you have to enable swap memory.
 Proceed after setting up swap.&#x20;
 {% endhint %}
 
+
+
 {% embed url="https://www.youtube.com/watch?t=942s&v=sA-DUX9KBNU" %}
 
 ## **2. Prepare The Node:**
