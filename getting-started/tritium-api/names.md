@@ -20,6 +20,10 @@ Namespaces can be transferred to other signature chains, opening the possibility
 
 Global Names and Names that have been created within a namespace can also be transferred to other signature chains. Local names cannot be transferred.
 
+{% hint style="info" %}
+Signature chains and user accounts are used interchangeably
+{% endhint %}
+
 ### `Methods`
 
 The following methods are currently supported by this API
@@ -36,11 +40,7 @@ The following methods are currently supported by this API
 [`claim/name`](names.md#claim-name)\
 [`list/name/history`](names.md#list-name-history)
 
-***
-
-***
-
-### `create/namespace`
+## `create/namespace`
 
 This will create a new namespace. The API supports an alternative endpoint that can include the new namespace name in the URL. For example `/names/create/namespace/mynamespace` will resolve to `names/create/namespace?name=mynamespace`.
 
@@ -50,19 +50,66 @@ This will create a new namespace. The API supports an alternative endpoint that 
 
 `/names/create/namespace`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/names/create/namespace" baseUrl="http://api.nexus-interactions.io:8080" summary="create/namespace" %}
 {% swagger-description %}
-
+This will create a new namespace
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The pin for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the namespace should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" required="true" %}
+A name to identify the namespace. A hash of the name will determine the register address
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Created namespace" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// create/namespace
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_TO_IDENTIFY_NAMESPACE", //optional if address is provided
+}
+fetch(`${SERVER_URL}/names/create/namespace`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "NAME_TO_IDENTIFY_NAMESPACE",  # optional if address is provided
+}
+response = requests.post(f"{SERVER_URL}/names/create/namespace", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -99,19 +146,67 @@ Retrieves a namespace object. The API supports an alternative endpoint that can 
 
 `/names/get/namespace`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/namespace" %}
 {% swagger-description %}
-
+Retrieves a namespace object
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="owner" %}
+The genesis hash of the signature chain that owns this Name
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="created" %}
+The UNIX timestamp when the Name was created
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the namespace
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the namespace
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get namespace" %}
+```json
+{
+    "name": "mynamespace",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+    "owner": "bf501d4f3d81c31f62038984e923ad01546ff678e305a7cc11b1931742524ce1"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+//// get/namespace
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_TO_IDENTIFY_NAMESPACE", //optional if address is provided
+}
+fetch(`${SERVER_URL}/names/get/namespace`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_TO_IDENTIFY_NAMESPACE",  # optional if address is provided
+}
+response = requests.post(f"{SERVER_URL}/names/get/namespace", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -149,19 +244,94 @@ This will transfer ownership of an namespace . This is a generic endpoint requir
 
 `/names/transfer/namespace`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/names/transfer/namespace" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/namespace" %}
 {% swagger-description %}
-
+This will transfer ownership of an namespace
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+The PIN for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the namespace. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the namespace to be transferred. This is optional if the address is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the namespace to be transferred. This is optional if the name is provided.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the user account (sig-chain) to transfer the namespace to. This is optional if the destination is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="destination" %}
+The genesis hash of the signature chain to transfer the the namespace to. This is optional if the username is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="transferred namespace" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// transfer/namespace
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_TO_IDENTIFY_NAMESPACE", //optional if address is provided
+    // address: "REGISTER_ADDRESS_OF_NAMESPACE", //optional if name is provided
+    username: "TO_USERNAME_OF_NAMESPACE", //optional if destination is provided
+    // destination: "TO_GENESIS_HASH_OF_NAMESPACE", //optional if username is provided
+    expires: 604800, //optional (in seconds)
+}
+fetch(`${SERVER_URL}/names/transfer/namespace`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "NAME_TO_IDENTIFY_NAMESPACE",  # optional if address is provided
+    # "address": "REGISTER_ADDRESS_OF_NAMESPACE", #optional if name is provided
+    "username": "TO_USERNAME_OF_NAMESPACE",  # optional if destination is provided
+    # "destination": "TO_GENESIS_HASH_OF_NAMESPACE", #optional if username is provided
+    "expires": 604800,  # optional (in seconds)
+}
+response = requests.post(f"{SERVER_URL}/names/transfer/namespace", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -206,19 +376,70 @@ Namespaces that have been transferred need to be claimed by the recipient before
 
 `/names/claim/namespace`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/names/claim/namespace" baseUrl="http://api.nexus-interactions.io:8080" summary="claim/namespace" %}
 {% swagger-description %}
-
+Namespaces that have been transferred need to be claimed by the recipient before the transfer is complete
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The PIN for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the namespace. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" required="true" %}
+The transaction ID (hash) of the corresponding namespace transfer transaction for which you are claiming
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Claimed namespace" %}
+```json
+{
+    "claimed":
+    [
+        "25428293b6631d2ff55b3a931926fec920e407a56f7759495e36089914718d68",
+        "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2"
+    ],
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// claim/namespace
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    txid: "HASH_OF_NAMESPACE_TRANSFER_TRANSACTON",
+}
+fetch(`${SERVER_URL}/names/claim/namespace`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "txid": "HASH_OF_NAMESPACE_TRANSFER_TRANSACTON",
+}
+response = requests.post(f"{SERVER_URL}/names/claim/namespace", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -259,19 +480,75 @@ This will get the history of a namespace as well as it's ownership. The API supp
 
 `/names/list/namespace/history`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/names/list/namespace/history" baseUrl="http://api.nexus-interactions.io:8080" summary="list/namespace/history" %}
 {% swagger-description %}
-
+This will get the history of a namespace as well as it's ownership
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the namespace. This is optional if the address is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the namespace. This is optional if the name is pro
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="namespace history details" %}
+```json
+[
+    {
+        "type": "TRANSFER",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "modified": 1560492117,
+        "checksum": 13703027408063695802,
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "name": "test"
+    },
+    {
+        "type": "CREATE",
+        "owner": "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2",
+        "modified": 1560492117,
+        "checksum": 13703027408063695802,
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "name": "test"
+    }
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// list/namespace/history
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_TO_IDENTIFY_NAMESPACE", //optional if address is provided
+    // address: "REGISTER_ADDRESS_OF_NAMESPACE", //optional if name is provided
+}
+fetch(`${SERVER_URL}/names/list/namespace/history`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_TO_IDENTIFY_NAMESPACE",  # optional if address is provided
+    # "address": "REGISTER_ADDRESS_OF_NAMESPACE", #optional if name is provided
+}
+response = requests.post(
+    f"{SERVER_URL}/names/list/namespace/history", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -332,19 +609,88 @@ This will create a new name. The API supports an alternative endpoint that can i
 
 `/names/create/name`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/names/create/name" baseUrl="http://api.nexus-interactions.io:8080" summary="create/name" %}
 {% swagger-description %}
-
+This will create a new nam
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The PIN for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the name should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" required="true" %}
+The name of the object that this name will point to. The name can contain any characters, but must not START with a colon 
+
+`:'`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="namespace" %}
+This optional field allows callers to specify the namespace that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="global" type="true" %}
+This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="register_address" %}
+The 256-bit hexadecimal register address of the the object that this Name will point to
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="created name" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1",
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// create/name
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_OF_THE_OBJECT_THAT_THIS_NAME_WILL_POINT_TO",
+    // address: "REGISTER_ADDRESS_OF_NAMESPACE", //optional if name is provided
+    // namespace: "YOUR_NAMESPACE",//optional
+    // global: false, //optional
+    register_address: "256 BIT REGISTER ADDRESS OF THE OBJECT THAT NAME WILL POINT TO"
+}
+fetch(`${SERVER_URL}/names/create/name`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "NAME_OF_THE_OBJECT_THAT_THIS_NAME_WILL_POINT_TO",
+    # "address": "REGISTER_ADDRESS_OF_NAMESPACE", #optional if name is provided
+    # "namespace": "YOUR_NAMESPACE",#optional
+    # "global": False, #optional
+    "register_address": "256 BIT REGISTER ADDRESS OF THE OBJECT THAT NAME WILL POINT TO"
+}
+response = requests.post(f"{SERVER_URL}/names/create/name", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -401,7 +747,7 @@ The API supports an alternative endpoint that can include the name in the URL. F
 
 `/names/get/name`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -465,7 +811,7 @@ This method allows the register\_address within a Name object to be changed . Th
 
 `/names/update/name`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -530,7 +876,7 @@ This will transfer ownership of a name . Only global names or names created in a
 
 `/names/transfer/name`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -587,7 +933,7 @@ Names that have been transferred need to be claimed by the recipient before the 
 
 `/names/claim/name`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -640,7 +986,7 @@ This will get the history of a name as well as it's ownership. The API supports 
 
 `/names/list/name/history`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
