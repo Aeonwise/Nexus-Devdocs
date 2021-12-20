@@ -81,14 +81,42 @@ The PIN for this signature chain
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// create/token
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+  pin: "YOUR_PIN",
+  //  session: "YOUR_SESSION_ID", //optional
+  // name: "TOKEN_NAME", //optional
+  supply: 1000000,
+  decimals: 2,
+}
+fetch(`${SERVER_URL}/tokens/create/token`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    #  "session": "YOUR_SESSION_ID", #optional
+    # "name": "TOKEN_NAME", #optional
+    "supply": 1000000,
+    "decimals": 2,
+}
+response = requests.post(f"{SERVER_URL}/tokens/create/token", json=data)
+print(response.json())
+
 ```
 {% endtab %}
 {% endtabs %}
@@ -151,15 +179,56 @@ The method supports the ability to send to multiple recipients in one transactio
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// debit/token
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+  pin: "YOUR_PIN",
+  //  session: "YOUR_SESSION_ID" //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  amount: 10,
+  name_to: "TO_TOKEN_NAME", //optional if address_to is passed
+  // address_to: "TO_TOKEN_ADDRESS", //optional if name_to is passed
+  // reference: "64-bit unsigned integer", optional
+  // expires: 604800, //optional (in seconds)
+  // recipients: [
+  //   { name: "NAME", amount: 10, name_to: "NAME_TO" },
+  //   { name: "NAME", amount: 10, name_to: "NAME_TO" }
+  // ] //optional
+}
+fetch(`${SERVER_URL}/tokens/debit/token`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    #  "session": "YOUR_SESSION_ID" #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    "amount": 10,
+    "name_to": "TO_TOKEN_NAME",  # optional if address_to is passed
+    # "address_to": "TO_TOKEN_ADDRESS", #optional if name_to is passed
+    # "reference": "64-bit unsigned integer", optional
+    # "expires": 604800, #optional (in seconds)
+    # "recipients": [
+    #   { "name": "NAME", amount: 10, name_to: "NAME_TO"
+}
+response = requests.post(f"{SERVER_URL}/tokens/debit/token", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -257,12 +326,43 @@ Increment the token balance by an amount received from a token account. This met
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Javascript" %}
+```javascript
+// credit/token
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
+let data = {
+  pin: "YOUR_PIN",
+  //  session: "YOUR_SESSION_ID", //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  txid: "of the debit transaction",
+}
+fetch(`${SERVER_URL}/tokens/credit/token`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    #  "session": "YOUR_SESSION_ID", #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    "txid": "of the debit transaction",
+}
+response = requests.post(f"{SERVER_URL}/tokens/credit/token", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -322,12 +422,43 @@ Additionally the API supports passing a field name in the URL after the token na
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Javascript" %}
+```
+// get/token
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
+let data = {
+  name: "TOKEN_NAME", //optional if address is passed
+  //  session: "YOUR_SESSION_ID", //optional
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  // count: false, //optional
+  // fieldname: "FILTER_NAME", //optional
+}
+fetch(`${SERVER_URL}/tokens/get/token`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "TOKEN_NAME",  # optional if address is passed
+    #  "session": "YOUR_SESSION_ID", #optional
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    # "count": False, #optional
+    # "fieldname": "FILTER_NAME", #optional
+}
+response = requests.post(f"{SERVER_URL}/tokens/get/token", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
