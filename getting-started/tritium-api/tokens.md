@@ -415,7 +415,7 @@ Additionally the API supports passing a field name in the URL after the token na
 
 `/tokens/get/token`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="get/token" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -423,7 +423,7 @@ Additionally the API supports passing a field name in the URL after the token na
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
+```javascript
 // get/token
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
@@ -446,7 +446,7 @@ fetch(`${SERVER_URL}/tokens/get/token`, {
 {% endtab %}
 
 {% tab title="Python" %}
-```
+```python
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
@@ -528,19 +528,50 @@ This method can be used to take tokens permanently out of the current supply, a 
 
 `/tokens/burn/token`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="burn/token" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Javascript" %}
+```javascript
+// burn/token
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
+let data = {
+  name: "TOKEN_NAME", //optional if address is passed
+  // session: "YOUR_SESSION_ID", //optional
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  amount: 10,
+  // reference: "64-bit unsigned integer", optional
+}
+fetch(`${SERVER_URL}/tokens/burn/token`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    "amount": 10,
+    # "reference": "64-bit unsigned integer", optional
+}
+response = requests.post(f"{SERVER_URL}/tokens/burn/token", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -597,19 +628,61 @@ This will list off all of the transactions related to a given token. You DO NOT 
 
 `/tokens/list/token/transactions`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="token/transactions" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Javascript" %}
+```javascript
+// list/token/transactions
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
+let data = {
+  // genesis: "GENESIS_HASH", //optional 
+  username: "YOUR_USERNAME",//optional
+  // session: "YOUR_SESSION_ID", //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  // verbose: "detail", //optional or "summary","none"
+  // limit: 50, //optional
+  // page: 1, //optional
+  // offset: 10, //optional
+  // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/tokens/list/token/transactions`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_HASH", #optional
+    "username": "YOUR_USERNAME",  # optional
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    # "verbose": "detail", #optional or "summary","none"
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(
+    f"{SERVER_URL}/tokens/list/token/transactions", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -734,22 +807,54 @@ This will list all accounts (globally) that have been created for a particular t
 
 `/tokens/list/token/accounts`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="list/token/accounts" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// list/token/accounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+  // session: "YOUR_SESSION_ID", //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  // verbose: "detail", //optional or "summary","none"
+  // limit: 50, //optional
+  // page: 1, //optional
+  // offset: 10, //optional
+  // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/tokens/list/token/accounts`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Pyhton" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    # "verbose": "detail", #optional or "summary","none"
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/tokens/list/token/accounts", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -813,19 +918,23 @@ Create a new token account for receiving tokens. The API supports an alternative
 
 `/tokens/create/account`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="create/account" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```
+// Some code
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -894,22 +1003,62 @@ The method supports the ability to send to multiple recipients in one transactio
 
 `/tokens/debit/account`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="debit/account" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// debit/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+  pin: "YOUR_PIN",
+  //  session: "YOUR_SESSION_ID" //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  amount: 10,
+  name_to: "TO_TOKEN_NAME", //optional if address_to is passed
+  // address_to: "TO_TOKEN_ADDRESS", //optional if name_to is passed
+  // reference: "64-bit unsigned integer", optional
+  // expires: 604800, //optional (in seconds)
+  // recipients: [
+  //   { name: "NAME", amount: 10, name_to: "NAME_TO" },
+  //   { name: "NAME", amount: 10, name_to: "NAME_TO" }
+  // ] //optional
+}
+fetch(`${SERVER_URL}/tokens/debit/account`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    #  "session": "YOUR_SESSION_ID" #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    "amount": 10,
+    "name_to": "TO_TOKEN_NAME",  # optional if address_to is passed
+    # "address_to": "TO_TOKEN_ADDRESS", #optional if name_to is passed
+    # "reference": "64-bit unsigned integer", optional
+    # "expires": 604800, #optional (in seconds)
+    # "recipients": [
+    #   { "name": "NAME", amount: 10, name_to: "NAME_TO"
+}
+response = requests.post(f"{SERVER_URL}/tokens/debit/account", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -1000,22 +1149,57 @@ Increment an amount received from another token account to an account owned by y
 
 `/tokens/credit/account`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="credit/account" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// // credit/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+  pin: "YOUR_PIN",
+  // session: "YOUR_SESSION_ID" //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  txid: "256 char hash", // (hash) of the corresponding debit transaction for which you are creating this credit for.
+  amount: 10,
+  name_to: "TO_TOKEN_NAME", //optional if address_to is passed
+  // name_proof: "NAME_PROOF", //used only for split payments (optional if address_proof is passed)
+  // address_proof: "REGISTER_ADDRESS" //optional if name_proof is passed 
+}
+fetch(`${SERVER_URL}/tokens/credit/account`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID" #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    # (hash) of the corresponding debit transaction for which you are creating this credit for.
+    "txid": "256 char hash",
+    "amount": 10,
+    "name_to": "TO_TOKEN_NAME",  # optional if address_to is passed
+    # "name_proof": "NAME_PROOF", #used only for split payments (optional if address_proof is passed)
+    # "address_proof": "REGISTER_ADDRESS" #optional if name_proof is passed
+}
+response = requests.post(f"{SERVER_URL}/tokens/credit/account", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -1072,6 +1256,53 @@ Additionally the API supports passing a field name in the URL after the account 
 #### Endpoint:
 
 `/tokens/get/account`
+
+{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+  name: "TOKEN_NAME", //optional if address is passed
+  // session: "YOUR_SESSION_ID", //optional
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  // count: false, //optional
+  // fieldname: "FILTER_NAME", //optional
+}
+fetch(`${SERVER_URL}/tokens/get/account`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    # "count": False, #optional
+    # "fieldname": "FILTER_NAME", #optional
+}
+response = requests.post(f"{SERVER_URL}/tokens/get/account", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -1139,6 +1370,85 @@ This will list off all of the transactions related to a given account. You DO NO
 #### Endpoint:
 
 `/tokens/list/account/transactions`
+
+{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain to scan for transactions (optional if username is supplied or already logged in)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+The username identifying the signature chain to scan for transactions(optional if genesis is supplied or already logged in
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the account name in order to deduce the register address of the account. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+The name identifying the token account to list transactions for. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+let data = {
+  // genesis: "GENESIS_HASH", //optional 
+  username: "YOUR_USERNAME",//optional
+  // session: "YOUR_SESSION_ID", //optional
+  name: "TOKEN_NAME", //optional if address is passed
+  // address: "TOKEN_ADDRESS", // optional if name is passed 
+  // verbose: "detail", //optional or "summary","none"
+  // limit: 50, //optional
+  // page: 1, //optional
+  // offset: 10, //optional
+  // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/tokens/list/account/transactions`, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_HASH", #optional
+    "username": "YOUR_USERNAME",  # optional
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "TOKEN_NAME",  # optional if address is passed
+    # "address": "TOKEN_ADDRESS", # optional if name is passed
+    # "verbose": "detail", #optional or "summary","none"
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(
+    f"{SERVER_URL}/tokens/list/account/transactions", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
