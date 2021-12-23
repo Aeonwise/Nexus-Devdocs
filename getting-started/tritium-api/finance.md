@@ -22,7 +22,7 @@ The following methods are currently supported by this API
 
 [`create/account`](finance.md#create-account)\
 [`debit/account`](finance.md#debit-account)\
-[`credit/account`](broken-reference)\
+[`credit/account`](broken-reference/)\
 [`get/account`](finance.md#get-account)\
 [`list/accounts`](finance.md#list-accounts)\
 [`list/account/transactions`](finance.md#list-account-transactions)\
@@ -45,7 +45,7 @@ Create a new account for receiving NXS. The API supports an alternative endpoint
 
 `/finance/create/account`
 
-{% swagger method="post" path="" baseUrl="" summary="Create a new NXS account" %}
+{% swagger method="post" path="/finance/create/account" baseUrl="http://api.nexus-interactions.io:8080" summary="create/account" %}
 {% swagger-description %}
 Create a new account for receiving NXS.
 {% endswagger-description %}
@@ -54,23 +54,23 @@ Create a new account for receiving NXS.
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="token_name" %}
+{% swagger-parameter in="body" name="token_name" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="token" %}
+{% swagger-parameter in="body" name="token" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="data" %}
+{% swagger-parameter in="body" name="data" required="false" %}
 
 {% endswagger-parameter %}
 
@@ -86,6 +86,12 @@ Create a new account for receiving NXS.
 
 {% tabs %}
 {% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
 ```
 // Some code
 ```
@@ -145,6 +151,22 @@ The method supports the ability to send to multiple recipients in one transactio
 #### Endpoint:
 
 `/finance/debit/account`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+
+{% endtab %}
+
+{% tab title="Python" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -232,6 +254,12 @@ Increment an amount received from another NXS account to an account owned by you
 
 `/finance/credit/account`
 
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/account" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -284,6 +312,12 @@ Additionally the API supports passing a field name in the URL after the account 
 #### Endpoint:
 
 `/finance/get/account`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/account" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
 
 #### Parameters:
 
@@ -350,6 +384,69 @@ This will list off all of the NXS accounts belonging to the currently logged in 
 #### Endpoint:
 
 `/finance/list/accounts`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
+
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account details" %}
+```json
+[
+    {
+        "created": 1568025836,
+        "modified": 1568025836,
+        "name": "default",
+        "address": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
+        "token_name": "NXS",
+        "token": "0",
+        "balance": 5000,
+        "pending": 0.0,
+        "unconfirmed": 76.492244
+    },
+    {
+        "created": 1568025836,
+        "modified": 1568025836,
+        "name": "savings",
+        "address": "8GhrC2TKkU4ra9Uuj8LuiAyxDAtza2u483N1rKDSaVp24dNgUy9",
+        "token_name": "mytoken",
+        "token": "8GHrC2TKkU4ra9Uuj8LuiAyxDAtza2u483N1rKDSaVp24dNgUx8",
+        "balance": 10000.0,
+        "pending": 0.0,
+        "unconfirmed": 0.0
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
 
 #### Parameters:
 
@@ -434,6 +531,12 @@ This will list off all of the transactions related to a given account. You DO NO
 
 `/finance/list/account/transactions`
 
+{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
 #### Parameters:
 
 `genesis` : The genesis hash identifying the signature chain to scan for transactions (optional if username is supplied or already logged in).
@@ -517,33 +620,33 @@ This will list off all of the transactions related to a given account. You DO NO
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of this contract within the transaction that was credited / claimed.
+`contract` : The ID of this contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
@@ -556,6 +659,20 @@ This will retrieve account values and staking metrics for the trust account belo
 #### Endpoint:
 
 `/finance/get/stakeinfo`
+
+{% swagger method="post" path="/finance/get/stakeinfo" baseUrl="http://api.nexus-interactions.io:8080" summary="get/stakeinfo" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+{% endswagger %}
 
 #### Parameters:
 
@@ -634,6 +751,12 @@ To remove a stake change request, you can either set an expiration time, or set 
 #### Endpoint:
 
 `/finance/set/stake`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
 
 #### Parameters:
 
@@ -719,6 +842,64 @@ This will retrieve a summary of balance information across all accounts belongin
 #### Endpoint:
 
 `/finance/get/balances`
+
+{% swagger method="post" path="/finance/get/balances" baseUrl="http://api.nexus-interactions.io:8080" summary="get/balances" %}
+{% swagger-description %}
+This will retrieve a summary of balance information across all accounts belonging to the currently logged in signature chain for a particular token type
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token_name" %}
+Optional name of a token to return the balances for. 
+
+`token`
+
+ can be supplied as an alternative to 
+
+`token_name`
+
+. Defaults to 
+
+`NXS`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token" %}
+Optional token address to return balances for. 
+
+`token_name`
+
+ can be supplied as an alternative to 
+
+`token`
+
+. Defaults to 
+
+`0`
+
+ (
+
+`NXS`
+
+)
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account balance" %}
+```json
+{
+    "token_name": "NXS",
+    "token": "0000000000000000000000000000000000000000000000000000000000000000",
+    "available": 1000,
+    "pending": 50,
+    "unconfirmed": 5,
+    "stake": 5000,
+    "immature": 100
+}
+```
+{% endswagger-response %}
+{% endswagger %}
 
 #### Parameters:
 
