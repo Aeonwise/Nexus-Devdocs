@@ -29,6 +29,71 @@ This will create a new object schema, a special type of object that can be used 
 
 `/objects/create/schema`
 
+{% swagger method="post" path="/objects/create/schema" baseUrl="http://api.nexus-interactions.io:8080" summary="create/schema" %}
+{% swagger-description %}
+This will create a new object schema, a special type of object that can be used to define the format of other objects created on the object register
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the object should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+An optional name to identify the schema. If provided a Name object will also be created in the users local namespace, allowing the schema to be accessed/retrieved by name. If no name is provided the schema will need to be accessed/retrieved by its 256-bit register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="format" %}
+The format the caller is using to define the object schema. Values can be 
+
+`JSON`
+
+ (the default), 
+
+`ANSI`
+
+ (not currently supported), or 
+
+`XML`
+
+ (not currently supported). This is an optional field and the value 
+
+`JSON`
+
+ is assumed if omitted
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="json" required="true" %}
+
+
+If format is `JSON`, then this field will hold the json definition of the schema as a JSON array representing each field in the object. It uses the following format:
+
+
+
+`name` : The name of the data field.
+
+`type` : The data type to use for this field. Values can be `uint8`, `uint16`, `uint32`, `uint64`, `uint256`, `uint512`, `uint1024`, `string`, or `bytes`.
+
+`max_length` : Optional, the maximum number of characters if type=string
+
+`value` : The default value of the field.
+
+`mutable` : The boolean field to indicate whether the field is writable (true) or read-only (false).
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
