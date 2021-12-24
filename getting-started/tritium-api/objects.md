@@ -94,6 +94,63 @@ If format is `JSON`, then this field will hold the json definition of the schema
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// create/schema
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME TO IDENTIFY THE SCHEMA", // If provided a Name object will also be created in the users local namespace, allowing the schema to be accessed/retrieved by name. If no name is provided the schema will need to be accessed/retrieved by its 256-bit register address.
+    format: "JSON", // Values can be JSON (the default), ANSI (not currently supported), or XML (not currently supported). This is an optional field and the value JSON is assumed if omitted.
+    //If format is JSON, then this field will hold the json definition of the schema as a JSON array representing each field in the object. It uses the following format:
+    json: {
+        name: "NAME OF THE DATA FIELD",
+        type: "string", // Values can be uint8, uint16, uint32, uint64, uint256, uint512, uint1024, string, or bytes.
+        // max_length : 1024,//Optional, the maximum number of characters if type=string
+        value: "DEFAULT VALUE OF THE FIELD",
+        // mutable : true, //The boolean field to indicate whether the field is writable (true) or read-only (false).
+    }
+}
+fetch(`${SERVER_URL}/objects/create/schema`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # If provided a Name object will also be created in the users local namespace, allowing the schema to be accessed/retrieved by name. If no name is provided the schema will need to be accessed/retrieved by its 256-bit register address.
+    "name": "NAME TO IDENTIFY THE SCHEMA",
+    # Values can be JSON (the default), ANSI (not currently supported), or XML (not currently supported). This is an optional field and the value JSON is assumed if omitted.
+    "format": "JSON",
+    # If format is JSON, then this field will hold the json definition of the schema as a JSON array representing each field in the object. It uses the following format:
+    "json": {
+        "name": "NAME OF THE DATA FIELD",
+        # Values can be uint8, uint16, uint32, uint64, uint256, uint512, uint1024, string, or bytes.
+        "type": "string",
+        # "max_length" : 1024,#Optional, the maximum number of characters if type=string
+        "value": "DEFAULT VALUE OF THE FIELD",
+        # "mutable" : True, #The boolean field to indicate whether the field is writable (True) or read-only (False).
+    }
+}
+response = requests.post(f"{SERVER_URL}/objects/create/schema", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -249,6 +306,47 @@ The format that the schema should be returned in. Values can be
 ```
 {% endswagger-response %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/schema
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME IDENTIFYING THE OBJECT", //optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    // session: "YOUR_SESSION_ID", //optional
+    address: "REGISTER ADDRESS OF THE OBJECT", //optional if the name is provided.
+    format: "JSON", // Values can be JSON (the default), ANSI (not currently supported), or XML (not currently supported). This is an optional field and the value JSON is assumed if omitted.
+}
+fetch(`${SERVER_URL}/objects/get/schema`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    "name": "NAME IDENTIFYING THE OBJECT",
+    # "session": "YOUR_SESSION_ID", #optional
+    # optional if the name is provided.
+    "address": "REGISTER ADDRESS OF THE OBJECT",
+    # Values can be JSON (the default), ANSI (not currently supported), or XML (not currently supported). This is an optional field and the value JSON is assumed if omitted.
+    "format": "JSON",
+}
+response = requests.post(f"{SERVER_URL}/objects/get/schema", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
