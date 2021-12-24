@@ -21,9 +21,7 @@ The following methods are currently supported by this API
 
 ***
 
-***
-
-### `create/schema`
+## `create/schema`
 
 This will create a new object schema, a special type of object that can be used to define the format of other objects created on the object register. The API supports an alternative endpoint that can include the new object name in the URI. For example `/objects/create/schema/myschema` will resolve to `objects/create/schema?name=myschema`.
 
@@ -102,13 +100,90 @@ The following is an example of an object defined using the `JSON` format:\
 
 ***
 
-### `get/schema`
+## `get/schema`
 
 Retrieves the schema / object definition of an object.
 
 #### Endpoint:
 
 `/objects/get/schema`
+
+{% swagger method="post" path="/objects/get/schema" baseUrl="http://api.nexus-interactions.io:8080" summary="get/schema" %}
+{% swagger-description %}
+Retrieves the schema / object definition of an object
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the object. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the object. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the object. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="format" %}
+The format that the schema should be returned in. Values can be 
+
+`JSON`
+
+ (the default), 
+
+`ANSI`
+
+ (not currently supported), or 
+
+`XML`
+
+ (not currently supported). This is optional field and the value 
+
+`JSON`
+
+ is assumed if omitted
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="schema details" %}
+```json
+{
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    "json" :
+        [
+            {
+                "name": "serial_number",
+                "type": "uint32",
+                "value": "0",
+                "mutable" : "false"
+            },
+            {
+                "name": "description",
+                "type": "string",
+                "value": "",
+                "max_length": 100,
+                "mutable" : "false"
+            },
+            {
+                "name": "shelf_location",
+                "type": "string",
+                "value": "",
+                "max_length": 100,
+                "mutable" : "true"
+            },
+        ]
+}
+```
+{% endswagger-response %}
+{% endswagger %}
 
 #### Parameters:
 
