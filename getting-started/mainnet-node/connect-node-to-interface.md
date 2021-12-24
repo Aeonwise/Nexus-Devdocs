@@ -5,7 +5,7 @@ This guide will help to access your wallet daemon using a remote wallet interfac
 On the computer which will run the interface go to [https://](https://crypto.nexus.io/wallet)[nexus.io/wallets](https://nexus.io/wallets) and download the wallet for your operating system.
 
 {% hint style="danger" %}
-Always verify the wallet integrity. Follow the instructions in the link below&#x20;
+Always verify the wallet integrity. Follow the instructions in the link below
 {% endhint %}
 
 {% embed url="https://nexus.io/ResourceHub/wallet-guide#download-verify-install" %}
@@ -80,7 +80,7 @@ Check the ufw firewall status
 sudo ufw status
 ```
 
-ufw status – You should see output something like in the image below.
+ufw status – The output should look like below .
 
 ![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-ufw.png)
 
@@ -94,12 +94,12 @@ Wait for a few seconds and
 
 ![](https://thedigitalfuture.net/wp-content/uploads/2020/12/RPI-Sync.png)
 
-You should see the interface connected to the node and the information appear on the overview page.
+The interface will be connected to the node and the information will appear on the overview page.
 
-Now you can login and transact normally using the interface.
+Now login and transact normally using the interface.
 
-{% hint style="warning" %}
-If you are staking on the CLI node. Do not log off from the interface, just close the interface.&#x20;
+{% hint style="danger" %}
+If staking on the CLI node. Do not log off from the interface, just close the interface.
 {% endhint %}
 
 To exit the SSH or putty terminal use the command. This will close only the SSH or putty terminal and the node will be running which can be confirmed with the interface.
@@ -109,6 +109,5 @@ exit
 ```
 
 {% hint style="danger" %}
-When the CLI node is connected to the interface do not disable "Manual core mode". This will send a shutdown signal to the core. This issue will be rectified with next release.
+When the CLI node is connected to the interface do not disable or enable "Manual core mode". This will send a shutdown signal to the core. This issue will be rectified with next release.
 {% endhint %}
-
