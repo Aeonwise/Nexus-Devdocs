@@ -217,11 +217,11 @@ Use Nexus API commands on the interface console – (Nexus wallet matrix theme)
 
 ### **Before we start:**
 
-* Be careful as you will be typing in the login credentials in the terminal and can be seen by anyone around you.
-* Every transaction will need you to enter your pin
+* Be careful as the login credentials in the terminal and can be seen by anyone around.
+* Every transaction will need the PIN
 * Every transaction on the Nexus blockchain is a debit to the sending account and credit to the receiving account, two transactions. (This will be useful to understand some API commands)
 
-Change into the LLL-TAO directory to start nexus core (You have to be in the LLL-TAO folder to run all the following commands)
+Change into the LLL-TAO directory to start nexus core (Change to the LLL-TAO folder to run all the following commands)
 
 ```
 cd LLL-TAO
