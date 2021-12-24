@@ -78,6 +78,12 @@ cd LLL-TAO
 
 Run `make` to compile from source. The 4 in ‘j4’ refers to the no. of cores / threads available on the CPU (RPI-4B has 4 cores). More compiling threads consumes memory, if you have 1GB memory recommend to use j1 to avoid ‘out of memory’ error.
 
+{% hint style="warning" %}
+To build on Raspberry Pi 3 or 4 with 1 GB RAM, enable swap memory with instructions from link below. Proceed after setting up swap.
+{% endhint %}
+
+{% embed url="https://rayanfer32.medium.com/enable-swap-memory-on-ubuntu-on-raspberry-pi-a0f873a65e74" %}
+
 This begins compiling the wallet, please be patient, as this step can take a very long time depending on the CPU.
 
 For X86/IA64 based computers use the below command
