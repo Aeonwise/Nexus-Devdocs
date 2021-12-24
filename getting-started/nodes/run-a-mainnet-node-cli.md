@@ -16,7 +16,7 @@ This guide is tailored for ubuntu/raspian distributions
 * Putty if you are using ssh via windows.
 
 {% hint style="info" %}
-To build on Raspberry Pi 3 or 4 with 1 GB RAM, enable swap memory with instructions from link below. Proceed after setting up swap.&#x20;
+To build on Raspberry Pi 3 or 4 with 1 GB RAM, enable swap memory with instructions from link below. Proceed after setting up swap.
 {% endhint %}
 
 {% embed url="https://rayanfer32.medium.com/enable-swap-memory-on-ubuntu-on-raspberry-pi-a0f873a65e74" %}
@@ -167,15 +167,16 @@ daemon=1
 #stake=1
 ```
 
-If you intend to access your wallet remotely (from a wallet interface on another machine), you’ll also need the following lines in the config file.&#x20;
+If you intend to access your wallet remotely (from a wallet interface on another machine), you’ll also need the following lines in the config file.
 
 {% hint style="info" %}
-\<ipaddress> is IP address of the machine connecting to your node remotely, it may be the interface or dapp server IP address. You can also use '\* to allow all computers in a particular subnet&#x20;
+\<ipaddress> is IP address of the machine connecting to your node remotely, it may be the interface or dapp server IP address. You can also use '\* to allow all computers in a particular subnet. `llpallowip=192.168.10.*:8080` allows all computers on the 192.168.10 local network
 {% endhint %}
 
 ```
+#To enable RPC remote access
 rpcremote=1
-#To enable API credtnails for API authentication 
+#To enable API authentication 
 apiauth=1
 #To enable remote API access. Local API access will be revoked
 apiremote=1
@@ -310,17 +311,16 @@ To check the full Nexus blockchain metrics.
 
 ```
 ./nexus system/get/metrics
-
 ```
 
 Hope this guide was helpful !!
 
 ## Update the node:
 
-When there is a new version of the core you need to update your node.&#x20;
+When there is a new version of the core you need to update your node.
 
 {% hint style="info" %}
-Wallet mandatory or incremental upgrades can be understood by looking at version number of the new and old wallets. If the new core version first digit is incremented then it is a mandatory update which might be a hard fork or major protocol changes. If second or third digit is incremented then, it is an incremental upgrade. Incremental updates can be given a miss, but our recommendation is to upgrade.  &#x20;
+Wallet mandatory or incremental upgrades can be understood by looking at version number of the new and old wallets. If the new core version first digit is incremented then it is a mandatory update which might be a hard fork or major protocol changes. If second or third digit is incremented then, it is an incremental upgrade. Incremental updates can be given a miss, but our recommendation is to upgrade.
 {% endhint %}
 
 To update the node you need to change into the LLL-TAO folder
