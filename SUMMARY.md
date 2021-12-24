@@ -11,7 +11,7 @@
 * [🖥 Mainnet Node](getting-started/nodes/README.md)
   * [Run a Mainnet Node -CLI](getting-started/nodes/run-a-mainnet-node-cli.md)
   * [Connect Node to Interface](getting-started/mainnet-node/connect-node-to-interface.md)
-  * [Update Mainnet Node](getting-started/mainnet-node/update-mainnet-node.md)
+  * [Update Mainnet CLI Node](getting-started/mainnet-node/update-mainnet-node.md)
 * [⚙ Tritium API](getting-started/tritium-api/README.md)
   * [API Overview](getting-started/tritium-api/api-overview.md)
   * [How-to-API](getting-started/tritium-api/how-to-api.md)
