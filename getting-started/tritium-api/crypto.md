@@ -56,15 +56,15 @@ Returns a list of all hashed public keys in the crypto object register for the s
 Returns a list of all hashed public keys in the crypto object register for the specified signature chain
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="genesis" %}
+{% swagger-parameter in="body" name="genesis" required="false" %}
 The genesis hash identifying the user account (optional if username is supplied)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="username" %}
+{% swagger-parameter in="body" name="username" required="false" %}
 The username identifying the user account optional if genesis is supplied)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 If no username/genesis is supplied, in multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to list the keys from. For single-user API mode the session should not be supplied.
 {% endswagger-parameter %}
 
@@ -183,35 +183,35 @@ Generates a new public-private key pair and stores the hashed public key in the 
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="name" type="auth" required="true" %}
-The name of the key to create. If a key already exists in the crypto object register for this key name then the method will return an error. Accepted values are 
+The name of the key to create. If a key already exists in the crypto object register for this key name then the method will return an error. Accepted values are
 
 `auth`
 
-, 
+,
 
 `lisp`
 
-, 
+,
 
 `network`
 
-, 
+,
 
 `sign`
 
-, 
+,
 
 `verify`
 
-, 
+,
 
 `app1`
 
-, 
+,
 
 `app2`
 
-, and 
+, and
 
 `app3`
 {% endswagger-parameter %}
@@ -220,16 +220,16 @@ The name of the key to create. If a key already exists in the crypto object regi
 The PIN for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the key should be created for. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="scheme" type="BRAINPOOL" %}
-Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
+{% swagger-parameter in="body" name="scheme" type="BRAINPOOL" required="false" %}
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be
 
 `BRAINPOOL`
 
- or 
+or
 
 `FALCON`
 {% endswagger-parameter %}
@@ -328,11 +328,11 @@ The certificate includes the owners genesis hash in the CN field, allowing calli
 
 {% swagger method="post" path="/crypto/create/certificate" baseUrl="http://api.nexus-interactions.io:8080" summary="create/certificate" %}
 {% swagger-description %}
-Generates a new self-signed x509 certificate for this signature chain and stores a hash of the certificate data in the 
+Generates a new self-signed x509 certificate for this signature chain and stores a hash of the certificate data in the
 
 `cert`
 
- field of the crypto object register. Users must be logged in to create a certificate
+field of the crypto object register. Users must be logged in to create a certificate
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="txid" required="true" %}
@@ -344,11 +344,11 @@ The certificate data. This is returned in PEM format, and base64 encoded. Callin
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="hashcert" required="true" %}
-The SK256 hash of the certificate data that is written to the 
+The SK256 hash of the certificate data that is written to the
 
 `cert`
 
- field in the crypto register. This hash can be used to prove that the certificate data has not been tampered with by comparing to the value in the crypto register of the certificate owners signature chain.
+field in the crypto register. This hash can be used to prove that the certificate data has not been tampered with by comparing to the value in the crypto register of the certificate owners signature chain.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -435,15 +435,15 @@ Returns the hashed public key from the crypto object register for the specified 
 The name of the public key to retrieve
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="genesis" %}
+{% swagger-parameter in="body" name="genesis" required="false" %}
 The genesis hash identifying the signature chain (optional if username is supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="username" %}
+{% swagger-parameter in="body" name="username" required="false" %}
 The username identifying the user account (optional if genesis is supplied)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 If no username/genesis is supplied, in multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to get the key from. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
@@ -539,24 +539,24 @@ Returns the public key (as opposed to the hashed public key that is returned by 
 Returns the public key (as opposed to the hashed public key that is returned by get/key) for a given key name
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" %}
 The name of the public key to return
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" %}
+{% swagger-parameter in="body" name="pin" required="false" %}
 The pin for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the key should be returned from. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="scheme" %}
-Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
+{% swagger-parameter in="body" name="scheme" required="false" %}
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be
 
 `BRAINPOOL`
 
- or 
+or
 
 `FALCON`
 
@@ -650,24 +650,24 @@ Returns the private key for a key pair. This method can only be used to obtain t
 Returns the private key for a key pair.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" %}
+{% swagger-parameter in="body" name="pin" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (user-account) the key should be returned from. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="scheme" %}
-Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
+{% swagger-parameter in="body" name="scheme" required="false" %}
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be
 
 `BRAINPOOL`
 
- or 
+or
 
 `FALCON`
 
@@ -832,16 +832,16 @@ Change the signature scheme used to generate the public-private keys for the use
 The PIN for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (user account) the key should be created for. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="scheme" required="true" %}
-The new scheme to use. Values can be 
+The new scheme to use. Values can be
 
 `BRAINPOOL`
 
- or 
+or
 
 `FALCON`
 {% endswagger-parameter %}
@@ -873,7 +873,6 @@ fetch(`${SERVER_URL}/crypto/change/scheme`, {
     .then(resp => resp.json())
     .then(json => console.log(json))
     .catch(error => console.log(error))
-
 ```
 {% endtab %}
 
@@ -937,37 +936,37 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 This method can be used to encrypt arbitrary data using the AES256 encryption function and a symmetric key.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="key" %}
+{% swagger-parameter in="body" name="key" required="false" %}
 A 256-bit (32 character) symmetric key to use to encrypt the data. Should only be provided if an external encryption key is known
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
-The name of the private key to use to generate the encryption key. Not required if 
+{% swagger-parameter in="body" name="name" required="false" %}
+The name of the private key to use to generate the encryption key. Not required if
 
 `key`
 
- is provided. 
+is provided.
 
 **`The name parameter can not be one of the nine default keys (`auth`,` lisp`,` network`,` sign`,` verify`,` cert`,` app1`,` app2`, and` app**
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" %}
-The PIN for this signature chain. Not required if 
+{% swagger-parameter in="body" name="pin" required="false" %}
+The PIN for this signature chain. Not required if
 
 `key`
 
- is provided.
+is provided.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
-For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if 
+{% swagger-parameter in="body" name="session" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if
 
 `key`
 
- is provided
+is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="peerkey" %}
+{% swagger-parameter in="body" name="peerkey" required="false" %}
 Optional, the public peer key used to to generate a shared key. This should be passed in as a base58-encoded string. Should only be provided if a shared key should be generated
 {% endswagger-parameter %}
 
@@ -1053,7 +1052,6 @@ print(response.json())
     "data": "vQVmV1FXoKwSLRS3IDq8ZRuaQMjqtlG0zvGob64a6EY="
 }
 
-
 ```
 
 #### Return values:
@@ -1093,35 +1091,35 @@ If the `peerkey` parameter is supplied then a shared symmetric key is generated 
 Decrypt data previously encrypted using AES256 and a symmetric key
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="key" %}
+{% swagger-parameter in="body" name="key" required="false" %}
 A 256-bit (32 character) symmetric key to use to decrypt the data. Should only be provided if an external encryption key is known
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
-The name of the private key to use to generate the decryption key. Not required if 
+{% swagger-parameter in="body" name="name" required="false" %}
+The name of the private key to use to generate the decryption key. Not required if
 
 `key`
 
- is provided.
+is provided.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" %}
-The PIN for this signature chain. Not required if 
+{% swagger-parameter in="body" name="pin" required="false" %}
+The PIN for this signature chain. Not required if
 
 `key`
 
- is provided
+is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
-For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if 
+{% swagger-parameter in="body" name="session" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if
 
 `key`
 
- is provided
+is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="peerkey" %}
+{% swagger-parameter in="body" name="peerkey" required="false" %}
 Optional, the peer public key used to to generate a shared key. This should be passed in as a base58-encoded string. Should only be provided if a shared key should be generated to decrypt the data
 {% endswagger-parameter %}
 
@@ -1231,7 +1229,7 @@ The name of the key in the crypto object register to use to sign the data
 The PIN for this signature chain
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) should be used to sign the data. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
@@ -1297,7 +1295,6 @@ print(response.json())
     "scheme": "BRAINPOOL",
     "signature": "MIGEAkAZSA/O9DSiwmrCZ3p6xTQau5F1EiSsVcp+Vvetw1oCqJyxb5BwnyksPcQ4kHiWOzFZls45o4bQnhHED3VYH+xaAkBUJbg4+HbRFNXnqCFZt2Ud6NqIOGKCPDjrP1bG2NQSbdaWcyRTWm7Qgm1RJ+gohQXdkkCdajaYevqA2CreAYSE"
 }
-
 ```
 
 #### Return values:
@@ -1324,29 +1321,65 @@ Verifies the signature is correct for the specified public key and data. This me
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="publickey" required="true" %}
-
+The public key to use to verify the signature, base58 encoded
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="scheme" required="true" %}
+The cryptographic scheme that should be used to verify the signature. Options are 
 
+`FALCON`
+
+ or 
+
+`BRAINPOOL`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="signature" required="true" %}
-
+The signature to be verified, base64 encoded
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="data" required="true" %}
-
+The signed data. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
 {% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// verify/signature
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    publickey: "PUBLIC KEY TO USE TO VERIFY THE SIGNATURE", // base58 encoded.
+    scheme: "BRAINPOOL", // FALCON or BRAINPOOL.
+    signature: "THE SIGNATURE TO BE VERIFIED", // base64 encoded.
+    data: "THE SIGNED DATA" //This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+}
+fetch(`${SERVER_URL}/crypto/verify/signature`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # base58 encoded.
+    "publickey": "PUBLIC KEY TO USE TO VERIFY THE SIGNATURE",
+    "scheme": "BRAINPOOL",  # FALCON or BRAINPOOL.
+    "signature": "THE SIGNATURE TO BE VERIFIED",  # base64 encoded.
+    # This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+    "data": "THE SIGNED DATA"
+}
+response = requests.post(f"{SERVER_URL}/crypto/verify/signature", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1382,16 +1415,6 @@ Verifies the x509 certificate that was previously obtained from the `crypto/get/
 {% endswagger-description %}
 {% endswagger %}
 
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### Parameters:
 
 `certificate` : The certificate data in PEM format, and base64 encoded.
@@ -1419,16 +1442,6 @@ The `data` must be supplied as a base64 encoded string. This will be decoded int
 
 {% endswagger-description %}
 {% endswagger %}
-
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### Parameters:
 
