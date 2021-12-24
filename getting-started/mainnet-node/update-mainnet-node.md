@@ -4,17 +4,17 @@ description: How to update the mainnet node
 
 # Update Mainnet Node
 
-When there is a new version of the core, it needs to be updated.&#x20;
+When there is a new version of the core, it needs to be updated.
 
 {% hint style="info" %}
 This guide is tailored for ubuntu/raspian distributions
 {% endhint %}
 
 {% hint style="info" %}
-Wallet mandatory or incremental upgrades can be understood by looking at version number of the new and old wallets. If the new core version first digit is incremented then it is a mandatory update which might be a hard fork or major protocol changes. If second or third digit is incremented then, it is an incremental upgrade. Incremental updates can be given a miss, but our recommendation is to upgrade.  &#x20;
+Wallet mandatory or incremental upgrades can be understood by looking at version number of the new and old wallets. If the new core version first digit is incremented then it is a mandatory update which might be a hard fork or major protocol changes. If second or third digit is incremented then, it is an incremental upgrade. Incremental updates can be given a miss, but our recommendation is to upgrade.
 {% endhint %}
 
-To update the node you need to change into the LLL-TAO folder
+To update the node change into the LLL-TAO folder
 
 ```
 cd LLL-TAO
@@ -32,7 +32,7 @@ Change to the home directory
 cd
 ```
 
-It is recommended to get your node operating system updated. This command may take some time
+It is recommended to get the node operating system updated. This command may take some time
 
 ```
 sudo apt update; sudo apt upgrade -y
@@ -70,15 +70,15 @@ For the master branch which in turn will refer to the merging use the link below
 git clone --depth 1 https://github.com/Nexusoft/LLL-TAO
 ```
 
-Change into the new source code directory
+Change into the source code directory
 
 ```
 cd LLL-TAO
 ```
 
-Run make to compile from source. The 4 in ‘j4’ refers to the no. of cores / threads available on the CPU of the node for compiling faster. (RPI-4B has 4 cores). More compiling threads consumes memory, if you have 1GB memory recommend you use j1 or you will get ‘out of memory’ error.
+Run `make` to compile from source. The 4 in ‘j4’ refers to the no. of cores / threads available on the CPU (RPI-4B has 4 cores). More compiling threads consumes memory, if you have 1GB memory recommend to use j1 to avoid ‘out of memory’ error.
 
-This begins compiling the wallet, please be patient, as this can take a very long time depending on your CPU.
+This begins compiling the wallet, please be patient, as this step can take a very long time depending on the CPU.
 
 For X86/IA64 based computers use the below command
 
@@ -108,8 +108,8 @@ To check the node info
 
 Check the core version is showing the new version.
 
-{% hint style="info" %}
-if using the nexus interface to remote control the node, update to the latest version, failing to update may cause issues with usability or functionality. Go to [https://nexus.io/wallets](https://nexus.io/wallets) to download the latest interface
+{% hint style="warning" %}
+if using the nexus interface to remotely access the node, update to the latest version, failing to update may cause issues with usability or functionality. Go to [https://nexus.io/wallets](https://nexus.io/wallets) to download the latest interface
 {% endhint %}
 
 Hope this guide was helpful !!
