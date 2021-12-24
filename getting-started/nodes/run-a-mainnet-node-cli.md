@@ -209,11 +209,7 @@ tar -xf tritium.tar.gz -C ~/.Nexus
 
 ## **6. API's To Control Node:**
 
-To interact with the nexus core daemon, use API commands via the terminal. Change your location to \~/LLL-TAO folder for the API’s to work. To run the node, stake and transact we will only be using the system, users and finance API’s. If you have any doubts you can refer to the API documentation [here](../tritium-api/).
-
-If you are using the GUI wallet and want to just check out the API commands you can use them on the Nexus wallet Interface console. Just use the API commands minus the ./nexus. Just check the video below.
-
-Use Nexus API commands on the interface console – (Nexus wallet matrix theme)
+To interact with the nexus core daemon, use API commands via the terminal. Change the location to \~/LLL-TAO folder for the API’s to work. To run the node, stake and transact we will only be using the system, users and finance API’s. If you have any doubts refer to the API documentation [here](../tritium-api/).
 
 ### **Before we start:**
 
@@ -221,7 +217,7 @@ Use Nexus API commands on the interface console – (Nexus wallet matrix theme)
 * Every transaction will need the PIN
 * Every transaction on the Nexus blockchain is a debit to the sending account and credit to the receiving account, two transactions. (This will be useful to understand some API commands)
 
-Change into the LLL-TAO directory to start nexus core (Change to the LLL-TAO folder to run all the following commands)
+Change into the LLL-TAO directory to start nexus core (Change to the LLL-TAO folder to run the following commands)
 
 ```
 cd LLL-TAO
@@ -247,23 +243,23 @@ Nexus core will be running in the background as a daemon. It will detect peers a
 ./nexus system/get/info
 ```
 
-The output of the API’s is in json format. You can confirm if your node is synchronized by checking the “synchronising”: false and “synccomplete”: 100. You can even check the block height on the explorer [here](http://explorer.nexus.io) or [here](https://nxsorbitalscan.com)
+The output of the API’s is in json format. You can confirm if the node is synchronized by checking the “synchronising”: false and “synccomplete”: 100. Check the block height on the explorer [here](http://explorer.nexus.io) or [here](https://nxsorbitalscan.com)
 
 After the blockchain is fully synchronized, create a new user account (signature chain).
 
-Username must be a minimum of 3 characters, passwords must be 8 characters and pin 4 characters. The PIN can be a combination of letters/numbers/symbols.
+Username must be a minimum of 2 characters, passwords must be 8 characters and PIN 4 characters. The PIN can be a combination of letters/numbers/symbols.
 
 ```
 ./nexus users/create/user username= password= pin=
 ```
 
-To log into your account (If you just created your account wait for a few blocks to confirm new account)
+To log into the account (If the account was just created, wait for a few blocks to confirm new account)
 
 ```
 ./nexus users/login/user username= password= pin=
 ```
 
-To unlock the account for staking and automatically credit incoming transactions set (notifications=1). If its not set you will have to manually credit the incoming transactions else it will be credited to the sender’s account after 24 hrs. This is the reversible transaction function working as designed.
+To unlock the account for staking and automatically credit incoming transactions set (notifications=1). If its not set, then manually credit the incoming transactions else it will be credited back to the sender’s account after 24 hrs. This is the reversible transaction function working as designed.
 
 ```
 ./nexus users/unlock/user pin= staking=1 notifications=1
@@ -275,33 +271,33 @@ To check stake info (works only after login and unlocking for staking)
 ./nexus finance/get/stakeinfo
 ```
 
-To get details of your accounts and address. (Trust and default accounts are automatically created with new account)
+To get details of the logged in user accounts and address. (Trust and default accounts are automatically created with new account)
 
 ```
 ./nexus users/list/accounts
 ```
 
-This will list all your account and its details
+This will list all the account and its details
 
 ```
 ./nexus finance/list/accounts
 ```
 
-This will list all transactions sent to a particular genesis or username. It is useful for identifying transactions that you need to accept such as credits.
+This will list all transactions sent to a particular genesis or username. It is useful for identifying transactions that need to accept such as credits.
 
 ```
 ./nexus users/list/notifications
 ```
 
-If automatic credit (notifications=1) is not specified as an option with unlock command that will reflect as a pending transaction and will be listed in notifications.
+If automatic credit (`notifications=1`) is not specified as an option with `unlock` command that will reflect as a pending transaction and will be listed in notifications.&#x20;
 
-This will credit a pending transaction, ‘txid’ is the debit transaction id from notifications
+To credit a pending transaction, ‘txid’ is the debit transaction id from notifications
 
 ```
 ./nexus finance/credit/account pin= txid=
 ```
 
-To send nexus coins, name is the account to be sent from and name\_to is the recipient account, these can be changed to address and address\_to if you are using the address.
+To send nexus coins, `name` is the account to be sent from and `name_to` is the recipient account, these can be changed to `address` and `address_to`
 
 ```
 ./nexus finance/debit/account name=username:name/namespace:name amount= name_to=username:name/namespace:name pin=
@@ -312,111 +308,5 @@ To check the full Nexus blockchain metrics.
 ```
 ./nexus system/get/metrics
 ```
-
-Hope this guide was helpful !!
-
-## Update the node:
-
-When there is a new version of the core you need to update your node.
-
-{% hint style="info" %}
-Wallet mandatory or incremental upgrades can be understood by looking at version number of the new and old wallets. If the new core version first digit is incremented then it is a mandatory update which might be a hard fork or major protocol changes. If second or third digit is incremented then, it is an incremental upgrade. Incremental updates can be given a miss, but our recommendation is to upgrade.
-{% endhint %}
-
-To update the node you need to change into the LLL-TAO folder
-
-```
-cd LLL-TAO
-```
-
-Stop the core
-
-```
-./nexus system/stop
-```
-
-Change to the home directory
-
-```
-cd
-```
-
-It is better to get your node operating system updated. This command may take some time
-
-```
-sudo apt update; sudo apt upgrade -y
-```
-
-Reboot the node. This command will restart the node and also close SSH or putty connection
-
-```
-sudo reboot
-```
-
-Give two minutes for the node to restart and then log in via SSH or putty
-
-```
-ssh ubuntu@192.168.3.144
-```
-
-Rename the existing ‘LLL-TAO’ folder to ‘old-LLL’
-
-```
-mv LLL-TAO old-LLL
-```
-
-Next download the latest nexus wallet source code from github, The LLL-TAO master branch is linked to the merging branch.
-
-For the core version 5.0.5 use the below link
-
-```
-git clone -b 5.0.5 https://github.com/Nexusoft/LLL-TAO
-```
-
-For the master branch which in turn will refer to the merging use the link below, this is the 5.1 core which is not compatible with the stable release
-
-```
-git clone --depth 1 https://github.com/Nexusoft/LLL-TAO
-```
-
-Change into the new source code directory
-
-```
-cd LLL-TAO
-```
-
-Run make to compile from source. The 4 in ‘j4’ refers to the no. of cores / threads available on the CPU of the node for compiling faster. (RPI-4B has 4 cores). More compiling threads consumes memory, if you have 1GB memory recommend you use j1 or you will get ‘out of memory’ error.
-
-This begins compiling the wallet, please be patient, as this can take a very long time depending on your CPU.
-
-For X86/IA64 based computers use the below command
-
-```
-make -f makefile.cli -j1 AMD64=1
-```
-
-For raspberry pi use the below command
-
-```
-make -f makefile.cli -j4 ARM64=1
-```
-
-Will show “Finished building nexus” on a successful compile.
-
-To start the core
-
-```
-./nexus
-```
-
-To check the node info
-
-```
-./nexus system/get/info
-```
-
-Check the core version is showing the new version.
-
-The nexus remote interface wallet also needs to be updated to the latest version, failing to update may cause issues with usability or functionality. Go to [https://nexus.io/wallets](https://nexus.io/wallets) to download the latest wallet
 
 Hope this guide was helpful !!
