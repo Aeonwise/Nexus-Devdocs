@@ -8,7 +8,7 @@ description: How to run a CLI node on mainnet - stable release
 This guide is tailored for ubuntu/raspian distributions
 {% endhint %}
 
-## **1. Before you begin this guide:**
+## **1. Before Starting this guide:**
 
 * A computer with a minimum of 1 CPU, 2 GB RAM and 64GB hard disk space, Raspberry Pi 4 with 2 GB RAM with 64 GB SD card
 * [Ubuntu server 20.04 LTS](https://ubuntu.com/download/server) for AMD/IA 64 or [Ubuntu IOT](https://ubuntu.com/download/iot) for Raspberry Pi or any distro of your choice
@@ -27,7 +27,7 @@ This is a video guide for setting up a CLI node
 
 ## **2. Prepare The Node:**
 
-[Install ubuntu server 20.04 LTS](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview) or distro of your choice, install open-ssh server during the install and once the installation is complete restart the node. SSH in your node and follow the below commands. You can copy the commands and paste it in the terminal using keys CTRL+SHIFT+v
+[Install ubuntu server 20.04 LTS](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview) or distro of choice, install open-ssh server during the install and once the installation is complete restart the node. SSH in node and follow the below commands.  Copy the commands and paste it in the terminal using keys CTRL+SHIFT+v
 
 Update your node:
 
@@ -35,13 +35,13 @@ Update your node:
 sudo apt update
 ```
 
-Upgrade your node:
+Upgrade the node:
 
 ```
  sudo apt upgrade -y
 ```
 
-Open SSH port before you enable firewall:
+Open SSH port before enabling firewall:
 
 ```
 sudo ufw allow ssh
@@ -77,13 +77,13 @@ Check firewall status:
 sudo ufw status
 ```
 
-Set your timezone:
+Set the node timezone:
 
 ```
 sudo dpkg-reconfigure tzdata
 ```
 
-If you need to change the hostname – Not compulsory if you already set it during the install
+To change the hostname – Optional
 
 ```
 sudo hostnamectl set-hostname <newhostname>
@@ -95,7 +95,7 @@ Reboot node:
 sudo reboot
 ```
 
-we have our computer ready to install the nexus core
+The computer is ready to install the Nexus core
 
 ## **3. Compiling Nexus Core:**
 
@@ -133,14 +133,14 @@ Will show “Finished building nexus” on a successful compile.
 
 ## **4. Configure The wallet (nexus.conf):**
 
-Create Nexus core data directory (it’s a hidden directory, Nexus daemon creates it automatically on first start. We are creating it manually to create the configuration file. If you have the directory you can skip this step.)
+Create Nexus core data directory (it’s a hidden directory, Nexus daemon creates it automatically on first start. We are creating it manually to create the configuration file. If the directory is already available, skip this step.)
 
 ```
 mkdir ~/.Nexus
 ```
 
 {% hint style="info" %}
-The wallet configuration is stored it the nexus.conf file, located in the core data directory
+The wallet configuration is stored in the nexus.conf file, located in the core data directory
 {% endhint %}
 
 Create the nexus.conf file
@@ -149,7 +149,7 @@ Create the nexus.conf file
 nano ~/.Nexus/nexus.conf
 ```
 
-Copy the below code into the file. Provide a user and password for RPC and API and remove the # in the #stake=1 if you intend to stake.
+Copy the below code into the file. Provide a user and password for RPC and API and remove the `#` in the `#stake=1` if you intend to stake.
 
 ```
 # This is an example nexus.conf. Tailor it to your deployment.
@@ -167,10 +167,10 @@ daemon=1
 #stake=1
 ```
 
-If you intend to access your wallet remotely (from a wallet interface on another machine), you’ll also need the following lines in the config file.
+To access the wallet remotely (from a wallet interface on another machine), add the following lines in the config file.
 
 {% hint style="info" %}
-\<ipaddress> is IP address of the machine connecting to your node remotely, it may be the interface or dapp server IP address. You can also use '\* to allow all computers in a particular subnet. `llpallowip=192.168.10.*:8080` allows all computers on the 192.168.10 local network
+`<ipaddress>` is IP address of the machine connecting to your node remotely, it may be the interface or dapp server IP address. You can also use '\*' wildcard to allow all computers in a particular subnet. `llpallowip=192.168.10.*:8080` allows all computers on the 192.168.10 local network
 {% endhint %}
 
 ```
@@ -189,13 +189,13 @@ Press Ctrl s and Ctrl x to save and exit the editor
 
 ## **5. Bootstrapping Tritium Database:**
 
-It will download the nexus database and then extract it to the data folder, alternatively you can skip this step if you choose to synchronise the data from peers which will be slow depending on your internet connection.
+This step will download the nexus database and then extract it to the data folder, alternatively you can skip this step if you choose to synchronise the data from peers which will be slow depending on your internet connection.
 
 ```
 cd ~
 ```
 
-This will download the database to your home folder. The file is just about 5 GB in size so have patience.
+This will download the database to the home folder. The file is about 5 GB in size.
 
 ```
 wget -c https://nexus.io/bootstrap/tritium/tritium.tar.gz
