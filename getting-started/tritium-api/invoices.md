@@ -38,10 +38,42 @@ In addition to the parameters documented here, callers are free to include any o
 
 `/invoices/create/invoice`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/invoices/create/invoice" baseUrl="http://api.nexus-interactions.io:8080" summary="create/invoice" %}
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -185,10 +217,71 @@ Retrieves information about an invoice. The API supports an alternative endpoint
 
 `/invoices/get/invoice`
 
-{% swagger method="post" path="" baseUrl="" summary="get/invoice" %}
+{% swagger method="post" path="/invoices/get/invoice" baseUrl="http://api.nexus-interactions.io:8080" summary="get/invoice" %}
 {% swagger-description %}
-
+Retrieves information about an invoice
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the invoice. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the invoice. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the invoice. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the invoice data
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="invoice details" %}
+```json
+{
+    "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
+    "created": 1581389015,
+    "modified": 1581389107,
+    "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+    "account": "8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N",
+    "recipient": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+    "number": "0004",
+    "PO": "Purch1234",
+    "contact": "accounts@mycompany.com",
+    "sender_detail": "My Company, 32 Some Street, Some Place",
+    "recipient_detail": "Some recipient details such as address or email",
+    "items": [
+        {
+            "description": "First item description",
+            "base_price": 1.0,
+            "tax": 0.1,
+            "unit_amount": "1.1",
+            "units": 3
+        },
+        {
+            "description": "Second item description",
+            "base_price": 5.0,
+            "tax": 0.5,
+            "unit_amount": "5.5",
+            "units": 1
+        }
+    ],
+    "amount": 8.8,
+    "token": "0",
+    "status": "PAID"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -318,7 +411,7 @@ If payment is successful, ownership of the invoice is claimed by the caller's si
 
 `/invoices/pay/invoice`
 
-{% swagger method="post" path="" baseUrl="" summary="pay/invoice" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="pay/invoice" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -407,10 +500,38 @@ Cancels an unpaid invoice so that ownership returns back to the issuers signatur
 
 `/invoices/cancel/invoice`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="cancel/invoice" %}
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the invoice to cancel. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the invoice to cancel. This is optional if the name is provided.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "318b86d2c208618aaa13946a3b75f14472ebc0cce9e659f2830b17e854984b55606738f689d886800f21ffee68a3e5fd5a29818e88f8c5b13b9f8ae67739903d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -483,7 +604,7 @@ This will get the history of the transactions for an invoice showing when it was
 
 `/invoices/list/invoice/history`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/invoice/history" %}
 {% swagger-description %}
 
 {% endswagger-description %}
