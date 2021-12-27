@@ -44,10 +44,27 @@ This will create a new item, assigning ownership to the user logged in to the pr
 This will create a new item, assigning ownership to the user logged in to the provided session
 {% endswagger-description %}
 
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the asset should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+An optional name to identify the item. If provided a Name object will also be created in the users local namespace, allowing the item to be accessed/retrieved by name. If no name is provided the item will need to be accessed/retrieved by its 256-bit register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" required="true" %}
+The data to store in the item
+{% endswagger-parameter %}
+
 {% swagger-response status="200: OK" description="" %}
-```javascript
+```json
 {
-    // Response
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "txid": "70e5d8b6227d209fafe4c90ed0ed7e63b23b72dc1349c60b37a00ed06e18215d5fa384da1b6522e24cb1467b11b0b0e8ac4e9db8374f09718ab1218e8da33a11"
 }
 ```
 {% endswagger-response %}
@@ -55,14 +72,38 @@ This will create a new item, assigning ownership to the user logged in to the pr
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// create/item
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    // name: "NAME TO IDENTIFY THE ITEM", //optional, If provided a Name object will also be created in the users local namespace, allowing the item to be accessed/retrieved by name. If no name is provided the item will need to be accessed/retrieved by its 256-bit register address.
+    data: "DATA TO STORE IN THE ITEM"
+}
+fetch(`${SERVER_URL}/supply/create/item`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "name": "NAME TO IDENTIFY THE ITEM", #optional, If provided a Name object will also be created in the users local namespace, allowing the item to be accessed/retrieved by name. If no name is provided the item will need to be accessed/retrieved by its 256-bit register address.
+    "data": "DATA TO STORE IN THE ITEM"
+}
+response = requests.post(f"{SERVER_URL}/supply/create/item", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -108,18 +149,80 @@ Additionally the API supports passing a field name in the URL after the asset na
 {% swagger-description %}
 This is the generic endpoint for retrieving an item from the object register.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the item. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the item. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the item{
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="item details" %}
+```json
+{
+    "name": "myitem",
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "created": 1560982537,
+    "modified": 1560982615,
+    "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "data": "xxxxxx"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// get/item
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME IDENTIFYING THE ITEM", //optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    // session: "YOUR_SESSION_ID", //optional
+    // address: "REGISTER ADDRESS OF THE ITEM", //optional if the name is provided.
+    // fieldname: "FILTER_FIELD", //optional field can be used to filter the response to return only a single field from the item.
+}
+fetch(`${SERVER_URL}/supply/get/item`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    "name": "NAME IDENTIFYING THE ITEM",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address": "REGISTER ADDRESS OF THE ITEM", #optional if the name is provided.
+    # "fieldname": "FILTER_FIELD", #optional field can be used to filter the response to return only a single field from the item.
+}
+response = requests.post(f"{SERVER_URL}/supply/get/item", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
