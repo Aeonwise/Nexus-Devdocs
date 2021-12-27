@@ -38,6 +38,73 @@ In addition to the parameters documented here, callers are free to include any o
 
 `/invoices/create/invoice`
 
+{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// create/invoice
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    // recipient: "TO_GENEISIS_HASH", //optional if the recipient_username is passed
+    recipient_username: "TO_USERNAME", //optional if the recipient is provided.
+    account_name: "TO_ACCOUNT_NAME", //This is optional if the address is provided.
+    account: "TO_REGISTER_ADDRESS", //optional if name is provided
+    // name: "NAME_TO_IDENTIFY_INVOICE", //optional
+    items: [{
+            description: "First item description",
+            base_price: 1.0,
+            tax: 0.1,
+            unit_amount: 5.5,
+            units: 1
+        }] //required atleast 1 item 
+}
+fetch(`${SERVER_URL}/invoices/create/invoice`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # "recipient": "TO_GENEISIS_HASH", #optional if the recipient_username is passed
+    # optional if the recipient is provided.
+    "recipient_username": "TO_USERNAME",
+    # This is optional if the address is provided.
+    "account_name": "TO_ACCOUNT_NAME",
+    "account": "TO_REGISTER_ADDRESS",  # optional if name is provided
+    # "name": "NAME_TO_IDENTIFY_INVOICE", #optional
+    "items": [{
+        "description": "First item description",
+        "base_price": 1.0,
+        "tax": 0.1,
+        "unit_amount": 5.5,
+        "units": 1
+    }]
+}
+response = requests.post(f"{SERVER_URL}/invoices/create/invoice", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -56,9 +123,9 @@ In addition to the parameters documented here, callers are free to include any o
 
 `items` : Array of line items that make up this invoice. At least one item in the items array must be included. The total invoice amount is calculated as the sum of all item amounts, and each item amount is calculated as the `unit_amount` multiplied by the `units`\
 {\
-&#x20;  `unit_amount` : The unit amount to be invoiced for this line item. This amount should be supplied in the currency of the payment account
+`unit_amount` : The unit amount to be invoiced for this line item. This amount should be supplied in the currency of the payment account
 
-&#x20;  `units` : The number of units to be invoiced at the unit amount.\
+`units` : The number of units to be invoiced at the unit amount.\
 }
 
 #### Example:
@@ -118,7 +185,50 @@ Retrieves information about an invoice. The API supports an alternative endpoint
 
 `/invoices/get/invoice`
 
-#### Parameters:
+{% swagger method="post" path="" baseUrl="" summary="get/invoice" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/invoice
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    name: "NAME_TO_IDENTIFY_INVOICE", //optional if address is provided
+    // session: "YOUR_SESSION_ID", //optional
+    // address: "REGISTER_ADDRESS_OF_INVOICE", //This is optional if the name is provided.
+    // fieldname: "FILTER_FIELD", //optional if name is provided
+}
+fetch(`${SERVER_URL}/invoices/get/invoice`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_TO_IDENTIFY_INVOICE",  # optional if address is provided
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address": "REGISTER_ADDRESS_OF_INVOICE", #This is optional if the name is provided.
+    # "fieldname": "FILTER_FIELD", #optional if name is provided
+}
+response = requests.post(f"{SERVER_URL}/invoices/get/invoice", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 `name` : The name identifying the invoice. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
@@ -183,9 +293,9 @@ Retrieves information about an invoice. The API supports an alternative endpoint
 
 `items` : Array of line items that make up this invoice.\
 {\
-&#x20;  `unit_amount` : The unit amount to be invoiced for this line item.
+`unit_amount` : The unit amount to be invoiced for this line item.
 
-&#x20;  `units` : The number of units to be invoiced at the unit amount.\
+`units` : The number of units to be invoiced at the unit amount.\
 }
 
 `amount` : The total invoice amount. This is the sum of all line item total amounts (unit\_amount x units).
@@ -207,6 +317,55 @@ If payment is successful, ownership of the invoice is claimed by the caller's si
 #### Endpoint:
 
 `/invoices/pay/invoice`
+
+{% swagger method="post" path="" baseUrl="" summary="pay/invoice" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// pay/invoice
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_TO_IDENTIFY_INVOICE", //optional
+    // address: "REGISTER_ADDRESS_OF_INVOICE_TO_PAY", //This is optional if the name is provided.
+    name_from: "The name identifying the account to debit (pay the invoice from).",
+    // address_from: //This is optional if the name is provided.
+}
+fetch(`${SERVER_URL}/invoices/pay/invoice`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "NAME_TO_IDENTIFY_INVOICE",  # optional
+    # "address": "REGISTER_ADDRESS_OF_INVOICE_TO_PAY", #This is optional if the name is provided.
+    "name_from": "The name identifying the account to debit (pay the invoice from).",
+    # "address_from": #This is optional if the name is provided.
+}
+response = requests.post(f"{SERVER_URL}/invoices/pay/invoice", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -248,6 +407,50 @@ Cancels an unpaid invoice so that ownership returns back to the issuers signatur
 
 `/invoices/cancel/invoice`
 
+{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// cancel/invoice
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_TO_IDENTIFY_INVOICE", //optional if address is provided
+    // address: "REGISTER_ADDRESS_OF_INVOICE_TO_PAY", //This is optional if the name is provided.
+}
+fetch(`${SERVER_URL}/invoices/cancel/invoice`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "NAME_TO_IDENTIFY_INVOICE",  # optional if address is provided
+    # "address": "REGISTER_ADDRESS_OF_INVOICE_TO_PAY", #This is optional if the name is provided.
+}
+response = requests.post(f"{SERVER_URL}/invoices/cancel/invoice", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -279,6 +482,103 @@ This will get the history of the transactions for an invoice showing when it was
 #### Endpoint:
 
 `/invoices/list/invoice/history`
+
+{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the invoice. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the invoice. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the invoice. This is optional if the name is provided.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+[
+    {
+        "type": "CLAIM",
+        "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "modified": 1581389015,
+        "checksum": 2752588510729237979,
+        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
+        "created": 1581389015,
+        "data": "{\"account\":\"8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N\",\"recipient\":\"a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440\",\"number\":\"0004\",\"PO\":\"Purch1234\",\"contact\":\"paul@nexus.io\",\"items\":[{\"description\":\"item1 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":1},{\"description\":\"item2 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":3}],\"amount\":4.4,\"token\":\"8DC5b4uRPYmfF8DWJy6ja2qPbtN7kNpdonHQeKx1nfauRAWDMUG\"}"
+    },
+    {
+        "type": "TRANSFER",
+        "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "modified": 1581389015,
+        "checksum": 3200103280975089335,
+        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
+        "created": 1581389015,
+        "data": "{\"account\":\"8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N\",\"recipient\":\"a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440\",\"number\":\"0004\",\"PO\":\"Purch1234\",\"contact\":\"paul@nexus.io\",\"items\":[{\"description\":\"item1 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":1},{\"description\":\"item2 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":3}],\"amount\":4.4,\"token\":\"8DC5b4uRPYmfF8DWJy6ja2qPbtN7kNpdonHQeKx1nfauRAWDMUG\"}"
+    },
+    {
+        "type": "CREATE",
+        "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "modified": 1581389015,
+        "checksum": 3200103280975089335,
+        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
+        "created": 1581389015,
+        "data": "{\"account\":\"8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N\",\"recipient\":\"a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440\",\"number\":\"0004\",\"PO\":\"Purch1234\",\"contact\":\"paul@nexus.io\",\"items\":[{\"description\":\"item1 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":1},{\"description\":\"item2 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":3}],\"amount\":4.4,\"token\":\"8DC5b4uRPYmfF8DWJy6ja2qPbtN7kNpdonHQeKx1nfauRAWDMUG\"}"
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+//// list/invoice/history
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "NAME_TO_IDENTIFY_INVOICE", //optional if address is provided
+    // session: "YOUR_SESSION_ID", //optional
+    // address: "REGISTER_ADDRESS_OF_INVOICE_TO_PAY", //This is optional if the name is provided.
+}
+fetch(`${SERVER_URL}/invoices/list/invoice/history`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+// Someimport requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "NAME_TO_IDENTIFY_INVOICE",  # optional if address is provided
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address": "REGISTER_ADDRESS_OF_INVOICE_TO_PAY", #This is optional if the name is provided.
+}
+response = requests.post(
+    f"{SERVER_URL}/invoices/list/invoice/history", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
