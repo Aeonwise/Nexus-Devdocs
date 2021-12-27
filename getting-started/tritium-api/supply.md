@@ -39,6 +39,34 @@ This will create a new item, assigning ownership to the user logged in to the pr
 
 `/supply/create/item`
 
+{% swagger method="post" path="" baseUrl="" summary="create/item" %}
+{% swagger-description %}
+This will create a new item, assigning ownership to the user logged in to the provided session
+{% endswagger-description %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -75,6 +103,26 @@ Additionally the API supports passing a field name in the URL after the asset na
 #### Endpoint:
 
 `/supply/get/item`
+
+{% swagger method="post" path="" baseUrl="" summary="get/item" %}
+{% swagger-description %}
+This is the generic endpoint for retrieving an item from the object register.
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -123,6 +171,85 @@ This is the generic endpoint for updating the data value in an item. The API sup
 
 `/supply/update/item`
 
+{% swagger method="post" path="" baseUrl="" summary="update/item" %}
+{% swagger-description %}
+This is the generic endpoint for updating the data value in an item
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the supply should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the supply to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the supply to update. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" %}
+The new value of the data field in this item
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// update/item
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session : "YOUR_SESSION_ID", //optional
+    // name : "NAME IDENTIFYING THE SUPPLY TO UPDATE", //optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    // address : "REGISTER ADDRESS OF THE SUPPLY TO UPDATE", //optional if the name is provided.
+    data: "NEW VALUE OF THE DATA FIELD IN THIS ITEM"
+}
+fetch(`${SERVER_URL}/supply/update/item`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session" : "YOUR_SESSION_ID", #optional
+    # "name" : "NAME IDENTIFYING THE SUPPLY TO UPDATE", #optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    # "address" : "REGISTER ADDRESS OF THE SUPPLY TO UPDATE", #optional if the name is provided.
+    "data": "NEW VALUE OF THE DATA FIELD IN THIS ITEM"
+}
+response = requests.post(f"{SERVER_URL}/supply/update/item", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -159,6 +286,22 @@ This will transfer ownership of an item. This is a generic endpoint requiring th
 #### Endpoint:
 
 `/supply/transfer/item`
+
+{% swagger method="post" path="" baseUrl="" summary="transfer/item" %}
+{% swagger-description %}
+This will transfer ownership of an item
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 

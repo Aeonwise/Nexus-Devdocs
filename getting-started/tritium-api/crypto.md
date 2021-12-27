@@ -12,13 +12,17 @@ The crypto object register contains nine named keys: `auth`, `lisp`, `network`, 
 
 Each key stored in the crypto register is a 256-bit hash of the public key of an asymmetric (public-private) key pair. The cryptographic scheme used to generate the key pairs is configurable via the `crypto/change/scheme` API method. Nexus currently supports both Brainpool (ECDSA-based) and FALCON (Lattice-based) schemes.
 
-**NOTE** All key pairs generated via the crypto API are based on the username, password, and pin of the users signature chain. The **`private keys are NOT stored on-chain`**, but instead re-constructed as necessary based on the username, password, and pin of the logged in user. This is important, as changing the password and pin of a signature chain (including recovering an account) will invalidate any existing keys held in the crypto object register. Therefore, when a user changes their password/pin or uses their recovery seed to set a new password/pin, we will **`automatically regenerate`** new public key hashes for the following keys, if they have been previously set: `auth`, `lisp`, `network`, `sign`, and `verify`.
+{% hint style="info" %}
+**NOTE** All key pairs generated via the crypto API are based on the username, password, and pin of the users signature chain. The **`private keys are NOT stored on-chain`**, but instead re-constructed as necessary based on the username, password, and pin of the logged in user. This is important, as changing the password and pin of a signature chain (including recovering an account) will invalidate any existing keys held in the crypto object register. Therefore, when a user changes their password/pin or uses their recovery seed to set a new password/pin, we will **`automatically regenerate`** new public key hashes for the following keys, if they have been previously set: `auth`, `lisp`, `network`, `sign`, and `verify`.**NOTE** The `cert` key contains a hash of the certificate data used to create a x509 self-signed certificate via `crypto/create/certificate`. As such it is also NOT regenerated when the user changes their password/pin.
+{% endhint %}
 
-**NOTE** The `cert` key contains a hash of the certificate data used to create a x509 self-signed certificate via `crypto/create/certificate`. As such it is also NOT regenerated when the user changes their password/pin.
-
+{% hint style="info" %}
 **NOTE** The `app1`, `app2`, and `app3` keys are `not` updated when a user changes their password/pin. This is intentional as any 3rd party application using these keys to encrypt data would be left unable to decrypt them again. To help 3rd party applications manage this situation, the API includes a method to retrieve the private key for the app1, app2, and app3 keys, allowing them to be stored off-chain and later used to decrypt data in the event that the user changes their password/pin.
+{% endhint %}
 
+{% hint style="info" %}
 **NOTE** You are _not_ required to create a key in the crypto object register (via `crypto/create/key`) in order to use the other methods in the crypto API (with the exception of `crypto/get/key`). This is because the public and private keys are reconstructed as necessary from the logged in user credentials and key name. However, callers will need to provide the key type (`scheme`) as a request parameter so that the correct key can be constructed.
+{% endhint %}
 
 ### `Methods`
 
