@@ -189,35 +189,9 @@ Generates a new public-private key pair and stores the hashed public key in the 
 {% swagger-parameter in="body" name="name" type="auth" required="true" %}
 The name of the key to create. If a key already exists in the crypto object register for this key name then the method will return an error. Accepted values are
 
-`auth`
+`auth`, `lisp`, `network`, `sign`,  `verify`,
 
-,
-
-`lisp`
-
-,
-
-`network`
-
-,
-
-`sign`
-
-,
-
-`verify`
-
-,
-
-`app1`
-
-,
-
-`app2`
-
-, and
-
-`app3`
+`app1`, `app2`, and `app3`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" type="1234" required="true" %}
@@ -229,7 +203,7 @@ For multi-user API mode, (configured with multiuser=1) the session is required t
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="scheme" type="BRAINPOOL" required="false" %}
-Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
 
 `BRAINPOOL`
 
@@ -332,11 +306,11 @@ The certificate includes the owners genesis hash in the CN field, allowing calli
 
 {% swagger method="post" path="/crypto/create/certificate" baseUrl="http://api.nexus-interactions.io:8080" summary="create/certificate" %}
 {% swagger-description %}
-Generates a new self-signed x509 certificate for this signature chain and stores a hash of the certificate data in the
+Generates a new self-signed x509 certificate for this signature chain and stores a hash of the certificate data in the 
 
 `cert`
 
-field of the crypto object register. Users must be logged in to create a certificate
+ field of the crypto object register. Users must be logged in to create a certificate
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="txid" required="true" %}
@@ -348,7 +322,7 @@ The certificate data. This is returned in PEM format, and base64 encoded. Callin
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="hashcert" required="true" %}
-The SK256 hash of the certificate data that is written to the
+The SK256 hash of the certificate data that is written to the 
 
 `cert`
 
@@ -430,7 +404,7 @@ Returns the hashed public key from the crypto object register for the specified 
 
 `/crypto/get/key`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/key" %}
+{% swagger method="post" path="/crypto/get/key" baseUrl="http://api.nexus-interactions.io:8080" summary="get/key" %}
 {% swagger-description %}
 Returns the hashed public key from the crypto object register for the specified key name, from the specified signature chain
 {% endswagger-description %}
@@ -556,15 +530,15 @@ For multi-user API mode, (configured with multiuser=1) the session is required t
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="scheme" required="false" %}
-Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
 
 `BRAINPOOL`
 
-or
+or 
 
-`FALCON`
+`FALCON.`
 
-. If no scheme parameter is provided then it will be determined from the crypto object register (for previously created keys) or taken from the users signature chain configuration
+ If no scheme parameter is provided then it will be determined from the crypto object register (for previously created keys) or taken from the users signature chain configuration
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="get publickey" %}

@@ -39,7 +39,7 @@ This will create a new item, assigning ownership to the user logged in to the pr
 
 `/supply/create/item`
 
-{% swagger method="post" path="" baseUrl="" summary="create/item" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="create/item" %}
 {% swagger-description %}
 This will create a new item, assigning ownership to the user logged in to the provided session
 {% endswagger-description %}
@@ -104,7 +104,7 @@ Additionally the API supports passing a field name in the URL after the asset na
 
 `/supply/get/item`
 
-{% swagger method="post" path="" baseUrl="" summary="get/item" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/item" %}
 {% swagger-description %}
 This is the generic endpoint for retrieving an item from the object register.
 {% endswagger-description %}
@@ -171,7 +171,7 @@ This is the generic endpoint for updating the data value in an item. The API sup
 
 `/supply/update/item`
 
-{% swagger method="post" path="" baseUrl="" summary="update/item" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="update/item" %}
 {% swagger-description %}
 This is the generic endpoint for updating the data value in an item
 {% endswagger-description %}
@@ -287,19 +287,100 @@ This will transfer ownership of an item. This is a generic endpoint requiring th
 
 `/supply/transfer/item`
 
-{% swagger method="post" path="" baseUrl="" summary="transfer/item" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/item" %}
 {% swagger-description %}
 This will transfer ownership of an item
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the item. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the item to be transferred. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the item to be transferred. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the user account (sig-chain) to transfer the item to. This is optional if the destination is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="destination" %}
+The genesis hash of the signature chain to transfer the the item to. This is optional if the username is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="item transfer details" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```javascript
+// transfer/item
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session : "YOUR_SESSION_ID", //optional
+    // name : "NAME IDENTIFYING THE ITEM TO BE TRANSFERRED", //optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    // address : "REGISTER ADDRESS OF THE ITEM TO BE TRANSFERRED", //optional if the name is provided.
+    username: "THE USERNAME IDENTIFYING THE USER ACCOUNT (SIG-CHAIN) TO TRANSFER THE ITEM TO", //optional if the destination is provided.
+    destination: "THE GENESIS HASH OF THE SIGNATURE CHAIN TO TRANSFER THE THE ITEM TO", //optional if the username is provided.
+    // expires : 604800 //optional (in seconds)
+}
+fetch(`${SERVER_URL}/supply/transfer/item`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session" : "YOUR_SESSION_ID", #optional
+    # "name" : "NAME IDENTIFYING THE ITEM TO BE TRANSFERRED", #optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    # "address" : "REGISTER ADDRESS OF THE ITEM TO BE TRANSFERRED", #optional if the name is provided.
+    # optional if the destination is provided.
+    "username": "THE USERNAME IDENTIFYING THE USER ACCOUNT (SIG-CHAIN) TO TRANSFER THE ITEM TO",
+    # optional if the username is provided.
+    "destination": "THE GENESIS HASH OF THE SIGNATURE CHAIN TO TRANSFER THE THE ITEM TO",
+    # "expires" : 604800 #optional (in seconds)
+}
+response = requests.post(f"{SERVER_URL}/supply/transfer/item", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -344,6 +425,79 @@ Items that have been transferred need to be claimed by the recipient before the 
 
 `/supply/claim/item`
 
+{% swagger method="post" path="/supply/claim/item" baseUrl="http://api.nexus-interactions.io:8080" summary="claim/item" %}
+{% swagger-description %}
+Items that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the item. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" required="true" %}
+The transaction ID (hash) of the corresponding item transfer transaction for which you are claiming
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+This optional field allows the user to rename an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="item claimed" %}
+```json
+{
+    "claimed" : 
+    [
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    ],
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// claim/item
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session : "YOUR_SESSION_ID", //optional
+    txid: "TRANSACTION ID (HASH)" //of the corresponding item transfer transaction for which you are claiming.
+        // name : "NEW_NAME", // By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+}
+fetch(`${SERVER_URL}/supply/claim/item`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+// Some cimport requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session" : "YOUR_SESSION_ID", #optional
+    # of the corresponding item transfer transaction for which you are claiming.
+    "txid": "TRANSACTION ID (HASH)"
+    # "name" : "NEW_NAME", # By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+}
+response = requests.post(f"{SERVER_URL}/supply/claim/item", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -381,6 +535,93 @@ This will get the history of changes to an item, including both the data and it'
 #### Endpoint:
 
 `/supply/list/item/history`
+
+{% swagger method="post" path="/list/item/history" baseUrl="http://api.nexus-interactions.io:8080" summary="list/item/history" %}
+{% swagger-description %}
+This will get the history of changes to an item, including both the data and it's ownership.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the item. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the item. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="item history details" %}
+```json
+[
+    {
+        "type": "CREATE",
+        "name": "mysupplyitem",
+        "checksum": 9070277379865698600,
+        "owner": "bf501d4f3d81c31f62038984e923ad01546ff678e305a7cc11b1931742524ce1",
+        "data": "0b6e657764617461696e746f",
+        "modifed": 1546888868
+    },
+    {
+        "type": "MODIFY",
+        "name": "mysupplyitem",
+        "checksum": 9060775569865698900,
+        "owner": "5efc8a9437d93e894defd50f8ba73a0b2b5529cc593d5e4a7ea413022a9c35e9",
+        "data": "0b6e657764617461696e746f",
+        "modifed": 1546888999
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/item/history
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "THE NAME IDENTIFYING THE ITEM", //optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    // session: "YOUR_SESSION_ID", //optional
+    address: "REGISTER ADDRESS OF THE ITEM" //optional if the name is provided.
+}
+fetch(`${SERVER_URL}/supply/list/item/history`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+    "name": "THE NAME IDENTIFYING THE ITEM",
+    # "session": "YOUR_SESSION_ID", #optional
+    # optional if the name is provided.
+    "address": "REGISTER ADDRESS OF THE ITEM"
+}
+response = requests.post(f"{SERVER_URL}/supply/list/item/history", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
