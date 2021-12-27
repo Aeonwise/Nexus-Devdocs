@@ -40,31 +40,53 @@ In addition to the parameters documented here, callers are free to include any o
 
 {% swagger method="post" path="/invoices/create/invoice" baseUrl="http://api.nexus-interactions.io:8080" summary="create/invoice" %}
 {% swagger-description %}
-
+Create a new invoice
 {% endswagger-description %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="pin" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="session" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="receipient" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="recipient_username" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="account_name" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="account" %}
 
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="items" %}
+Array of line items that make up this invoice. At least one item in the items array must be included. The total invoice amount is calculated as the sum of all item amounts, and each item amount is calculated as the 
+
+`unit_amount`
+
+ multiplied by the 
+
+`units`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="unit_amount" %}
+The unit amount to be invoiced for this line item. This amount should be supplied in the currency of the payment account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="units" %}
+The number of units to be invoiced at the unit amount
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
