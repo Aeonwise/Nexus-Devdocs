@@ -112,14 +112,42 @@ This optional field allows callers to add arbitrary data to an account register
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// create/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    token_name: "NXS", // optional if token is passed
+    // token: "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",//optional if token_name is passed, Defaults to 0 (NXS)
+    // name: "NAME TO IDENTIFY THE ACCOUNT", //optional
+    // data: "OPTIONAL FIELD ALLOWS CALLERS TO ADD ARBITRARY DATA TO AN ACCOUNT REGISTER.",//optional
+}
+fetch(`${SERVER_URL}/finance/create/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "token_name": "NXS",  # optional if token is passed
+    # "token": "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",#optional if token_name is passed, Defaults to 0 (NXS)
+    # "name": "NAME TO IDENTIFY THE ACCOUNT", #optional
+    # "data": "OPTIONAL FIELD ALLOWS CALLERS TO ADD ARBITRARY DATA TO AN ACCOUNT REGISTER.",#optional
+}
+response = requests.post(f"{SERVER_URL}/finance/create/account", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -202,11 +230,57 @@ Deduct an amount of NXS from an account and send it to another account or legacy
 
 {% tabs %}
 {% tab title="Javascript" %}
-
+```javascript
+// debit/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional  
+    name: "username:name", // name identifying the account to debit , optional if the address is provided.
+    // address : "REGISTER ADDRESS OF THE ACCOUNT TO DEBIT",//optional if the name is provided.
+    amount: 1, // amount of nexus to debit
+    name_to: "NAME IDENTIFYING THE ACCOUNT TO SEND TO", //optional if address_to is provided. The name should be in username:name format
+    // address_to : "REGISTER ADDRESS OF THE ACCOUNT TO SEND TO",// This is optional if name_to is provided. The address_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+    reference: "OPTIONAL FIELD ALLOWS CALLERS TO PROVIDE A REFERENCE", // which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+    expires: 604800, //optional (in seconds)  
+    // recipients: [
+    // { name: "NAME", amount: 10, name_to: "NAME_TO" },
+    // { name: "NAME", amount: 10, name_to: "NAME_TO" }
+    // ] //optional
+}
+fetch(`${SERVER_URL}/finance/debit/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
 {% endtab %}
 
 {% tab title="Python" %}
-
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "username:name", # name identifying the account to debit , optional if the address is provided.
+    # "address" : "REGISTER ADDRESS OF THE ACCOUNT TO DEBIT", #optional if the name is provided.
+    "amount": 1,  # amount of nexus to debit
+    "name_to": "NAME IDENTIFYING THE ACCOUNT TO SEND TO", # optional if address_to is provided. The name should be in username:name format
+    # "address_to" : "REGISTER ADDRESS OF THE ACCOUNT TO SEND TO",# This is optional if name_to is provided. The address_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+    "reference": "OPTIONAL FIELD ALLOWS CALLERS TO PROVIDE A REFERENCE", # which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+    "expires": 604800,  # optional (in seconds)
+    # "recipients": [
+    # { "name": "NAME", amount: 10, name_to: "NAME_TO" },
+    # { name: "NAME", amount: 10, name_to: "NAME_TO" }
+    # ] #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/debit/account", json=data)
+print(response.json())
+```
 {% endtab %}
 {% endtabs %}
 
@@ -302,6 +376,50 @@ Increment an amount received from another NXS account to an account owned by you
 {% endswagger-description %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// credit/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional  
+    txid: "TRANSACTION ID(HASH) OF CORRESPONDING DEBIT TRANSACTION FOR WHICH YOU ARE CREATING THIS CREDIT FOR", // The transaction can also be a legacy transaction created from sendtoaddress or sendmany where the inputs are UTXO but the output is an account register address.
+    name: "username:name", //name identifying the account to credit, This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the address is provided.
+    // address: "REGISTER ADDRESS OF THE ACCOUNT TO CREDIT", //optional if the name is provided. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction)
+    name_proof: "username:name", //name identifying the account that proves your ownership of the share of the debit This is only required for split payments and is optional if the address is provided. 
+    // address_proof: "REGISTER ADDRESS OF ACCOUNT THAT PROVES YOUR OWNERSHIP OF THE SHARE OF THE DEBIT" //optional if the name is provided. This is only required for spit payments  
+}
+fetch(`${SERVER_URL}/finance/credit/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "txid": "TRANSACTION ID(HASH) OF CORRESPONDING DEBIT TRANSACTION FOR WHICH YOU ARE CREATING THIS CREDIT FOR", # The transaction can also be a legacy transaction created from sendtoaddress or sendmany where the inputs are UTXO but the output is an account register address.
+    "name": "username:name", # name identifying the account to credit, This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the address is provided.
+    # "address": "REGISTER ADDRESS OF THE ACCOUNT TO CREDIT", #optional if the name is provided. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction)
+    "name_proof": "username:name", # name identifying the account that proves your ownership of the share of the debit This is only required for split payments and is optional if the address is provided.
+    # "address_proof": "REGISTER ADDRESS OF ACCOUNT THAT PROVES YOUR OWNERSHIP OF THE SHARE OF THE DEBIT" #optional if the name is provided. This is only required for spit payments
+}
+response = requests.post(f"{SERVER_URL}/finance/credit/account", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -360,6 +478,20 @@ Additionally the API supports passing a field name in the URL after the account 
 
 {% endswagger-description %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -490,6 +622,19 @@ An alternative to
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied.
@@ -573,11 +718,25 @@ This will list off all of the transactions related to a given account. You DO NO
 
 `/finance/list/account/transactions`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -716,6 +875,20 @@ This will retrieve account values and staking metrics for the trust account belo
 {% endswagger-parameter %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
@@ -794,11 +967,25 @@ To remove a stake change request, you can either set an expiration time, or set 
 
 `/finance/set/stake`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="set/stake" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -825,6 +1012,10 @@ To remove a stake change request, you can either set an expiration time, or set 
 ***
 
 ### `migrate/accounts`
+
+{% hint style="danger" %}
+Depreciated
+{% endhint %}
 
 This method will migrate your legacy accounts to signature chain accounts, sending the balance across in the process. A new account will be created in your signature chain for each legacy account, with a corresponding matching name (unless flagged not to create names). The balance of each legacy account is sent to the newly created signature chain account in individual transactions. As such, each transaction incurs the default legacy fee of 0.01 NXS, which is deducted from the amount being migrated.
 
@@ -943,6 +1134,20 @@ Optional token address to return balances for.
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied.
@@ -990,6 +1195,34 @@ This will retrieve a summary of balance information across all accounts for each
 #### Endpoint:
 
 `/finance/list/balances`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/balances" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -1051,6 +1284,54 @@ This will list all known trust accounts
 #### Endpoint:
 
 `/finance/list/trustaccounts`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/trustaccounts" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/trustaccounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // sort: "trust", //determines which field the results should be sorted on , values can be balance, stake, or trust
+    // order: "desc", //determines the order of the sort, values can be asc or desc. Default is desc
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/trustaccounts`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "sort": "trust", #determines which field the results should be sorted on , values can be balance, stake, or trust
+    # "order": "desc", #determines the order of the sort, values can be asc or desc. Default is desc
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/trustaccounts", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
