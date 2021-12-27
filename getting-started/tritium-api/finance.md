@@ -481,14 +481,40 @@ Additionally the API supports passing a field name in the URL after the account 
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// get/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "username:name", //name identifying the nxs account to retrieve. optional if the address is provided.
+    // session: "YOUR_SESSION_ID", //optional
+    // address : "REGISTER ADDRESS OF THE NXS ACCOUNT TO RETRIEVE", //optional if the name is provided.
+    // count : true, //optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    // fieldname: "FILTERING FIELD NAME", //optional
+}
+fetch(`${SERVER_URL}/finance/get/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "username:name", # name identifying the nxs account to retrieve. optional if the address is provided.
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address" : "REGISTER ADDRESS OF THE NXS ACCOUNT TO RETRIEVE", #optional if the name is provided.
+    # "count" : True, #optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    # "fieldname": "FILTERING FIELD NAME", #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/get/account", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -624,13 +650,42 @@ An alternative to
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// list/accounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    // count: true, //optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/accounts`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    # "count": True, #optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/accounts", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -726,14 +781,50 @@ This will list off all of the transactions related to a given account. You DO NO
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// list/account/transactions
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    genesis: "GENESIS HASH IDENTIFYING THE SIGCHAIN", //optional if username is supplied or already logged in
+    username: "USERNAME", //optional if genesis is supplied or already logged in
+    // session: "YOUR_SESSION_ID", //optional
+    name: "username:name", //name identifying the nxs account to list transactions for. optional if the address is provided. 
+    // address: "REGISTER ADDRESS OF THE NXS ACCOUNT TO LIST TRANSACTIONS FOR", //optional if the name is provided.
+    // verbose: "detail", //optional or "summary","none"
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/account/transactions`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "genesis": "GENESIS HASH IDENTIFYING THE SIGCHAIN", # optional if username is supplied or already logged in
+    "username": "USERNAME",  # optional if genesis is supplied or already logged in
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "username:name", # name identifying the nxs account to list transactions for. optional if the address is provided.
+    # "address": "REGISTER ADDRESS OF THE NXS ACCOUNT TO LIST TRANSACTIONS FOR", #optional if the name is provided.
+    # "verbose": "detail", #optional or "summary","none"
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/account/transactions", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -1211,15 +1302,41 @@ This will retrieve a summary of balance information across all accounts for each
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// list/balances
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/balances`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/balances", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
