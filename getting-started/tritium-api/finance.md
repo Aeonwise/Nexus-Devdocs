@@ -968,14 +968,35 @@ This will retrieve account values and staking metrics for the trust account belo
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// get/stakeinfo
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    fieldname: "FILTERING FIELD NAME" //optional
+}
+fetch(`${SERVER_URL}/finance/get/stakeinfo`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "fieldname": "FILTERING FIELD NAME"  # optional
+}
+response = requests.post(f"{SERVER_URL}/finance/get/stakeinfo", json=data)
+print(response.json())
+
 ```
 {% endtab %}
 {% endtabs %}
@@ -1066,14 +1087,38 @@ To remove a stake change request, you can either set an expiration time, or set 
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// set/stake
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    amount: 1, // the new amount of NXS to stake 
+    expires: 0, // the new expiration time of the stake in seconds. 0 means no expiration
+}
+fetch(`${SERVER_URL}/finance/set/stake`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "amount": 1,  # the new amount of NXS to stake
+    "expires": 0,  # the new expiration time of the stake in seconds. 0 means no expiration
+}
+response = requests.post(f"{SERVER_URL}/finance/set/stake", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -1228,13 +1273,35 @@ Optional token address to return balances for.
 {% tabs %}
 {% tab title="Javascript" %}
 ```
-// Some code
+// get/balances
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    token_name: "NXS", // optional if token is passed
+    // token: "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",//optional if token_name is passed, Defaults to 0 (NXS)
+}
+fetch(`${SERVER_URL}/finance/get/balances`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
 ```
-// Some code
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "token_name": "NXS",  # optional if token is passed
+    # "token": "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",#optional if token_name is passed, Defaults to 0 (NXS)
+}
+response = requests.post(f"{SERVER_URL}/finance/get/balances", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
