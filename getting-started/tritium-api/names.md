@@ -623,7 +623,7 @@ For multi-user API mode, (configured with multiuser=1) the session is required t
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" required="true" %}
-The name of the object that this name will point to. The name can contain any characters, but must not START with a colon
+The name of the object that this name will point to. The name can contain any characters, but must not START with a colon '
 
 `:'`
 {% endswagger-parameter %}
@@ -636,7 +636,7 @@ This optional field allows callers to specify the namespace that the name should
 This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="register_address" required="false" %}
+{% swagger-parameter in="body" name="register_address" required="true" %}
 The 256-bit hexadecimal register address of the the object that this Name will point to
 {% endswagger-parameter %}
 
