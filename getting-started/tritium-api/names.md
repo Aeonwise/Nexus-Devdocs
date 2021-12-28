@@ -44,7 +44,7 @@ The following methods are currently supported by this API
 
 This will create a new namespace. The API supports an alternative endpoint that can include the new namespace name in the URL. For example `/names/create/namespace/mynamespace` will resolve to `names/create/namespace?name=mynamespace`.
 
-**NOTE** : Namespace names cannot can only contain **lowercase letters, numbers, and periods (.)**.
+**NOTE** : Namespace names can only contain **lowercase letters, numbers, and periods (.)**.
 
 #### Endpoint:
 
@@ -59,7 +59,7 @@ This will create a new namespace
 The pin for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the namespace should be created with. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
@@ -151,19 +151,19 @@ Retrieves a namespace object. The API supports an alternative endpoint that can 
 Retrieves a namespace object
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="owner" %}
+{% swagger-parameter in="body" name="owner" required="false" %}
 The genesis hash of the signature chain that owns this Name
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="created" %}
+{% swagger-parameter in="body" name="created" required="false" %}
 The UNIX timestamp when the Name was created
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" %}
 The name identifying the namespace
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="address" %}
+{% swagger-parameter in="body" name="address" required="false" %}
 The register address of the namespace
 {% endswagger-parameter %}
 
@@ -249,36 +249,36 @@ This will transfer ownership of an namespace . This is a generic endpoint requir
 This will transfer ownership of an namespace
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="pin" %}
+{% swagger-parameter in="body" name="pin" required="false" %}
 The PIN for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the namespace. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" %}
 The name identifying the namespace to be transferred. This is optional if the address is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="address" %}
+{% swagger-parameter in="body" name="address" required="false" %}
 The register address of the namespace to be transferred. This is optional if the name is provided.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="username" %}
+{% swagger-parameter in="body" name="username" required="false" %}
 The username identifying the user account (sig-chain) to transfer the namespace to. This is optional if the destination is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="destination" %}
+{% swagger-parameter in="body" name="destination" required="false" %}
 The genesis hash of the signature chain to transfer the the namespace to. This is optional if the username is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="expires" %}
-This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the 
+{% swagger-parameter in="body" name="expires" required="false" %}
+This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the
 
 `number of seconds`
 
- from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="transferred namespace" %}
@@ -385,7 +385,7 @@ Namespaces that have been transferred need to be claimed by the recipient before
 The PIN for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the namespace. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
@@ -485,11 +485,11 @@ This will get the history of a namespace as well as it's ownership. The API supp
 This will get the history of a namespace as well as it's ownership
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" %}
 The name identifying the namespace. This is optional if the address is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="address" %}
+{% swagger-parameter in="body" name="address" required="false" %}
 The register address of the namespace. This is optional if the name is pro
 {% endswagger-parameter %}
 
@@ -618,25 +618,25 @@ This will create a new nam
 The PIN for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the name should be created with. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" required="true" %}
-The name of the object that this name will point to. The name can contain any characters, but must not START with a colon 
+The name of the object that this name will point to. The name can contain any characters, but must not START with a colon
 
 `:'`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="namespace" %}
+{% swagger-parameter in="body" name="namespace" required="false" %}
 This optional field allows callers to specify the namespace that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="global" type="true" %}
+{% swagger-parameter in="body" name="global" type="true" required="false" %}
 This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="register_address" %}
+{% swagger-parameter in="body" name="register_address" required="false" %}
 The 256-bit hexadecimal register address of the the object that this Name will point to
 {% endswagger-parameter %}
 
@@ -753,27 +753,27 @@ Retrieves a name object
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="name" required="false" %}
-The name identifying the name object. The name should be in the format username:name (for local names) or name.namespace (for names in a global namespace). If the 
+The name identifying the name object. The name should be in the format username:name (for local names) or name.namespace (for names in a global namespace). If the
 
 `name`
 
- parameter is provided then all other parameters are ignored
+parameter is provided then all other parameters are ignored
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
-For multi-user API mode, (configured with multiuser=1) the session is required to identify which signature chain should be searched. For single-user API mode the session should not be supplied, and the logged in signature chain will be used. This parameter is ignored if 
+{% swagger-parameter in="body" name="session" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which signature chain should be searched. For single-user API mode the session should not be supplied, and the logged in signature chain will be used. This parameter is ignored if
 
 `name`
 
- is provided.
+is provided.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="register_address" required="false" %}
-The register address to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if 
+The register address to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if
 
 `name`
 
- is provided.
+is provided.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="get name details" %}
@@ -878,30 +878,30 @@ This method allows the register\_address within a Name object to be changed. The
 
 {% swagger method="post" path="/names/update/name" baseUrl="http://api.nexus-interactions.io:8080" summary="update/name" %}
 {% swagger-description %}
-This method allows the register_address within a Name object to be changed 
+This method allows the register_address within a Name object to be changed
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="pin" %}
+{% swagger-parameter in="body" name="pin" required="false" %}
 The PIN for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
-The name identifying the Name object to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
+{% swagger-parameter in="body" name="name" required="false" %}
+The name identifying the Name object to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the
 
 `session`
 
- parameter is provided (as we can deduce the username from the session)
+parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="address" %}
+{% swagger-parameter in="body" name="address" required="false" %}
 The register address of the name to update. This is optional if the name is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="register_address" %}
+{% swagger-parameter in="body" name="register_address" required="false" %}
 The new register address that this Name should point to
 {% endswagger-parameter %}
 
@@ -1011,16 +1011,6 @@ This will transfer ownership of a name . Only global names or names created in a
 {% endswagger-description %}
 {% endswagger %}
 
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -1068,16 +1058,6 @@ Names that have been transferred need to be claimed by the recipient before the 
 {% endswagger-description %}
 {% endswagger %}
 
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -1120,16 +1100,6 @@ This will get the history of a name as well as it's ownership. The API supports 
 
 {% endswagger-description %}
 {% endswagger %}
-
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### Parameters:
 
