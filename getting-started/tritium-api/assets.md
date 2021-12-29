@@ -47,10 +47,121 @@ This will create a new asset or object register. The API supports an alternative
 
 `/assets/create/asset`
 
-{% swagger method="post" path="/assets/create/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="Create a new asset" %}
+{% swagger method="post" path="/assets/create/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="create/asset" %}
 {% swagger-description %}
 This will create a new asset or object register
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the asset should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+An optional name to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="format" %}
+The format the caller is using to define the asset. Values can be 
+
+`basic`
+
+ (the default), 
+
+`raw`
+
+, 
+
+`JSON`
+
+, 
+
+`ANSI`
+
+ (not currently supported), or 
+
+`XML`
+
+ (not currently supported). This is an optional field and the value 
+
+`basic`
+
+ is assumed if omitted
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" %}
+If format is 
+
+`raw`
+
+, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="<fieldname>:<value>" %}
+If format is 
+
+`basic`
+
+, then the caller can provide additional = pairs for each piece of data to store in the asset
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="json" %}
+
+
+`json` : If format is `JSON`, then this field will hold the json definition of the asset as a JSON array of objects representing each field in the object. It uses the following format:&#x20;
+
+`name` : The name of the data field.
+
+``
+
+`type` : The data type to use for this field. Values can be `uint8`, `uint16`, `uint32`, `uint64`, `uint256`, `uint512`, `uint1024`, `string`, or `bytes`.
+
+``
+
+`value` : The default value of the field.
+
+``
+
+`mutable` : The boolean field to indicate whether the field is writable (true) or read-only (false).
+
+``
+
+`maxlength`: Only applicable to `string` or `bytes` fields where `mutable`=true, this is the maximum number of characters (bytes) that can be stored in the field. If no maxlength parameter is provided then we will default the field size to the length of the default value rounded up to the nearest 64 bytes
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="asset created" %}
+```json
+{
+    "pin": "1234",
+    "name": "watch",
+    "format": "JSON",
+    "json" :
+        [
+            {
+                "name": "serial_number",
+                "type": "uint64",
+                "value": "123456789123456789",
+                "mutable" : "false"
+            },
+            {
+                "name": "description",
+                "type": "string",
+                "value": "This is the description of my asset",
+                "mutable" : "false"
+            },
+            {
+                "name": "shelf_location",
+                "type": "string",
+                "value": "Aisle 9 Shelf 2",
+                "mutable" : "true"
+            }
+        ]
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -82,7 +193,6 @@ fetch(`${SERVER_URL}/assets/create/asset`, {
     .then(resp => resp.json())
     .then(json => console.log(json))
     .catch(error => console.log(error))
-
 ```
 {% endtab %}
 {% endtabs %}
@@ -182,29 +292,37 @@ Additionally the API supports passing a field name in the URL after the asset na
 
 `/assets/get/asset`
 
-{% swagger method="post" path="/assets/get/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="Get asset information" %}
+{% swagger method="post" path="/assets/get/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="get/asset" %}
 {% swagger-description %}
 This retrieves an asset information from the object register
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="name" required="false" type="String" %}
+The name identifying the asset. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" type="String" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the asset. The 
 
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="address" %}
-
+{% swagger-parameter in="body" name="address" required="false" type="String" %}
+The register address of the asset. This is optional if the name is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="field" %}
+{% swagger-parameter in="body" name="field" required="false" type="String" %}
 
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+```json
 {
     "name": "watch",
     "address": "8B7SMKmECgYU1ydBQbzp5FCSe4AnkU2EwLE59D7eQDBpixmLZ2c",
@@ -295,7 +413,7 @@ This is the generic endpoint for updating one or more values in an asset. The AP
 
 `/assets/update/asset`
 
-{% swagger method="post" path="/assets/update/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="Update asset information" %}
+{% swagger method="post" path="/assets/update/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="update/asset" %}
 {% swagger-description %}
 This will update one or more values in an asset.
 {% endswagger-description %}
@@ -304,15 +422,15 @@ This will update one or more values in an asset.
 pin
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 session ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
-Asset name (optional) if asset address is provided 
+{% swagger-parameter in="body" name="name" required="false" %}
+Asset name (optional) if asset address is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="address" %}
+{% swagger-parameter in="body" name="address" required="false" %}
 Asset address (optional) if asset name is provided
 {% endswagger-parameter %}
 
@@ -350,7 +468,6 @@ fetch(`${SERVER_URL}/assets/update/asset`, {
     .then(resp => resp.json())
     .then(json => console.log(json))
     .catch(error => console.log(error))
-
 ```
 {% endtab %}
 {% endtabs %}
@@ -405,10 +522,55 @@ This will transfer ownership of an asset or digital item. This is a generic endp
 
 `/assets/transfer/asset`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/asset" %}
 {% swagger-description %}
-
+This will transfer ownership of an asset or digital item
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the asset. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the asset to be transferred. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the asset to be transferred. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the user account (sig-chain) to transfer the asset to. This is optional if the destination is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="destination" %}
+The genesis hash of the signature chain to transfer the the asset to. This is optional if the username is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 #### Parameters:
@@ -452,6 +614,22 @@ Assets that have been transferred need to be claimed by the recipient before the
 
 `/assets/claim/asset`
 
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -489,6 +667,48 @@ This will get the history of an asset or digital item as well as it's ownership.
 #### Endpoint:
 
 `/assets/list/asset/history`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list / asset / history
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "ASSET_NAME", //optional if address is passed
+    // session: "YOUR_SESSION_ID",//optional
+    // address: "ASSET_ADDRESS", //optional if name is passed
+}
+fetch(`${SERVER_URL}/assets/list/asset/history`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "ASSET_NAME",  # optional if address is passed
+    # "session": "YOUR_SESSION_ID",#optional
+    # "address": "ASSET_ADDRESS", #optional if name is passed
+}
+response = requests.post(f"{SERVER_URL}/assets/list/asset/history", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -551,6 +771,63 @@ This will tokenize an asset into fungible tokens that represent ownership. This 
 
 `/assets/tokenize/asset`
 
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// tokenize / asset
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID",//optional
+    name: "ASSET_NAME", //optional if address is passed
+    // address: "ASSET_ADDRESS", //optional if name is passed
+    token_name: "username:token",
+    // token: "address of the token",//optional
+}
+fetch(`${SERVER_URL}/assets/tokenize/asset/`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID",#optional
+    "name": "ASSET_NAME",  # optional if address is passed
+    # "address": "ASSET_ADDRESS", #optional if name is passed
+    "token_name": "username:token",
+    # "token": "address of the token",#optional
+}
+response = requests.post(f"{SERVER_URL}/assets/tokenize/asset/", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -589,6 +866,87 @@ This method returns the information about the user-defined fields that make up t
 #### Endpoint:
 
 `/assets/get/schema`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/schema" %}
+{% swagger-description %}
+This method returns the information about the user-defined fields that make up the asset
+{% endswagger-description %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+[
+    {
+        "name": "description",
+        "type": "string",
+        "value": "this is the description",
+        "mutable": true,
+        "maxlength": 200
+    },
+
+    {
+        "name": "count",
+        "type": "uint64",
+        "value": 1000,
+        "mutable": true
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get / schema
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "ASSET_NAME", //optional if address is passed
+    // session: "YOUR_SESSION_ID",//optional
+    // address: "ASSET_ADDRESS", //optional if name is passed
+    fieldname: "FILTER_FIELD",
+}
+fetch(`${SERVER_URL}/assets/get/schema`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "ASSET_NAME",  # optional if address is passed
+    # "session": "YOUR_SESSION_ID",#optional
+    # "address": "ASSET_ADDRESS", #optional if name is passed
+    "fieldname": "FILTER_FIELD",
+}
+response = requests.post(f"{SERVER_URL}/assets/get/schema", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
