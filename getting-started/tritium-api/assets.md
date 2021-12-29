@@ -341,7 +341,7 @@ The register address of the asset. This is optional if the name is provided
 This optional field can be used to filter the response to return only a single field from the asset
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="asset information" %}
 ```json
 {
     "name": "watch",
@@ -618,7 +618,7 @@ This optional field allows callers to specify an expiration for the transfer tra
  from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="transferred asset" %}
 ```json
 {
     "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
@@ -732,7 +732,7 @@ The transaction ID (hash) of the corresponding asset transfer transaction for wh
 This optional field allows the user to rename an asset when it is claimed. By default the name is copied from the previous owner and a Name record is created for the asset in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="asset claimed" %}
 ```javascript
 {
     "claimed" : 
