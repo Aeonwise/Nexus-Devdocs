@@ -146,25 +146,13 @@ Retrieves a namespace object. The API supports an alternative endpoint that can 
 
 `/names/get/namespace`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/namespace" %}
+{% swagger method="post" path="/names/get/namespace" baseUrl="http://api.nexus-interactions.io:8080" summary="get/namespace" %}
 {% swagger-description %}
 Retrieves a namespace object
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="owner" required="false" %}
-The genesis hash of the signature chain that owns this Name
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="created" required="false" %}
-The UNIX timestamp when the Name was created
-{% endswagger-parameter %}
-
 {% swagger-parameter in="body" name="name" required="false" %}
-The name identifying the namespace
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="address" required="false" %}
-The register address of the namespace
+The name identifying the namespace. This is optional if the address is provided
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="get namespace" %}
@@ -249,8 +237,8 @@ This will transfer ownership of an namespace . This is a generic endpoint requir
 This will transfer ownership of an namespace
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="pin" required="false" %}
-The PIN for this user account
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -382,7 +370,7 @@ Namespaces that have been transferred need to be claimed by the recipient before
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-The PIN for this user account
+PIN for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -393,7 +381,7 @@ For multi-user API mode (configured with multiuser=1) the session is required to
 The transaction ID (hash) of the corresponding namespace transfer transaction for which you are claiming
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Claimed namespace" %}
+{% swagger-response status="200: OK" description="claimed namespace" %}
 ```json
 {
     "claimed":
@@ -611,11 +599,11 @@ This will create a new name. The API supports an alternative endpoint that can i
 
 {% swagger method="post" path="/names/create/name" baseUrl="http://api.nexus-interactions.io:8080" summary="create/name" %}
 {% swagger-description %}
-This will create a new nam
+This will create a new name
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-The PIN for this user account
+PIN for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -1009,6 +997,47 @@ This will transfer ownership of a name . Only global names or names created in a
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the name to be transferred. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the name to be transferred. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the user account (sig-chain) to transfer the name to. This is optional if the destination is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="destination" %}
+The genesis hash of the signature chain to transfer the the name to. This is optional if the username is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 #### Parameters:
