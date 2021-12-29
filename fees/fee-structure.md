@@ -1,10 +1,10 @@
 ---
-description: Fees for the various operations
+description: Fees for various operations
 ---
 
-# Fee Structure
+# 💰 Fee Structure
 
-To maintain security of the network, to prevent spam, to create assets, invoices, names and tokens there are fees associated to prevent misuse.
+To maintain security of the network, to prevent spam, create assets, invoices, names and tokens there are fees associated to prevent misuse.
 
 The breakdown of fees for all operation types is as follows:
 

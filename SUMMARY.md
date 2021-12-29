@@ -8,8 +8,8 @@
 ## Why Use Nexus to Build ?
 
 * [📱 Mobile Wallet](why-use-nexus-to-build/mobile-wallet.md)
-* [Why Nexus?](why-use-nexus-to-build/why-nexus.md)
-* [Hybrid Network](why-use-nexus-to-build/hybrid-network.md)
+* [🌏 Why Nexus?](why-use-nexus-to-build/why-nexus.md)
+* [⚡ Hybrid Network](why-use-nexus-to-build/hybrid-network.md)
 
 ## MAINNET
 
@@ -48,8 +48,8 @@
 
 ## Fees
 
-* [Fee Structure](fees/fee-structure.md)
+* [💰 Fee Structure](fees/fee-structure.md)
 
 ## Use-Cases
 
-* [Token Types](use-cases/token-types.md)
+* [📈 Token Types](use-cases/token-types.md)
