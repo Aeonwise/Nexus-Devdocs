@@ -6,7 +6,7 @@ description: Testnet Node Setup
 
 This guide will help to setup a node on the nexus testnet. No permission is required to join the testnet and users have complete control of the dedicated node
 
-The node configuration will differ as per the individual application requirement or amount of transactions generated.&#x20;
+The node configuration will differ as per the individual application requirement or amount of transactions generated.
 
 {% hint style="info" %}
 If you need any help on the node specifications for a particular application do contact developer support
@@ -15,9 +15,9 @@ If you need any help on the node specifications for a particular application do 
 ## 1. Before you start:
 
 * A computer with a minimum of 1 CPU, 1GB RAM, 20GB hard space, Raspberry Pi 4 with 2 GB RAM.
-* [Ubuntu server 20.04 LTS](https://ubuntu.com/download/server#downloads) for AMD/IA64 or [Ubuntu IOT](https://ubuntu.com/download/raspberry-pi/thank-you?version=20.04.3\&architecture=server-arm64+raspi) for Raspberry Pi. (Use any linux distribution of choice, but this guide is tailored for ubuntu)&#x20;
+* [Ubuntu server 20.04 LTS](https://ubuntu.com/download/server#downloads) for AMD/IA64 or [Ubuntu IOT](https://ubuntu.com/download/raspberry-pi/thank-you?version=20.04.3\&architecture=server-arm64+raspi) for Raspberry Pi. (Use any linux distribution of choice, but this guide is tailored for ubuntu)
 * USB drive or SD card to install ubuntu
-* Etcher – To burn the OS image file to USB/SD card&#x20;
+* Etcher – To burn the OS image file to USB/SD card
 * Putty if you are using ssh via windows
 
 ## 2. Testnet Mining Node Links:
@@ -30,10 +30,10 @@ The testnet mining nodes are listed below.
 
 ## 3. Testnet Ports:
 
-The testnet uses a different set of ports compared to mainnet. If using firewall make sure to allow the following ports. Legacy is disabled and the reason RPC port 8336 is not allowed. &#x20;
+The testnet uses a different set of ports compared to mainnet. If using firewall make sure to allow the following ports. Legacy is disabled and the reason RPC port 8336 is not allowed.
 
 * 7080 -API port
-* 8325 - Mining port, only enable if mining on testnet&#x20;
+* 8325 - Mining port, only enable if mining on testnet
 * 8888 - Outgoing node connections
 
 ## **4. Prepare The Node:**
@@ -133,7 +133,7 @@ Lastly run this command to compile from source. This begins compiling the nexus 
 {% hint style="info" %}
 To build on Raspberry Pi with 1 GB of ram you have to enable Swap memory.
 
-Proceed after setting up swap.&#x20;
+Proceed after setting up swap.
 {% endhint %}
 
 {% embed url="https://rayanfer32.medium.com/enable-swap-memory-on-ubuntu-on-raspberry-pi-a0f873a65e74" %}
@@ -156,7 +156,7 @@ make -f makefile.cli -j4 ARM64=1 NO_WALLET=1
 
 Will show “Finished building nexus” on a successful compile.
 
-## **6.** Testnet Node Configuration**:**
+## **6.** Testnet Node Configuration:
 
 The nexus wallet configuration is kept in a nexus.conf file in `~/.Nexus` which is the nexus core directory
 

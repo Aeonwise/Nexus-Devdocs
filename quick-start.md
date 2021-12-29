@@ -4,6 +4,14 @@ description: Quickly get to the topic of choice
 
 # Quick Start
 
+## Why Nexus?
+
+This section will detail why Nexus should be the blockchain of choice to power dapps
+
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
+
 ## Testnet
 
 Want to test things before you bring it into the real world, we have you covered. We provide a full fledged testnet for our developers:
@@ -12,9 +20,9 @@ Want to test things before you bring it into the real world, we have you covered
 [testnet](testnet/testnet/)
 {% endcontent-ref %}
 
-## Nodes
+## Mainnet
 
-Learn how to setup a node and then you can get to play around it:
+Learn how to setup a mainnet node:
 
 {% content-ref url="mainnet/nodes/" %}
 [nodes](mainnet/nodes/)
@@ -44,4 +52,8 @@ Tritium++ will be launched in three phases, the first update 5.1 will come with 
 [tritium++-api](api/tritium++-api/)
 {% endcontent-ref %}
 
-##
+## Fees
+
+{% content-ref url="fees/fee-structure.md" %}
+[fee-structure.md](fees/fee-structure.md)
+{% endcontent-ref %}
