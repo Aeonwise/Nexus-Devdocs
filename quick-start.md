@@ -8,16 +8,16 @@ description: Quickly get to the topic of choice
 
 Want to test things before you bring it into the real world, we have you covered. We provide a full fledged testnet for our developers:
 
-{% content-ref url="getting-started/testnet/" %}
-[testnet](getting-started/testnet/)
+{% content-ref url="testnet/testnet/" %}
+[testnet](testnet/testnet/)
 {% endcontent-ref %}
 
 ## Nodes
 
 Learn how to setup a node and then you can get to play around it:
 
-{% content-ref url="getting-started/nodes/" %}
-[nodes](getting-started/nodes/)
+{% content-ref url="mainnet/nodes/" %}
+[nodes](mainnet/nodes/)
 {% endcontent-ref %}
 
 ## API keys

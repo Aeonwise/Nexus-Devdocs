@@ -5,13 +5,24 @@
 
 ## Getting Started
 
-* [🛠 Testnet Node](getting-started/testnet/README.md)
-  * [Run a Testnet Node](getting-started/testnet/run-a-testnet-node.md)
-  * [Tritium++ Private Testnet](getting-started/testnet/tritium++-private-testnet.md)
-* [🖥 Mainnet Node](getting-started/nodes/README.md)
-  * [Run a Mainnet Node -CLI](getting-started/nodes/run-a-mainnet-node-cli.md)
-  * [Connect Node to Interface](getting-started/mainnet-node/connect-node-to-interface.md)
-  * [Update Mainnet CLI Node](getting-started/mainnet-node/update-mainnet-node.md)
+## Why Use Nexus to Build ?
+
+* [📱 Mobile Wallet](why-use-nexus-to-build/mobile-wallet.md)
+* [Why Nexus?](why-use-nexus-to-build/why-nexus.md)
+* [Hybrid Network](why-use-nexus-to-build/hybrid-network.md)
+
+## MAINNET
+
+* [🖥 Mainnet Node](mainnet/nodes/README.md)
+  * [Run a Mainnet Node -CLI](mainnet/nodes/run-a-mainnet-node-cli.md)
+  * [Connect Node to Interface](mainnet/nodes/connect-node-to-interface.md)
+  * [Update Mainnet CLI Node](mainnet/nodes/update-mainnet-node.md)
+
+## TESTNET&#x20;
+
+* [🛠 Testnet Node](testnet/testnet/README.md)
+  * [Run a Testnet Node](testnet/testnet/run-a-testnet-node.md)
+  * [Tritium++ Private Testnet](testnet/testnet/tritium++-private-testnet.md)
 
 ## API
 
