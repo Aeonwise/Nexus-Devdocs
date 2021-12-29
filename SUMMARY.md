@@ -7,8 +7,8 @@
 
 ## Why Nexus?
 
-* [📱 Mobile Wallet](why-nexus/mobile-wallet.md)
 * [🔟 10 Reasons to Build on Nexus?](why-nexus/10-reasons-to-build-on-nexus.md)
+* [📱 Mobile Wallet](why-nexus/mobile-wallet.md)
 * [🌎 Hybrid Network](why-nexus/hybrid-network.md)
 
 ## MAINNET
