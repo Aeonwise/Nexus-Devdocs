@@ -522,7 +522,7 @@ This will transfer ownership of an asset or digital item. This is a generic endp
 
 `/assets/transfer/asset`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/asset" %}
+{% swagger method="post" path="/assets/transfer/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/asset" %}
 {% swagger-description %}
 This will transfer ownership of an asset or digital item
 {% endswagger-description %}
@@ -614,19 +614,23 @@ Assets that have been transferred need to be claimed by the recipient before the
 
 `/assets/claim/asset`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/assets/claim/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="claim/asset" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```
+// Some code
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -668,10 +672,38 @@ This will get the history of an asset or digital item as well as it's ownership.
 
 `/assets/list/asset/history`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/assets/list/asset/history" baseUrl="http://api.nexus-interactions.io:8080" summary="list/asset/history" %}
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the asset. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the asset. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the asset. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
