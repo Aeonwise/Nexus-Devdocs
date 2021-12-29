@@ -16,9 +16,9 @@ The minimum required components of the URI are:
 
 The following operators are supported for this API command-set:
 
-[`array`](broken-reference) - Generate a list of values given from a set of filtered results.\
-[`mean`](broken-reference) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](broken-reference) - Compute a sum of a set of values derived from filtered results.
+[`array`](../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
+[`mean`](../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
 
 **Example:**
 
@@ -95,23 +95,23 @@ The above command will create a debit contract withdrawing from a random sample 
 
 The following verbs are currently supported by this API command-set:
 
-[`burn`](broken-reference) - Remove a given token from circulation.\
-[`create`](broken-reference) - Generate a new object of supported type.\
-[`credit`](broken-reference) - Claim funds issued to account from debit.\
-[`debit`](broken-reference) - Issue funds from supported type.\
-[`get`](broken-reference) - Get object of supported type.\
-[`list`](broken-reference) - List all objects owned by given user.\
-[`history`](broken-reference) - Generate the history of all last states.\
-[`transactions`](broken-reference) - List all transactions that modified specified object.
+[`burn`](../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
+[`create`](../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
+[`credit`](../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`debit`](../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
+[`get`](../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`history`](../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
+[`transactions`](../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
 
 ## `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/balances`](broken-reference)\
-[`get/stakeinfo`](broken-reference)\
-[`migrate/accounts`](broken-reference)\
-[`set/stake`](broken-reference)
+[`get/balances`](../../getting-started/tritium++-api/broken-reference/)\
+[`get/stakeinfo`](../../getting-started/tritium++-api/broken-reference/)\
+[`migrate/accounts`](../../getting-started/tritium++-api/broken-reference/)\
+[`set/stake`](../../getting-started/tritium++-api/broken-reference/)
 
 Direct endpoints support filters and operators.
 
@@ -159,7 +159,7 @@ The following methods are currently supported by this API
 
 [`create/account`](finance.md#create-account)\
 [`debit/account`](finance.md#debit-account)\
-[`credit/account`](broken-reference)\
+[`credit/account`](../../getting-started/tritium++-api/broken-reference/)\
 [`get/account`](finance.md#get-account)\
 [`list/accounts`](finance.md#list-accounts)\
 [`list/account/transactions`](finance.md#list-account-transactions)\
@@ -665,33 +665,33 @@ This will list off all of the transactions related to a given account. You DO NO
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of this contract within the transaction that was credited / claimed.
+`contract` : The ID of this contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
