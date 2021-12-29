@@ -521,8 +521,8 @@ Returns the public key (as opposed to the hashed public key that is returned by 
 The name of the public key to return
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" required="false" %}
-The pin for the user account
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -623,17 +623,17 @@ Returns the private key for a key pair. This method can only be used to obtain t
 
 `/crypto/get/privatekey`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/privatekey" %}
+{% swagger method="post" path="/crypto/get/privatekey" baseUrl="http://api.nexus-interactions.io:8080" summary="get/privatekey" %}
 {% swagger-description %}
 Returns the private key for a key pair.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="name" required="false" %}
-
+{% swagger-parameter in="body" name="name" required="true" %}
+The name of the private key to return
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" required="false" %}
-
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -641,16 +641,24 @@ For multi-user API mode, (configured with multiuser=1) the session is required t
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="scheme" required="false" %}
-Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be
+Optional. When creating the app1, app2, app3, or any other key name apart from the six default keys, users can specify which scheme to use to generate the key pair. Values can be 
 
-`BRAINPOOL`
+`BRAINPOOL or`
 
-or
+ 
 
 `FALCON`
 
 . If no scheme parameter is provided then it will be determined from the crypto object register (for previously created keys) or taken from the users signature chain configuration
 {% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get privatekey" %}
+```json
+{
+    "privatekey": "2687a494478c3ffdbc5fdf73139a710470097777aca080572a68f2a6204eb27d431a6d81d9f3f15d4e6b1c4a70eb6fb2c345fa462b2a717397514a8190484001"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -728,8 +736,8 @@ Returns a self-signed x509 certificate for this signature chain valid for 365 da
 Returns a self-signed x509 certificate for this signature chain valid for 365 days from the time the method is called
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="pin" required="true" type="1234" %}
-The PIN for this user account
+{% swagger-parameter in="body" name="pin" required="true" type="" %}
+PIN for this user account
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="get certificate" %}
@@ -817,11 +825,7 @@ For multi-user API mode, (configured with multiuser=1) the session is required t
 {% swagger-parameter in="body" name="scheme" required="true" %}
 The new scheme to use. Values can be
 
-`BRAINPOOL`
-
-or
-
-`FALCON`
+`BRAINPOOL` or `FALCON`
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="scheme changed" %}
@@ -928,7 +932,7 @@ is provided.
 **`The name parameter can not be one of the nine default keys (`auth`,` lisp`,` network`,` sign`,` verify`,` cert`,` app1`,` app2`, and` app**
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" required="false" %}
+{% swagger-parameter in="body" name="pin" required="true" %}
 The PIN for this signature chain. Not required if
 
 `key`
@@ -1074,25 +1078,23 @@ A 256-bit (32 character) symmetric key to use to decrypt the data. Should only b
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" required="false" %}
-The name of the private key to use to generate the decryption key. Not required if
+The name of the private key to use to generate the decryption key. Not required if 
 
 `key`
 
-is provided.
+ is provided.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="false" %}
-The PIN for this signature chain. Not required if
+The PIN for this signature chain. Not required if 
 
 `key`
 
-is provided
+ is provided
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
-For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if
-
-`key`
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the private key should be taken from. For single-user API mode the session should not be supplied. Not required if `key`
 
 is provided
 {% endswagger-parameter %}
@@ -1105,7 +1107,7 @@ Optional, the peer public key used to to generate a shared key. This should be p
 The encrypted data to decrypt. This should be passed in as a base64-encoded string
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="decrypted data" %}
 ```json
 {
     "data": "aGVsbG8gd29ybGQ="
@@ -1204,14 +1206,14 @@ The name of the key in the crypto object register to use to sign the data
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-The PIN for this signature chain
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) should be used to sign the data. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="data" required="true" %}
+{% swagger-parameter in="body" name="data" required="false" %}
 The data to sign. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
 {% endswagger-parameter %}
 {% endswagger %}
@@ -1319,6 +1321,14 @@ The signature to be verified, base64 encoded
 {% swagger-parameter in="body" name="data" required="true" %}
 The signed data. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
 {% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    verified=true
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -1387,11 +1397,59 @@ Verifies the x509 certificate that was previously obtained from the `crypto/get/
 
 `/crypto/verify/certificate`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/verify/certificate" baseUrl="http://api.nexus-interactions.io:8080" summary="verify/certificate" %}
 {% swagger-description %}
+Verifies the x509 certificate that was previously obtained from the 
 
+`crypto/get/certificate`
+
+ method
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="certificate" required="true" %}
+The certificate data in PEM format, and base64 encoded
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="certificate verified" %}
+```javascript
+{
+    verified=true
+}
+```
+{% endswagger-response %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// verify/certificate
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    certificate: "THE CERTIFICATE DATA IN PEM FORMAT AND BASE64 ENCODED"
+}
+fetch(`${SERVER_URL}/crypto/verify/certificate`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "certificate": "THE CERTIFICATE DATA IN PEM FORMAT AND BASE64 ENCODED"
+}
+response = requests.post(f"{SERVER_URL}/crypto/verify/certificate", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -1415,11 +1473,75 @@ The `data` must be supplied as a base64 encoded string. This will be decoded int
 
 `/crypto/get/hash`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/crypto/get/hash" baseUrl="http://api.nexus-interactions.io:8080" summary="get/hash" %}
 {% swagger-description %}
-
+Generates a hash of the data using the requested hashing function
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="data" required="true" %}
+The data to generate the hash from. This is a string field, so callers wishing to pass in binary data should base64-encode the data first
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="function" required="true" %}
+Optional hashing function to use to generate the hash. Options can be 
+
+`SK256`
+
+, 
+
+`SK512`
+
+, 
+
+`ARGON2`
+
+. If no function is provided then it will default to SK256
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="get/hash" %}
+```javascript
+{
+    "hash": "73cc74e67a8b840039d992c0ec7d6637f67c3ed0ac78e8f375b292fbb23cc6c7"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/hash
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    data: "THE DATA TO GENERATE THE HASH FROM", // This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+    function: "SK256", //optional or can be SK256, SK512, ARGON2. If no function is provided then it will default to SK256.
+}
+fetch(`${SERVER_URL}/crypto/get/hash`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # This is a string field, so callers wishing to pass in binary data should base64-encode the data first.
+    "data": "THE DATA TO GENERATE THE HASH FROM",
+    # optional or can be SK256, SK512, ARGON2. If no function is provided then it will default to SK256.
+    "function": "SK256",
+}
+response = requests.post(f"{SERVER_URL}/crypto/get/hash", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 

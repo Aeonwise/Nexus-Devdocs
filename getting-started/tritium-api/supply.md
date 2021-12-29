@@ -39,7 +39,7 @@ This will create a new item, assigning ownership to the user logged in to the pr
 
 `/supply/create/item`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="create/item" %}
+{% swagger method="post" path="/supply/create/item" baseUrl="http://api.nexus-interactions.io:8080" summary="create/item" %}
 {% swagger-description %}
 This will create a new item, assigning ownership to the user logged in to the provided session
 {% endswagger-description %}
@@ -60,7 +60,7 @@ An optional name to identify the item. If provided a Name object will also be cr
 The data to store in the item
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="item created" %}
 ```json
 {
     "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
@@ -145,7 +145,7 @@ Additionally the API supports passing a field name in the URL after the asset na
 
 `/supply/get/item`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/item" %}
+{% swagger method="post" path="/supply/get/item" baseUrl="http://api.nexus-interactions.io:8080" summary="get/item" %}
 {% swagger-description %}
 This is the generic endpoint for retrieving an item from the object register.
 {% endswagger-description %}
@@ -274,7 +274,7 @@ This is the generic endpoint for updating the data value in an item. The API sup
 
 `/supply/update/item`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="update/item" %}
+{% swagger method="post" path="/supply/update/item" baseUrl="http://api.nexus-interactions.io:8080" summary="update/item" %}
 {% swagger-description %}
 This is the generic endpoint for updating the data value in an item
 {% endswagger-description %}
@@ -303,7 +303,7 @@ The register address of the supply to update. This is optional if the name is pr
 The new value of the data field in this item
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="item updated" %}
 ```json
 {
     "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
@@ -390,7 +390,7 @@ This will transfer ownership of an item. This is a generic endpoint requiring th
 
 `/supply/transfer/item`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/item" %}
+{% swagger method="post" path="/supply/transfer/item" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/item" %}
 {% swagger-description %}
 This will transfer ownership of an item
 {% endswagger-description %}
