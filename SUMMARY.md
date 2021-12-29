@@ -5,11 +5,11 @@
 
 ## Getting Started
 
-## Why Use Nexus to Build ?
+## Why Nexus?
 
-* [📱 Mobile Wallet](why-use-nexus-to-build/mobile-wallet.md)
-* [🌏 Why Nexus?](why-use-nexus-to-build/why-nexus.md)
-* [⚡ Hybrid Network](why-use-nexus-to-build/hybrid-network.md)
+* [📱 Mobile Wallet](why-nexus/mobile-wallet.md)
+* [🔟 10 Reasons to Build on Nexus?](why-nexus/10-reasons-to-build-on-nexus.md)
+* [🌎 Hybrid Network](why-nexus/hybrid-network.md)
 
 ## MAINNET
 

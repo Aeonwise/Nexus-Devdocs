@@ -2,7 +2,7 @@
 description: Why you should consider building with Nexus?
 ---
 
-# Why Nexus?
+# 🔟 10 Reasons to Build on Nexus?
 
 There is an increasing number of smart contract platforms rolling out in the crypto space, with many becoming household names. However, a dark horse in the race to be the most efficient and secure blockchain is ‘[Nexus](https://www.nexus.io)’. Given its low market cap, most people have never heard of this seven year old blockchain, yet it delivers far more than many of the leading smart contract platforms today.&#x20;
 
