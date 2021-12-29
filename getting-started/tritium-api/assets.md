@@ -22,7 +22,7 @@ Similarly `assets/get/asset/8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P`
 
 The logic for resolving the shortcut to either a name or address is that if the data is 64 characters of hexadecimal then it will be assumed to be a register address. Otherwise it will be considered a name.
 
-### `Methods`
+## `Methods`
 
 The following methods are currently supported by this API
 
@@ -34,10 +34,6 @@ The following methods are currently supported by this API
 [`list/asset/history`](assets.md#list-asset-history)\
 [`tokenize/asset`](assets.md#tokenize-asset)\
 [`get/schema`](assets.md#get-schema)
-
-***
-
-***
 
 ### `create/asset`
 
@@ -52,8 +48,8 @@ This will create a new asset or object register. The API supports an alternative
 This will create a new asset or object register
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="pin" %}
-
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" %}
@@ -64,7 +60,7 @@ For multi-user API mode, (configured with multiuser=1) the session is required t
 An optional name to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="format" %}
+{% swagger-parameter in="body" name="format" required="false" %}
 The format the caller is using to define the asset. Values can be 
 
 `basic`
@@ -195,6 +191,30 @@ fetch(`${SERVER_URL}/assets/create/asset`, {
     .catch(error => console.log(error))
 ```
 {% endtab %}
+
+{% tab title="Python" %}
+```json
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    "name": "ASSET_NAME",  # optional
+    # "session": "YOUR_SESSION_ID", #optional
+    "format": "JSON",  # optional or "basic" ,"raw","JSON","ANSI","XML"
+    # "data": "HEX_ENCODED_DATA_TOBE_STORED_IN_THE_ASSET",#optional
+    # <fieldname>=<value>#optional,
+    "json": [{
+        "name": "NAME_OF_DATA_FIELD",
+        "type": "string",  # uint8, uint16, uint32, uint64, uint256, uint512, uint1024 ,string,bytes
+        "value": "default value of the field",
+        "mutable": True,  # False for read-only
+        # "maxlength": 64, #in bytes
+    }]
+}
+response = requests.post(f"{SERVER_URL}/assets/create/asset", json=data)
+print(response.json())
+```
+{% endtab %}
 {% endtabs %}
 
 `pin` : The PIN for this signature chain.
@@ -318,7 +338,7 @@ The register address of the asset. This is optional if the name is provided
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="field" required="false" type="String" %}
-
+This optional field can be used to filter the response to return only a single field from the asset
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -357,6 +377,22 @@ fetch(`${SERVER_URL}/assets/get/asset`, {
     .then(resp => resp.json())
     .then(json => console.log(json))
     .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID",#optional
+    "name": "ASSET_NAME",  # optional if address is passed
+    # "address": "ASSET_ADDRESS", #optional if name is passed
+    # "fieldname": "FILTER_FIELD" #optional
+}
+response = requests.post(f"{SERVER_URL}/assets/get/asset", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -419,27 +455,31 @@ This will update one or more values in an asset.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-pin
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
-session ID
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the asset should be created with. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" required="false" %}
-Asset name (optional) if asset address is provided
+The name identifying the asset to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="address" required="false" %}
-Asset address (optional) if asset name is provided
+The register address of the asset to update. This is optional if the name is provided
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="<fieldname>=<value>" required="true" %}
 The caller can provide = pairs for each piece of data to update in the asset.
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Asset information updated" %}
-```javascript
+{% swagger-response status="200: OK" description="asset information updated" %}
+```json
 {
     "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
     "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
@@ -468,6 +508,21 @@ fetch(`${SERVER_URL}/assets/update/asset`, {
     .then(resp => resp.json())
     .then(json => console.log(json))
     .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "ASSET_NAME",  # optional if address is passed
+    # "session": "YOUR_SESSION_ID",#optional
+    # "address": "ASSET_ADDRESS", #optional if name is passed
+    # fieldname: value #<fieldname>=<values> to be updated
+}
+response = requests.post(f"{SERVER_URL}/assets/update/asset", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -606,7 +661,7 @@ This optional field allows callers to specify an expiration for the transfer tra
 
 ***
 
-### `claim/asset`
+## `claim/asset`
 
 Assets that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction . This is a generic endpoint requiring the transaction ID (hash) of the corresponding transfer transaction to be passed as a parameter. The API supports an alternative endpoint that can include the transaction ID in the URI. For example `/assets/claim/asset/27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1` will resolve to `assets/claim/asset?txid=27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1`.
 
