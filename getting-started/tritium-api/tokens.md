@@ -33,10 +33,6 @@ The following methods are currently supported by this API
 [`get/account`](tokens.md#get-account)\
 [`list/account/transactions`](tokens.md#list-account-transactions)
 
-***
-
-***
-
 ### `create/token`
 
 Create a new token object register. The API supports an alternative endpoint that can include the new token name in the URI. For example `/tokens/create/token/mytoken` will resolve to `tokens/create/token?name=mytoken`.
@@ -70,7 +66,7 @@ The initial token supply amount. Must be a whole number amount
 The maximum number of decimal places that can be applied to token amounts. For example decimals=2 will allow a token amount to be given to 2 decimal places
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="created token" %}
 ```javascript
 {
     // Response
@@ -173,8 +169,102 @@ The method supports the ability to send to multiple recipients in one transactio
 
 {% swagger method="post" path="/tokens/debit/token" baseUrl="http://api.nexus-interactions.io:8080" summary="debit/token" %}
 {% swagger-description %}
-
+Deduct a token amount from a token's initial supply and send it to a token account
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the token owner. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the token to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the token was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the token to debit. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="amount" %}
+The amount of tokens to debit
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_to" %}
+The name identifying the token account to send to. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_to" %}
+The register address of the token account to send to. This is optional if the name is provided.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="reference" %}
+This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the debit transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="recipients" %}
+This optional array can be provided as an alternative to the single 
+
+`name_to`
+
+/
+
+`address_to`
+
+, 
+
+`amount`
+
+, 
+
+`reference`
+
+, and 
+
+`expires`
+
+ fields. Each object in the array can have 
+
+`name_to`
+
+/
+
+`address_to`
+
+, 
+
+`amount`
+
+, 
+
+`refer`
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="token debited" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
