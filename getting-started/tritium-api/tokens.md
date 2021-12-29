@@ -410,7 +410,7 @@ Increment the token balance by an amount received from a token account. This met
 
 {% swagger method="post" path="/tokens/credit/token" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/token" %}
 {% swagger-description %}
-
+Increment the token balance by an amount received from a token account
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
@@ -542,8 +542,58 @@ Additionally the API supports passing a field name in the URL after the token na
 
 {% swagger method="post" path="/tokens/get/token" baseUrl="http://api.nexus-interactions.io:8080" summary="get/token" %}
 {% swagger-description %}
-
+Retrieves information about a token and its supply
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the token to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the token was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the token. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the token to retrieve. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
+
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the toke
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="token details" %}
+```json
+{
+    "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "created": 1566534164,
+    "modified": 1566616211,
+    "name": "mytoken",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+    "balance": 990,
+    "pending": 0,
+    "unconfirmed": 0,
+    "maxsupply": 1000,
+    "currentsupply": 10,
+    "decimals": 0
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -589,7 +639,7 @@ print(response.json())
 
 #### Parameters:
 
-`name` : The name identifying the token to retrieve. This is optional if the address is provided. `name` : The name identifying the token to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the token was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+`name` : The name identifying the token to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the token was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the token. The `session` parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
 
@@ -655,8 +705,44 @@ This method can be used to take tokens permanently out of the current supply, a 
 
 {% swagger method="post" path="/tokens/burn/tokens" baseUrl="http://api.nexus-interactions.io:8080" summary="burn/token" %}
 {% swagger-description %}
-
+This method can be used to take tokens permanently out of the current supply, a process commonly known as burning
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the token owner. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the account to debit the tokens from to be burnt. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the token was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the account to debit the tokens from the be burnt. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="amount" %}
+The amount of tokens to burn
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="reference" %}
+This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
