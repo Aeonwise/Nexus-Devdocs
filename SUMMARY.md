@@ -31,3 +31,12 @@
   * [FINANCE](getting-started/tritium++-api/finance.md)
   * [REGISTER](getting-started/tritium++-api/register.md)
   * [SYSTEM](getting-started/tritium++-api/system.md)
+
+## Fees
+
+* [Page 1](fees/page-1.md)
+* [Fee Structure](fees/fee-structure.md)
+
+## Use-Cases
+
+* [Page 2](use-cases/page-2.md)
