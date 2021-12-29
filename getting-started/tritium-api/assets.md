@@ -583,7 +583,7 @@ This will transfer ownership of an asset or digital item
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" %}
@@ -628,6 +628,48 @@ This optional field allows callers to specify an expiration for the transfer tra
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// transfer / asset
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID",//optional
+    name: "ASSET_NAME", //optional if address is passed
+    // address: "ASSET_ADDRESS", //optional if name is passed
+    username: "TO_USERNAME", //optional if destination is passed
+    // destination: "TO_GENESIS_HASH_OF_SIGCHAIN",//optional if username is passed
+}
+fetch(`${SERVER_URL}/assets/transfer/asset`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID",#optional
+    "name": "ASSET_NAME",  # optional if address is passed
+    # "address": "ASSET_ADDRESS", #optional if name is passed
+    "username": "TO_USERNAME",  # optional if destination is passed
+    # "destination": "TO_GENESIS_HASH_OF_SIGCHAIN",#optional if username is passed
+}
+response = requests.post(f"{SERVER_URL}/assets/transfer/asset", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -671,20 +713,73 @@ Assets that have been transferred need to be claimed by the recipient before the
 
 {% swagger method="post" path="/assets/claim/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="claim/asset" %}
 {% swagger-description %}
-
+Assets that have been transferred need to be claimed by the recipient before the transfer is complete
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user accounts
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the asset. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" %}
+The transaction ID (hash) of the corresponding asset transfer transaction for which you are claiming
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+This optional field allows the user to rename an asset when it is claimed. By default the name is copied from the previous owner and a Name record is created for the asset in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    "claimed" : 
+    [
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+    ],
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// claim / asset
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID",//optional
+    txid: "TX_HASH",
+    name: "ASSET_NAME", //optional if address is passed
+}
+fetch(`${SERVER_URL}/assets/claim/asset`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID",#optional
+    "txid": "TX_HASH",
+    "name": "ASSET_NAME",  # optional if address is passed
+}
+response = requests.post(f"{SERVER_URL}/assets/claim/asset", json=data)
+print(response.json())
+
 ```
 {% endtab %}
 {% endtabs %}
@@ -998,7 +1093,7 @@ This method returns the information about the user-defined fields that make up t
 
 `/assets/get/schema`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/schema" %}
+{% swagger method="post" path="/assets/get/schema" baseUrl="http://api.nexus-interactions.io:8080" summary="get/schema" %}
 {% swagger-description %}
 This method returns the information about the user-defined fields that make up the asset
 {% endswagger-description %}
@@ -1027,7 +1122,7 @@ The register address of the asset. This is optional if the name is provided
 This optional field can be used to filter the response to return only a single field from the asset
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="schema details" %}
 ```json
 [
     {
