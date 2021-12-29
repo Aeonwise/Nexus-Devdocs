@@ -45,29 +45,29 @@ Create a new token object register. The API supports an alternative endpoint tha
 
 `/tokens/create/token`
 
-{% swagger method="post" path="/tokens/create/token" baseUrl="http://api.nexus-interactions.io:8080" summary="Create token" %}
+{% swagger method="post" path="/tokens/create/token" baseUrl="http://api.nexus-interactions.io:8080" summary="create/token" %}
 {% swagger-description %}
 Create a new token object register
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-The PIN for this signature chain
+PIN for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
-
+{% swagger-parameter in="body" name="session" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the token should be created with. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" required="true" %}
-
+An optional name to identify the token. If provided a Name object will also be created in the users local namespace, allowing the token to be accessed/retrieved by name. If no name is provided the token will need to be accessed/retrieved by its 256-bit register address
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="supply" required="true" %}
-
+The initial token supply amount. Must be a whole number amount
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="decimals" required="true" %}
-
+The maximum number of decimal places that can be applied to token amounts. For example decimals=2 will allow a token amount to be given to 2 decimal places
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -116,7 +116,6 @@ data = {
 }
 response = requests.post(f"{SERVER_URL}/tokens/create/token", json=data)
 print(response.json())
-
 ```
 {% endtab %}
 {% endtabs %}
@@ -172,7 +171,7 @@ The method supports the ability to send to multiple recipients in one transactio
 
 `/tokens/debit/token`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/tokens/debit/token" baseUrl="http://api.nexus-interactions.io:8080" summary="debit/token" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -319,7 +318,7 @@ Increment the token balance by an amount received from a token account. This met
 
 `/tokens/credit/token`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/tokens/credit/token" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/token" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -415,7 +414,7 @@ Additionally the API supports passing a field name in the URL after the token na
 
 `/tokens/get/token`
 
-{% swagger method="post" path="" baseUrl="" summary="get/token" %}
+{% swagger method="post" path="/tokens/get/token" baseUrl="http://api.nexus-interactions.io:8080" summary="get/token" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -528,7 +527,7 @@ This method can be used to take tokens permanently out of the current supply, a 
 
 `/tokens/burn/token`
 
-{% swagger method="post" path="" baseUrl="" summary="burn/token" %}
+{% swagger method="post" path="/tokens/burn/tokens" baseUrl="http://api.nexus-interactions.io:8080" summary="burn/token" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -628,7 +627,7 @@ This will list off all of the transactions related to a given token. You DO NOT 
 
 `/tokens/list/token/transactions`
 
-{% swagger method="post" path="" baseUrl="" summary="token/transactions" %}
+{% swagger method="post" path="/tokens/list/token/transactions" baseUrl="http://api.nexus-interactions.io:8080" summary="list/token/transactions" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -769,33 +768,33 @@ print(response.json())
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Always `DEBIT` for token transactions.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Always `DEBIT` for token transactions.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of the contract within the transaction that was credited / claimed.
+`contract` : The ID of the contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
@@ -807,10 +806,18 @@ This will list all accounts (globally) that have been created for a particular t
 
 `/tokens/list/token/accounts`
 
-{% swagger method="post" path="" baseUrl="" summary="list/token/accounts" %}
+{% swagger method="post" path="/tokens/list/token/accounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/token/accounts" %}
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
@@ -1376,28 +1383,28 @@ This will list off all of the transactions related to a given account. You DO NO
 
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="genesis" %}
+{% swagger-parameter in="body" name="genesis" required="false" %}
 The genesis hash identifying the signature chain to scan for transactions (optional if username is supplied or already logged in)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" required="false" %}
 The username identifying the signature chain to scan for transactions(optional if genesis is supplied or already logged in
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the account name in order to deduce the register address of the account. The 
+{% swagger-parameter in="body" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the account name in order to deduce the register address of the account. The
 
 `session`
 
- parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
+parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-The name identifying the token account to list transactions for. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
+{% swagger-parameter in="body" required="false" %}
+The name identifying the token account to list transactions for. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the
 
 `session`
 
- parameter is provided (as we can deduce the username from the session)
+parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 {% endswagger %}
 
@@ -1527,33 +1534,33 @@ print(response.json())
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Always `DEBIT` for token transactions.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Always `DEBIT` for token transactions.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of the contract within the transaction that was credited / claimed.
+`contract` : The ID of the contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
