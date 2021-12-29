@@ -52,4 +52,4 @@
 
 ## Use-Cases
 
-* [📈 Token Types](use-cases/token-types.md)
+* [🟠 Token Types](use-cases/token-types.md)
