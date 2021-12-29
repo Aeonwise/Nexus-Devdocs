@@ -858,10 +858,50 @@ This will tokenize an asset into fungible tokens that represent ownership. This 
 
 `/assets/tokenize/asset`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/assets/tokenize/asset" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
 {% swagger-description %}
-
+This will tokenize an asset into fungible tokens that represent ownership
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig chain) owns the asset. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the asset to be tokenized. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the asset to be tokenized. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token_name" %}
+The name of a token to use to tokenize the asset. The name should be in username:token name format. 
+
+`token`
+
+ can be supplied as an alternative to 
+
+`token_name`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token" %}
+The register address of a token to use to tokenize the asset. 
+
+`token_name`
+
+ can be supplied as an alternative to 
+
+`token`
+{% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
 ```json
@@ -926,6 +966,10 @@ print(response.json())
 `address` : The register address of the asset to be tokenized. This is optional if the name is provided.
 
 `token_name` : The name of a token to use to tokenize the asset. The name should be in username:token name format. `token` can be supplied as an alternative to `token_name`.
+
+{% hint style="info" %}
+Create the token beforehand and use the token\_name or token address to tokenize the asset
+{% endhint %}
 
 `token` : The register address of a token to use to tokenize the asset. `token_name` can be supplied as an alternative to `token`.
 
