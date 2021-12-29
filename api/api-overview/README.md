@@ -2,7 +2,7 @@
 description: Tritium API Overview
 ---
 
-# API Overview
+# ⚙ API Overview
 
 Nexus provides several APIs to allow users and developers to easily interact with the functionality of the Nexus software stack. Each API is a logically grouped collection of methods that either interact with a specific part of the stack (e.g. ledger, registers), by functional area (accounts, assets, tokens), or by industry specific use case (supply, music).
 

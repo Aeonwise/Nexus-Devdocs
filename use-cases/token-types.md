@@ -1,4 +1,4 @@
-# 📈 Token Types
+# 🟠 Token Types
 
 Nexus API's can issue tokens, assets, items, invoices. What are all the different type of tokens available today
 

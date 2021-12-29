@@ -26,9 +26,9 @@
 
 ## API
 
+* [⚙ API Overview](api/api-overview/README.md)
+  * [How-to-API](api/api-overview/how-to-api.md)
 * [⚙ Tritium API](api/tritium-api/README.md)
-  * [API Overview](api/tritium-api/api-overview.md)
-  * [How-to-API](api/tritium-api/how-to-api.md)
   * [SYSTEM](api/tritium-api/system.md)
   * [USERS](api/tritium-api/users.md)
   * [FINANCE](api/tritium-api/finance.md)

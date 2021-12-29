@@ -30,7 +30,7 @@ Learn how to setup a mainnet node:
 
 ## API keys
 
-Nexus API's talk to the nexus node and the API authentication keys have to be configured in the node. [Click here](api/tritium-api/api-overview.md#security) for more information
+Nexus API's talk to the nexus node and the API authentication keys have to be configured in the node. [Click here](api/api-overview/#security) for more information
 
 {% hint style="info" %}
 API uses HTTP basic authentication and SSL will be available in the future
