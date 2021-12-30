@@ -36,8 +36,8 @@ The following methods are currently supported by this API
 [`list/tokens`](users.md#list-tokens)\
 [`list/transactions`](users.md#list-transactions)\
 [`save/session`](users.md#save-session)\
-[`load/session`](users.md#load-session) \
-[`has/session`](users.md#has-session)&#x20;
+[`load/session`](users.md#load-session)\
+[`has/session`](users.md#has-session)
 
 ## `create/user`
 
@@ -85,7 +85,6 @@ The PIN can be a combination of letters/numbers/symbols or could be tied into an
     "timestamp": 1545445970,
     "version": 1
 }
-
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -180,7 +179,7 @@ This will start a session for your user account with this specific API instance.
 
 `/users/login/user`
 
-{% swagger method="post" path="/users/login/user" baseUrl="http://api.nexus-interactions.io:8080" summary="Starts a user session" %}
+{% swagger method="post" path="/users/login/user" baseUrl="http://api.nexus-interactions.io:8080" summary="login/user" %}
 {% swagger-description %}
 This will start a session for your user account with this specific API instance. Username, password, and pin fields are mandatory for login
 {% endswagger-description %}
@@ -197,7 +196,7 @@ The password for the user account
 The pin for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Content-Type" %}
+{% swagger-parameter in="header" name="Content-Type" required="false" %}
 application/json
 {% endswagger-parameter %}
 
@@ -285,7 +284,7 @@ This will log you out of this specific API, and delete your credentials stored i
 This will log you the particular user and delete user credentials stored in encrypted memory
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="session" type="" %}
+{% swagger-parameter in="body" name="session" type="" required="false" %}
 session ID
 {% endswagger-parameter %}
 
@@ -354,7 +353,7 @@ The `pin` field is mandatory for unlock. The mining/staking/transactions/notific
 
 `/users/unlock/user`
 
-{% swagger method="post" path="/users/unlock/user" baseUrl="http://test1api.nexus-interations.io:7080" summary="unlock/user" %}
+{% swagger method="post" path="/users/unlock/user" baseUrl="http://api.nexus-interactions.io:8080" summary="unlock/user" %}
 {% swagger-description %}
 This will unlock your signature chain and cache the PIN in encrypted memory to be used for all subsequent API calls. This method is only available when using single-user API mode (multiuser=0).
 {% endswagger-description %}
@@ -363,19 +362,19 @@ This will unlock your signature chain and cache the PIN in encrypted memory to b
 The PIN for the particular user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="mining" type="true" %}
+{% swagger-parameter in="body" name="mining" type="true" required="false" %}
 This boolean value determines whether the logged in users account can be used for mining.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="notifications" type="true" %}
+{% swagger-parameter in="body" name="notifications" type="true" required="false" %}
 This boolean value determines whether the logged in users account can be used for processing notifications
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="staking" type="false" %}
+{% swagger-parameter in="body" name="staking" type="false" required="false" %}
 This boolean value determines whether the logged in users account can be used for staking
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="transactions" type="false" %}
+{% swagger-parameter in="body" name="transactions" type="false" required="false" %}
 This boolean value determines whether the logged in users account can be used for creating or claiming transactions
 {% endswagger-parameter %}
 
@@ -489,19 +488,19 @@ The mining/staking/transactions/notifications parameters are optional and, if su
 This will lock your signature chain, making it unavailable for use unless it is either unlocked or the PIN is passed in to all API requests. Only available in single-user API mode (multiuser=0)
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="mining" type="false" %}
+{% swagger-parameter in="body" name="mining" type="false" required="false" %}
 This boolean value locks the user account for mining
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="notifications" type="true" %}
+{% swagger-parameter in="body" name="notifications" type="true" required="false" %}
 This boolean value locks the users account from processing notifications
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="staking" type="true" %}
+{% swagger-parameter in="body" name="staking" type="true" required="false" %}
 This boolean value locks the users account for staking
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="transactions" type="false" %}
+{% swagger-parameter in="body" name="transactions" type="false" required="false" %}
 This boolean value locks the users account from claiming transactions
 {% endswagger-parameter %}
 
@@ -613,11 +612,9 @@ This method requires the user to already be logged in.
 {% swagger method="post" path="/users/update/user" baseUrl="http://api.nexus-interactions.io:8080" summary="update/user" %}
 {% swagger-description %}
 This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
-
-
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 When using multi-user API mode the session parameter must be supplied to identify which user to update
 {% endswagger-parameter %}
 
@@ -629,8 +626,8 @@ The current password for this user account
 The current pin for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="recovery" %}
-The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via 
+{% swagger-parameter in="body" name="recovery" required="false" %}
+The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via
 
 `new_recovery`
 {% endswagger-parameter %}
@@ -643,8 +640,8 @@ The new password for this user account
 The new pin for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="new_recovery" %}
-new recovery seed to set on this sig chain. This is optional if new_pin or new_password is provided. The recovery seed must be a minimum of 40 characters. 
+{% swagger-parameter in="body" name="new_recovery" required="false" %}
+new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
 
 **NOTE**
 
@@ -717,7 +714,7 @@ print(response.json())
 
 `new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
 
-`new_recovery` : The new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.&#x20;
+`new_recovery` : The new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
 
 {% hint style="danger" %}
 The recovery phrase is case sensitive
@@ -775,7 +772,7 @@ Return status information for the currently logged in user
 Return status information for the currently logged in user
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 user session ID
 {% endswagger-parameter %}
 
@@ -899,32 +896,32 @@ This will list off all of the assets owned by a signature chain.
 
 `/users/list/assets`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="/list/assets" %}
+{% swagger method="post" path="/users/list/assets" baseUrl="http://api.nexus-interactions.io:8080" summary="/list/assets" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="genesis" %}
+{% swagger-parameter in="body" name="genesis" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="username" %}
+{% swagger-parameter in="body" name="username" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="limit" %}
+{% swagger-parameter in="body" name="limit" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="page" %}
+{% swagger-parameter in="body" name="page" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="offset" %}
+{% swagger-parameter in="body" name="offset" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="where" %}
+{% swagger-parameter in="body" name="where" required="false" %}
 
 {% endswagger-parameter %}
 
@@ -1023,36 +1020,36 @@ This will list off all of the token accounts belonging to a particular signature
 
 `/users/list/accounts`
 
-{% swagger method="post" path="/users/list/accounts" baseUrl="" summary="users/list/accounts" %}
+{% swagger method="post" path="/users/list/accounts" baseUrl="http://api.nexus-interactions.io:8080" summary="users/list/accounts" %}
 {% swagger-description %}
 This will list all of the token accounts belonging to a particular signature chain
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="genesis" %}
+{% swagger-parameter in="body" name="genesis" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="username" %}
+{% swagger-parameter in="body" name="username" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="count" %}
+{% swagger-parameter in="body" name="count" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="limit" %}
+{% swagger-parameter in="body" name="limit" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="page" %}
+{% swagger-parameter in="body" name="page" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="offset" %}
+{% swagger-parameter in="body" name="offset" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="where" %}
+{% swagger-parameter in="body" name="where" required="false" %}
 
 {% endswagger-parameter %}
 
@@ -1210,36 +1207,36 @@ This will list all invoices issued or received by the signature chain.
 
 `/users/list/invoices`
 
-{% swagger method="post" path="/users/list/invoices" baseUrl="" summary="users/list/invoices" %}
+{% swagger method="post" path="/users/list/invoices" baseUrl="http://api.nexus-interactions.io:8080" summary="list/invoices" %}
 {% swagger-description %}
 This will list all invoices issued or received by the signature chain
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="genesis" %}
+{% swagger-parameter in="body" name="genesis" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="username" %}
+{% swagger-parameter in="body" name="username" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="status" %}
+{% swagger-parameter in="body" name="status" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="limit" %}
+{% swagger-parameter in="body" name="limit" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="page" %}
+{% swagger-parameter in="body" name="page" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="offset" %}
+{% swagger-parameter in="body" name="offset" required="false" %}
 
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="where" %}
+{% swagger-parameter in="body" name="where" required="false" %}
 
 {% endswagger-parameter %}
 
@@ -1400,9 +1397,9 @@ print(response.json())
 
 `items` : Array of line items that make up this invoice.\
 {\
-&#x20;  `unit_amount` : The unit amount to be invoiced for this line item.
+`unit_amount` : The unit amount to be invoiced for this line item.
 
-&#x20;  `units` : The number of units to be invoiced at the unit amount.\
+`units` : The number of units to be invoiced at the unit amount.\
 }
 
 `amount` : The total invoice amount. This is the sum of all line item total amounts (unit\_amount x units).
@@ -1423,7 +1420,7 @@ This will list off all of the supply chain items (append registers) owned by a s
 
 `/users/list/items`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/list/items" baseUrl="http://api.nexus-interactions.io:8080" summary="list/items" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -1431,11 +1428,15 @@ This will list off all of the supply chain items (append registers) owned by a s
 
 {% tabs %}
 {% tab title="First Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 
 {% tab title="Second Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1494,7 +1495,7 @@ This will list off all of the names owned by the signature chain. For privacy re
 
 `/users/list/names`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/list/names" baseUrl="http://api.nexus-interactions.io:8080" summary="list/names" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -1502,11 +1503,15 @@ This will list off all of the names owned by the signature chain. For privacy re
 
 {% tabs %}
 {% tab title="First Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 
 {% tab title="Second Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1561,19 +1566,23 @@ This will list off all of the namespaces owned by the signature chain.
 
 `/users/list/namespaces`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/list/namespaces" baseUrl="http://api.nexus-interactions.io:8080" summary="list/namespaces" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```
+// Some code
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1630,19 +1639,23 @@ This will list off all of the transactions sent to a particular genesis or usern
 
 `/users/list/notifications`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/list/notifications" baseUrl="http://api.nexus-interactions.io:8080" summary="list/notifications" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```
+// Some code
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1691,7 +1704,6 @@ This will list off all of the transactions sent to a particular genesis or usern
     }
 
 ]
-
 ```
 
 #### Return values:
@@ -1734,19 +1746,23 @@ Process all outstanding notifications for a logged in signature chain. This API 
 
 `/users/process/notifications`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="Javascript" %}
+```
+// Some code
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-
+{% tab title="Python" %}
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1769,7 +1785,6 @@ Process all outstanding notifications for a logged in signature chain. This API 
         }
     ]
 }
-
 ```
 
 #### Return values:
@@ -1792,7 +1807,7 @@ This will list off all of the tokens that were created by a particular signature
 
 `/users/list/tokens`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="list/tokens" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -1800,11 +1815,15 @@ This will list off all of the tokens that were created by a particular signature
 
 {% tabs %}
 {% tab title="First Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 
 {% tab title="Second Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1885,7 +1904,7 @@ This will list off all of the transactions for the requested signature chain gen
 
 `/users/list/transactions`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="list/transactions" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -1893,11 +1912,15 @@ This will list off all of the transactions for the requested signature chain gen
 
 {% tabs %}
 {% tab title="First Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 
 {% tab title="Second Tab" %}
-
+```
+// Some code
+```
 {% endtab %}
 {% endtabs %}
 
@@ -1977,33 +2000,33 @@ This will list off all of the transactions for the requested signature chain gen
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of the contract within the transaction that was credited / claimed.
+`contract` : The ID of the contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
@@ -2017,21 +2040,11 @@ This will save the users session to the local database, allowing the session to 
 
 `/users/save/session`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="" baseUrl="" summary="save/session" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
-
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### Parameters:
 
@@ -2059,16 +2072,6 @@ Loads a previously saved session from the local database. In addition to restori
 {% endswagger-description %}
 {% endswagger %}
 
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### Parameters:
 
 `genesis` : The genesis hash identifying the signature chain to load the session for (optional if username is supplied).
@@ -2084,7 +2087,6 @@ Loads a previously saved session from the local database. In addition to restori
     "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
     "session": "0000000000000000000000000000000000000000000000000000000000000000"
 }
-
 ```
 
 #### Return values:
@@ -2109,16 +2111,6 @@ Determines whether a previously saved session exists in the local database for t
 {% endswagger-description %}
 {% endswagger %}
 
-{% tabs %}
-{% tab title="First Tab" %}
-
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### Parameters:
 
 `genesis` : The genesis hash identifying the signature chain to check the session for (optional if username is supplied).
@@ -2132,7 +2124,6 @@ Determines whether a previously saved session exists in the local database for t
     "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
     "has": true
 }
-
 ```
 
 #### Return values:
