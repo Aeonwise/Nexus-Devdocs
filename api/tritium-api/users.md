@@ -1746,7 +1746,7 @@ Process all outstanding notifications for a logged in signature chain. This API 
 
 `/users/process/notifications`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/process/notifications" baseUrl="http://api.nexus-interactions.io:8080" summary="process/notifications" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -1807,7 +1807,7 @@ This will list off all of the tokens that were created by a particular signature
 
 `/users/list/tokens`
 
-{% swagger method="post" path="" baseUrl="" summary="list/tokens" %}
+{% swagger method="post" path="/users/list/tokens" baseUrl="http://api.nexus-interactions.io:8080" summary="list/tokens" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -1904,20 +1904,20 @@ This will list off all of the transactions for the requested signature chain gen
 
 `/users/list/transactions`
 
-{% swagger method="post" path="" baseUrl="" summary="list/transactions" %}
+{% swagger method="post" path="/users/list/transactions" baseUrl="http://api.nexus-interactions.io:8080" summary="list/transactions" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Javascript" %}
 ```
 // Some code
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
+{% tab title="Python" %}
 ```
 // Some code
 ```
@@ -2040,11 +2040,37 @@ This will save the users session to the local database, allowing the session to 
 
 `/users/save/session`
 
-{% swagger method="post" path="" baseUrl="" summary="save/session" %}
+{% swagger method="post" path="/users/save/session" baseUrl="http://api.nexus-interactions.io:8080" summary="save/session" %}
 {% swagger-description %}
-
+This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    success:true
+}
+```
+{% endswagger-response %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+```
+// Some code
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+```
+// Some code
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -2066,11 +2092,68 @@ Loads a previously saved session from the local database. In addition to restori
 
 `/users/load/session`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/load/session" baseUrl="http://api.nexus-interactions.io:8080" summary="load/session" %}
 {% swagger-description %}
-
+Loads a previously saved session from the local database. In addition to restoring the logged in status of the user, the session resumes the unlocked status that was active at the time it was saved. The users PIN is required as this is used (in conjunction with the genesis) to decrypt the session data loaded from the local database.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain to load the session for (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain to load the session for (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="load session" %}
+```json
+{
+    "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "session": "0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/load/session
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME", // optional 
+    pin: "YOUR_PIN"
+}
+fetch(`${SERVER_URL}/users/load/session`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",  # optional
+    "pin": "YOUR_PIN"
+}
+response = requests.post(f"{SERVER_URL}/users/load/session", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -2105,11 +2188,62 @@ Determines whether a previously saved session exists in the local database for t
 
 `/users/has/session`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/users/has/session" baseUrl="http://api.nexus-interactions.io:8080" summary="has/session" %}
 {% swagger-description %}
-
+Determines whether a previously saved session exists in the local database for the specified user
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain to check the session for (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain to check the session for (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="has session" %}
+```json
+{
+    "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "has": true
+}
+```
+{% endswagger-response %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/has/session
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME", // optional 
+}
+fetch(`${SERVER_URL}/users/has/session`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",  # optional
+}
+response = requests.post(f"{SERVER_URL}/users/has/session", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
