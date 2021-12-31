@@ -43,9 +43,13 @@ The following methods are currently supported by this API
 
 This will create a new user account (signature chain) for use on the network. The user account is secured by a combination of username, password, and PIN.
 
-**NOTE** : username must be a minimum of 2 characters\
-**NOTE** : password must be a minimum of 8 characters\
-**NOTE** : pin must be a minimum of 4 characters
+{% hint style="info" %}
+**NOTE:**&#x20;
+
+&#x20;_username_ must be a minimum of 3 characters\
+&#x20;_password_ must be a minimum of 8 characters\
+&#x20;_pin_ must be a minimum of 4 characters
+{% endhint %}
 
 #### Endpoint:
 
@@ -55,9 +59,11 @@ This will create a new user account (signature chain) for use on the network. Th
 {% swagger-description %}
 This will create a new user account (signature chain) for use on the network. The user account is secured by a combination of username, password, and PIN.
 
-**NOTE** : username must be a minimum of 2 characters\
-**NOTE** : password must be a minimum of 8 characters\
-**NOTE** : pin must be a minimum of 4 characters
+**NOTE** :&#x20;
+
+_username_ must be a minimum of 3 characters\
+_password_ must be a minimum of 8 characters\
+_pin_ must be a minimum of 4 characters
 {% endswagger-description %}
 
 {% swagger-parameter in="header" name="username" required="true" %}
