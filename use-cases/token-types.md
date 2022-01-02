@@ -7,7 +7,8 @@ Nexus API's can issue tokens, assets, items, invoices. What are all the differen
 * Tokenised Assets
 * Supply Chain
 * Invoice
-* Document verification, File Encryption / decryption
+* Document verification
+* File Encryption / decryption
 
 ![Uses of Non-Fungible Tokens](../.gitbook/assets/NFT.jpeg)
 

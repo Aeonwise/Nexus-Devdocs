@@ -1,5 +1,5 @@
 ---
-description: Nexus Mobile Wallet
+description: A truly decentralized mobile wallet for a decentralized future
 ---
 
 # 📱 Mobile Wallet
@@ -22,4 +22,8 @@ Following the principle of the Nexus [software stack](https://tech.nexus.io/soft
 
 By necessity, the Nexus mobile wallet will only store and process block headers and the user's signature chain, starting with the hash of the very first Tritium block hard-coded into the wallet. For an advanced user running their own full node and certain API functionality, it is possible to enable the mobile wallet to establish a direct connection. This enables a user to offload heavy computational work to their desktop node, such as searching through historical data or maintaining a full copy of the blockchain.&#x20;
 
-\
+**A Next-Gen Mobile Wallet**
+
+The Nexus mobile wallet has been designed with decentralization and mass adoption at it's core. The mobile wallet will put blockchain in everyone's hand and this will make Nexus a de-facto choice for any developer to consider. Signature chains make it a hassle free experience for the user, in case the smartphone is lost or damaged, will not permanently lock your crypto portfolio, just download the wallet and log in on the new phone and the user has full access to his Nexus assets.
+
+Nexus mobile wallet will replace and challenge the centralized system designs, compared to the other mobile solutions available in the crypto sphere. Join us and be part of the decentralized solution.

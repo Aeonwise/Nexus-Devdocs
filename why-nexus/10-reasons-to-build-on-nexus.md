@@ -8,6 +8,8 @@ There is an increasing number of smart contract platforms rolling out in the cry
 
 The Nexus [roadmap](https://www.nexus.io/roadmap) is extensive, with massive upgrades and new features still to come, many of which are just around the corner. However, let’s now focus on the top 10 reasons to build on Nexus based on its current capabilities. All these features can be used by developers on the public network or their own private chain.&#x20;
 
+{% embed url="https://www.youtube.com/watch?t=5s&v=HSXP5mbjn1s" %}
+
 ### **1: Platform-agnostic API**
 
 Nexus was designed from its inception with composability in mind. The team and the community have been building a "connected world" that is achievable only with a trustless bridge between the mainstream Web2 infrastructure, such as marketplaces, development platforms, automation tools, game engines, and social networks, and the emerging Web3, powered by Nexus’ [integrated API](https://www.nexus.io/integrated-api) (Application Programming Interface) kit. Decentralized applications (DApps) built on Nexus interact with a JSON-API, allowing developers to integrate blockchain functionalities into their traditional applications while having web-development based skills only. Nexus provides a wide range of well tested commands that reduce the time, risk and costs involved in Dapp development. Nexus’ unique architecture enables seamless interoperability between the data-rich Web2 and the tokenized Web3.

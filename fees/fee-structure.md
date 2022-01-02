@@ -1,10 +1,14 @@
 ---
-description: Fees for various operations
+description: Fees for various operations on mainnet
 ---
 
 # 💰 Fee Structure
 
-To maintain security of the network, to prevent spam, create assets, invoices, names and tokens there are fees associated to prevent misuse.
+To maintain security of the public network, to prevent spam, create assets, invoices, names and tokens there are fees associated to prevent misuse.
+
+{% hint style="info" %}
+The fee mentioned here are only applicable for the mainnet.
+{% endhint %}
 
 The breakdown of fees for all operation types is as follows:
 
