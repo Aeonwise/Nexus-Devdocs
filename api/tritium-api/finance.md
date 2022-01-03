@@ -1562,7 +1562,7 @@ Optional token address to return balances for.
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
+```javascript
 // get/balances
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 let data = {
@@ -1582,7 +1582,7 @@ fetch(`${SERVER_URL}/finance/get/balances`, {
 {% endtab %}
 
 {% tab title="Python" %}
-```
+```python
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
@@ -1644,16 +1644,55 @@ This will retrieve a summary of balance information across all accounts for each
 
 `/finance/list/balances`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/balances" %}
+{% swagger method="post" path="/finance/list/balances" baseUrl="http://api.nexus-interactions.io:8080" summary="list/balances" %}
 {% swagger-description %}
-
+This will retrieve a summary of balance information across all accounts for each coin/token type owned, belonging to the currently logged in signature chain
 {% endswagger-description %}
 
-{% swagger-response status="200: OK" description="" %}
-```javascript
-{
-    // Response
-}
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="list balances" %}
+```json
+[
+     {
+        "token_name": "NXS",
+        "token": "0000000000000000000000000000000000000000000000000000000000000000",
+        "available": 17002.095753,
+        "pending": 1.0,
+        "unconfirmed": 0.0,
+        "stake": 9000.0,
+        "immature": 0.0
+    },
+    {
+        "token_name": "ABC",
+        "token": "d7885b8ce210375377ee23d6b54f922ddb64c9c8e70fabd392753337331bf29a",
+        "available": 250.0,
+        "pending": 0.0,
+        "unconfirmed": 0.0
+    }
+]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -1759,10 +1798,85 @@ This will list all known trust accounts
 
 `/finance/list/trustaccounts`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/trustaccounts" %}
+{% swagger method="post" path="/finance/list/trustaccounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/trustaccounts" %}
 {% swagger-description %}
-
+This will list all known trust accounts
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="sort" %}
+Determines which field the results should be sorted on. Values can be 
+
+`balance`
+
+, 
+
+`stake`
+
+, or 
+
+`trust`
+
+. Default is 
+
+`trust`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="order" %}
+Determines the order of the sort. Values can be 
+
+`desc`
+
+ for descending (the default) or 
+
+`asc`
+
+ for ascending
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="trustaccounts list" %}
+```json
+[
+    {
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "a2cfad9f505f8166203df2685ee7cb8582be9ae017dcafa4ca4530cd5b4f1dca",
+        "created": 1569298627,
+        "modified": 1569359986,
+        "balance": 9.897773,
+        "stake": 1000000.0,
+        "stakerate": 0.5179354594112684
+    },
+    {
+        "address": "8FBtvmLSLqhVM9PsJ5Zzy1XzcZyP9XaEErjSoGPaoN5fBJaQbp8",
+        "owner": "a2e7b433a4dcb54c3b4dc1111d7945394dc3e140c9a400dc623b3f6d53ec758b",
+        "created": 1569306341,
+        "modified": 1569312960,
+        "balance": 0.004081,
+        "stake": 5000.0,
+        "stakerate": 0.5013274626265375
+    }
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
