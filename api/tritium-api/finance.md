@@ -370,9 +370,9 @@ Increment an amount received from another NXS account to an account owned by you
 
 `/finance/credit/account`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/account" %}
+{% swagger method="post" path="/finance/credit/account" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/account" %}
 {% swagger-description %}
-
+Increment an amount received from another NXS account to an account owned by your signature chain.
 {% endswagger-description %}
 {% endswagger %}
 
@@ -473,10 +473,30 @@ Additionally the API supports passing a field name in the URL after the account 
 
 `/finance/get/account`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="get/account" %}
+{% swagger method="post" path="/finance/get/account" baseUrl="http://api.nexus-interactions.io:8080" summary="get/account" %}
 {% swagger-description %}
-
+Retrieves information about a NXS account 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
