@@ -212,20 +212,104 @@ Deduct an amount of NXS from an account and send it to another account or legacy
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" %}
-
+PIN for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="name" %}
+The name identifying the account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="address" %}
+The register address of the account to debit. This is optional if the name is provided
 {% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="amount" %}
+The amount of NXS to debit
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_to" %}
+The name identifying the account to send to. This is optional if address_to is provided. The name should be in username:name format
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_to" %}
+The register address of the account to send to. This is optional if name_to is provided. The address_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="reference" %}
+This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 
+
+`64-bit unsigned integer`
+
+ in the range of 0 to 18446744073709551615
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the debit transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="recipients" %}
+This optional array can be provided as an alternative to the single 
+
+`name_to`
+
+/
+
+`address_to`
+
+, 
+
+`amount`
+
+, 
+
+`reference`
+
+, and 
+
+`expires`
+
+ fields. Each object in the array can have 
+
+`name_to`
+
+/
+
+`address_to`
+
+, 
+
+`amount`
+
+, 
+
+`reference`
+
+, and 
+
+`expires`
+
+ fields, as described above. Up to 99 recipients can be included in the array
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account debited" %}
+```json
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -317,6 +401,12 @@ The following example shows the json payload for a debit of 10.5 NXS from an acc
     "name": "main",
     "amount": 10.5,
     "name_to": "bob:savings"
+}{
+    "pin": "1234",
+    "session": "5e9d8aa625a1838f60f30e12058089169e32c968389f365428f7b0c878bb47f8",
+    "name": "main",
+    "amount": 10.5,
+    "name_to": "bob:savings"
 }
 ```
 
@@ -374,6 +464,50 @@ Increment an amount received from another NXS account to an account owned by you
 {% swagger-description %}
 Increment an amount received from another NXS account to an account owned by your signature chain.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" %}
+The transaction ID (hash) of the corresponding debit transaction for which you are creating this credit for. The transaction can also be a legacy transaction created from sendtoaddress or sendmany where the inputs are UTXO but the output is an account register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the account to credit. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the account to credit. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_proof" %}
+The name identifying the account that proves your ownership of the share of the debit. This is only required for split payments and is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_proof" %}
+The register address of the account that proves your ownership of the share of the debit. This is only required for spit payments and is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account credited" %}
+```json
+{
+    "txid": "318b86d2c208618aaa13946a3b75f14472ebc0cce9e659f2830b17e854984b55606738f689d886800f21ffee68a3e5fd5a29818e88f8c5b13b9f8ae67739903d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -479,24 +613,54 @@ Retrieves information about a NXS account
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="name" %}
+The name identifying the NXS account to retrieve. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the object. The 
 
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="address" %}
-
+The register address of the NXS account to retrieve. This is optional if the name is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
 
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the account
 {% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account details" %}
+```json
+{
+    "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "created": 1566534164,
+    "modified": 1566616211,
+    "name": "default",
+    "address": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
+    "token_name": "NXS",
+    "token": "0",
+    "data": "abcd1234",
+    "balance": 2903.239792,
+    "pending": 0.0,
+    "unconfirmed": 76.492244
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -605,9 +769,9 @@ This will list off all of the NXS accounts belonging to the currently logged in 
 
 `/finance/list/accounts`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
+{% swagger method="post" path="/finance/list/accounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
 {% swagger-description %}
-
+This will list off all of the NXS accounts belonging to the currently logged in signature chain.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="session" %}
@@ -785,18 +949,106 @@ print(response.json())
 
 This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 
+{% hint style="info" %}
 **NOTE** : The returned transaction data will only include contracts that related to the requested account. Any other contracts are omitted from the transaction result.
 
 **NOTE** : If you use the username parameter it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
 `/finance/list/account/transactions`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
+{% swagger method="post" path="/finance/list/account/transactions" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
 {% swagger-description %}
-
+This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain to scan for transactions (optional if username is supplied or already logged in)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain to scan for transactions(optional if genesis is supplied or already logged in)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the account name in order to deduce the register address of the account. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the NXS account to list transactions for. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the NXS account to list transactions for. This is optional if the name is provided 
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="verbose" %}
+Optional, determines how much transaction data to include in the response. Supported values are:&#x20;
+
+`default` : hash, contracts\
+`summary` : type, version, sequence, timestamp, operation, and confirmations.
+
+`detail` : genesis, nexthash, prevhash, pubkey and signature.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account transactions list" %}
+```json
+[
+    {
+        "txid": "01034b39cb3635d370f97339e6f87b8751d4c0d62676da7d6ec20416966f298f47dea99603d03a74e638b0d50b31b1e721790e5b103abfe3353a709ccf5d1e7c",
+        "contracts": [
+            {
+                "OP": "CREDIT",
+                "txid": "01e73b498dbabbf4629ad674b9ae3824b96cca83199c25a67901db53b271d19acf1411b0c4f9a3d8ded80860ffe2dcf683d2d227a675d453303b31f86f868f9e",
+                "contract": 0,
+                "proof": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+                "to": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+                "to_name": "default",
+                "amount": 76.450762,
+                "token": "0",
+                "token_name": "NXS"
+            },
+            {
+                "OP": "FEE",
+                "from": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+                "from_name": "default",
+                "amount": 0.1
+            }
+        ]
+    }
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
