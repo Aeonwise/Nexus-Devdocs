@@ -1941,7 +1941,9 @@ print(response.json())
 
 This will list off all of the transactions sent to a particular genesis or username. It is useful for identifying transactions that you need to accept such as credits.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -1949,20 +1951,114 @@ This will list off all of the transactions sent to a particular genesis or usern
 
 {% swagger method="post" path="/users/list/notifications" baseUrl="http://api.nexus-interactions.io:8080" summary="list/notifications" %}
 {% swagger-description %}
-
+This will list off all of the transactions sent to a particular genesis or username. It is useful for identifying transactions that you need to accept such as credits.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="suppressed" %}
+Optional boolean flag indicating that suppressed notifications should be included in the list
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+[
+    {
+        "OP": "DEBIT",
+        "from": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "from_name": "abc",
+        "to": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "to_name": "myasset",
+        "amount": 10.0,
+        "reference": 0,
+        "token": "8GHxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nAbD",
+        "token_name": "abc",
+        "txid": "01fa33c49901f3a2622b724d33e6bae238a8a0c3615facb4a00842b1b3a8545e275aff1015f1f2d04bffb3f47f54f64aa917702e3a8904c1be874ce5e969adb4",
+        "time": 1566479032,
+        "proof": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "dividend_payment": true
+    },
+    {
+        "OP": "TRANSFER",
+        "address": "8HJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8n8Dc",
+        "destination": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "force": false,
+        "txid": "0123200b85d720d85211d245fa4a38671622accd544f049262506eff242241733c5acfb396499e88a9156534b7d7943d554b59cbb38070fa323b16d52e439995",
+        "time": 1566479610
+    }
+
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// /users/list/notifications
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME", // optional 
+    // suppressed: true, // includes suppresed notifcations
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/notifications`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",  # optional
+    # "suppressed": True, # includes suppresed notifcations
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/notifications", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
