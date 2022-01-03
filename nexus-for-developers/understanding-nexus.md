@@ -4,7 +4,7 @@ description: Things to think about when building an app on Nexus.
 
 # Understanding Nexus
 
-Nexus is a community run project and compared to other VC run projects we differ in our thinking and that reflects in the way Nexus is developed and our goal is to provide power to the people. Nexus is like a toolbox and will not provide a finished product to users, we believe the community will to build applications&#x20;
+Nexus is a community run project and compared to other VC run projects we differ in our thinking and that reflects in the way Nexus is designed and developed. Nexus is at best a toolbox and will not provide a finished product to users, we believe the community will build applications which will start a symbiotic relationship.
 
 
 
@@ -12,11 +12,13 @@ Nexus is a community run project and compared to other VC run projects we differ
 
 As of today the only way that an application can access the user wallet is when the user provides the user credentials, this is not the preferred method&#x20;
 
-Nexus has designed 2fa which will be released with the Tritium++ v6.0 update where the user&#x20;
+Nexus 2FA
+
+Nexus has designed 2fa which will be released with the Tritium++ v6.0 update where all the computation is offloaded to the users wallet and also decentralises&#x20;
 
 ## Fee Structure
 
-Nexus simple transactions are free, but most operations and contract execution will have fees, this is done to protect spamming the network and some actors to take undue advantage.
+Nexus simple transactions are free, but most operations and contract execution will have fees, this is done to protect spamming the network and to avoid some actors from taking undue advantage.
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
@@ -24,13 +26,25 @@ Nexus simple transactions are free, but most operations and contract execution w
 
 ### Tokens:
 
-Nexus makes it very simple to generate tokens with the UI wallet and as of today Nexus provides the&#x20;
-
-
+Nexus makes it very simple to generate tokens with the UI wallet and as of today Nexus provides the. The nexus tokens API can be use to create fungible tokens and the Assets API can be use to create Non-fungible tokens
 
 * Fungible Tokens&#x20;
 * Non Fungible Tokens (NFT)
 * Protected Assets - <mark style="color:red;">Future</mark>
+
+### Fungible Token
+
+A fungible token is something that is identical in nature and interchangeable. These tokens can be divided and exchanged for another. Generally, most [**cryptocurrencies**](https://phemex.com/blogs/what-are-cryptocurrencies) are considered to be fungible. For example, a [**Bitcoin**](https://phemex.com/academy/what-is-bitcoin) is fungible. You can [**trade**](https://phemex.com) one Bitcoin for another, and you will end up with the exact same thing. Other examples of fungible asset classes are bonds, commodities, cryptocurrencies, and precious metals.
+
+### Non-Fungible Token
+
+Non-fungible is something that is distinct or unique and cannot be replaced with something else. A one-of-a-kind trading card is non-fungible. The primary attribute of non-fungibility is uniqueness.
+
+Below image shows the various use-cases which can powered by non fungible tokens
+
+![NFT Use-cases](../.gitbook/assets/NFT.jpeg)
+
+
 
 ## Names and Namespaces:
 
