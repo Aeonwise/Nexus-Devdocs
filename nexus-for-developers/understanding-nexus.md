@@ -10,13 +10,13 @@ Nexus is a community run project and compared to other VC run projects we differ
 
 ## Application Wallet Connect:
 
-As of today the only way that an application can access the user wallet is when the user provides the user credentials, this is not the preferred method&#x20;
+As of today the only way that an application can access the user wallet is when the user provides the account credentials, this is not the preferred method &#x20;
 
 #### Nexus 2FA
 
 Nexus has designed 2fa which will be released with the Tritium++ v6.0 update.
 
-The user just inputs his username into the app and the app send it to its backend node and the data is sent through the Nexus network to the users wallet with a request to connect to the particular app. This also offloads  all computation to the users wallet and also decentralises the process.
+In 2fa mode the user just inputs his username into the app, which is sent to its backend node and the data is sent through the Nexus network to the users wallet with a request to connect to the particular dapp. On a successful confirmation the wallet is connected to the dapp via the network. This also offloads all computation to the users wallet and also decentralises the process.
 
 ## Fee Structure
 
@@ -54,11 +54,11 @@ Nexus provides native Names and Namespaces which are one of the important things
 
 Names and Namespaces are special kinds of object registers that are used as locators to other object registers in the blockchain. When an object register is first created (an asset for example) the caller can provide a name for the register. If a name is provided then a Name object register is also created with its register address based on a hash of the name. The Name object also has a address field, which is populated with the register address of the register (asset, token, account etc) that the Name "points" to. In this way, objects can be retrieved by name by first hashing the name to get the Name object's address, retrieving the Name object, and then using the address stored within it to retrieve the object register. A Name then, is best thought of as a named index to object registers
 
-Names on Nexus are of three different types\\
+Names on Nexus are of three different types:
 
 ### Local Names:&#x20;
 
-Local names are names which are local to a user account (sig chain). These can be an account, asset. item name. To use a local name you must prefix the name with the owners username separated by a single colon, e.g. `bob:savings`. This is equivalent to saying "look at all the Names registered in the sig chain `bob` and find one called `savings` and then see what object register it points to". There can only be one Name called `savings` in the sig chain `bob`, but another user `alice` can also create a local name called `savings.`  Creating Names will cost `1 NXS`
+Local Names are local to a user account (sig chain). To use a local name you must prefix the name with the owners `username` separated by a single colon, e.g. `bob:savings`. This is equivalent to saying "look at all the Names registered in the sig chain `bob` and find one called `savings` and then see what object register it points to". There can only be one Name called `savings` in the sig chain `bob`, but another user `alice` can also create a local name called `savings.`  Creating Names will cost `1 NXS`
 
 ### Namespace:&#x20;
 
