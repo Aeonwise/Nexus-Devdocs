@@ -97,18 +97,16 @@ Retrieves block data for the given block hash or height.
 Retrieves block data for the given block hash or height.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="hash" %}
-The block hash to retrieve the block data for.
+{% swagger-parameter in="body" name="hash" required="false" %}
+The block hash to retrieve the block data for
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="height" %}
-The block height to retrieve the block data for.
+{% swagger-parameter in="body" name="height" required="false" %}
+The block height to retrieve the block data for
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="verbose" %}
-
-
-Optional, determines how much transaction data to include in the response. Supported values are :&#x20;
+{% swagger-parameter in="body" name="verbose" required="false" %}
+Optional, determines how much transaction data to include in the response. Supported values are :
 
 `none` : no transaction data
 
@@ -117,8 +115,6 @@ Optional, determines how much transaction data to include in the response. Suppo
 `summary` : type, version, sequence, timestamp, and contracts.
 
 `detail` : genesis, nexthash, prevhash, pubkey and sign
-
-
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="blockdata" %}
@@ -297,33 +293,33 @@ Either the hash or the height needs to be supplied, but not both. Retrieving blo
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of the contract within the transaction that was credited / claimed.
+`contract` : The ID of the contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
@@ -342,17 +338,15 @@ Retrieves an array of block data for a sequential range of blocks from a given h
 Retrieves an array of block data for a sequential range of blocks from a given hash or height.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="hash" %}
+{% swagger-parameter in="body" name="hash" required="false" %}
 The block hash to retrieve the block data for
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="height" %}
+{% swagger-parameter in="body" name="height" required="false" %}
 The block height to retrieve the block data for
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="verbose" %}
-
-
+{% swagger-parameter in="body" name="verbose" required="false" %}
 This is optional, determines how much transaction data to include in the response. Supported values are :
 
 `none` : no transaction data
@@ -364,15 +358,15 @@ This is optional, determines how much transaction data to include in the respons
 `detail` : genesis, nexthash, prevhash, pubkey and signature.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="limit" %}
+{% swagger-parameter in="body" name="limit" required="false" %}
 The number of records to return for the current page. The default is 100
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="page" %}
+{% swagger-parameter in="body" name="page" required="false" %}
 Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="offset" %}
+{% swagger-parameter in="body" name="offset" required="false" %}
 An alternative to 
 
 `page`
@@ -380,7 +374,7 @@ An alternative to
 , offset can be used to return a set of (limit) results from a particular index.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="where" %}
+{% swagger-parameter in="body" name="where" required="false" %}
 An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
 {% endswagger-parameter %}
 
@@ -610,37 +604,33 @@ Either the hash or the height needs to be supplied, but not both. Retrieving blo
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `idcontractid` : The sequential ID of this contract within the transaction.
+`idcontractid` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of this contract within the transaction that was credited / claimed.
+`contract` : The ID of this contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
-
-}
-
-***
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 ### `get/transaction`
 
@@ -655,27 +645,15 @@ Retrieves transaction data for a given transaction hash.
 Retrieves transaction data for a given transact
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="format" %}
-Determines the format of the return value. Parameter value can be 
-
-`JSON`
-
- (the default) or 
-
-`raw`
-
-. If 
-
-`raw`
-
- is specified then the method returns a serialized, hex-encoded transaction that can subsequently be broadcast to the network via 
+{% swagger-parameter in="body" name="format" required="false" %}
+Determines the format of the return value. Parameter value can be `JSON` (the default) or `raw` .  If `raw` is specified then the method returns a serialized, hex-encoded transaction that can subsequently be broadcast to the network via
 
 `/ledger/submit/transaction`
 
-.
+
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="hash" %}
+{% swagger-parameter in="body" name="hash" required="false" %}
 The block hash to retrieve the block data for. This is ignored if 
 
 `raw`
@@ -683,19 +661,19 @@ The block hash to retrieve the block data for. This is ignored if
  format is requested
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="txid" %}
+{% swagger-parameter in="body" name="txid" required="false" %}
 The transaction ID (hash) to retrieve the transaction data
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="verbose" %}
-Optional, determines how much transaction data to include in the response. This is ignored if `raw` format is requested. Supported values are :&#x20;
+{% swagger-parameter in="body" name="verbose" required="false" %}
+Optional, determines how much transaction data to include in the response. This is ignored if `raw` format is requested. Supported values are :
 
 `summary` : hash, type, version, sequence, timestamp, and contracts.
 
 `detail` : genesis, nexthash, prevhash, pubkey and signature.
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="transaction list" %}
 ```json
 {
     "txid": "51fd1f61de02f0788cac3c2fcde94012ef12ed34227717f9f5fe2c019ac1aa0a3d3ad9580721eeced8f036c771eb2a8cc6d67a6409c721b68bbe66d1387b97f3",
@@ -839,39 +817,37 @@ print(response.json())
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of the contract within the transaction that was credited / claimed.
+`contract` : The ID of the contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-}
 
-***
 
-### `submit/transaction`
+### &#x20;`submit/transaction`
 
 Submits a transaction to be included in the mempool and broadcast to the network.
 
@@ -879,9 +855,9 @@ Submits a transaction to be included in the mempool and broadcast to the network
 
 `/ledger/submit/transaction`
 
-{% swagger method="post" path="/ledger/submit/transaction" baseUrl="http://api.nexus-interactions.io:8080" summary="Submit transaction" %}
+{% swagger method="post" path="/ledger/submit/transaction" baseUrl="http://api.nexus-interactions.io:8080" summary="Submit/transaction" %}
 {% swagger-description %}
-
+Submits a transaction to be included in the mempool and broadcast to the network.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="data" required="true" %}
@@ -959,14 +935,14 @@ For debits that were made to a tokenized asset as part of a split payment transa
 
 {% swagger method="post" path="/ledger/void/transaction" baseUrl="http://api.nexus-interactions.io:8080" summary="Void transaction" %}
 {% swagger-description %}
-Voids (reverses) a debit or transfer transaction that you have previously made, that has not yet been credited or claimed by the recipient. 
+Voids (reverses) a debit or transfer transaction that you have previously made, that has not yet been credited or claimed by the recipient.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" required="true" name="pin" %}
 The PIN for the signature chain voiding the transaction
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) created the transaction being voided. For single-user API mode the session should not be supplied.
 {% endswagger-parameter %}
 
