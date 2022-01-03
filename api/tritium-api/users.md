@@ -2240,7 +2240,9 @@ print(response.json())
 
 This will list off all of the tokens that were created by a particular signature chain.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -2248,20 +2250,112 @@ This will list off all of the tokens that were created by a particular signature
 
 {% swagger method="post" path="/users/list/tokens" baseUrl="http://api.nexus-interactions.io:8080" summary="list/tokens" %}
 {% swagger-description %}
-
+This will list off all of the tokens that were created by a particular signature chain.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain (optional if username is supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
+
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+[
+    {
+        "name": "mytoken1",
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "balance": 0,
+        "maxsupply": 26738388,
+        "currentsupply": 26738388,
+        "decimals": 2
+    },
+    {
+        "name": "mytoken2",
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "balance": 990,
+        "maxsupply": 1000,
+        "currentsupply": 10,
+        "decimals": 8
+    }
+
+
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// /users/list/tokens  
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME", // optional 
+    // count: true, //optional (defaults to false)
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/tokens`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",  # optional
+    # "count": True, #optional (defaults to False)
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/tokens", json=data)
+print(response.json())
+
 ```
 {% endtab %}
 {% endtabs %}
@@ -2272,7 +2366,7 @@ This will list off all of the tokens that were created by a particular signature
 
 `username` : The username identifying the signature chain (optional if genesis is supplied).
 
-`count` : Optional boolean field that determines whether the response includes the transaction `count` field. This defaults to false, as including the transaction count can slow the response time of the method considerably.
+`count` : OptOptional boolean field that determines whether the response includes the transaction `count` field. This defaults to false, as including the transaction count can slow the response time of the method considerably.
 
 `limit` : The number of records to return for the current page. The default is 100.
 
