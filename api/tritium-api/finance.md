@@ -1212,8 +1212,6 @@ print(response.json())
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-}
-
 ***
 
 ### `get/stakeinfo`
@@ -1226,16 +1224,36 @@ This will retrieve account values and staking metrics for the trust account belo
 
 {% swagger method="post" path="/finance/get/stakeinfo" baseUrl="http://api.nexus-interactions.io:8080" summary="get/stakeinfo" %}
 {% swagger-description %}
-
+This will retrieve account values and staking metrics for the trust account belonging to the currently logged in signature chain. If called when the stake minter is not running, this method only returns trust account values, Staking metrics will return 0
 {% endswagger-description %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the account
 {% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "balance": 150,
+    "stake": 5000,
+    "trust": 54322,
+    "new": false,
+    "staking": true,
+    "pooled": false,
+    "onhold": false,
+    "stakerate": 1.97,
+    "trustweight": 58.97,
+    "blockweight": 47.62,
+    "stakeweight": 54.03,
+    "change": false
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
