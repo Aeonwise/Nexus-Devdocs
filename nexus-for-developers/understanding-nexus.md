@@ -26,11 +26,7 @@ Nexus simple transactions are free, but most operations and contract execution w
 
 ### Tokens:
 
-Nexus makes it very simple to generate tokens with the UI wallet and as of today Nexus provides the. The nexus tokens API can be use to create fungible tokens and the Assets API can be use to create Non-fungible tokens
-
-* Fungible Tokens&#x20;
-* Non Fungible Tokens (NFT)
-* Protected Assets - <mark style="color:red;">Future</mark>
+Nexus makes it very simple to generate tokens with the UI wallet and as of today we can create fungible and non-fungible tokens. The nexus `Tokens` API can be use to create fungible tokens and the `Assets` API can be use to create Non-fungible tokens
 
 ### Fungible Token
 
@@ -44,11 +40,13 @@ Below image shows the various use-cases which can powered by non fungible tokens
 
 ![NFT Use-cases](../.gitbook/assets/NFT.jpeg)
 
-
+{% hint style="info" %}
+Protected assets will also be available at a later time.
+{% endhint %}
 
 ## Names and Namespaces:
 
-Nexus provides native Names andNamespaces whih are one of the important things a developer has to take advantage to get the best user experience and also
+Nexus provides native Names and Namespaces which are one of the important things a developer has to take advantage to provide the best user experience.
 
 Names and Namespaces are special kinds of object registers that are used as locators to other object registers in the blockchain. When an object register is first created (an asset for example) the caller can provide a name for the register. If a name is provided then a Name object register is also created with its register address based on a hash of the name. The Name object also has a address field, which is populated with the register address of the register (asset, token, account etc) that the Name "points" to. In this way, objects can be retrieved by name by first hashing the name to get the Name object's address, retrieving the Name object, and then using the address stored within it to retrieve the object register. A Name then, is best thought of as a named index to object registers
 
