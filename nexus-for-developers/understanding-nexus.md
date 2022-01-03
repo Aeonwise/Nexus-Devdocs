@@ -76,5 +76,5 @@ These are created within the context of a namespace, which itself is a globally 
 
 Global names require no username or namespace prefix, and are therefore globally unique. These will be likely reserved for use cases where a succinct, unique, name is necessary, for example a token ticker symbol. To avoid needless name-squatting, global names attract a high fee (`2000 NXS`).&#x20;
 
-Global Name registered and linked to a token will be referred by the ticker `NEX` instead of it's register address `8B5pKxGWgBM9nXzucrqmhdy9PuDHxDi41fqosXZsLTUXGfQ4CXn.`  This will also be convenient to launch the token on the P2P marketplace or DeFi when available.
+Global Name registered and linked to a token will be referred by the ticker `NEX` instead of it's register address `8B5pKxGWgBM9nXzucrqmhdy9PuDHxDi41fqosXZsLTUXGfQ4CXn` . This will also be convenient to launch the token on the P2P marketplace or DeFi when available.
 
