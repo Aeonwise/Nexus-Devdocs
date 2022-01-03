@@ -6,10 +6,18 @@ description: Quickly get to the topic of choice
 
 ## Why Nexus?
 
-This section will detail why Nexus should be the blockchain of choice to power dapps
+If you are new here, then we highly recommend to go through this section which will detail why Nexus should be the blockchain of choice to power dapps
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
+{% endcontent-ref %}
+
+## Nexus For Developers:
+
+If you have settled on Nexus then go through this section to understand Nexus design and the various components which are critical for a successful application
+
+{% content-ref url="nexus-for-developers/understanding-nexus.md" %}
+[understanding-nexus.md](nexus-for-developers/understanding-nexus.md)
 {% endcontent-ref %}
 
 ## Testnet

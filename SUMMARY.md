@@ -18,6 +18,10 @@
   * [Connect Node to Interface](mainnet/nodes/connect-node-to-interface.md)
   * [Update Mainnet CLI Node](mainnet/nodes/update-mainnet-node.md)
 
+## Nexus For Developers&#x20;
+
+* [Understanding Nexus](nexus-for-developers/understanding-nexus.md)
+
 ## TESTNET&#x20;
 
 * [🛠 Testnet Node](testnet/testnet/README.md)
@@ -53,7 +57,3 @@
 ## Use-Cases
 
 * [🟠 Token Types](use-cases/token-types.md)
-
-## Nexus For Developers&#x20;
-
-* [Understanding Nexus](nexus-for-developers/understanding-nexus.md)
