@@ -969,6 +969,49 @@ An array of clauses to filter the JSON results. More information on filtering th
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/list/assets
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    genesis: "GENESIS_ID",
+    username: "YOUR_USERNAME",
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    where: "FILTERING SQL QUERY"
+}
+fetch(`${SERVER_URL}/users/list/assets`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "genesis": "GENESIS_ID",
+    "username": "YOUR_USERNAME",
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    "where": "FILTERING SQL QUERY"
+}
+response = requests.post(f"{SERVER_URL}/users/list/assets", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
@@ -1030,7 +1073,9 @@ An array of clauses to filter the JSON results. More information on filtering th
 
 This will list off all of the token accounts belonging to a particular signature chain.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -1050,23 +1095,31 @@ The username identifying the signature chain (optional if genesis is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="count" required="false" %}
+Optional boolean field that determines whether the response includes the transaction 
 
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="limit" required="false" %}
-
+The number of records to return for the current page. The default is 100
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="page" required="false" %}
-
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not suppliedAllows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="offset" required="false" %}
+An alternative to 
 
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="where" required="false" %}
-
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="accounts list" %}
@@ -1217,7 +1270,9 @@ print(response.json())
 
 This will list all invoices issued or received by the signature chain.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -1229,31 +1284,47 @@ This will list all invoices issued or received by the signature chain
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="genesis" required="false" %}
-
+The genesis hash identifying the signature chain (optional if username is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="username" required="false" %}
-
+The username identifying the signature chain (optional if genesis is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="status" required="false" %}
+Optional filter by invoice status. Values can be 
 
+`OUTSTANDING`
+
+ (the invoice has been issued but not paid), 
+
+`PAID`
+
+ (the invoice has been paid by the recipient), or 
+
+`CANCELLED`
+
+ (the invoice was cancelled by the issuer before payment)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="limit" required="false" %}
-
+The number of records to return for the current page. The default is 100
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="page" required="false" %}
-
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="offset" required="false" %}
+An alternative to 
 
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="where" required="false" %}
-
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="invoice details" %}
@@ -1430,7 +1501,9 @@ print(response.json())
 
 This will list off all of the supply chain items (append registers) owned by a signature chain.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -1438,20 +1511,91 @@ This will list off all of the supply chain items (append registers) owned by a s
 
 {% swagger method="post" path="/users/list/items" baseUrl="http://api.nexus-interactions.io:8080" summary="list/items" %}
 {% swagger-description %}
-
+This will list off all of the supply chain items (append registers) owned by a signature chain
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="item list" %}
+```json
+[
+    {
+        "created": 1560982537,
+        "modified": 1560982615,
+        "name": "myitem",
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "data": "xxxxxx"
+    }
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// /users/list/items
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME",
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/items`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/items", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -1505,7 +1649,9 @@ This will list off all of the supply chain items (append registers) owned by a s
 
 This will list off all of the names owned by the signature chain. For privacy reasons Names are only returned for the currently logged in user (multiuser=0) or for the logged in session (multiuser=1)
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -1515,25 +1661,96 @@ This will list off all of the names owned by the signature chain. For privacy re
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1), the session is required to identify which signature chain should be used to return the Names for. For single-user API mode the session should not be supplied and the currently logged in users signature chain is used
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="names list" %}
+```json
+[
+
+    {
+        "name": "default",
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "register_address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    }
+
+
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-```
-// Some code
+{% tab title="Javascript" %}
+```javascript
+// /users/list/names
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    session: "YOUR_SESSION_ID", //optional
+    // username: "YOUR_USERNAME", // optional but slower to calculate
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/names`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-```
-// Some code
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "session": "YOUR_SESSION_ID",  # optional
+    # "username": "YOUR_USERNAME", # optional but slower to calculate
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/names", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
 
 #### Parameters:
 
-`session` : For multi-user API mode (configured with multiuser=1), the session is required to identify which signature chain should be used to return the Names for. For single-user API mode the session should not be supplied an the currently logged in users signature chain is used.
+`session` : For multi-user API mode (configured with multiuser=1), the session is required to identify which signature chain should be used to return the Names for. For single-user API mode the session should not be supplied and the currently logged in users signature chain is used.
 
 `limit` : The number of records to return for the current page. The default is 100.
 
@@ -1576,7 +1793,9 @@ This will list off all of the names owned by the signature chain. For privacy re
 
 This will list off all of the namespaces owned by the signature chain.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -1584,20 +1803,93 @@ This will list off all of the namespaces owned by the signature chain.
 
 {% swagger method="post" path="/users/list/namespaces" baseUrl="http://api.nexus-interactions.io:8080" summary="list/namespaces" %}
 {% swagger-description %}
-
+This will list off all of the namespaces owned by the signature chain
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+
+    {
+        "name": "mynamespace1",
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+    },
+    {
+        "name": "mynamespace2",
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    }
+
+
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// /users/list/namespaces
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME", // optional 
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/namespaces`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",  # optional
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/namespaces", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
