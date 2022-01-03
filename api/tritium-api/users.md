@@ -2154,18 +2154,53 @@ Process all outstanding notifications for a logged in signature chain. This API 
 {% swagger-description %}
 
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The PIN for this signature chain. This is required unless the signature chain is already unlocked for notifications
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the notifications should be processed for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="suppressed" %}
+Optional boolean flag indicating that suppressed notifications should be included when processing
+{% endswagger-parameter %}
 {% endswagger %}
 
 {% tabs %}
 {% tab title="Javascript" %}
-```
-// Some code
+```javascript
+// /users/process/notifications
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_USERNAME", // optional 
+    // session: "SESSION_ID", //optional
+    // suppressed: true, // includes suppresed notifcations
+}
+fetch(`${SERVER_URL}/users/process/notifications`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
 {% tab title="Python" %}
-```
-// Some code
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_USERNAME",  # optional
+    # "session": "SESSION_ID", #optional
+    # "suppressed": True, # includes suppresed notifcations
+}
+response = requests.post(
+    f"{SERVER_URL}/users/process/notifications", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
