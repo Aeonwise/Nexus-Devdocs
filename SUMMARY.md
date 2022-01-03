@@ -11,13 +11,6 @@
 * [📱 Mobile Wallet](why-nexus/mobile-wallet.md)
 * [🌎 Hybrid Network](why-nexus/hybrid-network.md)
 
-## MAINNET
-
-* [🖥 Mainnet Node](mainnet/nodes/README.md)
-  * [Run a Mainnet Node -CLI](mainnet/nodes/run-a-mainnet-node-cli.md)
-  * [Connect Node to Interface](mainnet/nodes/connect-node-to-interface.md)
-  * [Update Mainnet CLI Node](mainnet/nodes/update-mainnet-node.md)
-
 ## Nexus For Developers&#x20;
 
 * [Understanding Nexus](nexus-for-developers/understanding-nexus.md)
@@ -27,6 +20,13 @@
 * [🛠 Testnet Node](testnet/testnet/README.md)
   * [Run a Testnet Node](testnet/testnet/run-a-testnet-node.md)
   * [Tritium++ Private Testnet](testnet/testnet/tritium++-private-testnet.md)
+
+## MAINNET
+
+* [🖥 Mainnet Node](mainnet/nodes/README.md)
+  * [Run a Mainnet Node -CLI](mainnet/nodes/run-a-mainnet-node-cli.md)
+  * [Connect Node to Interface](mainnet/nodes/connect-node-to-interface.md)
+  * [Update Mainnet CLI Node](mainnet/nodes/update-mainnet-node.md)
 
 ## API
 
@@ -53,7 +53,3 @@
 ## Fees
 
 * [💰 Fee Structure](fees/fee-structure.md)
-
-## Use-Cases
-
-* [🟠 Token Types](use-cases/token-types.md)

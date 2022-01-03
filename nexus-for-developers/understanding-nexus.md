@@ -12,13 +12,17 @@ Nexus is a community run project and compared to other VC run projects we differ
 
 As of today the only way that an application can access the user wallet is when the user provides the user credentials, this is not the preferred method&#x20;
 
-Nexus 2FA
+#### Nexus 2FA
 
-Nexus has designed 2fa which will be released with the Tritium++ v6.0 update where all the computation is offloaded to the users wallet and also decentralises&#x20;
+Nexus has designed 2fa which will be released with the Tritium++ v6.0 update.
+
+The user just inputs his username into the app and the app send it to its backend node and the data is sent through the Nexus network to the users wallet with a request to connect to the particular app. This also offloads  all computation to the users wallet and also decentralises the process.
 
 ## Fee Structure
 
 Nexus simple transactions are free, but most operations and contract execution will have fees, this is done to protect spamming the network and to avoid some actors from taking undue advantage.
+
+To know and better understand the fee structure click on the link below.
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
