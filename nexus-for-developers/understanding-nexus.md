@@ -28,7 +28,7 @@ To know and better understand the fee structure click on the link below.
 [Broken link](broken-reference)
 {% endcontent-ref %}
 
-### Tokens:
+## Tokens:
 
 Nexus makes it very simple to generate tokens with the UI wallet and as of today we can create fungible and non-fungible tokens. The nexus `Tokens` API can be use to create fungible tokens and the `Assets` API can be use to create Non-fungible tokens
 
