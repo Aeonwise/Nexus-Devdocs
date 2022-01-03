@@ -199,7 +199,7 @@ The password for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-The pin for the user account
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="Content-Type" required="false" %}
@@ -654,7 +654,7 @@ new recovery seed to set on this sig chain. This is optional if new\_pin or new\
 : the recovery seed is case sensitive
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="user credentials updated" %}
 ```json
 {
     "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
@@ -779,11 +779,15 @@ Return status information for the currently logged in user
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
-user session ID
+When using multi-user API mode the session parameter must be supplied to identify which user to return the status for.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-pin
+PIN for the user account. This should only be supplied in multi-user mode and only if the caller requires the 
+
+`username`
+
+ to be included in the response. In single user mode the username is always returned 
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="User status" %}
@@ -896,7 +900,9 @@ print(response.json())
 
 This will list off all of the assets owned by a signature chain.
 
+{% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
@@ -904,34 +910,38 @@ This will list off all of the assets owned by a signature chain.
 
 {% swagger method="post" path="/users/list/assets" baseUrl="http://api.nexus-interactions.io:8080" summary="/list/assets" %}
 {% swagger-description %}
-
+This will list off all of the assets owned by a signature chain
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="genesis" required="false" %}
-
+The genesis hash identifying the signature chain (optional if username is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="username" required="false" %}
-
+The username identifying the signature chain (optional if genesis is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="limit" required="false" %}
-
+The number of records to return for the current page. The default is 100
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="page" required="false" %}
-
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="offset" required="false" %}
+An alternative to 
 
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="where" required="false" %}
-
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="assets list" %}
 ```json
 [
     {
@@ -1032,11 +1042,11 @@ This will list all of the token accounts belonging to a particular signature cha
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="genesis" required="false" %}
-
+The genesis hash identifying the signature chain (optional if username is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="username" required="false" %}
-
+The username identifying the signature chain (optional if genesis is supplied)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="count" required="false" %}
