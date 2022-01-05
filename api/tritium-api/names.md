@@ -664,7 +664,7 @@ fetch(`${SERVER_URL}/names/create/name`, {
 {% endtab %}
 
 {% tab title="Python" %}
-```
+```python
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
@@ -995,7 +995,7 @@ This will transfer ownership of a name . Only global names or names created in a
 
 {% swagger method="post" path="/names/transfer/name" baseUrl="http://api.nexus-interactions.io:8080" summary="transfer/name" %}
 {% swagger-description %}
-
+This will transfer ownership of a name . Only global names or names created in a namespace (with a name in the format of mynamespace::myname) can be transferred.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
@@ -1040,6 +1040,51 @@ This optional field allows callers to specify an expiration for the transfer tra
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// transfer/name
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    name: "NAME_IDENTIFYING_THE_NAME_OBJECT", // in format username:name (for local names) or name.namespace (for names in a global namespace)
+    // address: "REGISTER_ADDRESS_OF_THE_NAME_TO_UPDATE", // optional if name is provided
+    username: "TO_USERNAME", //optional if destination is provided
+    // destination: "GENESIS_HASH_OF_THE_SIGCHAIN_TO_TRANSFER_THE_NAME_TO", //optional if username is provided
+    // expires: 604800, //optional (in seconds)
+}
+fetch(`${SERVER_URL}/names/transfer/name`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    # in format username:name (for local names) or name.namespace (for names in a global namespace)
+    "name": "NAME_IDENTIFYING_THE_NAME_OBJECT",
+    # "address": "REGISTER_ADDRESS_OF_THE_NAME_TO_UPDATE", # optional if name is provided
+    "username": "TO_USERNAME",  # optional if destination is provided
+    # "destination": "GENESIS_HASH_OF_THE_SIGCHAIN_TO_TRANSFER_THE_NAME_TO", #optional if username is provided
+    # "expires": 604800, #optional (in seconds)
+}
+response = requests.post(f"{SERVER_URL}/names/transfer/name", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -1081,11 +1126,59 @@ Names that have been transferred need to be claimed by the recipient before the 
 
 `/names/claim/name`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="/names/claim/name" baseUrl="http://api.nexus-interactions.io:8080" summary="claim/name" %}
 {% swagger-description %}
-
+Names that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" required="true" %}
+The transaction ID (hash) of the corresponding name transfer transaction for which you are claiming
+{% endswagger-parameter %}
 {% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// claim/name
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+  pin: "YOUR_PIN",
+  // session: "YOUR_SESSION_ID", //optional
+  txid: "HASH_OF_NAME_TRANSFER_TRANSACTON"
+}
+fetch(`${SERVER_URL}/names/claim/name`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "txid": "HASH_OF_NAME_TRANSFER_TRANSACTON"
+}
+response = requests.post(f"{SERVER_URL}/names/claim/name", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -1124,10 +1217,36 @@ This will get the history of a name as well as it's ownership. The API supports 
 
 `/names/list/name/history`
 
-{% swagger method="get" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="" %}
+{% swagger method="post" path="names/list/name/history" baseUrl="http://api.nexus-interactions.io:8080" summary="list/name/history" %}
 {% swagger-description %}
-
+This will get the history of a name as well as it's ownership
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the name. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+[
+    {
+        "type": "CREATE",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "modified": 1560492280,
+        "checksum": 5612332250743384100,
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "name": "paul",
+        "namespace": "test",
+        "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+    }
+
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 #### Parameters:
