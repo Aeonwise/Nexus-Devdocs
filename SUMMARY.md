@@ -13,7 +13,7 @@
 
 ## Nexus For Developers&#x20;
 
-* [Understanding Nexus](nexus-for-developers/understanding-nexus.md)
+* [🤓 Understanding Nexus](nexus-for-developers/understanding-nexus.md)
 
 ## TESTNET&#x20;
 

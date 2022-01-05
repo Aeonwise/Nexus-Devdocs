@@ -2,11 +2,35 @@
 description: Things to think about when building an app on Nexus.
 ---
 
-# Understanding Nexus
+# 🤓 Understanding Nexus
 
 Nexus is a community run project and compared to other VC run projects we differ in our thinking and that reflects in the way Nexus is designed and developed. Nexus is at best a toolbox and will not provide a finished product to users, we believe the community will build applications which will start a symbiotic relationship.
 
+### Good to know:
 
+Nexus is a software stack underpinned by a ledger and interoperates with the OSI (Open Systems Interconnect) stack
+
+Every action on the Nexus network is a contract. When a user sends NXS it is a debit contract to the senders account and a credit contract to the receivers account
+
+Contracts are bundled into a transaction which can contain a max of 100 contracts and each block can do a max of 655 tps
+
+The block size is 2MB and can contain of 32768 tx's (32768\*64=2 MB) where 64 KB is the length of the nexthash. This is theoretical max and if any other arbitrary data in included, then the no of tx's in a block will be reduced.
+
+Wallet has to be online and the user logged in to the account, to accept and credit a incoming transaction
+
+The hash size used for various operations
+
+* 256 bit hash for standard registers
+* 512 bit hash for transaction hash
+* 1024 bit hash for block hash
+
+Nexus uses a 64 Bit register based Virtual Machine (VM)
+
+
+
+
+
+&#x20;
 
 ## Application Wallet Connect:
 
