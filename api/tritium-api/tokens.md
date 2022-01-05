@@ -1645,18 +1645,62 @@ Increment an amount received from another token account to an account owned by y
 
 `/tokens/credit/account`
 
-{% swagger method="post" path="" baseUrl="" summary="credit/account" %}
+{% swagger method="post" path="/tokens/credit/account" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/account" %}
 {% swagger-description %}
 Increment an amount received from another token account to an account owned by your signature chain.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the token account. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the token account to credit. This is only required for split payments (where the receiving account is not included in the credit transaction) and is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the account to credit. This is only required for split payments (where the receiving account is not included in the credit transaction) and is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" %}
+The transaction ID (hash) of the corresponding debit transaction for which you are creating this credit for.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_proof" %}
+he name identifying the account that proves your ability to credit the debit transaction. This is only required for split payments, where your right to receive a payment is determined by the number of tokens you hold in the account proof account. The 
+
+`name_proof`
+
+ parameter can be used as alternative to 
+
+`proof`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_proof" %}
+The register address the account that proves your ability to credit the debit transaction. This is only required for split payments, where your right to receive a payment is determined by the number of tokens you hold in the account proof account. The 
+
+`address_proof`
+
+ parameter can be used as alternative to 
+
+`name_proof`
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="credited token" %}
+```json
+{
+    "txid": "318b86d2c208618aaa13946a3b75f14472ebc0cce9e659f2830b17e854984b55606738f689d886800f21ffee68a3e5fd5a29818e88f8c5b13b9f8ae67739903d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -1761,10 +1805,38 @@ Additionally the API supports passing a field name in the URL after the account 
 
 `/tokens/get/account`
 
-{% swagger method="get" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/tokens/get/account" baseUrl="http://api.nexus-interactions.io:8080" summary="get/account" %}
 {% swagger-description %}
-
+Retrieves information about a token account .
 {% endswagger-description %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" %}
+
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
