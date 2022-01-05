@@ -847,11 +847,28 @@ For multi-user API mode, (configured with multiuser=1) the session can be provid
 The register address of the asset. This is optional if the name is provided
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
-```javascript
-{
-    // Response
-}
+{% swagger-response status="200: OK" description="asset history" %}
+```json
+[
+    {
+        "type": "TRANSFER",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "modified": 1560492117,
+        "checksum": 13703027408063695802,
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "name": "test",
+        "data": "1234"
+    },
+    {
+        "type": "CREATE",
+        "owner": "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2",
+        "modified": 1560492117,
+        "checksum": 13703027408063695802,
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "name": "test",
+        "data: "1234"
+    }
+]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -998,7 +1015,7 @@ The register address of a token to use to tokenize the asset.
 `token`
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="200: OK" description="asset tokenised" %}
 ```json
 {
     "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
