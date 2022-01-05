@@ -1810,30 +1810,51 @@ Additionally the API supports passing a field name in the URL after the account 
 Retrieves information about a token account .
 {% endswagger-description %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="name" %}
+The name identifying the token account to retrieve. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the account. The 
 
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="address" %}
+The register address of the token account to retrieve. This is optional if the name is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
 
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" %}
-
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the token account
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
-```javascript
+{% swagger-response status="200: OK" description="token account details" %}
+```json
 {
-    // Response
+    "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "created": 1566534164,
+    "modified": 1566616211,
+    "name": "myaccount",
+    "address": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
+    "token_name": "mytoken",
+    "token": "8EHRNnxn5qX9gMF1Jbqvo1jkAeP7XY1PETnMtegv9rdr6QG3ZJy",
+    "balance": 990,
+    "pending": 0.0,
+    "unconfirmed": 10
 }
 ```
 {% endswagger-response %}
@@ -1939,28 +1960,30 @@ print(response.json())
 
 This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 
+{% hint style="info" %}
 **NOTE** : The returned transaction data will only include contracts that related to the requested account. Any other contracts are omitted from the transaction result.
 
 **NOTE** : If you use the username parameter it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
 
 #### Endpoint:
 
 `/tokens/list/account/transactions`
 
-{% swagger method="post" path="" baseUrl="" summary="" %}
+{% swagger method="post" path="/list/account/transactions" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
 {% swagger-description %}
-
+This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="genesis" required="false" %}
 The genesis hash identifying the signature chain to scan for transactions (optional if username is supplied or already logged in)
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" required="false" %}
+{% swagger-parameter in="body" required="false" name="username" %}
 The username identifying the signature chain to scan for transactions(optional if genesis is supplied or already logged in
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" required="false" %}
+{% swagger-parameter in="body" required="false" name="session" %}
 For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the account name in order to deduce the register address of the account. The
 
 `session`
@@ -1968,13 +1991,66 @@ For multi-user API mode, (configured with multiuser=1) the session can be provid
 parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" required="false" %}
+{% swagger-parameter in="body" required="false" name="name" %}
 The name identifying the token account to list transactions for. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the
 
 `session`
 
 parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the token account to list transactions for. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="verbose" %}
+
+
+Optional, determines how much transaction data to include in the response. Supported values are :
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account transaction list" %}
+```json
+[
+    {
+        "txid": "01034b39cb3635d370f97339e6f87b8751d4c0d62676da7d6ec20416966f298f47dea99603d03a74e638b0d50b31b1e721790e5b103abfe3353a709ccf5d1e7c",
+        "contracts": [
+            {
+                "OP": "CREDIT",
+                "txid": "01e73b498dbabbf4629ad674b9ae3824b96cca83199c25a67901db53b271d19acf1411b0c4f9a3d8ded80860ffe2dcf683d2d227a675d453303b31f86f868f9e",
+                "contract": 0,
+                "proof": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+                "to": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
+                "to_name": "test",
+                "amount": 10,
+                "token": "8EHRNnxn5qX9gMF1Jbqvo1jkAeP7XY1PETnMtegv9rdr6QG3ZJy",
+                "token_name": "TST"
+            }
+        ]
+    }
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
