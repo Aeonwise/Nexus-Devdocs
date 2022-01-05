@@ -1249,6 +1249,41 @@ The register address of the name. This is optional if the name is provided
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/name/history
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+  name: "NAME_IDENTIFYING_THE_NAME", // in format username:name (for local names) or name.namespace (for names in a global namespace)
+  // address: "REGISTER_ADDRESS_OF_THE_NAME_TO_UPDATE", // optional if name is provided
+}
+fetch(`${SERVER_URL}/list/name/history`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # in format username:name (for local names) or name.namespace (for names in a global namespace)
+    "name": "NAME_IDENTIFYING_THE_NAME",
+    # "address": "REGISTER_ADDRESS_OF_THE_NAME_TO_UPDATE", # optional if name is provided
+}
+response = requests.post(f"{SERVER_URL}/list/name/history", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `name` : The name identifying the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
