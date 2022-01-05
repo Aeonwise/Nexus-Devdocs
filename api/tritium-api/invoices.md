@@ -43,56 +43,52 @@ In addition to the parameters documented here, callers are free to include any o
 Create a new invoice
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="pin" %}
-
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="session" %}
-
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the invoice should be created with. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="receipient" %}
-
+The genesis hash of the signature chain to issue the invoice to. This is optional if the recipient_username is provided
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="recipient_username" %}
-
+The username identifying the user account (sig-chain) to issue the invoice to. This is optional if the recipient is provided
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="account_name" %}
+The name identifying the account the invoice should be paid to. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="account" %}
-
+The register address of the account the invoice should be paid to. This is optional if the name is provided
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" %}
-
+An optional name to identify the invoice. If provided a Name object will also be created in the users local namespace, allowing the invoice to be accessed/retrieved by name. If no name is provided the account will need to be accessed/retrieved by its 256-bit register address
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="items" %}
-Array of line items that make up this invoice. At least one item in the items array must be included. The total invoice amount is calculated as the sum of all item amounts, and each item amount is calculated as the 
+Array of line items that make up this invoice. At least one item in the items array must be included. The total invoice amount is calculated as the sum of all item amounts, and each item amount is calculated as the `unit_amount` multiplied by the `units.`\
+``{\
+`unit_amount` : The unit amount to be invoiced for this line item. This amount should be supplied in the currency of the payment account
 
-`unit_amount`
-
- multiplied by the 
-
-`units`
+`units` : The number of units to be invoiced at the unit amount.\
+}
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="unit_amount" %}
-The unit amount to be invoiced for this line item. This amount should be supplied in the currency of the payment account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="units" %}
-The number of units to be invoiced at the unit amount
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="" %}
-```javascript
+{% swagger-response status="200: OK" description="invoice created" %}
+```json
 {
-    // Response
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
 }
 ```
 {% endswagger-response %}
@@ -433,10 +429,50 @@ If payment is successful, ownership of the invoice is claimed by the caller's si
 
 `/invoices/pay/invoice`
 
-{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="pay/invoice" %}
+{% swagger method="post" path="/invoices/pay/invoice" baseUrl="http://api.nexus-interactions.io:8080" summary="pay/invoice" %}
 {% swagger-description %}
-
+Make a payment (debit) to settle an invoice.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the invoice to pay. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the invoice to pay. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_from" %}
+The name identifying the account to debit (pay the invoice from). This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_from" %}
+The register address of the account to debit (pay the invoice from). This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "txid": "318b86d2c208618aaa13946a3b75f14472ebc0cce9e659f2830b17e854984b55606738f689d886800f21ffee68a3e5fd5a29818e88f8c5b13b9f8ae67739903d"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
