@@ -2006,7 +2006,14 @@ The register address of the token account to list transactions for. This is opti
 {% swagger-parameter in="body" name="verbose" %}
 
 
-Optional, determines how much transaction data to include in the response. Supported values are :
+Optional, determines how much transaction data to include in the response. Supported values are :\
+
+
+`default` : hash, contracts
+
+`summary` : type, version, sequence, timestamp, operation, and confirmations.
+
+`detail` : genesis, nexthash, prevhash, pubkey and signature
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="limit" %}
