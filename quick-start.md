@@ -62,6 +62,8 @@ Tritium++ will be launched in three phases, the first update 5.1 will come with 
 
 ## Fees
 
+Nexus simple transactions are free, but to protect from spam and to prevent hoarding, there are fees on some of the operations. Check the fee structure below:
+
 {% content-ref url="fees/fee-structure.md" %}
 [fee-structure.md](fees/fee-structure.md)
 {% endcontent-ref %}
