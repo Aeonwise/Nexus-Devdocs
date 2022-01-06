@@ -12,16 +12,17 @@ Nexus is a community run project and compared to other VC run projects we differ
 * Nexus is a protocol chain, independent of any other blockchain and can encompass every use-case that can be built on other platforms and more (Full functionality is not available as of today, but is outlined in the roadmap)
 * Developing on Nexus is easy with REST API which is the higher level API and later this year we will launch augmented contracts which will be lower level API calls with contracts using any domain specific language of choice
 * Nexus has designed signature chain, it creates a unique user blockchain which can be accessed with a username, password and PIN and the user does not need to manage keys or need hardware wallets. A recovery phrase should be set which can be used in case of lost password and PIN as an additional safeguard.
-* Nexus has free simple transactions, sending NXS and tokens is free. Contracts will have a set fee based on complexity and the fee will be calculated before the transaction is executed.
+* Nexus has free simple transactions, sending NXS and tokens is free. Contracts will have a set fee based on complexity and the exact fee will be calculated before the transaction is executed.
 * Nexus is a software stack underpinned by a ledger and interoperates with the OSI (Open Systems Interconnect) stack.
 * Nexus is quantum resistant and is designed to easily upgrade to a better Post quantum cryptography when available, with just a wallet update. In the future users will have a bunch of algorithms to choose from in settings.
+* Nexus has three channel consensus, two mining channels Prime and Hash and one staking (nPoS) channel
 * Every action on the Nexus network is a contract. When a user sends NXS it is a debit contract to the senders account and a credit contract to the receivers account.
 * Contracts are bundled into a transaction which can contain a max of 100 contracts and each block can do a max of 655 TPS
 * The block size is 2MB and can contain 32768 tx's (32768\*64=2 MB) where 64 KB is the length of the nexthash. This is theoretical max and if any other arbitrary data in included, then the no of tx's in a block will be reduced.
 * Wallet has to be online and the user logged in to the account, to accept and credit a incoming transaction
 * Nexus has a reversible transaction feature, where if the debited NXS are not credited to a users account due to wallet not being online or the address is not available then the NXS will be credited back to the senders account in 7 days. The user can specify the time is seconds when doing the debit transaction with the expiry flag in seconds
 * Nexus uses a 64 Bit register based Virtual Machine (VM), this makes it quite fast compared to EVM.
-* The hash size used for various operations
+* The hash size used:
   * 256 bit hash for standard registers
   * 512 bit hash for transaction hash
   * 1024 bit hash for block hash
@@ -31,15 +32,19 @@ Nexus is a community run project and compared to other VC run projects we differ
 *
 
 
-
-###
-
-###
 {% endhint %}
 
 
 
+{% hint style="warning" %}
+#### Things to Know:
 
+Nexus is a pure layer one solution chain and has designed it's own solution for scalability like the hybrid network and 3 Dimensional chain (3DC - Future)&#x20;
+
+Nexus is not interoperable at this time with any other chains
+
+
+{% endhint %}
 
 
 
