@@ -14,7 +14,7 @@ If you are new here, then we highly recommend to go through this section which w
 
 ## Nexus For Developers:
 
-If you have settled on Nexus then go through this section to understand Nexus design and the various components which are critical for a successful application
+If you have settled on Nexus then go through this section to understand Nexus design and the various components which are critical for a great experience
 
 {% content-ref url="nexus-for-developers/understanding-nexus.md" %}
 [understanding-nexus.md](nexus-for-developers/understanding-nexus.md)
@@ -30,7 +30,7 @@ Want to test things before you bring it into the real world, we have you covered
 
 ## Mainnet
 
-Learn how to setup a mainnet node:
+Learn how to setup a mainnet node to power you DApps, stake or just to learn how things work:
 
 {% content-ref url="mainnet/nodes/" %}
 [nodes](mainnet/nodes/)

@@ -39,7 +39,7 @@ Nexus is a community run project and compared to other VC run projects we differ
 {% hint style="warning" %}
 #### Things to Know:
 
-Nexus is a pure layer one solution chain and has designed it's own solution for scalability like the hybrid network and 3 Dimensional chain (3DC - Future)&#x20;
+Nexus is a pure layer one chain and has designed it's own solution for scalability like the hybrid network and 3 Dimensional chain (3DC - Future)&#x20;
 
 Nexus is not interoperable at this time with any other chains
 
@@ -48,21 +48,9 @@ Nexus is not interoperable at this time with any other chains
 
 
 
+### DApp Wallet Connect:
 
-
-
-
-&#x20;
-
-## Application Wallet Connect:
-
-As of today the only way that an application can access the user wallet is when the user provides the account credentials, this is not the preferred method &#x20;
-
-#### Nexus 2FA
-
-Nexus has designed 2fa which will be released with the Tritium++ v6.0 update.
-
-In 2fa mode the user just inputs his username into the app, which is sent to its backend node and the data is sent through the Nexus network to the users wallet with a request to connect to the particular dapp. On a successful confirmation the wallet is connected to the dapp via the network. This also offloads all computation to the users wallet and also decentralises the process.
+To safely connect the wallet and interact with DApps, Nexus has designed _Nexus 2FA_ which will be released with the Tritium++ v6.0 update.
 
 ## Fee Structure
 
@@ -111,7 +99,9 @@ Local Names are local to a user account (sig chain). To use a local name you mus
 Namespace are globally unique keyword and Namespaces allow users to provide user-friendly names for their object registers without needing to disclose their username. This is useful for privacy, but also to allow names to be related to a business or some other meaningful context. To avoid name-squatting registering a namespace name attracts a high fee (`1000 NXS`).
 
 {% hint style="info" %}
-**Good to Know:** Namespace names can only contain **lowercase letters, numbers, and periods (.)**
+#### **Good to Know:**
+
+&#x20;**** Namespace names can only contain **lowercase letters, numbers, and periods (.)**
 {% endhint %}
 
 #### Namespaced:&#x20;
@@ -123,4 +113,10 @@ These are created within the context of a namespace, which itself is a globally 
 Global names require no username or namespace prefix, and are therefore globally unique. These will be likely reserved for use cases where a succinct, unique, name is necessary, for example a token ticker symbol. To avoid needless name-squatting, global names attract a high fee (`2000 NXS`).&#x20;
 
 Global Name registered and linked to a token will be referred by the ticker `NEX` instead of it's register address `8B5pKxGWgBM9nXzucrqmhdy9PuDHxDi41fqosXZsLTUXGfQ4CXn` . This will also be convenient to launch the token on the P2P marketplace or DeFi when available.
+
+{% hint style="info" %}
+#### Good to Know:
+
+To have a global token ticker for your Nexus token, register a Global Name and link it to the token register address.
+{% endhint %}
 
