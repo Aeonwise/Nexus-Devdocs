@@ -111,11 +111,7 @@ The commonly used resources are described below:
 
     An asset is an object register of a specialized type.
 
-***
-
-***
-
-### `Error Handling`
+## `Error Handling`
 
 In the event that an API call results in an error, a JSON object will be returned with the following format:
 
@@ -129,7 +125,7 @@ In the event that an API call results in an error, a JSON object will be returne
 }
 ```
 
-DSL Error Codes
+### DSL Error Codes
 
 | Code | Message                                                                     |
 | ---- | --------------------------------------------------------------------------- |
@@ -143,7 +139,7 @@ DSL Error Codes
 | 8    |                                                                             |
 | 9    |                                                                             |
 
-API Error Codes
+### API Error Codes
 
 | Code | Message                                                                                                                                         |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
