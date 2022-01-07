@@ -3,8 +3,6 @@
 * [Welcome to Nexus Developer Documentation](README.md)
 * [Quick Start](quick-start.md)
 
-## Getting Started
-
 ## Why Nexus?
 
 * [🔟 10 Reasons to Build on Nexus?](why-nexus/10-reasons-to-build-on-nexus.md)
