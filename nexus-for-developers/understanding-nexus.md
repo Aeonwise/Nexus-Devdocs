@@ -9,7 +9,7 @@ Nexus is a community run project and compared to other VC run projects we differ
 {% hint style="info" %}
 #### Good to know:
 
-* Nexus is a protocol chain, independent of any other blockchain and can encompass every use-case that can be built on other platforms and more (Full functionality is not available as of today, but is outlined in the roadmap)
+* Nexus is a protocol chain, independent of any other blockchain and can encompass every use-case that can be built on other platforms and more (Full functionality is not available as of today, but is outlined in the [roadmap](https://nexus.io/roadmap))
 * Developing on Nexus is easy with REST API which is the higher level API and later this year we will launch augmented contracts which will be lower level API calls with contracts using any domain specific language of choice
 * Nexus has designed signature chain, it creates a unique user blockchain which can be accessed with a username, password and PIN and the user does not need to manage keys or need hardware wallets. A recovery phrase should be set which can be used in case of lost password and PIN as an additional safeguard.
 * Nexus has free simple transactions, sending NXS and tokens is free. Contracts will have a set fee based on complexity and the exact fee will be calculated before the transaction is executed.
