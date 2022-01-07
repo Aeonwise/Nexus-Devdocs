@@ -14,7 +14,7 @@ The mobile wallet puts the blockchain in very persons hand, combine that with th
 
 Traditionally, mobile wallets use a central node run by the wallet developer to communicate with the rest of the network**.** The central node acts as a trusted proxy and is the sole provider of information regarding blockchain state. The Nexus wallet, on the other hand, runs the same desktop core, operates as a lite node by downloading a list of peers from the network seed nodes and forming connections to several of its peers. This allows the wallet to broadcast transactions directly to the network and detect confirmations by checking for inclusion against block headers. The Nexus mobile wallet gains added security by being able to verify block headers provided by multiple peers instead of through one central node. For the tech-savvy, this is also known as [Simplified Payment Verification](https://wiki.bitcoinsv.io/index.php/Simplified\_Payment\_Verification).
 
-![](../.gitbook/assets/MW.png)
+![Traditional vs Nexus Mobile Wallet](../.gitbook/assets/MW.png)
 
 Following the principle of the Nexus [software stack](https://tech.nexus.io/software-stack), new mobile dapps will be able to interface and interact with the local wallet instead of relying on a separate server to obtain information regarding blockchain state. The Nexus mobile wallet is also completely non-custodial, meaning that your [signature chain](https://tech.nexus.io/signature-chains) remains completely private. All transactions are processed and packaged on the local device and then broadcast to the rest of the network, just like a full node.&#x20;
 
