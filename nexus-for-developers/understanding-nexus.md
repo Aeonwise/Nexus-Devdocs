@@ -4,7 +4,7 @@ description: Things to think about when building an app on Nexus.
 
 # 🤓 Understanding Nexus
 
-Nexus is a community run project and compared to other VC run projects we differ in our thinking and that reflects in the way Nexus is designed and developed. Nexus is at best a toolbox and will not provide a finished product to users, we believe the community will build applications which will start a symbiotic relationship.
+Nexus is a community run project and compared to other crypto projects, we differ in our thinking and that reflects in the way Nexus is designed and developed. Nexus is at best a toolbox and as it stands today, will  not provide a finished product to users, we are confident the community will build applications for end users which will start a symbiotic relationship.
 
 {% hint style="info" %}
 #### Good to know:
