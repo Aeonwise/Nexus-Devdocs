@@ -39,11 +39,9 @@ e.g.
 http://127.0.0.1:8080/ledger/get/block
 ```
 
+{% hint style="info" %}
 **NOTE**: URI's are always in lowercase.
-
-***
-
-***
+{% endhint %}
 
 ### `Verbs (actions)`
 
