@@ -1,5 +1,5 @@
 ---
-description: REGISTER API
+description: REGISTER API (QUERY  DSL)
 ---
 
 # REGISTER

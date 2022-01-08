@@ -1,5 +1,5 @@
 ---
-description: Things to think about when building an app on Nexus.
+description: Things to understand before building on Nexus.
 ---
 
 # 🤓 Understanding Nexus
@@ -29,9 +29,6 @@ Nexus is a community run project and compared to other crypto projects, we diffe
 * Nexus addresses start with:
   * Legacy : 2
   * Tritium: 8
-*
-
-
 {% endhint %}
 
 
@@ -42,11 +39,7 @@ Nexus is a community run project and compared to other crypto projects, we diffe
 Nexus is a pure layer one chain and has designed it's own solution for scalability like the hybrid network and 3 Dimensional chain (3DC - Future)&#x20;
 
 Nexus is not interoperable at this time with any other chains
-
-
 {% endhint %}
-
-
 
 ### DApp Wallet Connect:
 
