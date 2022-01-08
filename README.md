@@ -26,7 +26,7 @@ The development of Nexus is still ongoing and we have a extensive roadmap
 
 The genesis block of Nexus was mined on September 23rd of 2014 at 16:20:00 GMT – 7.
 
-Total of 78,000,000 NXS, which will be mined by September, 2024 and after that there will be tail end emission of 3.67% max. Mining will emit 0.67% and staking will emit 3% if all the NXS are staked.
+Nexus has a max supply of 78,000,000 NXS, which will be mined by September, 2024 and after that there will be tail end emission of 3.67% max. Mining will emit 0.67% and staking will emit 3% if all the NXS are staked.
 
 ### Nexus Innovations:
 
