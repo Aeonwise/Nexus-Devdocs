@@ -4,7 +4,7 @@ description: How to run mainnet CLI nodes
 
 # 🖥 Mainnet Node
 
-This section will help you to run nodes for mainnet, update the nodes, remotely access your nodes using the interface or dapp.
+This section will help to run CLI nodes for mainnet,  remotely access the nodes using the interface or dapp and update the nodes,
 
 {% content-ref url="run-a-mainnet-node-cli.md" %}
 [run-a-mainnet-node-cli.md](run-a-mainnet-node-cli.md)

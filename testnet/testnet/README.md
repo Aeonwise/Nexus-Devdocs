@@ -16,6 +16,6 @@ We recommend application developers to join the testnet with their own nodes whi
 
 The developers can even run their own separate testnet, but it will require a lot of resources .
 
-{% hint style="info" %}
-This testnet uses the merging branch and you may find some bugs.
+{% hint style="warning" %}
+This testnet uses the merging branch and you may come across some bugs.
 {% endhint %}
