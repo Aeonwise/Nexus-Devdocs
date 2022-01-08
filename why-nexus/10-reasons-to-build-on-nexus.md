@@ -32,7 +32,7 @@ Nexus has built a groundbreaking transactional architecture called ‘[Signature
 
 ### **6: Quantum-Proof Security**&#x20;
 
-[Signature Chains](https://tech.nexus.io/signature-chains) also enhance the security of existing ECDSA (Elliptic Curve Digital Signature Algorithm). They generate one-time-use key-pairs derived from the Nexus wallet credentials, of which the public key’s hash is only published once the key-pair is used, while deterministically generating a new key-pair while signing the next transaction. This results in a higher level of security compared to other platforms as the attack window to brute force a private key is reduced to under 200 milliseconds. In addition, Signature Chains utilize the following cryptographic functions: FALCON (a second round contender for the NIST Post-Quantum cryptography competition), Argon2 (winner of the password hashing competition, and a superior alternative to S-Crypt or B-Crypt), and Keccak (winner of the SHA3 competition) to improve its robustness.
+[Signature Chains](https://nexus.io/ResourceHub/signature-chains) also enhance the security of existing ECDSA (Elliptic Curve Digital Signature Algorithm). They generate one-time-use key-pairs derived from the Nexus wallet credentials, of which the public key’s hash is only published once the key-pair is used, while deterministically generating a new key-pair while signing the next transaction. This results in a higher level of security compared to other platforms as the attack window to brute force a private key is reduced to under 200 milliseconds. In addition, Signature Chains utilize the following cryptographic functions: FALCON (a second round contender for the NIST Post-Quantum cryptography competition), Argon2 (winner of the password hashing competition, and a superior alternative to S-Crypt or B-Crypt), and Keccak (winner of the SHA3 competition) to improve its robustness.
 
 ### **7: Feeless Transactions**
 
@@ -48,7 +48,7 @@ Nexus has developed its own database called the Lower Level Database (LLD). It i
 
 ### **10: Passionate & Supportive Community**
 
-Nexus is not a business; we are an enthusiastic community of independent thinkers and creative problem solvers focused on achieving decentralization through the application of innovative and original technology. We uphold the initial decentralized vision of cryptocurrency, and a world where resources are applied more efficiently, so that more people are able to unlock their authentic potential. We invite you to join us in building a decentralized future. Visit our Twitter or website to learn more, and if you have any questions, please join one of our [Telegram support](https://docs.google.com/document/d/1sGYrxpuQdyAnfECfKDtR3JoZ4MCWrFRjRHa\_xT\_pN-U/edit) channels or use the chat box on our website.
+Nexus is not a business; we are an enthusiastic community of independent thinkers and creative problem solvers focused on achieving decentralization through the application of innovative and original technology. We uphold the initial decentralized vision of cryptocurrency, and a world where resources are applied more efficiently, so that more people are able to unlock their authentic potential. We invite you to join us in building a decentralized future. Visit our Twitter or website to learn more, and if you have any questions, please join one of our [Telegram support](https://t.me/NexusSupport) channels or use the chat box on our website.
 
 **A Next-Gen Blockchain**
 
