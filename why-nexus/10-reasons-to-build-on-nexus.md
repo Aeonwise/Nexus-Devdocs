@@ -50,7 +50,7 @@ Nexus has developed its own database called the Lower Level Database (LLD). It i
 
 Nexus is not a business; we are an enthusiastic community of independent thinkers and creative problem solvers focused on achieving decentralization through the application of innovative and original technology. We uphold the initial decentralized vision of cryptocurrency, and a world where resources are applied more efficiently, so that more people are able to unlock their authentic potential. We invite you to join us in building a decentralized future. Visit our Twitter or website to learn more, and if you have any questions, please join one of our [Telegram support](https://t.me/NexusSupport) channels or use the chat box on our website.
 
-**A Next-Gen Blockchain**
+#### **A Next-Gen Blockchain**
 
 These 10 reasons to build on Nexus are only a taste of what this unique blockchain and smart contracts platform has to offer. Our P2P market API and Query DSL are currently in testing, and forthcoming upgrades will include Pooled staking, Conditional Contracts DSL (Domain Specific Language), Augmented (smart) contracts, Hybrid mode, Distributed Files System, and the beginning of the DAO architecture. So there is a lot more to look forward to!
 
