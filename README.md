@@ -14,7 +14,7 @@ This is a living document, work in progress and will be updated regularly after 
 
 ## Why Nexus?
 
-Nexus is the most advanced, innovative and open protocol blockchain platform, with advanced contracts in the crypto space. The technology will be able to encompass all the usecases which requires blockchain and smart contracts on a decentralised network.&#x20;
+Nexus is the most advanced, innovative and open protocol blockchain platform, with advanced contracts in the crypto space. The technology will accommodate all usecases which require blockchain and smart contracts on a decentralised network.&#x20;
 
 Nexus was mined into existence similar to Bitcoin, there was no ICO or premine which makes it a safe bet against any regulatory crackdown.
 
