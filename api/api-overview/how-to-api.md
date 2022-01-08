@@ -72,7 +72,9 @@ The Users API can be found in the following repo path:
 
 LLL-TAO/docs/API/USERS.MD
 
+{% hint style="info" %}
 **NOTE** : Login sessions do not persist if you restart your node. They are stored in secure allocator in memory only, do not cache them on disk otherwise you could open potential security issues.
+{% endhint %}
 
 ### Finance API
 
@@ -102,7 +104,9 @@ The Tokens API can be found in the following repo path:
 
 LLL-TAO/docs/API/TOKENS.MD
 
+{% hint style="info" %}
 NOTE: some of the commands in this API require LOGIN. Make sure to use the users API to login before using LOGIN required commands.
+{% endhint %}
 
 ### Ledger API
 
@@ -120,7 +124,9 @@ The Supply API can be found in the following repo path:
 
 LLL-TAO/docs/API/SUPPLY.MD
 
+{% hint style="info" %}
 NOTE: some of the commands in this API require LOGIN. Make sure to use the users API to login before using LOGIN required commands.
+{% endhint %}
 
 ### System API
 
