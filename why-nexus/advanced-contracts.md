@@ -18,7 +18,7 @@ This design makes the NVM very fast compared to EVM as it's designed for the pro
 
 The NVM is designed intentionally not to be turing complete. This design decision has a huge upside and that is free simple transactions, while EVM needs Gas to control computation requests due to bad code, which can grind the network to a halt. With the NVM design advanced contracts will have predictable fees which will be calculated before contract execution.
 
-Nexus will have different types of contracts, for the higher level API, templates will be provided, which a user can choose from a dropdown list. For advanced users augmented contracts will empower them to use contracts with their choice of domain specific language.&#x20;
+Nexus will have different types of contracts, for the higher level API's, templates will be provided, which a user can choose from a dropdown list. For advanced users augmented contracts will empower them to use contracts with their choice of domain specific language. Augmented contracts will be available at a later date. For more details refer the [roadmap](https://nexus.io/roadmap)
 
 {% hint style="info" %}
 More information will be provided in the future when new updates are released
