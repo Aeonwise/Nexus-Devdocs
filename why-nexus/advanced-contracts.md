@@ -21,5 +21,5 @@ The NVM is designed intentionally not to be turing complete. This design decisio
 Nexus will have different types of contracts, for the higher level API, templates will be provided, which a user can choose from a dropdown list. For advanced users augmented contracts will empower them to use contracts with their choice of domain specific language.&#x20;
 
 {% hint style="info" %}
-More information will be provided in the future when more&#x20;
+More information will be provided in the future when new updates are released
 {% endhint %}
