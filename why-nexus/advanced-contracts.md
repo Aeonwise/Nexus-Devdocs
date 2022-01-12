@@ -1,5 +1,5 @@
 ---
-description: Contracts on Nexus are named as Advanced contracts
+description: Contracts on Nexus are called as Advanced contracts
 ---
 
 # Advanced Contracts
