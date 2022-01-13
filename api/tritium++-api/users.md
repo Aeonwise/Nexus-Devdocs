@@ -6,6 +6,10 @@ description: USERS API
 
 The Users API provides methods for creating and managing users. A user is synonymous with a signature chain.
 
+{% hint style="info" %}
+The Tritium++ Users API differs a little from Tritium
+{% endhint %}
+
 ### `Named Shortcuts`
 
 For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
@@ -30,7 +34,7 @@ The following methods are currently supported by this API
 [`list/transactions`](users.md#list-transactions)\
 [`save/session`](users.md#save-session)\
 [`load/session`](users.md#load-session)\
-[`has/session` ](users.md#has-session)
+[`has/session`](users.md#has-session)
 
 ***
 
@@ -80,7 +84,6 @@ This will create a new user account (signature chain) for use on the network. Th
     "timestamp": 1545445970,
     "version": 1
 }
-
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -178,15 +181,15 @@ This will start a session for your user account with this specific API instance.
 \<pin>
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="apiuser" %}
+{% swagger-parameter in="header" name="apiuser" required="false" %}
 API authentication username
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="apipassword" %}
+{% swagger-parameter in="header" name="apipassword" required="false" %}
 API authentication password
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Content-Type" %}
+{% swagger-parameter in="header" name="Content-Type" required="false" %}
 application/json
 {% endswagger-parameter %}
 
@@ -260,7 +263,7 @@ This will log you out of this specific API, and delete your credentials stored i
 
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="session" type="" %}
+{% swagger-parameter in="body" name="session" type="" required="false" %}
 session ID
 {% endswagger-parameter %}
 
@@ -326,19 +329,19 @@ This will unlock your signature chain and cache the PIN in encrypted memory to b
 pin
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="mining" type="true" %}
+{% swagger-parameter in="body" name="mining" type="true" required="false" %}
 enable mining tx's
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="notifications" type="true" %}
+{% swagger-parameter in="body" name="notifications" type="true" required="false" %}
 enable incoming credit tx's
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="staking" type="false" %}
+{% swagger-parameter in="body" name="staking" type="false" required="false" %}
 enable staking tx's
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="transactions" type="false" %}
+{% swagger-parameter in="body" name="transactions" type="false" required="false" %}
 enable debit tx's
 {% endswagger-parameter %}
 
@@ -436,19 +439,19 @@ The mining/staking/transactions/notifications parameters are optional and, if su
 This will lock your signature chain, making it unavailable for use unless it is either unlocked or the PIN is passed in to all API requests. Only available in single-user API mode (multiuser=0)
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="mining" type="false" %}
-enable mining tx's 
+{% swagger-parameter in="body" name="mining" type="false" required="false" %}
+enable mining tx's
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="notifications" type="true" %}
+{% swagger-parameter in="body" name="notifications" type="true" required="false" %}
 enable auto credit incoming tx's
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="staking" type="true" %}
+{% swagger-parameter in="body" name="staking" type="true" required="false" %}
 enable staking tx's
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="transactions" type="false" %}
+{% swagger-parameter in="body" name="transactions" type="false" required="false" %}
 enable debit tx's
 {% endswagger-parameter %}
 
@@ -544,8 +547,6 @@ This method requires the user to already be logged in.
 {% swagger method="post" path="/users/update/user" baseUrl="http://api.nexus-interactions.io:8080" summary="Update user credentails" %}
 {% swagger-description %}
 This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
-
-
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="password" required="true" %}
@@ -556,7 +557,7 @@ current password
 current pin
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="recovery" %}
+{% swagger-parameter in="body" name="recovery" required="false" %}
 
 {% endswagger-parameter %}
 
@@ -568,8 +569,8 @@ new password
 new pin
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="new_recovery" %}
-new recovery seed to set on this sig chain. This is optional if new_pin or new_password is provided. The recovery seed must be a minimum of 40 characters. 
+{% swagger-parameter in="body" name="new_recovery" required="false" %}
+new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
 
 **NOTE**
 
@@ -678,11 +679,11 @@ Return status information for the currently logged in user
 Return status information for the currently logged in user
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="session" %}
+{% swagger-parameter in="body" name="session" required="false" %}
 user session ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" %}
+{% swagger-parameter in="body" name="pin" required="false" %}
 pin
 {% endswagger-parameter %}
 
@@ -834,7 +835,6 @@ This will list off all of the transactions sent to a particular genesis or usern
     }
 
 ]
-
 ```
 
 #### Return values:
@@ -896,7 +896,6 @@ Process all outstanding notifications for a logged in signature chain. This API 
         }
     ]
 }
-
 ```
 
 #### Return values:
@@ -1072,33 +1071,33 @@ This will list off all of the transactions for the requested signature chain gen
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.\
 {\
-&#x20;  `id` : The sequential ID of this contract within the transaction.
+`id` : The sequential ID of this contract within the transaction.
 
-&#x20;  `OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
-&#x20;  `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-&#x20;  `txid` : The transaction that was credited / claimed.
+`txid` : The transaction that was credited / claimed.
 
-&#x20;  `contract` : The ID of the contract within the transaction that was credited / claimed.
+`contract` : The ID of the contract within the transaction that was credited / claimed.
 
-&#x20;  `proof` : The register address proving the credit.
+`proof` : The register address proving the credit.
 
-&#x20;  `from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
 
-&#x20;  `from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
-&#x20;  `to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
 
-&#x20;  `to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
 
-&#x20;  `amount` : the token amount of the transaction.
+`amount` : the token amount of the transaction.
 
-&#x20;  `token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-&#x20;  `token_name` : The name of the token that the transaction relates to.
+`token_name` : The name of the token that the transaction relates to.
 
-&#x20;  `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 }
 
@@ -1147,7 +1146,6 @@ Loads a previously saved session from the local database. In addition to restori
     "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
     "session": "0000000000000000000000000000000000000000000000000000000000000000"
 }
-
 ```
 
 #### Return values:
@@ -1179,7 +1177,6 @@ Determines whether a previously saved session exists in the local database for t
     "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
     "has": true
 }
-
 ```
 
 #### Return values:
