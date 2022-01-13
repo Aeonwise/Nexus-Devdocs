@@ -2,7 +2,7 @@
 description: Contracts on Nexus are called as Advanced contracts
 ---
 
-# Advanced Contracts
+# 📃 Advanced Contracts
 
 The Nexus Virtual Machine (NVM) is a `state machine` and exists as one single entity maintained by hundreds of connected Nexus nodes.
 
@@ -22,7 +22,7 @@ Nexus will have different types of contracts, for the higher level API's, templa
 
 ## OPERATIONS & REGISTER LAYERS
 
-To put in a simple way, contracts are a request to perform a specific type of instruction on data which results in change in the data. In the Nexus software stack the `Operations layer` is the  instructions or actions that give registers context, and define more complex contract logic and `Register layer` is the data layer.  A contract is an object containing: a register pre-state (the register that is being operated on that was passed upwards from the Register Layer), a primitive operation (only one primitive operation per contract), and a set of conditions (any amount of conditional operations).
+To put in a simple way, contracts are a request to perform a specific type of instruction on data which results in change in the data. In the Nexus software stack the `Operations layer` contains the  instructions or actions that give registers context, and define more complex contract logic and `Register layer` is the data layer.  A contract is an object containing: a register pre-state (the register that is being operated on that was passed upwards from the Register Layer), a primitive operation (only one primitive operation per contract), and a set of conditions (any amount of conditional operations).
 
 ### **Primitive Operations:**
 
