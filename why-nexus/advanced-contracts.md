@@ -16,13 +16,13 @@ The NVM is designed as a 64 bit, register based; this design was chosen as it ma
 
 This design makes the NVM very fast compared to EVM as it's designed for the processors of today. To put it in numbers, EVM takes 1.7 million nano sec/instruction and NVM takes 33 nano sec/instruction. EVM is at a huge disadvantage as it takes 4 cycles to complete an instruction due to its 256 bit length on a 64 bit CPU and also its dated stack design.
 
-The NVM is designed intentionally not to be turing complete, this decision also stems from the fact the Nexus is a **`Verification`** engine. This design decision has a huge upside and that is free simple transactions, while EVM needs Gas to control computation requests due to bad code, which can grind the network to a halt. With the NVM design advanced contracts will have predictable fees which will be calculated before contract execution.
+The NVM is designed intentionally not to be turing complete, this decision also stems from the fact the Nexus is a **`Verification`** engine. This design has a huge upside and that is free simple transactions, while EVM needs Gas to control computation requests due to bad code, which can grind the network to a halt. With the NVM design advanced contracts will have predictable fees which will be calculated before contract execution.
 
 Nexus will have different types of contracts, for the higher level API's, templates will be provided, which a user can choose from a dropdown list. For advanced users augmented contracts will empower them to use contracts with their choice of domain specific language. Augmented contracts will be available at a later date. For more details refer the [roadmap](https://nexus.io/roadmap)
 
 ## OPERATIONS & REGISTER LAYERS
 
-To put in a simple way, contracts are a request to perform a specific type of instruction on data. In the Nexus stack the `Operations layer` are instructions or actions that give registers context, and define more complex contract logic and `Register layer` is the data layer.  A contract is an object containing: a register pre-state (the register that is being operated on that was passed upwards from the Register Layer), a primitive operation (only one primitive operation per contract), and a set of conditions (any amount of conditional operations).
+To put in a simple way, contracts are a request to perform a specific type of instruction on data which results in change in the data. In the Nexus software stack the `Operations layer` is the  instructions or actions that give registers context, and define more complex contract logic and `Register layer` is the data layer.  A contract is an object containing: a register pre-state (the register that is being operated on that was passed upwards from the Register Layer), a primitive operation (only one primitive operation per contract), and a set of conditions (any amount of conditional operations).
 
 ### **Primitive Operations:**
 

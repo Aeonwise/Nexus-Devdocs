@@ -44,9 +44,9 @@
   * [SUPPLY](api/tritium-api/supply.md)
   * [OBJECTS](api/tritium-api/objects.md)
 * [⚙ Tritium++ API](api/tritium++-api/README.md)
+  * [Query DSL](api/tritium++-api/register.md)
   * [USERS](api/tritium++-api/users.md)
   * [FINANCE](api/tritium++-api/finance.md)
-  * [REGISTER](api/tritium++-api/register.md)
   * [SYSTEM](api/tritium++-api/system.md)
 
 ## Fees

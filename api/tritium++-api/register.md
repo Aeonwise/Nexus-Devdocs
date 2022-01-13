@@ -1,12 +1,14 @@
 ---
-description: REGISTER API (QUERY  DSL)
+description: Database Query Domain specific Language
 ---
 
-# REGISTER
-
-## Query DSL
+# Query DSL
 
 The Query DSL allows you to sort and filter recursively to any logical depth. This DSL can be used in conjunction with operators to sort, filter, and compute data in real-time.
+
+{% hint style="info" %}
+The Query DSL can be applied to other **`list`** API commands with a **`where`** parameter with the 5.1 release
+{% endhint %}
 
 ### `Selector Keys`
 
