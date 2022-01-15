@@ -48,16 +48,16 @@ API uses HTTP basic authentication and SSL will be available in the future
 
 Dive a little deeper and start exploring our API reference to get an idea of everything that's possible with the API:
 
-{% content-ref url="api/tritium-api/" %}
-[tritium-api](api/tritium-api/)
+{% content-ref url="api/api-overview/tritium-api/" %}
+[tritium-api](api/api-overview/tritium-api/)
 {% endcontent-ref %}
 
 {% hint style="info" %}
 Tritium++ will be launched in three phases, the first update 5.1 will come with the new overhauled API. The code is available in merging branch for testing.
 {% endhint %}
 
-{% content-ref url="api/tritium++-api/" %}
-[tritium++-api](api/tritium++-api/)
+{% content-ref url="api/api-overview/tritium++-api/" %}
+[tritium++-api](api/api-overview/tritium++-api/)
 {% endcontent-ref %}
 
 ## Fees

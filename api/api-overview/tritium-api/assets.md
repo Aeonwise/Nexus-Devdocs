@@ -239,8 +239,11 @@ print(response.json())
 
 #### Example:
 
-The following is an example of an asset defined using the `basic` format:\
+The following is an example of an asset defined using the `basic` format:
+
+{% hint style="info" %}
 **NOTE**: In this example the asset is entirely read-only and no fields can be updated.
+{% endhint %}
 
 ```
 {
@@ -253,8 +256,11 @@ The following is an example of an asset defined using the `basic` format:\
 }
 ```
 
-The following is an example of an asset defined using the `JSON` format:\
+The following is an example of an asset defined using the `JSON` format:
+
+{% hint style="info" %}
 **NOTE**: In this example the shelf\_location field is defined as mutable and can therefore be updated.
+{% endhint %}
 
 ```
 {
