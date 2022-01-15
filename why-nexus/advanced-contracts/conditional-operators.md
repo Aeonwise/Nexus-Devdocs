@@ -1,6 +1,6 @@
-# Conditional
+# Conditional Operators
 
-
+Find below the various conditional operators.
 
 | Core validation types |
 | --------------------- |
@@ -79,3 +79,24 @@
 |                           |
 | //object registers        |
 | VALUE = 0xc9              |
+
+
+
+| GENESIS = 0xca,    |
+| ------------------ |
+| TIMESTAMP = 0xcb,  |
+| OPERATIONS = 0xcc, |
+| CONDITIONS = 0xcd, |
+
+
+
+| HEIGHT = 0xd0,   |
+| ---------------- |
+| SUPPLY = 0xd1,   |
+| TIMESTAMP = 0xd2 |
+
+
+
+| SK256 = 0xe0, |
+| ------------- |
+| SK512 = 0xe1  |

@@ -9,9 +9,8 @@
 * [📱 Mobile Wallet](why-nexus/mobile-wallet.md)
 * [🌎 Hybrid Network](why-nexus/hybrid-network.md)
 * [📃 Advanced Contracts](why-nexus/advanced-contracts/README.md)
-  * [Primitive](why-nexus/advanced-contracts/primitive.md)
-  * [Conditional](why-nexus/advanced-contracts/conditional.md)
-  * [Register](why-nexus/advanced-contracts/register.md)
+  * [Primitive Operators](why-nexus/advanced-contracts/primitive-operators.md)
+  * [Conditional Operators](why-nexus/advanced-contracts/conditional-operators.md)
 
 ## Nexus For Developers&#x20;
 
