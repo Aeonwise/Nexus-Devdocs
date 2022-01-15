@@ -8,7 +8,9 @@
 * [🔟 10 Reasons to Build on Nexus?](why-nexus/10-reasons-to-build-on-nexus.md)
 * [📱 Mobile Wallet](why-nexus/mobile-wallet.md)
 * [🌎 Hybrid Network](why-nexus/hybrid-network.md)
-* [📃 Advanced Contracts](why-nexus/advanced-contracts.md)
+* [📃 Advanced Contracts](why-nexus/advanced-contracts/README.md)
+  * [Primitive](why-nexus/advanced-contracts/primitive.md)
+  * [Page 2](why-nexus/advanced-contracts/page-2.md)
 
 ## Nexus For Developers&#x20;
 
