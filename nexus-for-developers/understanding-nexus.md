@@ -4,7 +4,7 @@ description: Things to understand before building on Nexus.
 
 # 🤓 Understanding Nexus
 
-Nexus is a community run project and compared to other crypto projects, we differ in our thinking and that reflects in the way Nexus is designed and developed. Nexus is at best a toolbox and as it stands today, will  not provide a finished product to users, except the fully functional desktop and mobile wallets. We are confident the community will build applications for end users which will start a symbiotic relationship.
+Nexus is a community run project and compared to other crypto projects, our vision reflects the Nexus architecture and development. Nexus is at best a toolbox, and as it stands today will  not provide a finished product to users, except the fully functional desktop and mobile wallets. We are confident the community will build applications for end users which will start a symbiotic cycle of organic growth.
 
 {% hint style="info" %}
 #### Good to know:
