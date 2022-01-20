@@ -20,6 +20,14 @@ If you have settled on Nexus then go through this section to understand Nexus de
 [understanding-nexus](nexus-for-developers/understanding-nexus/)
 {% endcontent-ref %}
 
+## Ethereum Ecosystem to Nexus
+
+Seasoned Ethereum developer want to try your hands on Nexus. Check the link below
+
+{% content-ref url="nexus-for-developers/understanding-nexus/ethereum-to-nexus.md" %}
+[ethereum-to-nexus.md](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
+{% endcontent-ref %}
+
 ## Testnet
 
 Want to test things before you bring it into the real world, we have you covered. We provide a full fledged testnet for our developers:
