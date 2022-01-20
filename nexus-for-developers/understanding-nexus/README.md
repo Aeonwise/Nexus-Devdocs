@@ -69,7 +69,7 @@ Non-fungible is something that is distinct or unique and cannot be replaced with
 
 Below image shows the various use-cases which can powered by non fungible tokens
 
-![NFT Use-cases](../.gitbook/assets/NFT.jpeg)
+![NFT Use-cases](../../.gitbook/assets/NFT.jpeg)
 
 {% hint style="info" %}
 Protected assets will also be available at a later time.

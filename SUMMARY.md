@@ -14,8 +14,8 @@
 
 ## Nexus For Developers&#x20;
 
-* [🤓 Understanding Nexus](nexus-for-developers/understanding-nexus.md)
-* [Ethereum to Nexus](nexus-for-developers/ethereum-to-nexus.md)
+* [🤓 Understanding Nexus](nexus-for-developers/understanding-nexus/README.md)
+  * [Ethereum to Nexus](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
 
 ## TESTNET&#x20;
 

@@ -16,8 +16,8 @@ If you are new here, then we highly recommend to go through this section which w
 
 If you have settled on Nexus then go through this section to understand Nexus design and the various components which are critical for a great experience
 
-{% content-ref url="nexus-for-developers/understanding-nexus.md" %}
-[understanding-nexus.md](nexus-for-developers/understanding-nexus.md)
+{% content-ref url="nexus-for-developers/understanding-nexus/" %}
+[understanding-nexus](nexus-for-developers/understanding-nexus/)
 {% endcontent-ref %}
 
 ## Testnet
