@@ -12,11 +12,11 @@ If you are someone who has experience developing on Ethereum, EVM compatible or 
 * Nexus is not interoperable with other chains and we have a very good reason for that.
 * Nexus is still under heavy development. Refer to the [roadmap](https://nexus.io/roadmap) for more details.
 
-## How to Build on Nexus:
+## How to Build on Nexus
 
 Nexus does not have a smart-contract programming language similar to Ethereum. As said before being a unique architecture; the options to build on Nexus are as below.
 
-### INTEGRATED API:
+### INTEGRATED API
 
 Today development is made possible with the REST API which is a higher level API. This empowers  web developers and even no-code developers to build blockchain applications.
 
@@ -24,7 +24,7 @@ Today development is made possible with the REST API which is a higher level API
 [api-overview](../../api/api-overview/)
 {% endcontent-ref %}
 
-### ADVANCED DEVELOPERS:
+### ADVANCED DEVELOPERS
 
 For more advanced developers who need full creative control, we have developed augmented contacts which can be used with any domain specific language of choice.
 
