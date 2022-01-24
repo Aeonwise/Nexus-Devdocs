@@ -46,7 +46,7 @@ Nexus has designed a multi pronged approach to tackle development on Nexus. This
 
 ### Query DSL
 
-Query DSL is one of the contract language that adds capabilities similar to SQL query, including wildcard search and logical operators, enabling one to search or filter any digital asset or token on Nexus directly through the API. For example, one could search Property Titles in Arizona. This feature sets the foundation for a decentralized search engine.
+Query DSL is one of the contract languages that adds capabilities similar to SQL query, including wildcard search and logical operators, enabling one to search or filter any digital asset or token on Nexus directly through the API. For example, one could search Property Titles in Arizona. This feature sets the foundation for a decentralized search engine.
 
 The Query DSL allows you to search any aspect of the chain, you can also filter and even operate on the queried dataset. Supported operators are: _`min, max, mean, mode, sum, floor, array, sdev, median`._ More operators will be available at a later date.
 
