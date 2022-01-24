@@ -86,9 +86,10 @@ More information will be provided when Contracts DSL is nearing completion.
 
 ### Augmented Contracts
 
-Augmented contracts are based on the conditional interpreter, but functionality will be extended. Conditional VM will be a subset of Augmented, such as in my function I have an if statement, this is executed as a condition. But augmented will allow writing complex code. For instance I have an account, I do an operator overload function for DEBIT, that can add additional requirements for a debit from that account such as max amount per time interval, etc. I could add another public method that could be invoked by another user to draw an amount on my account if they fullfill a certain condition, so forth. It will be the full implementation of our interpreter where we will have the functionality of most languages like Java and C++.
+For advanced developers who need full creative control, we have developed Augmented Contacts which can be used with any domain specific language of choice. Today we have Conditional Contracts, Primitive Operators, and Registers.&#x20;
 
+Conditional VM will be a subset of Augmented, such as in my function I have an _`if`_ statement, this is executed as a condition. But augmented will allow writing complex code. For instance I have an account, I do an operator overload function for `DEBIT`, that can add additional requirements for a debit from that account such as max amount per time interval, etc. I could add another public method that could be invoked by another user to draw an amount on my account if they fulfill a certain condition, so forth. It will be the full implementation of our interpreter where we will have the functionality of most languages like Java and C++.
 
+Augmented Contracts are the second type of contracts that will be available in the Tritium Protocol. These types of contracts extend the Conditional VM (Virtual Machine that processes Conditional Statements) to provide additional benefits including, but not limited to, methods, functions, operation overloading, and encapsulation. Augmented contracts add a layer of complexity and processing, so will carry a higher fee to execute. This will require more on-chain processing, but overall makes our Contract Engine much more powerful.
 
-
-
+The goal of Augmented Contracts is to provide relative capabilities of complex languages like C++, so we will support polymorphism, operator overloading, functions, methods, public, private, protected, unique, etc. augmented contracts builds on the existing VM- and register-based architecture. More programmable languages and things like maps, vectors, functions, etc. will come with augmented contracts.

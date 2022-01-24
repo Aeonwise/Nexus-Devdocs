@@ -24,17 +24,9 @@ Today development is made possible with the REST API which is a higher level API
 [api-overview](../../api/api-overview/)
 {% endcontent-ref %}
 
-### ADVANCED DEVELOPERS
+### Contracts on Nexus
 
-For more advanced developers who need full creative control, we have developed augmented contacts which can be used with any domain specific language of choice.
-
-Today we have Conditional Contracts, Primitive Operators, and Registers. More programmable languages and things like maps, vectors, functions, etc. will come with augmented contracts
-
-Augmented Contracts are the second type of contracts that will be available in the Tritium Protocol. These types of contracts extend the Conditional VM (Virtual Machine that processes Conditional Statements) to provide additional benefits including, but not limited to, methods, functions, operation overloading, and encapsulation. Augmented contracts add a layer of complexity and processing, so will carry a higher fee to execute. This will require more on-chain processing, but overall makes our Contract Engine much more powerful
-
-The goal of augmented contracts is to provide relative capabilities of complex languages like C++, so we will support polymorphism, operator overloading, functions, methods, public, private, protected, unique, etc. augmented contracts builds on the existing VM- and register-based architecture.
-
-For more information on Nexus Advanced Contracts check out the page below:
+Click on the link below to read more:
 
 {% content-ref url="../../why-nexus/advanced-contracts/" %}
 [advanced-contracts](../../why-nexus/advanced-contracts/)
