@@ -38,11 +38,11 @@ More information will be provided in the future when new updates are released
 
 ## API Layer
 
-The API layer extrapolates from the contracts (registers and operation layers). The developers can easily use the API, rather than having to code "a smart contract'". Even though API layer is not a contract layer it uses the same contract layers, this highlights the brilliant architecture of the software stack as same contracts can be made available to nocode or web developers or to integrate into existing applications at the same time abstracting them from the complexity of coding or understanding blockchain. &#x20;
+The API layer extrapolates from the contracts (registers and operation layers). The developers can easily use the API, rather than having to code "a smart contract'". Even though API layer is not a contract layer it uses the same contract layers, this highlights the brilliant architecture of the software stack as same contracts can be made available to no-code, web developers or to integrate into existing applications, at the same time abstracting them from the complexity of code or blockchain. &#x20;
 
 ## Contracts on Nexus
 
-Nexus has designed a multi pronged approach to tackle development on Nexus. This gives everyone a chance to be part of the Nexus ecosystem.
+Nexus has designed a multi pronged approach to tackle development on Nexus. This gives everyone an opportunity to be part of the Nexus ecosystem. The details of the various contracts on Nexus are given below
 
 ### Query DSL
 
@@ -88,15 +88,15 @@ What that means is we will be able to deploy new contract standards without need
 
 When a user sends funds, they get an extra drop-down that allows to select a contract to send under. Step towards real world use of smart contracts
 
-### Conditional Contracts DSL
+### Conditional Contracts DSL (Coming Soon)
 
 Conditional Contracts DSL, a new standards to be written in a higher level language and compiled into bytecode. Designed for users who will be developing new API’s or contract standards. It enables conditional contracts to be written directly into the API with the use of English, which is a crucial step in realising the full potential of Tritium’s contract functionality. This approach also allows people to be able to read or interpret contracts. This will reveal a lot of new functionality to developers.
 
 We thus far have maintained the standard contracts as embedded constants in the codebase. The ability for developers to code new contracts, provides the opportunity for a dynamic standardization using Nexus to manage this state, similar to dynamic object modelling.
 
-More information will be provided when Contracts DSL is nearing completion.
+More specific information will be updated when Contracts DSL is nearing completion.
 
-### Augmented Contracts
+### Augmented Contracts ( Roadmap-2022)
 
 For advanced developers who need full creative control, we have developed Augmented Contacts which can be used with any domain specific language of choice. Today we have Conditional Contracts, Primitive Operators, and Registers.&#x20;
 
