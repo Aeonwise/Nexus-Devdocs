@@ -24,11 +24,11 @@ Nexus will have different types of contracts, for the higher level API's, templa
 
 To put in a simple way, contracts are a request to perform a specific type of instruction on data which results in change in the data. In the Nexus software stack the `Operations layer` contains the  instructions or actions that give registers context, and define more complex contract logic and `Register layer` is the data layer.  A contract is an object containing: a register pre-state (the register that is being operated on that was passed upwards from the Register Layer), a primitive operation (only one primitive operation per contract), and a set of conditions (any amount of conditional operations).
 
-### **Primitive Operations:**
+### **Primitive Operations**
 
 The current iteration of the Operations Layer contains 16 primitive operations, and 54 conditional operations and types. The primitive operations can be best described as the actions taking place on the register such as: WRITE, DEBIT, TRANSFER, APPEND, etc. These actions themselves cause the register to change its state in some way or form, including its movement from one signature chain to another.
 
-### **Conditional Contracts:**
+### **Conditional Contracts**
 
 Conditional Contracts are an agreement between participating parties, outlining a set of requirements that must be met for a transaction to complete. They are the building blocks that allow users to engage with one another, such as contract expiration, or the exchanging of items. More advanced forms of non-custodial escrow or arbitration are also possible. Conditional statements have no limit to their complexity, being capable of handling groups of groups of conditions that together evaluate to either true or false. In the case the conditions return true, this allows the recipient of the transaction to claim their funds or object (depending on if this was a TRANSFER or DEBIT). In the case that the recipient is unable to satisfy the conditions, after a period of time set by the sender, the transaction will be redeemable.
 
@@ -36,7 +36,13 @@ Conditional Contracts are an agreement between participating parties, outlining 
 More information will be provided in the future when new updates are released
 {% endhint %}
 
-## Contracts on Nexus:
+## API Layer
+
+The API layer extrapolates from the contracts (registers and operation layers). The developers can easily use the API, rather than having to code "a smart contract'". Even though API layer is not a contract layer it uses the same contract layers, this highlights the brilliant architecture of the software stack as same contracts can be made available to nocode or web developers or to integrate into existing applications at the same time abstracting them from the complexity of coding or understanding blockchain. &#x20;
+
+## Contracts on Nexus
+
+Nexus has designed a multi pronged approach to tackle development on Nexus. This gives everyone a chance to be part of the Nexus ecosystem.
 
 ### Query DSL
 
@@ -62,7 +68,11 @@ This will give same dataset, but give you a JSON array of the names that start w
 register/list/names/name,owner where='object.name=l*'
 ```
 
-This will respond with name and owner fields, somewhat like a SQL query where you do select name FROM names. So it gives a developer data modelling capabilities on top of the blockchain functionality
+This will respond with name and owner fields, somewhat like a SQL query where you do select name FROM names. So it gives a developer data modelling capabilities on top of the blockchain functionality.
+
+A global search of entire chain takes 1 to 2 seconds. Running the first register command I get:
+
+`[Completed in 1862.234494 ms]`
 
 For more information, check out the link below:
 
@@ -78,9 +88,11 @@ What that means is we will be able to deploy new contract standards without need
 
 When a user sends funds, they get an extra drop-down that allows to select a contract to send under. Step towards real world use of smart contracts
 
-#### Conditional Contracts DSL:
+### Conditional Contracts DSL
 
-That will lead into the Contracts DSL, a new standards to be written in a higher level language and compiled into bytecode. This will reveal a lot of new functionality to developers.&#x20;
+Conditional Contracts DSL, a new standards to be written in a higher level language and compiled into bytecode. Designed for users who will be developing new API’s or contract standards. It enables conditional contracts to be written directly into the API with the use of English, which is a crucial step in realising the full potential of Tritium’s contract functionality. This approach also allows people to be able to read or interpret contracts. This will reveal a lot of new functionality to developers.
+
+We thus far have maintained the standard contracts as embedded constants in the codebase. The ability for developers to code new contracts, provides the opportunity for a dynamic standardization using Nexus to manage this state, similar to dynamic object modelling.
 
 More information will be provided when Contracts DSL is nearing completion.
 
