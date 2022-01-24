@@ -1,5 +1,5 @@
 ---
-description: Contracts on Nexus are called as Advanced contracts
+description: Designed for real world, the everyone's everyday contracts.
 ---
 
 # 📃 Advanced Contracts
@@ -94,7 +94,7 @@ Conditional Contracts DSL, a new standards to be written in a higher level langu
 
 We thus far have maintained the standard contracts as embedded constants in the codebase. The ability for developers to code new contracts, provides the opportunity for a dynamic standardization using Nexus to manage this state, similar to dynamic object modelling.
 
-More specific information will be updated when Contracts DSL is nearing completion.
+More specific information will be updated when available.
 
 ### Augmented Contracts ( Roadmap-2022)
 
@@ -105,3 +105,5 @@ Conditional VM will be a subset of Augmented, such as in my function I have an _
 Augmented Contracts are the second type of contracts that will be available in the Tritium Protocol. These types of contracts extend the Conditional VM (Virtual Machine that processes Conditional Statements) to provide additional benefits including, but not limited to, methods, functions, operation overloading, and encapsulation. Augmented contracts add a layer of complexity and processing, so will carry a higher fee to execute. This will require more on-chain processing, but overall makes our Contract Engine much more powerful.
 
 The goal of Augmented Contracts is to provide relative capabilities of complex languages like C++, so we will support polymorphism, operator overloading, functions, methods, public, private, protected, unique, etc. augmented contracts builds on the existing VM- and register-based architecture. More programmable languages and things like maps, vectors, functions, etc. will come with augmented contracts.
+
+More specific information will be updated when available.
