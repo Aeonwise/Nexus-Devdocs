@@ -1,6 +1,6 @@
 # Primitive Operators
 
-Find below the primitive operators
+Find below the primitive operators:
 
 | //used for pattern matching                              |
 | -------------------------------------------------------- |

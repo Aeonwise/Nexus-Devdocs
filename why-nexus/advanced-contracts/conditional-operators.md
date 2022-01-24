@@ -1,6 +1,6 @@
 # Conditional Operators
 
-Find below the various conditional operators.
+Find below the various conditional operators:
 
 | Core validation types |
 | --------------------- |

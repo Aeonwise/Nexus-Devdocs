@@ -1,5 +1,5 @@
 ---
-description: Designed for real world, the everyone's everyday contracts.
+description: Designed for the real world, the everyone's everyday contracts.
 ---
 
 # 📃 Advanced Contracts
