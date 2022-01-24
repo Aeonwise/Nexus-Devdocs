@@ -90,7 +90,7 @@ When a user sends funds using the Nexus Interface, they get an extra drop-down t
 
 ### Conditional Contracts DSL (Coming Soon)
 
-Conditional Contracts DSL, a new standards to be written in a higher level language and compiled into bytecode. Designed for users who will be developing new API’s or contract standards. It enables conditional contracts to be written directly into the API with the use of English, which is a crucial step in realising the full potential of Tritium’s contract functionality. This approach also allows people to be able to read or interpret contracts. This will reveal a lot of new functionality to developers.
+Conditional Contracts DSL, a new standard to be written in a higher-level language and compiled into bytecode. Designed for users who will be developing new API’s or contract standards. It enables conditional contracts to be written directly into the API with the use of English, which is a crucial step in realising the full potential of Tritium’s contract functionality. This approach also allows people to be able to read or interpret contracts. This will reveal a lot of new functionality to developers.
 
 We thus far have maintained the standard contracts as embedded constants in the codebase. The ability for developers to code new contracts, provides the opportunity for a dynamic standardization using Nexus to manage this state, similar to dynamic object modelling.
 
