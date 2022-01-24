@@ -35,3 +35,60 @@ Conditional Contracts are an agreement between participating parties, outlining 
 {% hint style="info" %}
 More information will be provided in the future when new updates are released
 {% endhint %}
+
+## Contracts on Nexus:
+
+### Query DSL
+
+Query DSL is another contract language that adds capabilities similar to SQL query, including wildcard search and logical operators, enabling one to search or filter any digital asset or token on Nexus directly through the API. For example, one could search Property Titles in Arizona. This feature sets the foundation for a decentralized search engine.
+
+The Query DSL allows you to search any aspect of the chain, you can also filter and even operate on the queried dataset. Supported operators are: _`min, max, mean, mode, sum, floor, array, sdev, median`._ More operators will be available at a later date.
+
+Query basically gives SQL functionality over a blockchain dataset. The operators make it have Excel functionality, among others. It's really powerful for developers. It can even search the entire chain:
+
+```
+register/list/names where='object.name=l*' 
+```
+
+Above will show every name that starts with the letter `'l'`. It can then run operators on that, by filtering out fields:
+
+```
+register/list/names/name/array where='object.name=l*'
+```
+
+This will give same dataset, but give you a JSON array of the names that start with `'l'`, not including the other fields. It also supports multiple filters:
+
+```
+register/list/names/name,owner where='object.name=l*'
+```
+
+This will respond with name and owner fields, somewhat like a SQL query where you do select name FROM names. So it gives a developer data modelling capabilities on top of the blockchain functionality
+
+For more information, check out the link below:
+
+{% content-ref url="../../api/api-overview/tritium++-api/register.md" %}
+[register.md](../../api/api-overview/tritium++-api/register.md)
+{% endcontent-ref %}
+
+### Conditional Contracts
+
+Conditional contracts are binary contract templates, users will be able to select a contract standard to send with. This will lead into dynamic allocation of contract standards and object standards per command-set. Standardization where we can allocate new contracts that will automatically populate in standards lists, without the need for a wallet upgrade.
+
+What that means is we will be able to deploy new contract standards without needing to release new wallet. It will read a public sigchain that records contract and object standards. This will lead into dynamic constants as well, such as fees so that we can adjust consensus critical values without the need for hard forks or updates to the core daemon.
+
+When a user sends funds, they get an extra drop-down that allows to select a contract to send under. Step towards real world use of smart contracts
+
+#### Conditional Contracts DSL:
+
+That will lead into the Contracts DSL, a new standards to be written in a higher level language and compiled into bytecode. This will reveal a lot of new functionality to developers.&#x20;
+
+More information will be provided when Contracts DSL is nearing completion.
+
+### Augmented Contracts
+
+Augmented contracts are based on the conditional interpreter, but functionality will be extended. Conditional VM will be a subset of Augmented, such as in my function I have an if statement, this is executed as a condition. But augmented will allow writing complex code. For instance I have an account, I do an operator overload function for DEBIT, that can add additional requirements for a debit from that account such as max amount per time interval, etc. I could add another public method that could be invoked by another user to draw an amount on my account if they fullfill a certain condition, so forth. It will be the full implementation of our interpreter where we will have the functionality of most languages like Java and C++.
+
+
+
+
+
