@@ -38,15 +38,15 @@ More information will be provided in the future when new updates are released
 
 ## API Layer
 
-The API layer extrapolates from the contracts (registers and operation layers). The developers can easily use the API, rather than having to code "a smart contract'". Even though API layer is not a contract layer it uses the same contract layers, this highlights the brilliant architecture of the software stack as same contracts can be made available to no-code, web developers or to integrate into existing applications, at the same time abstracting them from the complexity of code or blockchain. &#x20;
+The API layer extrapolates from the contracts (registers and operation layers). The developers can easily use the API, rather than having to code _`"a smart-contract".`_ Even though API layer is not a contract layer it uses the same contract layers which can be directly accessed by domain specific languages (DSL), to create custom contracts. This highlights the brilliant architecture of the software stack as same contracts can be made available to no-code, web developers or to integrate into existing applications, at the same time abstracting them from the complexity of code or blockchain. &#x20;
 
 ## Contracts on Nexus
 
-Nexus has designed a multi pronged approach to tackle development on Nexus. This gives everyone an opportunity to be part of the Nexus ecosystem. The details of the various contracts on Nexus are given below
+Nexus has designed a multi pronged approach to tackle development on Nexus. This gives everyone an opportunity to build and integrate truly decentralized solutions. The details of the various contracts on Nexus are given below
 
 ### Query DSL
 
-Query DSL is another contract language that adds capabilities similar to SQL query, including wildcard search and logical operators, enabling one to search or filter any digital asset or token on Nexus directly through the API. For example, one could search Property Titles in Arizona. This feature sets the foundation for a decentralized search engine.
+Query DSL is one of the contract language that adds capabilities similar to SQL query, including wildcard search and logical operators, enabling one to search or filter any digital asset or token on Nexus directly through the API. For example, one could search Property Titles in Arizona. This feature sets the foundation for a decentralized search engine.
 
 The Query DSL allows you to search any aspect of the chain, you can also filter and even operate on the queried dataset. Supported operators are: _`min, max, mean, mode, sum, floor, array, sdev, median`._ More operators will be available at a later date.
 
@@ -86,7 +86,7 @@ Conditional contracts are binary contract templates, users will be able to selec
 
 What that means is we will be able to deploy new contract standards without needing to release new wallet. It will read a public sigchain that records contract and object standards. This will lead into dynamic constants as well, such as fees so that we can adjust consensus critical values without the need for hard forks or updates to the core daemon.
 
-When a user sends funds, they get an extra drop-down that allows to select a contract to send under. Step towards real world use of smart contracts
+When a user sends funds using the Nexus Interface, they get an extra drop-down that allows to select from a list of standard template contracts to send under. This is a major step towards real world use of smart contracts.
 
 ### Conditional Contracts DSL (Coming Soon)
 
