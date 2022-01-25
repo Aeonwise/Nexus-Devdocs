@@ -29,16 +29,10 @@ This is a video guide for setting up a CLI node
 
 [Install ubuntu server 20.04 LTS](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview) or distro of choice, install open-ssh server during the install and once the installation is complete restart the node. SSH in node and follow the below commands.  Copy the commands and paste it in the terminal using keys CTRL+SHIFT+v
 
-Update your node:
+Update and upgrade the node:
 
 ```
-sudo apt update
-```
-
-Upgrade the node:
-
-```
- sudo apt upgrade -y
+sudo apt update; sudo apt upgrade -y
 ```
 
 Open SSH port before enabling firewall:
