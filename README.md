@@ -32,7 +32,9 @@ The genesis block of Nexus was mined on September 23rd of 2014 at 16:20:00 GMT â
 
 Nexus has a max supply of 78,000,000 NXS, which will be mined by September, 2024 and after that there will be tail end emission of 3.67% max. Mining will emit 0.67% and staking will emit 3% if all the NXS are staked.
 
-### Nexus Innovations:
+### Nexus Innovations
+
+Nexus has created a very unique and innovative blockchain, a result of an in-depth R\&D on the expectations of people from blockchain, and how to make it accessible to all people. Listed below are the key design innovations.
 
 1. 7 layer Software Stack
 2. Signature Chains
@@ -46,9 +48,17 @@ Nexus has a max supply of 78,000,000 NXS, which will be mined by September, 2024
 10. Location identification seperation protocol (LISP) - Future
 11. LX-OS - Future
 
+### Throughput
+
 Nexus throughput on Tritium is 655 TPS, and each Tx can hold upto a max 100 contracts. 655\*100=65500 contracts per second theoretical max.
 
 {% hint style="info" %}
 Tritium++ throughput has seen a lot of improvements and will be updated with Tritium++ launch
 {% endhint %}
+
+## Nexus
+
+For more information on Nexus, the technology, wallet, mining and glossary, click the link below:
+
+{% embed url="https://docs.nexus-interactions.io" %}
 
