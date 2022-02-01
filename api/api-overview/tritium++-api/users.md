@@ -164,7 +164,7 @@ This will start a session for your user account with this specific API instance.
 
 `/users/login/user`
 
-{% swagger method="post" path="users/login/user" baseUrl="http://test1api.nexus-interations.io:7080/" summary="Starts a user session" %}
+{% swagger method="post" path="users/login/user" baseUrl="http://test1api.nexus-interactions.io:7080/" summary="Starts a user session" %}
 {% swagger-description %}
 This will start a session for your user account with this specific API instance. Username, password, and pin fields are mandatory for login
 {% endswagger-description %}
@@ -258,7 +258,7 @@ This will log you out of this specific API, and delete your credentials stored i
 
 `/users/logout/user`
 
-{% swagger method="post" path="users/logout/user" baseUrl="http://test1api.nexus-interations.io:7080/" summary="End user session" %}
+{% swagger method="post" path="users/logout/user" baseUrl="http://test1api.nexus-interactions.io:7080/" summary="End user session" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -674,7 +674,7 @@ Return status information for the currently logged in user
 
 `/users/get/status`
 
-{% swagger method="post" path="" baseUrl="" summary="User Status" %}
+{% swagger method="post" path="/users" baseUrl="http://api.nexus-interactions.io:8080" summary="User Status" %}
 {% swagger-description %}
 Return status information for the currently logged in user
 {% endswagger-description %}
