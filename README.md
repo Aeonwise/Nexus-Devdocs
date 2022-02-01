@@ -8,8 +8,8 @@ description: A place where you will find all the information needed to build on 
 
 Nexus is a next-generation blockchain technology that is **re-building the internet** from the ground up.
 
-{% hint style="warning" %}
-This is a living document, work in progress and will be updated regularly after completion
+{% hint style="success" %}
+This is a living document and will be updated regularly.
 {% endhint %}
 
 ## Why Nexus?
