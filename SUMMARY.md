@@ -48,7 +48,6 @@
     * [OBJECTS](api/api-overview/tritium-api/objects.md)
   * [⚙ Tritium++ API](api/api-overview/tritium++-api/README.md)
     * [Query DSL](api/api-overview/tritium++-api/register.md)
-    * [USERS](api/api-overview/tritium++-api/users.md)
     * [FINANCE](api/api-overview/tritium++-api/finance.md)
     * [SYSTEM](api/api-overview/tritium++-api/system.md)
     * [REGISTER](api/api-overview/tritium++-api/register-1.md)
@@ -56,3 +55,10 @@
 ## Fees
 
 * [💰 Fee Structure](fees/fee-structure.md)
+
+## Under Construction
+
+* [Under Construction Pages](under-construction/under-construction-pages/README.md)
+  * [Page 2](under-construction/under-construction-pages/page-2/README.md)
+    * [system](under-construction/under-construction-pages/page-2/system.md)
+  * [USERS](under-construction/under-construction-pages/users.md)
