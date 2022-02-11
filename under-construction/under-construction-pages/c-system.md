@@ -1,4 +1,8 @@
-# system
+---
+description: SYSTEM API
+---
+
+# c-system
 
 The System API provides public access to information about this node. This includes data such as the version of software the node is running, ledger and mempool state, node IP address, and connected peers.
 
@@ -6,12 +10,12 @@ The System API provides public access to information about this node. This inclu
 
 The following methods are currently supported by this API
 
-[`stop`](system.md#stop)\
-[`get/info`](system.md#get-info)\
-[`get/metrics`](system.md#get-metrics)\
-[`list/peers`](system.md#list-peers)\
-[`list/lisp-eids`](system.md#list-lisp-eids)\
-[`validate/address`](system.md#validate-address)
+[`stop`](c-system.md#stop)\
+[`get/info`](c-system.md#get-info)\
+[`get/metrics`](c-system.md#get-metrics)\
+[`list/peers`](c-system.md#list-peers)\
+[`list/lisp-eids`](c-system.md#list-lisp-eids)\
+[`validate/address`](c-system.md#validate-address)
 
 ### `stop`
 
