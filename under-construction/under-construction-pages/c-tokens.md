@@ -2,7 +2,7 @@
 description: TOKENS API
 ---
 
-# TOKENS
+# c-tokens
 
 The Tokens API provides methods for creating fungible tokens, creating accounts to store them in, and sending and receiving tokens between users.
 
@@ -20,18 +20,18 @@ The logic for resolving the shortcut to either a name or address is that if the 
 
 The following methods are currently supported by this API
 
-[`create/token`](tokens.md#create-token)\
-[`debit/token`](tokens.md#debit-token)\
-[`credit/token`](tokens.md#credit-token)\
-[`get/token`](tokens.md#get-token)\
-[`burn/token`](tokens.md#burn-token)\
-[`list/token/transactions`](tokens.md#list-token-transactions)\
-[`list/token/accounts`](tokens.md#list-token-accounts)\
-[`create/account`](tokens.md#create-account)\
-[`debit/account`](tokens.md#debit-account)\
-[`credit/account`](tokens.md#credit-account)\
-[`get/account`](tokens.md#get-account)\
-[`list/account/transactions`](tokens.md#list-account-transactions)
+[`create/token`](c-tokens.md#create-token)\
+[`debit/token`](c-tokens.md#debit-token)\
+[`credit/token`](c-tokens.md#credit-token)\
+[`get/token`](c-tokens.md#get-token)\
+[`burn/token`](c-tokens.md#burn-token)\
+[`list/token/transactions`](c-tokens.md#list-token-transactions)\
+[`list/token/accounts`](c-tokens.md#list-token-accounts)\
+[`create/account`](c-tokens.md#create-account)\
+[`debit/account`](c-tokens.md#debit-account)\
+[`credit/account`](c-tokens.md#credit-account)\
+[`get/account`](c-tokens.md#get-account)\
+[`list/account/transactions`](c-tokens.md#list-account-transactions)
 
 ### `create/token`
 
@@ -2213,5 +2213,3 @@ print(response.json())
 `token_name` : The name of the token that the transaction relates to.
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
-
-***
