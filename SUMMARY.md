@@ -59,6 +59,8 @@
 ## Under Construction
 
 * [Under Construction Pages](under-construction/under-construction-pages/README.md)
+  * [c-objects](under-construction/under-construction-pages/c-objects.md)
+  * [c-crypto](under-construction/under-construction-pages/c-crypto.md)
   * [c-invoices](under-construction/under-construction-pages/c-invoices.md)
   * [c-names](under-construction/under-construction-pages/c-names.md)
   * [c-supply](under-construction/under-construction-pages/c-supply.md)
