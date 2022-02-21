@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Welcome to Nexus Developer Documentation](README.md)
+* [Nexus Developer Documentation](README.md)
 * [Quick Start](quick-start.md)
 
 ## Why Nexus?
