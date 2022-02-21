@@ -12,9 +12,11 @@ Nexus core  is used to run the public, private and hybrid nodes and the configur
 
 ### &#x20;What is a Hybrid Network?
 
-Hybrid networks allows private and public chains to coexist. This allows the company's sensitive sales and finance data to be truly private and secure, but still be secured with the public chain by creating a state recording checkpoints on the public network.
+Hybrid networks allows private and public chains to coexist as a single entity. This allows the company's sensitive sales and finance data on the private chain to be truly private and secure, but still be secured with the public chain by creating a state recording checkpoints on the public network. Hybrid network can have their own consensus mechanisms implemented if required.
 
 Hybrid networks lets the Nexus chain to scale horizontally, as it offloads processing to the private nodes and that creates parallel processing chains. When a lot of hybrid networks join the public chain the Nexus blockchain can scale massively while preserving privacy and security of the private networks.
+
+
 
 {% hint style="info" %}
 More details on Hybrid Networks will be provided as the development is completed
