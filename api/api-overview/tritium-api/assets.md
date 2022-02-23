@@ -237,6 +237,10 @@ print(response.json())
 * `mutable` : The boolean field to indicate whether the field is writable (true) or read-only (false).
 * `maxlength`: Only applicable to `string` or `bytes` fields where `mutable`=true, this is the maximum number of characters (bytes) that can be stored in the field. If no maxlength parameter is provided then we will default the field size to the length of the default value rounded up to the nearest 64 bytes.
 
+{% hint style="warning" %}
+There is a limit of 1KB for asset data to be saved in the register, excluding the Asset Name
+{% endhint %}
+
 #### Example:
 
 The following is an example of an asset defined using the `basic` format:

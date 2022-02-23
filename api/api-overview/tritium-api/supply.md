@@ -118,6 +118,10 @@ print(response.json())
 
 `data` : The data to store in the item
 
+{% hint style="warning" %}
+There is a limit of 1KB for Item data to be saved in the register, excluding the Item Name
+{% endhint %}
+
 #### Return value JSON object:
 
 ```
