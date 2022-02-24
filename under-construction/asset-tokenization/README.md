@@ -4,9 +4,15 @@ Asset tokenization is a new concept that uses digital tokens to fractionalize ow
 
 On Nexus Asset tokenization is the process by which an issuer creates an "_**Asset**_ which represents a digital or physical asset, a fungible token and then link them together (Tokenizing). The tokens now represents that particular "_**Asset**_. &#x20;
 
-Asset Tokenization makes it easy for anyone to create a fractional ownership of an asset. It also makes it easy to distribute the dividend or profits to the asset owners in percentage of their holdings automatically.
+Asset Tokenization makes it easy for anyone to create a fractional ownership of an asset. It also makes it easy to distribute the dividend or profits to the asset owners in percentage of their holdings automatically at that point of time.&#x20;
 
-&#x20;
+### Why Nexus for Asset Tokenization?
+
+Nexus provides lot of benefits for any type of user who is looking to Tokenize an Asset. Firstly any user can tokenize an asset using the Nexus Wallet Interface and is abstracted from code or smart-contracts. It allows true peer-to-peer (P2P) asset creation and sale using the on-chain P2P Marketplace via the Marketplace module in the Interface. It is cheap to mint assets, tokens and free to transfer tokens. It also automatically payout profits or dividend to the asset token holders in proportion of the tokens held at that point of time.&#x20;
+
+Watch the video below on which explains Asset Tokenization.
+
+{% embed url="https://www.youtube.com/watch?v=b0MLQcDlHbA" %}
 
 
 
@@ -19,6 +25,10 @@ Suppose you have a property worth $500,000 in New York, NY. Asset tokenization c
 {% hint style="warning" %}
 NXS payout sent to an asset will be distributed to the asset token holders as per the % of their holdings at that point of time. If any tokens are held in the originating contract then the  % of the payout which corresponds to the % of tokens held, will be credited back to the payout account when the debit contract expires.
 {% endhint %}
+
+Nexus can transform many industries and the way investors interact with businesses and brokerage firms. This can enable the creation of borderless networks where investors, businesses, and communities can interact with each other without a central authority.
+
+
 
 Tokenization is poised to become the next big thing in the financial markets because it provides the following benefits:
 
