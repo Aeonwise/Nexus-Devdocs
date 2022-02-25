@@ -26,31 +26,45 @@ Install ubuntu server 20.04 LTS or distro of your choice, install open-ssh serve
 
 Update and upgrade your node:
 
-`sudo apt update; sudo apt upgrade -y`
+```
+sudo apt update; sudo apt upgrade -y
+```
 
 Open SSH port before you enable firewall:
 
-`sudo ufw allow ssh`
+```
+sudo ufw allow ssh
+```
 
 Enable firewall:
 
-`sudo ufw enable`
+```
+sudo ufw enable
+```
 
 Check firewall status:
 
-`sudo ufw status`
+```
+sudo ufw status
+```
 
 Set timezone:
 
-`sudo dpkg-reconfigure tzdata`
+```
+sudo dpkg-reconfigure tzdata
+```
 
 If you need to change the hostname – Not compulsory if you already set it during the install
 
-`sudo hostnamectl set-hostname`
+```
+sudo hostnamectl set-hostname
+```
 
 Reboot node:
 
-`sudo reboot`
+```
+sudo reboot
+```
 
 Now the computer is ready to install the nexus core
 
