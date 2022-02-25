@@ -71,4 +71,5 @@
   * [c-ledger](under-construction/under-construction-pages/c-ledger.md)
   * [c-users](under-construction/under-construction-pages/users.md)
 * [Asset Tokenization](under-construction/asset-tokenization/README.md)
+  * [Private Node](under-construction/asset-tokenization/private-node.md)
   * [How to Tokenise an Asset?](under-construction/asset-tokenization/how-to-tokenise-an-asset.md)
