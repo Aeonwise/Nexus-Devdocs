@@ -1,6 +1,8 @@
-# Private Node
+---
+description: How to setup and Run a Private Network
+---
 
-
+# Run a Private Node
 
 This guide will help to set up a private testnet. The Nexus wallet is used to run public, private and hybrid networks, the configuration is what sets them apart. The private and hybrid networks will not be compatible with legacy.
 
