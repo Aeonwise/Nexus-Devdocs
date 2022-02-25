@@ -17,18 +17,22 @@
 * [🤓 Understanding Nexus](nexus-for-developers/understanding-nexus/README.md)
   * [Ethereum to Nexus](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
 
-## TESTNET&#x20;
-
-* [🛠 Testnet Node](testnet/testnet/README.md)
-  * [Run a Testnet Node](testnet/testnet/run-a-testnet-node.md)
-  * [Tritium++ Private Testnet](testnet/testnet/tritium++-private-testnet.md)
-
 ## MAINNET
 
 * [🖥 Mainnet Node](mainnet/nodes/README.md)
   * [Run a Mainnet Node -CLI](mainnet/nodes/run-a-mainnet-node-cli.md)
   * [Connect Node to Interface](mainnet/nodes/connect-node-to-interface.md)
   * [Update Mainnet CLI Node](mainnet/nodes/update-mainnet-node.md)
+
+## TESTNET&#x20;
+
+* [🛠 Testnet Node](testnet/testnet/README.md)
+  * [Run a Testnet Node](testnet/testnet/run-a-testnet-node.md)
+  * [Tritium++ Private Testnet](testnet/testnet/tritium++-private-testnet.md)
+
+## PRIVATE NETWORK
+
+* [Private Node](private-network/private-node.md)
 
 ## API
 
@@ -71,5 +75,4 @@
   * [c-ledger](under-construction/under-construction-pages/c-ledger.md)
   * [c-users](under-construction/under-construction-pages/users.md)
 * [Asset Tokenization](under-construction/asset-tokenization/README.md)
-  * [Private Node](under-construction/asset-tokenization/private-node.md)
   * [How to Tokenise an Asset?](under-construction/asset-tokenization/how-to-tokenise-an-asset.md)
