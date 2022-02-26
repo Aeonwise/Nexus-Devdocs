@@ -28,6 +28,14 @@ Seasoned Ethereum developer want to try your hands on Nexus. Check the link belo
 [ethereum-to-nexus.md](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
 {% endcontent-ref %}
 
+## Mainnet
+
+Learn how to setup a mainnet node to power you DApps, stake or just to learn how things work:
+
+{% content-ref url="mainnet/nodes/" %}
+[nodes](mainnet/nodes/)
+{% endcontent-ref %}
+
 ## Testnet
 
 Want to test things before you bring it into the real world, we have you covered. We provide a full fledged testnet for our developers:
@@ -36,12 +44,12 @@ Want to test things before you bring it into the real world, we have you covered
 [testnet](testnet/testnet/)
 {% endcontent-ref %}
 
-## Mainnet
+## Private Network:
 
-Learn how to setup a mainnet node to power you DApps, stake or just to learn how things work:
+Run a Private Network powered by the Nexus core for Enterprises or Organisation, or check out Nexus before you decide it is the best fit or compare it to other permissioned options available.
 
-{% content-ref url="mainnet/nodes/" %}
-[nodes](mainnet/nodes/)
+{% content-ref url="private-network/private-node/" %}
+[private-node](private-network/private-node/)
 {% endcontent-ref %}
 
 ## API keys
