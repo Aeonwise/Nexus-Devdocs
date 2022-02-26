@@ -48,8 +48,8 @@ Want to test things before you bring it into the real world, we have you covered
 
 Run a Private Network powered by the Nexus core for Enterprises or Organisation, or check out Nexus before you decide it is the best fit or compare it to other permissioned options available.
 
-{% content-ref url="private-network/private-node/" %}
-[private-node](private-network/private-node/)
+{% content-ref url="private/private-node/" %}
+[private-node](private/private-node/)
 {% endcontent-ref %}
 
 ## API keys

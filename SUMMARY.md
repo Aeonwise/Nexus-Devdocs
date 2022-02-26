@@ -30,10 +30,10 @@
   * [Run a Testnet Node](testnet/testnet/run-a-testnet-node.md)
   * [Tritium++ Private Testnet](testnet/testnet/tritium++-private-testnet.md)
 
-## PRIVATE NETWORK
+## PRIVATE
 
-* [🔐 Private Node](private-network/private-node/README.md)
-  * [Run a Private Node](private-network/private-node/run-a-private-node.md)
+* [🔐 Private Node](private/private-node/README.md)
+  * [Run a Private Node](private/private-node/run-a-private-node.md)
 
 ## API
 
