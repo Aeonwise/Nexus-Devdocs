@@ -32,7 +32,7 @@
 
 ## PRIVATE NETWORK
 
-* [Private Node](private-network/private-node/README.md)
+* [🔐 Private Node](private-network/private-node/README.md)
   * [Run a Private Node](private-network/private-node/run-a-private-node.md)
 
 ## API
