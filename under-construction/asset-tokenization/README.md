@@ -1,8 +1,12 @@
+---
+description: Everything there is to know about Asset Tokenization
+---
+
 # Asset Tokenization
 
 **Asset Tokenization** also referred as  "_Asset Backed Tokens"_ or "T_okenized Assets"_ is a new concept that uses digital tokens to fractionalize ownership of assets such as property, jewellery or fine art and uses contracts on blockchain to manage these ownership rights.&#x20;
 
-On Nexus Asset tokenization is the process by which an issuer creates an "_**Asset**_ which represents a digital or physical asset, a fungible token and then link them together (Tokenizing). The tokens now represents that particular "_**Asset**_. &#x20;
+On Nexus Asset tokenization is the process by which an issuer creates an "_**Asset**_ which represents a digital or physical asset, a fungible token and then links them together (Tokenizing). The tokens now represents that particular "_**Asset**_. &#x20;
 
 Watch this video below, which explains Asset Tokenization.
 
@@ -12,17 +16,17 @@ Watch this video below, which explains Asset Tokenization.
 
 Nexus Blockchain provides lot of benefits for every type of user who is looking to tokenize an Asset. Firstly any user can tokenize an asset using the Wallet Interface and is abstracted from code, writing smart-contracts or dealing with a third party tokenizing service.&#x20;
 
-It allows true peer-to-peer (P2P) asset creation and sale using the on-chain P2P Marketplace module in the Interface. It is cheap to mint assets, tokens and free to transfer tokens. When a user sends a payout to the asset, It automatically pays out the asset token holders in proportion to the tokens held at that point of time.&#x20;
+It allows direct onchain asset creation and sale using the on-chain Peer-to-Peer P2P Marketplace module in the Interface. It is cheap to mint assets, tokens and free to transfer tokens. When a user sends a payout to the asset, It automatically pays out the asset token holders in proportion to the tokens held at that point of time.&#x20;
 
-Asset Tokenization can transform many industries and the way investors interact with businesses and brokerage firms. This can enable the creation of borderless networks where investors, businesses, and communities can interact with each other without a central authority.
+Asset Tokenization can transform many industries and the way investors interact from the existing intermediary system to a P2P system. This can enable the creation of borderless networks where investors, businesses, and communities can interact with each other without a central authority.
 
 ### **Why Are Tokens Better Than Traditional Assets?** <a href="#why-are-tokens-better-than-traditional-assets" id="why-are-tokens-better-than-traditional-assets"></a>
 
-The main benefits of tokenization come from automation via Advanced contracts, algorithms that start actions only if certain conditions are met. Smart contracts drop intermediaries, which raise costs and decrease the speed of transactions.
+The main benefits of tokenization come from automation via advanced contracts, algorithms that start actions only if certain conditions are met. Advanced contracts make intermediaries, which raise costs and decrease the speed of transactions.
 
-Generally, bonds and equities are assets with high liquidity in electronic form controlled by the establishment, in contrast to assets such as vehicles, real estate, jewellery, art and collectibles which lack access to high trading volumes, trading opportunities on exchanges, and liquidity.
+Generally, bonds and equities are high liquidity assets, in electronic form controlled by the establishment. In contrast assets such as vehicles, real estate, jewellery, art and collectibles lack access to high trading volumes, trading opportunities on exchanges, and liquidity.
 
-With smart contracts, costs are lowered, and transaction speed is improved.
+With Nexus Advanced contracts, costs are lowered and transactions are fast. The P2P marketplace will enable P2P transfers and give you access to more people&#x20;
 
 \
 
