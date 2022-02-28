@@ -22,11 +22,11 @@ Asset Tokenization can transform many industries and the way investors interact 
 
 ### **Why Are Tokens Better Than Traditional Assets?** <a href="#why-are-tokens-better-than-traditional-assets" id="why-are-tokens-better-than-traditional-assets"></a>
 
-The main benefits of tokenization come from automation via advanced contracts, algorithms that start actions only if certain conditions are met. Advanced contracts make intermediaries redundant, which saves costs, additional IT infrastructure to manage the records of fractional ownership and the overheads.
+The main benefits of tokenization come from automation via advanced contracts, algorithms that start actions only if certain conditions are met. Advanced contracts make intermediaries, which raise costs and decrease the speed of transactions.
 
 Generally, bonds and equities are high liquidity assets, in electronic form controlled by the establishment. In contrast assets such as vehicles, real estate, jewellery, art and collectibles lack access to high trading volumes, trading opportunities on exchanges, and liquidity.
 
-With Nexus Advanced contracts it will be cheap and fast. The P2P marketplace will enable users to buy / sell onchain, this will bring more security and give access to a lot more people.
+With Nexus Advanced contracts, costs are lowered and transactions are fast. The P2P marketplace will enable P2P transfers and give you access to more people&#x20;
 
 \
 
