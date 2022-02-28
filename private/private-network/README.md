@@ -12,9 +12,7 @@ In other words, it is a permissioned and restrictive blockchain that operates in
 
 **Why Nexus Private Mode ?**
 
-Nexus core allows users to create a private network and configure it as per their needs. Even though the core is the same that powers the public network, it can be configured to run as Hybrid network or private network. Enterprises or organisations get an open source blockchain at no extra cost. They also get the benefit from regular updates and a big community which tests the software at a very large scale.
-
-The private mode has much higher TPS compared to the public network. The private network can be distributed by adding mode nodes at strategic locations, which will give it more
+Nexus core allows users to create a private network and configure it as per their needs. Even though the core is the same that powers the public network, it can be configured to run as Hybrid network or private network. Enterprises or organisations get an open source blockchain at no extra cost. They also get the benefit of regular updates and a big community which tests the software at a very large scale. The private mode has much higher TPS compared to the public network. The private network can be distributed by adding mode nodes at strategic locations, which makes it resilient.
 
 ### **Advantages of Private Network**
 
@@ -22,9 +20,11 @@ The Nexus private network has many advantages which are listed below.&#x20;
 
 **No Fees & Zero Cost:** The Nexus Private network allows you to transact without fees. The Nexus Core is available free of cost to be tested and Implemented.
 
-**Scalable:**  Nexus Private mode has higher transaction per second (TPS) around 10K TPS compared to 655 TPS on Public chain and are highly scalable. This is possible due to the limited no of nodes and location which have low latency internet connections.&#x20;
+**Scalable:**  Nexus Private mode has higher transaction per second (TPS) around 10K TPS compared to 655 TPS on Public chain and are highly scalable. This is possible due to the limited no of nodes and location which have low latency internet connections.
 
-**Open Source and Tested:** The Nexus Core is open source and all code is tested extensively by the community.&#x20;
+**Secure:** Nexus core uses the latest security standards and is quantum resistant which makes it highly secure and future proof. The code is constantly updated and new features are added which makes it secure and upto date with all the technical advancements in the blockchain space.
+
+**Open Source:** The Nexus Core is open source and all code is tested extensively by the community.&#x20;
 
 **Efficient:** Nexus core is very efficient, and this is because they have fewer participants, meaning they can move faster.
 
