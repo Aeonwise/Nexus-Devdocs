@@ -22,27 +22,21 @@ Asset Tokenization can transform many industries and the way investors interact 
 
 ### **Why Are Tokens Better Than Traditional Assets?** <a href="#why-are-tokens-better-than-traditional-assets" id="why-are-tokens-better-than-traditional-assets"></a>
 
-The main benefits of tokenization come from automation via advanced contracts, algorithms that start actions only if certain conditions are met. Advanced contracts make intermediaries, which raise costs and decrease the speed of transactions.
+The main benefits of tokenization come from automation via advanced contracts, algorithms that start actions only if certain conditions are met. Advanced contracts make intermediaries redundant, which saves costs, additional IT infrastructure to manage the records of fractional ownership and the overheads.
 
 Generally, bonds and equities are high liquidity assets, in electronic form controlled by the establishment. In contrast assets such as vehicles, real estate, jewellery, art and collectibles lack access to high trading volumes, trading opportunities on exchanges, and liquidity.
 
-With Nexus Advanced contracts, costs are lowered and transactions are fast. The P2P marketplace will enable P2P transfers and give you access to more people&#x20;
+With Nexus Advanced contracts it will be cheap and fast. The P2P marketplace will enable users to buy / sell onchain, this will bring more security and give access to a lot more people.
 
-\
-
+### Advantages of Asset Tokenization
 
 Tokenization is poised to become the next big thing in the financial markets because it provides the following benefits:
 
 * **Fractional Ownership** **Enables Low Minimum Investment Threshold:** In the traditional financial world, investment barriers can be extremely high. Think about the amount of investment required to buy a real estate asset or a piece of art. Tokenization, enables fractional ownership of an asset, which in turn lowers the minimum investment threshold, allowing even small retail investors to diversify their portfolios and enter the previously exclusive markets that were only available for large investors and beyond their reach.
 * **Liquidity** – By converting real-world asset to token backed, issuers can secure greater liquidity. For example, private securities are typically illiquid, which affects the trading process on secondary markets. Thanks to tokenization, this problem can be addressed to give investors more freedom to implement various strategies on scarcer assets. This enables anyone to tokenise their asset.
-* **No territorial barriers:** An investor can invest in a property located in any part of the world without visiting there physically. Investment becomes secure, fast and easy with asset tokenization on the blockchain.
+* **No Territorial Barriers:** An investor can invest in a property located in any part of the world without visiting there physically. Investment becomes secure, fast and easy with asset tokenization on the blockchain.
 * **No Administrative Burden:** Tokenized assets allow faster transactions with no administrative burden. Through the use of Advanced contracts cumbersome manual processes, clearing and settlement processes will be automated, streamlined, efficient and simplified.
-*   **Real-Time Traceability and  Validation:** With an immutable record of ownership, tokenized assets allow for improved traceability and transparency. Each record is documented on an immutable shared ledger that contains the whole history of activities performed over an asset. This ensures that relevant parties have a clear view of the updated ledger of ownership records. This also helps anyone verify themselves before they invest preventing fraud.
-
-    ‍
-
-    \
-
+* **Real-Time Traceability and  Validation:** With an immutable record of ownership, tokenized assets allow for improved traceability and transparency. Each record is documented on an immutable shared ledger that contains the whole history of activities performed over an asset. This ensures that relevant parties have a clear view of the updated ledger of ownership records. This also helps anyone verify themselves before they invest preventing fraud.‍
 * **Faster and Cheap:**  Modern blockchains not only enable fast and low-cost transactions, but also removes the intermediaries and this relates to the tokenized assets as well. Nexus is designed for high throughput with free simple transactions and low asset minting fees. This could speed up the adoption of tokenization as the main approach to deal with real-world assets.
 * **Transparency:** Blockchain has become one of the most important technologies thanks to its unique attributes, including immutability and transparency. Once a blockchain transaction has achieved finality, it cannot be reversed, canceled, or tampered with in any way. Nexus ensures that anyone can cheap the authenticity of the assets being sol
 * **Convenience:** Today, everyone can get exposure to stocks by buying shares or speculate on their price via derivatives through online platforms operated by intermediaries. The internet has transformed the way we invest, but blockchain can do even more by making the investment process more convenient, direct, secure and accessible.
@@ -62,9 +56,13 @@ The possibilities are endless as tokenization allows for both fractional ownersh
 
 **Services:** A business can offer goods or services as a way to raise funds or conduct business. Investors can use tokens to purchase goods or services provided by the supplier.
 
-Commodities:
+Commodities:&#x20;
 
 Startups: Startups are very risky, need a lot of capital and being risky it is difficult to secure capital in the normal way. Startup investment are not available to normal people. By Tokenizing a startup it will be easy to obtain capital and also will cater to a bigger population.
 
 
+
+Conclusion
+
+Asset tokenization opens a new avenue for a lot for people to monetize illiquid asset, and at the same time give more people more avenues to invest in a safe and easy way.  users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, peace of mind for the issuer and the investor.&#x20;
 
