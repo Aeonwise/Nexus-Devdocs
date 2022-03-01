@@ -60,7 +60,7 @@ The possibilities are endless as tokenization allows for both fractional ownersh
 
 ### Conclusion
 
-Asset tokenization opens a new avenue for a lot for people to monetize illiquid assets, and at the same time give people, avenues to invest in a safe and easy way. Users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, peace of mind for the issuer and the investor.&#x20;
+Asset tokenization opens a new avenues for a lot for people to monetize illiquid assets, and at the same time give people new opportunities to invest conveniently. Users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, convenience, peace of mind for the issuer and the investor.&#x20;
 
 If you are looking at Asset Tokenization on Nexus and need any help contact us at:
 
