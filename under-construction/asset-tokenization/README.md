@@ -40,31 +40,27 @@ Tokenization is poised to become the next big thing in the financial markets bec
 * **Faster and Cheap:**  Modern blockchains not only enable fast and low-cost transactions, but also removes the intermediaries and this relates to the tokenized assets as well. Nexus is designed for high throughput with free simple transactions and low asset minting fees. This could speed up the adoption of tokenization as the main approach to deal with real-world assets.
 * **Transparency:** Blockchain has become one of the most important technologies thanks to its unique attributes, including immutability and transparency. Once a blockchain transaction has achieved finality, it cannot be reversed, canceled, or tampered with in any way. Nexus ensures that anyone can cheap the authenticity of the assets being sol
 * **Convenience:** Today, everyone can get exposure to stocks by buying shares or speculate on their price via derivatives through online platforms operated by intermediaries. The internet has transformed the way we invest, but blockchain can do even more by making the investment process more convenient, direct, secure and accessible.
+* **Equal Opportunity Provider:** Asset Tokenization will give an opportunity for ordinary people, banked or unbanked to take part in investments. Today the more lucrative investments are not available to the general public and limited to accredited investors. Asset Tokenization will get rid of intermediaries which will create a more level playing field.
 
-\
+### **What can be tokenized?**
 
+The possibilities are endless as tokenization allows for both fractional ownership and proof-of-ownership. From traditional assets like venture capital funds, bonds, commodities, and real-estate properties to exotic assets like sports teams, race horses, artwork, and celebrities, companies worldwide use blockchain technology to tokenize almost anything.&#x20;
 
-#### **What can be tokenized?**
+**Assets:** An asset is any item of value that someone can transform into cash. It’s further divided into two classes: personal and business. Personal assets can include art and property. Business assets include assets that are present on the balance sheet.
 
-The possibilities are endless as tokenization allows for both fractional ownership and proof-of-ownership. From traditional assets like venture capital funds, bonds, commodities, and real-estate properties to exotic assets like sports teams, race horses, artwork, and celebrities, companies worldwide use blockchain technology to tokenize almost anything. However, we have grouped them into four main categories:
+**Equity**: Equity (shares) can be tokenized; however, the assets remain in the digital form of security tokens stored online in a wallet. It's similar to how investors typically buy shares on a stock exchange.
 
-**Asset:** An asset is any item of value that someone can transform into cash. It’s further divided into two classes: personal and business. Personal assets can include and property. Business assets include assets that are present on the balance sheet.
-
-**Equity**: Equity (shares) can be tokenized; however, the assets remain in the digital form of security tokens stored online in a wallet. Investors can typically buy shares on a stock exchange.
-
-**Funds:** An investment fund is a type of asset that investors can tokenize — these tokens represent an investors' share of the fund. Each investor is provided tokens which represent their share of the fund.
+**Funds:** An investment fund is a type of asset that investors can tokenize, these tokens represent an investors' share of the fund. Each investor is provided tokens which represent their share of the fund.
 
 **Services:** A business can offer goods or services as a way to raise funds or conduct business. Investors can use tokens to purchase goods or services provided by the supplier.
 
-Commodities:&#x20;
+**Commodities:** Many commodities will benefit from tokenization. The assets with strong value propositions are the ones to benefit from this process the most. Precious metals like palladium, platinum, and rhodium are currently being tokenized.
 
-Startups: Startups are very risky, need a lot of capital and being risky it is difficult to secure capital in the normal way. Startup investment are not available to normal people. By Tokenizing a startup it will be easy to obtain capital and also will cater to a bigger population.
+**Startups:** Startups are a risky bet, but if they take off there is a lot of money to be made. Today  normal people do not have easy access to invest in startups. They need a lot of capital and being risky it is difficult to secure capital in the traditional setup and this space is ruled by Venture Capitalists. Tokenizing a startup will make it easier to secure capital and also cater to a bigger populace and also it will make genuine startups to make a real difference.
 
+### Conclusion
 
-
-Conclusion
-
-Asset tokenization opens a new avenue for a lot for people to monetize illiquid asset, and at the same time give more people more avenues to invest in a safe and easy way. Users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, peace of mind for the issuer and the investor.&#x20;
+Asset tokenization opens a new avenue for a lot for people to monetize illiquid assets, and at the same time give people, avenues to invest in a safe and easy way. Users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, peace of mind for the issuer and the investor.&#x20;
 
 If you are looking at Asset Tokenization on Nexus and need any help contact us at:
 
