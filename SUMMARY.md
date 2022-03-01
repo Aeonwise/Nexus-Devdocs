@@ -11,6 +11,7 @@
 * [📃 Advanced Contracts](why-nexus/advanced-contracts/README.md)
   * [Primitive Operators](why-nexus/advanced-contracts/primitive-operators.md)
   * [Conditional Operators](why-nexus/advanced-contracts/conditional-operators.md)
+* [🏨 Asset Tokenization](why-nexus/asset-tokenization.md)
 
 ## Nexus For Developers&#x20;
 
@@ -75,5 +76,4 @@
   * [c-system](under-construction/under-construction-pages/c-system.md)
   * [c-ledger](under-construction/under-construction-pages/c-ledger.md)
   * [c-users](under-construction/under-construction-pages/users.md)
-* [Asset Tokenization](under-construction/asset-tokenization/README.md)
-  * [How to Tokenise an Asset?](under-construction/asset-tokenization/how-to-tokenise-an-asset.md)
+* [How to Tokenise an Asset?](under-construction/how-to-tokenise-an-asset.md)
