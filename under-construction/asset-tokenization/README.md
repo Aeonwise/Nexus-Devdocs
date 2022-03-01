@@ -64,5 +64,9 @@ Startups: Startups are very risky, need a lot of capital and being risky it is d
 
 Conclusion
 
-Asset tokenization opens a new avenue for a lot for people to monetize illiquid asset, and at the same time give more people more avenues to invest in a safe and easy way.  users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, peace of mind for the issuer and the investor.&#x20;
+Asset tokenization opens a new avenue for a lot for people to monetize illiquid asset, and at the same time give more people more avenues to invest in a safe and easy way. Users can tokenise their personal assets like private properties, art, music, videos and a lot of other things. Asset Tokenization on Nexus brings cost savings, security, peace of mind for the issuer and the investor.&#x20;
+
+If you are looking at Asset Tokenization on Nexus and need any help contact us at:
+
+{% embed url="https://t.me/NexusDevelopers" %}
 
