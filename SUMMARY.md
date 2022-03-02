@@ -11,12 +11,15 @@
 * [📃 Advanced Contracts](why-nexus/advanced-contracts/README.md)
   * [Primitive Operators](why-nexus/advanced-contracts/primitive-operators.md)
   * [Conditional Operators](why-nexus/advanced-contracts/conditional-operators.md)
-* [🏨 Asset Tokenization](why-nexus/asset-tokenization.md)
 
 ## Nexus For Developers&#x20;
 
 * [🤓 Understanding Nexus](nexus-for-developers/understanding-nexus/README.md)
   * [Ethereum to Nexus](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
+
+## USE-CASES
+
+* [🏨 Asset Tokenization](use-cases/asset-tokenization.md)
 
 ## MAINNET
 
@@ -77,3 +80,4 @@
   * [c-ledger](under-construction/under-construction-pages/c-ledger.md)
   * [c-users](under-construction/under-construction-pages/users.md)
 * [How to Tokenise an Asset?](under-construction/how-to-tokenise-an-asset.md)
+* [Usecases](under-construction/usecases.md)
