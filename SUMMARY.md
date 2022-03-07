@@ -20,8 +20,8 @@
 ## USE-CASES
 
 * [Use-Cases on Nexus](use-cases/use-cases-on-nexus/README.md)
-  * [🏨 Asset Tokenization](use-cases/use-cases-on-nexus/asset-tokenization.md)
-  * [Assets - NFT's](use-cases/use-cases-on-nexus/assets-nfts.md)
+  * [Assets - NFT's](use-cases/use-cases-on-nexus/assets-nfts/README.md)
+    * [🏨 Asset Tokenization](use-cases/use-cases-on-nexus/assets-nfts/asset-tokenization.md)
   * [Supply Chain - Track & Trace](use-cases/use-cases-on-nexus/supply-chain-track-and-trace.md)
   * [Certificates](use-cases/use-cases-on-nexus/certificates.md)
 

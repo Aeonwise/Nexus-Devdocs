@@ -25,9 +25,9 @@ NFT's can be transferred to other users which transfers the ownership of the Ass
 
 Assets can be used for various use-cases both digital and physical. Listed below are a few use-cases:
 
-![](../../.gitbook/assets/NFT.jpeg)
+![](../../../.gitbook/assets/NFT.jpeg)
 
-#### Digital
+#### Digital:
 
 * Digital Art
 * GIFs
@@ -36,7 +36,7 @@ Assets can be used for various use-cases both digital and physical. Listed below
 * Videos
 * Digital Land
 
-#### Real World  (Physical)
+#### Real World  (Physical):
 
 * Asset tokenization
 * Property Deeds&#x20;
@@ -52,6 +52,4 @@ Assets can be used for various use-cases both digital and physical. Listed below
 * Insurance
 * Domain Names
 
-This list is just the tip of the iceberg, there are a lot of ways to use Assets, creativity is the limit here.
-
-\
+This list is just the tip of the iceberg, there are a lot of ways to use Assets, creativity is the limit here.\
