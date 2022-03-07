@@ -6,11 +6,9 @@ description: End to End supply chain track and Trace
 
 Today’s supply chains are global networks that generally include manufacturers, suppliers, logistics companies, and retailers that work together to deliver products to consumers. As modern supply chains continue to expand, they also are becoming more complex and disparate. Typically, traditional supply chains use paper based and disjointed data systems that lead to information silos and make tracking products a time consuming task. Lack of traceability and transparency is an industry-wide challenge that leads to delays, errors, and increased costs. Modern supply chain participants need a unified view of data, while still being able to independently and privately verify transactions such as production and transport updates.
 
-Supply chain solutions built using Nexus **Supply API** can provide the end-to-end visibility. Today’s supply chains need to track and trace their entire production process with increased automation efficiency.
+Supply chain solutions built using Nexus **Supply API** can provide the end-to-end visibility. Today’s supply chains need to track and trace their entire production process with increased automation efficiency. Nexus supply chain solution has the potential to drive cost-saving efficiencies and to enhance the consumer experience through traceability and transparency. Improving supply chain management and taking it to another level. It is very easy to integrate it into existing systems.
 
-Blockchain supply chain has the potential to drive cost-saving efficiencies and to enhance the consumer experience through traceability, transparency, and trade-ability. Improving supply chain management and taking it to another level happens to be one of the best use cases of blockchain technology. To understand this, let’s first grasp what we mean by a supply chain.
-
-### Industry Use-Cases:
+### Industry Use-Cases
 
 #### FOOD & AGRICULTURE <a href="#food_and_agriculture" id="food_and_agriculture"></a>
 
