@@ -10,7 +10,7 @@ In traditional games, you buy the game – you play it. As you play, you find an
 
 You no longer need those items or weapons you found or purchased. All the work and time you put into the game, the assets you have are now meaningless. You can’t use them in another game, and you can’t sell them either because they are not your property.
 
-### Blockchain games?
+### Blockchain Gaming
 
 On a high level, they work similarly to traditional games. You play, find and discover items, weapons, and gear and use or equip those items while playing the game. However, the key difference with their traditional counterparts is that the assets exist outside of the game.
 
