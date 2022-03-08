@@ -28,14 +28,6 @@ Then the creator of the asset submits this data to the blockchain.  Now, since t
 
 For example, you want to send this shield to a gamer named Aeon4586, who won it in a giveaway competition. You transfer it to that gamer, and it is then stored in his Signature chain. Now, it is recorded on the blockchain that Aeon4586 is one of the 100 owners of the golden shield. You can verify this by checking the asset name or register address to see the asset details.
 
-* A player officially and provably owns assets.
-* Blockchain records this information for everyone to see.
-* Games check the blockchain to see what assets a person owns.
-* Blockchain game developers decide whether to include this item in their game.
-* To create this asset, a player doesn’t need to have any game to be developed beforehand.
-* Blockchain games become a multiverse, where gamers can use assets across different games, sell them at auctions, and put them on a marketplace outside the game.
-* Players are free to send their items peer to peer.
-
 ### Advantages of Blockchain Games
 
 * A player officially and provably owns game assets.
@@ -45,6 +37,7 @@ For example, you want to send this shield to a gamer named Aeon4586, who won it 
 * Blockchain games become a multiverse, where gamers can use assets across different games, sell them at auctions, and put them on a marketplace outside the game.
 * Players are free to send or sell their items peer to peer.
 * The time a player spends in a game to own in-game assets will not be a total waste and can be monetized.
+* Anyone can create an asset outside the game and that can be included in a game later.
 
 ### Conclusion
 
