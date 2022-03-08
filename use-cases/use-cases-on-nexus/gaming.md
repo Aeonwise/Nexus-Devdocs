@@ -1,5 +1,5 @@
 ---
-description: Nexus Use-cases in The Gaming Industry
+description: Nexus Use-cases in the Gaming Industry
 ---
 
 # 🎮 Gaming
@@ -16,12 +16,13 @@ On a high level, they work similarly to traditional games. You play, find and di
 
 When you turn off the game or stop playing altogether, you can use the items, for example, a sword or a shield, in another game, sell them on an external market or convert them into cryptocurrency. Blockchain makes each item unique and transferrable.
 
-Blockchain allows you to create items and store their information. For example, the requirements might be to create an item, name it, have a picture to go along with that item, define the quantity and the ownership of these items. It would look similar to this:
+Blockchain allows you to create items and store their information. For example, the requirements might be to create an asset, name it, have a picture to go along with that item, define the quantity and the ownership of these items. It would look similar to this:
 
-* Golden shield
-* Picture of the shield
-* Quantity – 100
-* Owner – the game creator, deciding on who will get them.
+* Sword
+* Picture of the Sword
+* Name of the Game
+* NO: 1 out of 100
+* Owner (Mutable) - the game creator, can be transferred and changed to new owner
 
 Then the creator of the asset submits this data to the blockchain.  Now, since this blockchain asset exists and we know that there are 100 golden shields, the person who holds them can give these assets away by transferring them on the blockchain.
 
