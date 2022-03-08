@@ -8,6 +8,10 @@ Today’s supply chains are global networks that generally include manufacturers
 
 Supply chain solutions built using Nexus **Supply API** can provide the end-to-end visibility. Today’s supply chains need to track and trace their entire production process with increased automation efficiency. Nexus supply chain solution has the potential to drive cost-saving efficiencies and to enhance the consumer experience through traceability and transparency. Improving supply chain management and taking it to another level. It is very easy to integrate it into existing systems.
 
+{% hint style="info" %}
+Nexus provides a unique Supply API intended for supply chain track and trace
+{% endhint %}
+
 ### Industry Use-Cases
 
 #### FOOD & AGRICULTURE <a href="#food_and_agriculture" id="food_and_agriculture"></a>
