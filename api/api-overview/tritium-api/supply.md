@@ -27,10 +27,6 @@ The following methods are currently supported by this API
 [`claim/item`](supply.md#claim-item)\
 [`list/item/history`](supply.md#list-item-history)
 
-***
-
-***
-
 ### `create/item`
 
 This will create a new item, assigning ownership to the user logged in to the provided session. The API supports an alternative endpoint that can include the new asset name in the URI. For example `supply/create/item/myitem` will resolve to `supply/create/item?name=myitem`.
