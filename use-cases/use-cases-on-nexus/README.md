@@ -24,6 +24,10 @@ Nexus can encompass a lot of use-cases today using API's and with the upcoming T
 [supply-chain-track-and-trace.md](supply-chain-track-and-trace.md)
 {% endcontent-ref %}
 
+{% content-ref url="gaming.md" %}
+[gaming.md](gaming.md)
+{% endcontent-ref %}
+
 {% content-ref url="certificates.md" %}
 [certificates.md](certificates.md)
 {% endcontent-ref %}

@@ -23,7 +23,7 @@
   * [🏫 Assets - NFT's](use-cases/use-cases-on-nexus/assets-nfts/README.md)
     * [🖼 Asset Tokenization](use-cases/use-cases-on-nexus/assets-nfts/asset-tokenization.md)
   * [🚚 Supply Chain - Track & Trace](use-cases/use-cases-on-nexus/supply-chain-track-and-trace.md)
-  * [Gaming](use-cases/use-cases-on-nexus/gaming.md)
+  * [🎮 Gaming](use-cases/use-cases-on-nexus/gaming.md)
   * [📰 Certificates](use-cases/use-cases-on-nexus/certificates.md)
 
 ## MAINNET

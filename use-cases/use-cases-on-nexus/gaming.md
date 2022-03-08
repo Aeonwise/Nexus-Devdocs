@@ -2,7 +2,7 @@
 description: Nexus Use-cases in The Gaming Industry
 ---
 
-# Gaming
+# 🎮 Gaming
 
 ### Traditional Gaming <a href="#why-does-gaming-need-blockchain" id="why-does-gaming-need-blockchain"></a>
 
@@ -45,4 +45,15 @@ For example, you want to send this shield to a gamer named Aeon4586, who won it 
 * Players are free to send or sell their items peer to peer.
 * The time a player spends in a game to own in-game assets will not be a total waste and can be monetized.
 
+### Conclusion
+
+Blockchain technology is still new, but it has a lot of potential for building exciting and engaging games. The combination of games and metaverse is the new trend , which is going to explode in popularity. We expect to see a lot more development in the coming years.
+
+Building blockchain games is not very different from blockchain app development, but there are nuances that you need to keep in mind before you start building, including your game model and the blockchain that you will use. Nexus makes is really easy to integrate blockchain functionality in existing games with the REST API's.
+
+Finally, blockchain gaming can change the way we play. It will be a complete transformation from how the games are funded to how players interact with each other and developers. Now, it’s the best time to start experimenting with the different possibilities, especially if you’re already familiar with blockchain technology.
+
+Blockchain-based games assets are decentralized and give people the opportunity to win real money or prizes. All these features make blockchain based games exciting, even for players who don’t usually enjoy these types of games.
+
+\
 \
