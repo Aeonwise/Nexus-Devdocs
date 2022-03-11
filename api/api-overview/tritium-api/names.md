@@ -45,7 +45,7 @@ The following methods are currently supported by this API
 This will create a new namespace. The API supports an alternative endpoint that can include the new namespace name in the URL. For example `/names/create/namespace/mynamespace` will resolve to `names/create/namespace?name=mynamespace`.
 
 {% hint style="info" %}
-**NOTE** : Namespace names can only contain **lowercase letters, numbers, and periods (.)**.
+**NOTE** : Namespaces can only contain **lowercase letters, numbers, and periods (.)**.
 {% endhint %}
 
 #### Endpoint:
