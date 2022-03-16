@@ -85,6 +85,4 @@
   * [c-system](under-construction/under-construction-pages/c-system.md)
   * [c-ledger](under-construction/under-construction-pages/c-ledger.md)
   * [c-users](under-construction/under-construction-pages/users.md)
-* [How to Tokenise an Asset?](under-construction/how-to-tokenise-an-asset.md)
 * [Nexus - Blockchain of Choice](under-construction/nexus-blockchain-of-choice.md)
-* [Usecases](under-construction/usecases.md)
