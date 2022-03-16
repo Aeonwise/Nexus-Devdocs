@@ -8,7 +8,7 @@ If you are someone who has experience developing on Ethereum, EVM compatible or 
 
 * Nexus has a disparate architecture compared to Ethereum or other protocol / base chains.
 * Nexus is a _`Verification`_ engine, unlike Ethereum which is a _`Computation`_ engine.
-* Nexus will be a pure layer 1 chain, we have ingenious solutions designed for scalability
+* Nexus will be a pure layer 1 chain solution, we have ingenious solutions designed for scalability
 * Nexus is not EVM compatible.
 * Nexus is not interoperable with other chains and we have a very good reason for that.
 * Nexus is still under heavy development. Refer to the [roadmap](https://nexus.io/roadmap) for more details.
