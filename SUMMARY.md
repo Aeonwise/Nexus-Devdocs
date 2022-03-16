@@ -86,4 +86,5 @@
   * [c-users](under-construction/under-construction-pages/users.md)
 * [How to Tokenise an Asset?](under-construction/how-to-tokenise-an-asset.md)
 * [Nexus - Blockchain of Choice](under-construction/nexus-blockchain-of-choice.md)
+* [Brick and Mortar Stores](under-construction/brick-and-mortar-stores.md)
 * [Usecases](under-construction/usecases.md)
