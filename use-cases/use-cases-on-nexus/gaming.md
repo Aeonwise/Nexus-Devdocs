@@ -26,7 +26,7 @@ Blockchain allows users to create items and store their information. For example
 
 Then the creator of the asset submits this data to the blockchain.  Now, since this blockchain asset exists and we know that there are 100 golden shields, the person who holds them can give these assets away by transferring them on the blockchain.
 
-For example, user wants to send this shield to a gamer named Aeon4586, who won it in a giveaway competition. User transfers it to that gamer, and it is then stored in his Signature chain. Now, it is recorded on the blockchain that Aeon4586 is one of the 100 owners of the golden shield. Anyone can verify this by checking the asset name or register address to see the asset details.
+For example, user wants to send this shield to a gamer named Aeon4586, who won it in a giveaway competition. User transfers it to that gamer, and it is then stored in his Signature chain. Now, it is recorded on the blockchain that Aeon4586 is one of the 100 owners of the golden shield. Anyone can verify this by checking the asset name or register address.
 
 ### Advantages of Blockchain Games
 
