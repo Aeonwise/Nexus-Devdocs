@@ -25,6 +25,7 @@
   * [🚚 Supply Chain - Track & Trace](use-cases/use-cases-on-nexus/supply-chain-track-and-trace.md)
   * [🎮 Gaming](use-cases/use-cases-on-nexus/gaming.md)
   * [📰 Certificates](use-cases/use-cases-on-nexus/certificates.md)
+  * [🏪 Brick and Mortar Store](use-cases/use-cases-on-nexus/brick-and-mortar-store.md)
 
 ## MAINNET
 
@@ -86,5 +87,4 @@
   * [c-users](under-construction/under-construction-pages/users.md)
 * [How to Tokenise an Asset?](under-construction/how-to-tokenise-an-asset.md)
 * [Nexus - Blockchain of Choice](under-construction/nexus-blockchain-of-choice.md)
-* [Brick and Mortar Store](under-construction/brick-and-mortar-store.md)
 * [Usecases](under-construction/usecases.md)

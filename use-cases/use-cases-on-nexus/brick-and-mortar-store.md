@@ -1,15 +1,15 @@
 ---
-description: Real world use-case
+description: Real world use-case for Brick & mortar Stores
 ---
 
-# Brick and Mortar Store
+# 🏪 Brick and Mortar Store
 
 Nexus has been designed for the real world, everyday use by the average joe and can be understood in this use-case. This can be easily implemented by any brick and motor stores to manage the store by integrating Nexus.
 
 Nexus can be used for payments, invoices, logistics and tracking, online marketplace.  To make it easy we need to understand how these things can be implemented.
 
 {% hint style="info" %}
-Depending on the location and regulations crypto payments might not be feasible. Lot of things need to be fined tuned to local regulations. The POS system also will need further tuning depends on usage and regulations&#x20;
+Depending on the location and regulations crypto payments might not be feasible. Lot of things need to be fined tuned to local regulations. The POS system also will need further tuning depends on usage and regulations .
 {% endhint %}
 
 ## How can it be Implemented
