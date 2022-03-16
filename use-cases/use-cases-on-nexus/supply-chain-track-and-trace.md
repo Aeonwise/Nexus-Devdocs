@@ -2,7 +2,7 @@
 description: End to End supply chain track and Trace
 ---
 
-# Supply Chain - Track & Trace
+# 🚚 Supply Chain - Track & Trace
 
 Today’s supply chains are global networks that generally include manufacturers, suppliers, logistics companies, and retailers that work together to deliver products to consumers. As modern supply chains continue to expand, they also are becoming more complex and disparate. Typically, traditional supply chains use paper based and disjointed data systems that lead to information silos and make tracking products a time consuming task. Lack of traceability and transparency is an industry-wide challenge that leads to delays, errors, and increased costs. Modern supply chain participants need a unified view of data, while still being able to independently and privately verify transactions such as production and transport updates.
 

@@ -2,7 +2,7 @@
 description: Asset = Non-Fungible Token
 ---
 
-# Assets - NFT's
+# 🏫 Assets - NFT's
 
 ### **What is an Asset (NFT)?**
 

@@ -2,7 +2,7 @@
 description: Everything there is to know about Asset Tokenization
 ---
 
-# 🏨 Asset Tokenization
+# 🖼 Asset Tokenization
 
 **Asset Tokenization** also referred as  "_Asset Backed Tokens"_ or "T_okenized Assets"_ is a new concept that uses digital tokens to fractionalize ownership of assets such as property, jewellery or fine art and uses contracts on blockchain to manage these ownership rights.&#x20;
 
