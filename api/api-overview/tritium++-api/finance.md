@@ -1148,13 +1148,13 @@ print(response.json())
 
 ### `list/trust`
 
-This will list off all of the NXS and token accounts belonging to the currently logged in signature chain or the username specified. This will not list the trust account.
+This will list only the trust account belonging to the currently logged in signature chain or the username specified. This will not list the NXS or token accounts.
 
 #### Endpoint:
 
 `/finance/list/trust`
 
-{% swagger method="post" path="/finance/list/trust" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
+{% swagger method="post" path="/finance/list/trust" baseUrl="http://api.nexus-interactions.io:8080" summary="list/trust" %}
 {% swagger-description %}
 This will list off all of the NXS accounts belonging to the currently logged in signature chain.
 {% endswagger-description %}
