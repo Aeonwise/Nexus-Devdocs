@@ -199,15 +199,159 @@ print(response.json())
 
 `modified` : The UNIX timestamp when the account was last modified.
 
+`type` : Type of register.
+
 `balance` : The current NXS balance of the trust account. This is general account balance that is not staked.
 
-`stake` : The amount of NXS currently staked in the trust account.
+`token` : The type of token or token account.
 
-`trust` : The current raw trust score of the trust account.
+`ticker` : The name of the account.
 
-`stakerate` : The current annual reward rate earned for staking as an annual percent.
+`total` : The total amount of NXS or token held by that account.
 
 ### list/names
+
+### `list/names`
+
+This will list off all of the names owned by the signature chain. For privacy reasons Names are only returned for the currently logged in user (multiuser=0) or for the logged in session (multiuser=1)
+
+{% hint style="info" %}
+**NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
+
+#### Endpoint:
+
+`/register/list/names`
+
+{% swagger method="post" path="/register/list/names" baseUrl="http://api.nexus-interactions.io:8080" summary="list/names" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode (configured with multiuser=1), the session is required to identify which signature chain should be used to return the Names for. For single-user API mode the session should not be supplied and the currently logged in users signature chain is used
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="names list" %}
+```json
+[
+
+    {
+        "name": "default",
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "register_address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    }
+
+
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/list/names
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    session: "YOUR_SESSION_ID", //optional
+    // username: "YOUR_USERNAME", // optional but slower to calculate
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/register/list/names`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "session": "YOUR_SESSION_ID",  # optional
+    # "username": "YOUR_USERNAME", # optional but slower to calculate
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/register/list/names", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`session` : For multi-user API mode (configured with multiuser=1), the session is required to identify which signature chain should be used to return the Names for. For single-user API mode the session should not be supplied and the currently logged in users signature chain is used.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+
+    {
+        "name": "default",
+        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+        "register_address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    }
+
+
+]
+```
+
+#### Return values:
+
+`created` : The UNIX timestamp when the Name was created.
+
+`modified` : The UNIX timestamp when the Name was last modified.
+
+`name` : The name identifying the object register.
+
+`address` : The register address of the Name.
+
+`register_address` : The register address of the the object that this Name points to.
 
 ### `list/trust`
 
