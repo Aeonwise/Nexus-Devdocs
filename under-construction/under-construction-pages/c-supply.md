@@ -2,7 +2,7 @@
 description: SUPPLY API
 ---
 
-# c-supply
+# c-SUPPLY
 
 The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a `data` value and this value can be updated over time. Items are stored in an APPEND register, meaning that changes to the item are recorded in sequence in the register. This in turn means that a history of changes to the `data` field, as well as the history of ownership of the item, can be obtained.
 
@@ -248,6 +248,154 @@ print(response.json())
     "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
     "data": "xxxxxx"
 }
+```
+
+#### Return values:
+
+`created` : The UNIX timestamp when the item was created.
+
+`modified` : The UNIX timestamp when the item was last modified.
+
+`name` : The name identifying the item. For privacy purposes, this is only included in the response if the caller is the owner of the item
+
+`address` : The register address of the item.
+
+`owner` : The genesis hash of the owner of the item.
+
+`data` : The data stored in the item.
+
+
+
+### `list/items`
+
+This will list off all of the supply chain items (append registers) owned by a signature chain.
+
+{% hint style="info" %}
+**NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
+
+#### Endpoint:
+
+`/users/list/items`
+
+{% swagger method="post" path="/users/list/items" baseUrl="http://api.nexus-interactions.io:8080" summary="list/items" %}
+{% swagger-description %}
+This will list off all of the supply chain items (append registers) owned by a signature chain
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="item list" %}
+```json
+[
+    {
+        "created": 1560982537,
+        "modified": 1560982615,
+        "name": "myitem",
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "data": "xxxxxx"
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/list/items
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME",
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/items`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/items", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
+
+`username` : The username identifying the signature chain (optional if genesis is supplied).
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "created": 1560982537,
+        "modified": 1560982615,
+        "name": "myitem",
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "data": "xxxxxx"
+    }
+]
 ```
 
 #### Return values:

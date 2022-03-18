@@ -1,4 +1,4 @@
-# c-invoices
+# c-INVOICES
 
 The Invoices API provides users and application developers the ability to issue and pay invoices on the Nexus blockchain. This API is a demonstration of how registers can be used to store arbitrary user data, and conditional contracts can be used to implement use-case rules. Invoices can be created and then sent to a recipient signature chain to be paid. The sending of the invoice is implemented using a TRANSFER contract, transferring ownership of the invoice register to the recipient. A conditional contract is applied to the TRANSFER operation preventing the recipient from claiming ownership unless the invoice amount is paid to the issuer.
 
@@ -410,6 +410,239 @@ print(response.json())
 `token` : The register address of the token that this invoice should be paid in. Set to 0 for NXS transactions
 
 `status` : The current status of this invoice. Values can be `OUTSTANDING` (the invoice has been issued but not paid), `PAID` (the invoice has been paid by the recipient), or `CANCELLED` (the invoice was cancelled by the issuer before payment).
+
+
+
+### `list/invoices`
+
+This will list all invoices issued or received by the signature chain.
+
+{% hint style="info" %}
+**NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
+
+#### Endpoint:
+
+`/users/list/invoices`
+
+{% swagger method="post" path="/users/list/invoices" baseUrl="http://api.nexus-interactions.io:8080" summary="list/invoices" %}
+{% swagger-description %}
+This will list all invoices issued or received by the signature chain
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" required="false" %}
+The genesis hash identifying the signature chain (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" required="false" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="status" required="false" %}
+Optional filter by invoice status. Values can be 
+
+`OUTSTANDING`
+
+ (the invoice has been issued but not paid), 
+
+`PAID`
+
+ (the invoice has been paid by the recipient), or 
+
+`CANCELLED`
+
+ (the invoice was cancelled by the issuer before payment)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" required="false" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" required="false" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" required="false" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" required="false" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="invoice details" %}
+```json
+   {
+        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
+        "created": 1581389015,
+        "modified": 1581389107,
+        "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "account": "8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N",
+        "recipient": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "number": "0004",
+        "PO": "Purch1234",
+        "contact": "accounts@mycompany.com",
+        "sender_detail": "My Company, 32 Some Street, Some Place",
+        "recipient_detail": "Some recipient details such as address or email",
+        "items": [
+            {
+                "description": "First item description",
+                "base_price": 1.0,
+                "tax": 0.1,
+                "unit_amount": "1.1",
+                "units": 3
+            },
+            {
+                "description": "Second item description",
+                "base_price": 5.0,
+                "tax": 0.5,
+                "unit_amount": "5.5",
+                "units": 1
+            }
+        ],
+        "amount": 8.8,
+        "token": "0",
+        "status": "PAID"
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/list/invoices
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    // genesis: "GENESIS_ID", //optional
+    username: "YOUR_USERNAME",
+    // status: "OUTSTANDING" //optional 
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/users/list/invoices`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "genesis": "GENESIS_ID", #optional
+    "username": "YOUR_USERNAME",
+    # "status": "OUTSTANDING" #optional
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/users/list/invoices", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
+
+`username` : The username identifying the signature chain (optional if genesis is supplied).
+
+`status` : Optional filter by invoice status. Values can be `OUTSTANDING` (the invoice has been issued but not paid), `PAID` (the invoice has been paid by the recipient), or `CANCELLED` (the invoice was cancelled by the issuer before payment)
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
+        "created": 1581389015,
+        "modified": 1581389107,
+        "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "account": "8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N",
+        "recipient": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
+        "number": "0004",
+        "PO": "Purch1234",
+        "contact": "accounts@mycompany.com",
+        "sender_detail": "My Company, 32 Some Street, Some Place",
+        "recipient_detail": "Some recipient details such as address or email",
+        "items": [
+            {
+                "description": "First item description",
+                "base_price": 1.0,
+                "tax": 0.1,
+                "unit_amount": "1.1",
+                "units": 3
+            },
+            {
+                "description": "Second item description",
+                "base_price": 5.0,
+                "tax": 0.5,
+                "unit_amount": "5.5",
+                "units": 1
+            }
+        ],
+        "amount": 8.8,
+        "token": "0",
+        "status": "PAID"
+    }
+]
+```
+
+#### Return values:
+
+`owner` : The genesis hash of the signature chain that owns this invoice.
+
+`created` : The UNIX timestamp when the invoice was created.
+
+`modified` : The UNIX timestamp when the invoice was last modified.
+
+`name` : The name identifying the invoice. For privacy purposes, this is only included in the response if the caller is the owner of the invoice
+
+`address` : The register address of the invoice.
+
+`recipient` : The genesis hash of the signature chain to issue the invoice to.
+
+`account` : The register address of the account the invoice should be paid to.
+
+`items` : Array of line items that make up this invoice.\
+{\
+`unit_amount` : The unit amount to be invoiced for this line item.
+
+`units` : The number of units to be invoiced at the unit amount.\
+}
+
+`amount` : The total invoice amount. This is the sum of all line item total amounts (unit\_amount x units).
+
+`token` : The register address of the token that this invoice should be paid in. Set to 0 for NXS transactions
+
+`status` : The current status of this invoice. Values can be `OUTSTANDING` (the invoice has been issued but not paid), `PAID` (the invoice has been paid by the recipient), or `CANCELLED` (the invoice was cancelled by the issuer before payment).
+
+***
 
 ***
 
