@@ -627,26 +627,28 @@ print(response.json())
 ```
 [
     {
-        "created": 1568025836,
-        "modified": 1568025836,
-        "name": "default",
-        "address": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
-        "token_name": "NXS",
+        "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+        "version": 1,
+        "created": 1638020495,
+        "modified": 1646840986,
+        "type": "OBJECT",
+        "balance": 1574818.992,
         "token": "0",
-        "balance": 5000,
-        "pending": 0.0,
-        "unconfirmed": 76.492244
+        "ticker": "NXS",
+        "address": "8CmjM4n8haU26RHRNeeP9NzXkEboN1bfgY7piEcv5AMd1brrJWd",
+        "name": "local:default"
     },
     {
-        "created": 1568025836,
-        "modified": 1568025836,
-        "name": "savings",
-        "address": "8GhrC2TKkU4ra9Uuj8LuiAyxDAtza2u483N1rKDSaVp24dNgUy9",
-        "token_name": "mytoken",
-        "token": "8GHrC2TKkU4ra9Uuj8LuiAyxDAtza2u483N1rKDSaVp24dNgUx8",
-        "balance": 10000.0,
-        "pending": 0.0,
-        "unconfirmed": 0.0
+        "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+        "version": 1,
+        "created": 1644350882,
+        "modified": 1644350882,
+        "type": "OBJECT",
+        "balance": 0.0,
+        "token": "8DGvmgAzEAmYkeUTN5SpgVjDH5zLEirTKNS9gbwqb559Z5Q7xeT",
+        "ticker": "Chalet Token",
+        "address": "8Bpa8PAsrznifpiwwAFT8cvSoUqbhggFPstfW5AuyqSZNrUepfo",
+        "name": "local:Chalet Token"
     }
 ]
 ```
