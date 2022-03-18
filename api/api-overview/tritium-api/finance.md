@@ -22,7 +22,7 @@ The following methods are currently supported by this API
 
 [`create/account`](finance.md#create-account)\
 [`debit/account`](finance.md#debit-account)\
-[`credit/account`](../../../getting-started/tritium-api/broken-reference/)\
+[`credit/account`](finance.md#credit-account)\
 [`get/account`](finance.md#get-account)\
 [`list/accounts`](finance.md#list-accounts)\
 [`list/account/transactions`](finance.md#list-account-transactions)\

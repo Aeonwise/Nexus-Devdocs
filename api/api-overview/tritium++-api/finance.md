@@ -653,6 +653,100 @@ Increment an amount received from another NXS account to an account owned by you
 
 `/finance/credit/account`
 
+{% swagger method="post" path="/finance/credit/account" baseUrl="http://api.nexus-interactions.io:8080" summary="credit/account" %}
+{% swagger-description %}
+Increment an amount received from another NXS account to an account owned by your signature chain.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="txid" %}
+The transaction ID (hash) of the corresponding debit transaction for which you are creating this credit for. The transaction can also be a legacy transaction created from sendtoaddress or sendmany where the inputs are UTXO but the output is an account register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the account to credit. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the account to credit. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_proof" %}
+The name identifying the account that proves your ownership of the share of the debit. This is only required for split payments and is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_proof" %}
+The register address of the account that proves your ownership of the share of the debit. This is only required for spit payments and is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account credited" %}
+```json
+{
+    "txid": "318b86d2c208618aaa13946a3b75f14472ebc0cce9e659f2830b17e854984b55606738f689d886800f21ffee68a3e5fd5a29818e88f8c5b13b9f8ae67739903d"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// credit/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional  
+    txid: "TRANSACTION ID(HASH) OF CORRESPONDING DEBIT TRANSACTION FOR WHICH YOU ARE CREATING THIS CREDIT FOR", // The transaction can also be a legacy transaction created from sendtoaddress or sendmany where the inputs are UTXO but the output is an account register address.
+    name: "username:name", //name identifying the account to credit, This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the address is provided.
+    // address: "REGISTER ADDRESS OF THE ACCOUNT TO CREDIT", //optional if the name is provided. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction)
+    name_proof: "username:name", //name identifying the account that proves your ownership of the share of the debit This is only required for split payments and is optional if the address is provided. 
+    // address_proof: "REGISTER ADDRESS OF ACCOUNT THAT PROVES YOUR OWNERSHIP OF THE SHARE OF THE DEBIT" //optional if the name is provided. This is only required for spit payments  
+}
+fetch(`${SERVER_URL}/finance/credit/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "txid": "TRANSACTION ID(HASH) OF CORRESPONDING DEBIT TRANSACTION FOR WHICH YOU ARE CREATING THIS CREDIT FOR", # The transaction can also be a legacy transaction created from sendtoaddress or sendmany where the inputs are UTXO but the output is an account register address.
+    "name": "username:name", # name identifying the account to credit, This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction) and is optional if the address is provided.
+    # "address": "REGISTER ADDRESS OF THE ACCOUNT TO CREDIT", #optional if the name is provided. This is only required when crediting a split payment transaction (where the receiving account is not included in the credit transaction)
+    "name_proof": "username:name", # name identifying the account that proves your ownership of the share of the debit This is only required for split payments and is optional if the address is provided.
+    # "address_proof": "REGISTER ADDRESS OF ACCOUNT THAT PROVES YOUR OWNERSHIP OF THE SHARE OF THE DEBIT" #optional if the name is provided. This is only required for spit payments
+}
+response = requests.post(f"{SERVER_URL}/finance/credit/account", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `pin` : The PIN for this signature chain.
@@ -705,6 +799,102 @@ Additionally the API supports passing a field name in the URL after the account 
 #### Endpoint:
 
 `/finance/get/account`
+
+{% swagger method="post" path="/finance/get/account" baseUrl="http://api.nexus-interactions.io:8080" summary="get/account" %}
+{% swagger-description %}
+Retrieves information about a NXS account 
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the NXS account to retrieve. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the name in order to deduce the register address of the object. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the NXS account to retrieve. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
+
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account details" %}
+```json
+{
+    "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+    "created": 1566534164,
+    "modified": 1566616211,
+    "name": "default",
+    "address": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
+    "token_name": "NXS",
+    "token": "0",
+    "data": "abcd1234",
+    "balance": 2903.239792,
+    "pending": 0.0,
+    "unconfirmed": 76.492244
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    name: "username:name", //name identifying the nxs account to retrieve. optional if the address is provided.
+    // session: "YOUR_SESSION_ID", //optional
+    // address : "REGISTER ADDRESS OF THE NXS ACCOUNT TO RETRIEVE", //optional if the name is provided.
+    // count : true, //optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    // fieldname: "FILTERING FIELD NAME", //optional
+}
+fetch(`${SERVER_URL}/finance/get/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "name": "username:name", # name identifying the nxs account to retrieve. optional if the address is provided.
+    # "session": "YOUR_SESSION_ID", #optional
+    # "address" : "REGISTER ADDRESS OF THE NXS ACCOUNT TO RETRIEVE", #optional if the name is provided.
+    # "count" : True, #optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    # "fieldname": "FILTERING FIELD NAME", #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/get/account", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -1407,6 +1597,75 @@ This will retrieve account values and staking metrics for the trust account belo
 
 `/finance/get/stakeinfo`
 
+{% swagger method="post" path="/finance/get/stakeinfo" baseUrl="http://api.nexus-interactions.io:8080" summary="get/stakeinfo" %}
+{% swagger-description %}
+This will retrieve account values and staking metrics for the trust account belonging to the currently logged in signature chain. If called when the stake minter is not running, this method only returns trust account values, Staking metrics will return 0
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "balance": 150,
+    "stake": 5000,
+    "trust": 54322,
+    "new": false,
+    "staking": true,
+    "pooled": false,
+    "onhold": false,
+    "stakerate": 1.97,
+    "trustweight": 58.97,
+    "blockweight": 47.62,
+    "stakeweight": 54.03,
+    "change": false
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/stakeinfo
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    fieldname: "FILTERING FIELD NAME" //optional
+}
+fetch(`${SERVER_URL}/finance/get/stakeinfo`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "fieldname": "FILTERING FIELD NAME"  # optional
+}
+response = requests.post(f"{SERVER_URL}/finance/get/stakeinfo", json=data)
+print(response.json())
+
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
@@ -1484,6 +1743,50 @@ To remove a stake change request, you can either set an expiration time, or set 
 #### Endpoint:
 
 `/finance/set/stake`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="set/stake" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// set/stake
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    amount: 1, // the new amount of NXS to stake 
+    expires: 0, // the new expiration time of the stake in seconds. 0 means no expiration
+}
+fetch(`${SERVER_URL}/finance/set/stake`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "amount": 1,  # the new amount of NXS to stake
+    "expires": 0,  # the new expiration time of the stake in seconds. 0 means no expiration
+}
+response = requests.post(f"{SERVER_URL}/finance/set/stake", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
