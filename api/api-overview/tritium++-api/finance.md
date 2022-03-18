@@ -1873,6 +1873,100 @@ This will retrieve a summary of balance information across all accounts belongin
 
 `/finance/get/balances`
 
+{% swagger method="post" path="/finance/get/balances" baseUrl="http://api.nexus-interactions.io:8080" summary="get/balances" %}
+{% swagger-description %}
+This will retrieve a summary of balance information across all accounts belonging to the currently logged in signature chain for a particular token type
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token_name" %}
+Optional name of a token to return the balances for. 
+
+`token`
+
+ can be supplied as an alternative to 
+
+`token_name`
+
+. Defaults to 
+
+`NXS`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token" %}
+Optional token address to return balances for. 
+
+`token_name`
+
+ can be supplied as an alternative to 
+
+`token`
+
+. Defaults to 
+
+`0`
+
+ (
+
+`NXS`
+
+)
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account balance" %}
+```json
+{
+    "token_name": "NXS",
+    "token": "0000000000000000000000000000000000000000000000000000000000000000",
+    "available": 1000,
+    "pending": 50,
+    "unconfirmed": 5,
+    "stake": 5000,
+    "immature": 100
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/balances
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    token_name: "NXS", // optional if token is passed
+    // token: "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",//optional if token_name is passed, Defaults to 0 (NXS)
+}
+fetch(`${SERVER_URL}/finance/get/balances`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "token_name": "NXS",  # optional if token is passed
+    # "token": "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",#optional if token_name is passed, Defaults to 0 (NXS)
+}
+response = requests.post(f"{SERVER_URL}/finance/get/balances", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied.
@@ -1920,6 +2014,99 @@ This will retrieve a summary of balance information across all accounts for each
 #### Endpoint:
 
 `/finance/list/balances`
+
+{% swagger method="post" path="/finance/list/balances" baseUrl="http://api.nexus-interactions.io:8080" summary="list/balances" %}
+{% swagger-description %}
+This will retrieve a summary of balance information across all accounts for each coin/token type owned, belonging to the currently logged in signature chain
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="list balances" %}
+```json
+[
+     {
+        "token_name": "NXS",
+        "token": "0000000000000000000000000000000000000000000000000000000000000000",
+        "available": 17002.095753,
+        "pending": 1.0,
+        "unconfirmed": 0.0,
+        "stake": 9000.0,
+        "immature": 0.0
+    },
+    {
+        "token_name": "ABC",
+        "token": "d7885b8ce210375377ee23d6b54f922ddb64c9c8e70fabd392753337331bf29a",
+        "available": 250.0,
+        "pending": 0.0,
+        "unconfirmed": 0.0
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/balances
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/balances`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/balances", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -1981,6 +2168,129 @@ This will list all known trust accounts
 #### Endpoint:
 
 `/finance/list/trustaccounts`
+
+{% swagger method="post" path="/finance/list/trustaccounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/trustaccounts" %}
+{% swagger-description %}
+This will list all known trust accounts
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="sort" %}
+Determines which field the results should be sorted on. Values can be 
+
+`balance`
+
+, 
+
+`stake`
+
+, or 
+
+`trust`
+
+. Default is 
+
+`trust`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="order" %}
+Determines the order of the sort. Values can be 
+
+`desc`
+
+ for descending (the default) or 
+
+`asc`
+
+ for ascending
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="trustaccounts list" %}
+```json
+[
+    {
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "a2cfad9f505f8166203df2685ee7cb8582be9ae017dcafa4ca4530cd5b4f1dca",
+        "created": 1569298627,
+        "modified": 1569359986,
+        "balance": 9.897773,
+        "stake": 1000000.0,
+        "stakerate": 0.5179354594112684
+    },
+    {
+        "address": "8FBtvmLSLqhVM9PsJ5Zzy1XzcZyP9XaEErjSoGPaoN5fBJaQbp8",
+        "owner": "a2e7b433a4dcb54c3b4dc1111d7945394dc3e140c9a400dc623b3f6d53ec758b",
+        "created": 1569306341,
+        "modified": 1569312960,
+        "balance": 0.004081,
+        "stake": 5000.0,
+        "stakerate": 0.5013274626265375
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/trustaccounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // sort: "trust", //determines which field the results should be sorted on , values can be balance, stake, or trust
+    // order: "desc", //determines the order of the sort, values can be asc or desc. Default is desc
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/trustaccounts`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "sort": "trust", #determines which field the results should be sorted on , values can be balance, stake, or trust
+    # "order": "desc", #determines the order of the sort, values can be asc or desc. Default is desc
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/trustaccounts", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
