@@ -330,14 +330,39 @@ print(response.json())
 
 ```
 [
-
     {
+        "owner": "b13119ff9f8c0287f64c10b0a051767c446589fcd9f38212fc9f889ec483511d",
+        "version": 1,
+        "created": 1647542791,
+        "modified": 1647542791,
+        "type": "OBJECT",
+        "register": "8FCtRJWnig1htC6oteocqbqEkgWnFHLkpmF7RGH2g2ZcTT65jP1",
+        "name": "trust",
+        "namespace": "",
+        "address": "8H9dbXxpa6gw21gWoERcnvS1fo8VtzBdcQKDfQxvfrGfxuU7ZX4"
+    },
+    {
+        "owner": "b13119ff9f8c0287f64c10b0a051767c446589fcd9f38212fc9f889ec483511d",
+        "version": 1,
+        "created": 1647542791,
+        "modified": 1647542791,
+        "type": "OBJECT",
+        "register": "8BThrudfD6rDSdNkYzqqxdTh2MzVwp71EgdxkAQ7jJNFTvRxqd3",
         "name": "default",
-        "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
-        "register_address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
-    }
-
-
+        "namespace": "",
+        "address": "8JVDBBGwgTCmEsgN7FjtgTvSET2e3ujmPhNQ1XJ1FzS9e7vJBir"
+    },
+    {
+        "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+        "version": 1,
+        "created": 1646840986,
+        "modified": 1646840986,
+        "type": "OBJECT",
+        "register": "88NBrTSZ2NS3NiW7Gc6NPGfhcQF5bcvxiuPwWbv5WVAE6zftvwD",
+        "name": "1KB Asset Size Test",
+        "namespace": "",
+        "address": "8HAig6MEz8M8o8y3UBSr6k9MrMMMjk3ubCjyt5EF5HRt7aVC4Ww"
+    },
 ]
 ```
 
