@@ -997,15 +997,15 @@ print(response.json())
 
 ***
 
-### `list/asset/history`
+### `history/asset`
 
-This will get the history of an asset or digital item as well as it's ownership.The API supports an alternative endpoint that can include the asset name (if known) or register address in the URI. For example `/assets/list/asset/history/myasset` will resolve to `assets/list/asset/history?name=myasset`.
+This will get the history of an asset or digital item as well as it's ownership.The API supports an alternative endpoint that can include the asset name (if known) or register address in the URI. For example `/assets/history/asset/myasset` will resolve to `assets/history/asset?name=myasset`.
 
 #### Endpoint:
 
-`/assets/list/asset/history`
+`/assets/history/asset`
 
-{% swagger method="post" path="/assets/list/asset/history" baseUrl="http://api.nexus-interactions.io:8080" summary="list/asset/history" %}
+{% swagger method="post" path="/assets/list/asset/history" baseUrl="http://api.nexus-interactions.io:8080" summary="history/asset" %}
 {% swagger-description %}
 This will get the history of an asset or digital item as well as it's ownership
 {% endswagger-description %}
@@ -1066,7 +1066,7 @@ let data = {
     // session: "YOUR_SESSION_ID",//optional
     // address: "ASSET_ADDRESS", //optional if name is passed
 }
-fetch(`${SERVER_URL}/assets/list/asset/history`, {
+fetch(`${SERVER_URL}/assets/history/asset`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -1086,7 +1086,7 @@ data = {
     # "session": "YOUR_SESSION_ID",#optional
     # "address": "ASSET_ADDRESS", #optional if name is passed
 }
-response = requests.post(f"{SERVER_URL}/assets/list/asset/history", json=data)
+response = requests.post(f"{SERVER_URL}/assets/history/asset", json=data)
 print(response.json())
 ```
 {% endtab %}
