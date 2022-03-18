@@ -150,22 +150,36 @@ An array of clauses to filter the JSON results. More information on filtering th
 ```json
 [
     {
-        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
-        "owner": "a2cfad9f505f8166203df2685ee7cb8582be9ae017dcafa4ca4530cd5b4f1dca",
-        "created": 1569298627,
-        "modified": 1569359986,
-        "balance": 9.897773,
-        "stake": 1000000.0,
-        "stakerate": 0.5179354594112684
+        "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+        "version": 1,
+        "created": 1638020495,
+        "modified": 1647607162,
+        "type": "OBJECT",
+        "balance": 193.059063,
+        "stake": 15000.0,
+        "token": "0",
+        "ticker": "NXS",
+        "trust": 7853245,
+        "age": "90 days, 21 hours, 27 minutes",
+        "rate": 3.0,
+        "address": "8EunQ82qVdnuQkX2gXKZr5P55kQRz4KbpaLdCVBjBNu8jeys4C4",
+        "total": 15193.059063
     },
     {
-        "address": "8FBtvmLSLqhVM9PsJ5Zzy1XzcZyP9XaEErjSoGPaoN5fBJaQbp8",
-        "owner": "a2e7b433a4dcb54c3b4dc1111d7945394dc3e140c9a400dc623b3f6d53ec758b",
-        "created": 1569306341,
-        "modified": 1569312960,
-        "balance": 0.004081,
-        "stake": 5000.0,
-        "stakerate": 0.5013274626265375
+        "owner": "b1cc162a96b1b5869f439101c0b135d9219799a64d1db340ae80435e4fc12207",
+        "version": 1,
+        "created": 1637569568,
+        "modified": 1647607029,
+        "type": "OBJECT",
+        "balance": 107937.088058,
+        "stake": 1000000.0,
+        "token": "0",
+        "ticker": "NXS",
+        "trust": 8573310,
+        "age": "99 days, 5 hours, 28 minutes",
+        "rate": 3.0,
+        "address": "8Fuv6SQdYr9YNd3PUuV1E2LPsNUfgcrstmcPr7CMYze5yiEwfV9",
+        "total": 1107937.088058
     }
 ]
 ```
