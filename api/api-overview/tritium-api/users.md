@@ -1069,7 +1069,9 @@ print(response.json())
 
 `<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.
 
-## `list/accounts`
+
+
+### `list/accounts`
 
 This will list off all of the token accounts belonging to a particular signature chain.
 

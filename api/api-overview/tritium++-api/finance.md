@@ -493,13 +493,122 @@ Additionally the API supports passing a field name in the URL after the account 
 
 ### `list/accounts`
 
-This will list off all of the NXS accounts belonging to the currently logged in signature chain.
+This will list off all of the NXS and token accounts belonging to the currently logged in signature chain or the username specified. This will not list the trust account.
 
 #### Endpoint:
 
 `/finance/list/accounts`
 
+{% swagger method="post" path="/finance/list/accounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
+{% swagger-description %}
+This will list off all of the NXS accounts belonging to the currently logged in signature chain.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
+
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account details" %}
+```json
+[
+    {
+        "created": 1568025836,
+        "modified": 1568025836,
+        "name": "default",
+        "address": "8CbkwEQ9S8owmX74joU6XmiwxJq1aoiqUoXc9fLCKzw15HscM99",
+        "token_name": "NXS",
+        "token": "0",
+        "balance": 5000,
+        "pending": 0.0,
+        "unconfirmed": 76.492244
+    },
+    {
+        "created": 1568025836,
+        "modified": 1568025836,
+        "name": "savings",
+        "address": "8GhrC2TKkU4ra9Uuj8LuiAyxDAtza2u483N1rKDSaVp24dNgUy9",
+        "token_name": "mytoken",
+        "token": "8GHrC2TKkU4ra9Uuj8LuiAyxDAtza2u483N1rKDSaVp24dNgUx8",
+        "balance": 10000.0,
+        "pending": 0.0,
+        "unconfirmed": 0.0
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/accounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    // count: true, //optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/accounts`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    # "count": True, #optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/accounts", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
 #### Parameters:
+
+`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
+
+`username` : The username identifying the signature chain (optional if genesis is supplied).
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied.
 
@@ -538,6 +647,180 @@ This will list off all of the NXS accounts belonging to the currently logged in 
         "balance": 10000.0,
         "pending": 0.0,
         "unconfirmed": 0.0
+    }
+]
+```
+
+#### Return values:
+
+`created` : The UNIX timestamp when the account was created.
+
+`modified` : The UNIX timestamp when the account was last modified.
+
+`name` : The name identifying the account. For privacy purposes, this is only included in the response if the caller is the owner of the account
+
+`address` : The register address of the account.
+
+`token_name` : This will always be set to `NXS`.
+
+`token` : This will always be set to 0 for NXS accounts.
+
+`data` : The arbitrary data included in the account register. If no data was included during the account creation then this field will be omitted.
+
+`balance` : The available balance of this account. This is the last confirmed balance less any new debits that you have made since the last block
+
+`pending` : This is the sum of all confirmed debit transactions that have been made to this account, that have not yet been credited. To move coins from pending into the available balance you must create a corresponding credit transaction. NOTE: if configured to run, the events processor does this for you.
+
+`unconfirmed` : This is the sum of all unconfirmed debit transactions that have been made to this account PLUS the sum of all unconfirmed credits that you have for confirmed debit transactions. When someone makes a debit to your account it will immediately appear in the unconfirmed balance until that transaction is included in a block, at which point it moves into `pending`. When you (or the events processor) creates the corresponding credit transaction for that debit, the amount will move from `pending` back into `unconfirmed` until the credit transaction is included in a block, at which point the amount moves to `balance`.
+
+`stake` : Only returned for the trust account, this is the amount of NXS currently staked in the trust account.
+
+`count` : Only returned if the caller requested `count` : true. This is the number of transactions made to/from the account.
+
+
+
+### `list/trust`
+
+This will list off all of the NXS and token accounts belonging to the currently logged in signature chain or the username specified. This will not list the trust account.
+
+#### Endpoint:
+
+`/finance/list/trust`
+
+{% swagger method="post" path="/finance/list/trust" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
+{% swagger-description %}
+This will list off all of the NXS accounts belonging to the currently logged in signature chain.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="count" %}
+Optional boolean field that determines whether the response includes the transaction 
+
+`count`
+
+ field. This defaults to false, as including the transaction count can slow the response time of the method considerably
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account details" %}
+```json
+[
+    {
+        "owner": "b1cc162a96b1b5869f439101c0b135d9219799a64d1db340ae80435e4fc12207",
+        "version": 1,
+        "created": 1637569568,
+        "modified": 1647603917,
+        "type": "OBJECT",
+        "balance": 107934.119503,
+        "stake": 1000000.0,
+        "token": "0",
+        "ticker": "NXS",
+        "trust": 8570230,
+        "age": "99 days, 4 hours, 37 minutes",
+        "rate": 3.0,
+        "address": "8Fuv6SQdYr9YNd3PUuV1E2LPsNUfgcrstmcPr7CMYze5yiEwfV9"
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/accounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    // count: true, //optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/trust`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    # "count": True, #optional boolean field that determines whether the response includes the transaction count field. slower to calculate
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/trust", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
+
+`username` : The username identifying the signature chain (optional if genesis is supplied).
+
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the account. For single-user API mode the session should not be supplied.
+
+`count` : Optional boolean field that determines whether the response includes the transaction `count` field. This defaults to false, as including the transaction count can slow the response time of the method considerably.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b1cc162a96b1b5869f439101c0b135d9219799a64d1db340ae80435e4fc12207",
+        "version": 1,
+        "created": 1637569568,
+        "modified": 1647603917,
+        "type": "OBJECT",
+        "balance": 107934.119503,
+        "stake": 1000000.0,
+        "token": "0",
+        "ticker": "NXS",
+        "trust": 8570230,
+        "age": "99 days, 4 hours, 37 minutes",
+        "rate": 3.0,
+        "address": "8Fuv6SQdYr9YNd3PUuV1E2LPsNUfgcrstmcPr7CMYze5yiEwfV9"
     }
 ]
 ```
