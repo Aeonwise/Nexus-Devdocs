@@ -232,6 +232,10 @@ This command supports the `any` wildcard noun.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
+
+
+
+
 ### `create/account`
 
 Create a new account for receiving NXS. The API supports an alternative endpoint that can include the account name in the URL. For example `/finance/create/account/savings` will resolve to `finance/create/account?name=savings`.
@@ -239,6 +243,113 @@ Create a new account for receiving NXS. The API supports an alternative endpoint
 #### Endpoint:
 
 `/finance/create/account`
+
+{% swagger method="post" path="/finance/create/account" baseUrl="http://api.nexus-interactions.io:8080" summary="create/account" %}
+{% swagger-description %}
+Create a new account for receiving NXS.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token_name" required="false" %}
+Optional name of a token to create the account for. 
+
+`token`
+
+ can be supplied as an alternative to 
+
+`token_name`
+
+. Defaults to 
+
+`NXS`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token" required="false" %}
+Optional token address to create the account for. 
+
+`token_name`
+
+ can be supplied as an alternative to 
+
+`token`
+
+. Defaults to 
+
+`0`
+
+ (
+
+`NXS`
+
+)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" required="false" %}
+An optional name to identify the account. If provided a Name object will also be created in the users local namespace, allowing the account to be accessed/retrieved by name. If no name is provided the account will need to be accessed/retrieved by its 256-bit register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" required="false" %}
+This optional field allows callers to add arbitrary data to an account register
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Account created" %}
+```json
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// create/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    token_name: "NXS", // optional if token is passed
+    // token: "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",//optional if token_name is passed, Defaults to 0 (NXS)
+    // name: "NAME TO IDENTIFY THE ACCOUNT", //optional
+    // data: "OPTIONAL FIELD ALLOWS CALLERS TO ADD ARBITRARY DATA TO AN ACCOUNT REGISTER.",//optional
+}
+fetch(`${SERVER_URL}/finance/create/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "token_name": "NXS",  # optional if token is passed
+    # "token": "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",#optional if token_name is passed, Defaults to 0 (NXS)
+    # "name": "NAME TO IDENTIFY THE ACCOUNT", #optional
+    # "data": "OPTIONAL FIELD ALLOWS CALLERS TO ADD ARBITRARY DATA TO AN ACCOUNT REGISTER.",#optional
+}
+response = requests.post(f"{SERVER_URL}/finance/create/account", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -293,6 +404,168 @@ The method supports the ability to send to multiple recipients in one transactio
 #### Endpoint:
 
 `/finance/debit/account`
+
+{% swagger method="post" path="/finance/debit/account" baseUrl="http://api.nexus-interactions.io:8080" summary="debit/account" %}
+{% swagger-description %}
+Deduct an amount of NXS from an account and send it to another account or legacy UTXO address
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the account to debit. This is optional if the name is provided
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="amount" %}
+The amount of NXS to debit
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name_to" %}
+The name identifying the account to send to. This is optional if address_to is provided. The name should be in username:name format
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address_to" %}
+The register address of the account to send to. This is optional if name_to is provided. The address_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="reference" %}
+This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 
+
+`64-bit unsigned integer`
+
+ in the range of 0 to 18446744073709551615
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="expires" %}
+This optional field allows callers to specify an expiration for the debit transaction. The expires value is the 
+
+`number of seconds`
+
+ from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="recipients" %}
+This optional array can be provided as an alternative to the single 
+
+`name_to`
+
+/
+
+`address_to`
+
+, 
+
+`amount`
+
+, 
+
+`reference`
+
+, and 
+
+`expires`
+
+ fields. Each object in the array can have 
+
+`name_to`
+
+/
+
+`address_to`
+
+, 
+
+`amount`
+
+, 
+
+`reference`
+
+, and 
+
+`expires`
+
+ fields, as described above. Up to 99 recipients can be included in the array
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account debited" %}
+```json
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// debit/account
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional  
+    name: "username:name", // name identifying the account to debit , optional if the address is provided.
+    // address : "REGISTER ADDRESS OF THE ACCOUNT TO DEBIT",//optional if the name is provided.
+    amount: 1, // amount of nexus to debit
+    name_to: "NAME IDENTIFYING THE ACCOUNT TO SEND TO", //optional if address_to is provided. The name should be in username:name format
+    // address_to : "REGISTER ADDRESS OF THE ACCOUNT TO SEND TO",// This is optional if name_to is provided. The address_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+    reference: "OPTIONAL FIELD ALLOWS CALLERS TO PROVIDE A REFERENCE", // which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+    expires: 604800, //optional (in seconds)  
+    // recipients: [
+    // { name: "NAME", amount: 10, name_to: "NAME_TO" },
+    // { name: "NAME", amount: 10, name_to: "NAME_TO" }
+    // ] //optional
+}
+fetch(`${SERVER_URL}/finance/debit/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "username:name", # name identifying the account to debit , optional if the address is provided.
+    # "address" : "REGISTER ADDRESS OF THE ACCOUNT TO DEBIT", #optional if the name is provided.
+    "amount": 1,  # amount of nexus to debit
+    "name_to": "NAME IDENTIFYING THE ACCOUNT TO SEND TO", # optional if address_to is provided. The name should be in username:name format
+    # "address_to" : "REGISTER ADDRESS OF THE ACCOUNT TO SEND TO",# This is optional if name_to is provided. The address_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+    "reference": "OPTIONAL FIELD ALLOWS CALLERS TO PROVIDE A REFERENCE", # which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+    "expires": 604800,  # optional (in seconds)
+    # "recipients": [
+    # { "name": "NAME", amount: 10, name_to: "NAME_TO" },
+    # { name: "NAME", amount: 10, name_to: "NAME_TO" }
+    # ] #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/debit/account", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
@@ -868,6 +1141,148 @@ This will list off all of the transactions related to a given account. You DO NO
 #### Endpoint:
 
 `/finance/list/account/transactions`
+
+{% swagger method="post" path="/finance/list/account/transactions" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
+{% swagger-description %}
+This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" %}
+The genesis hash identifying the signature chain to scan for transactions (optional if username is supplied or already logged in)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" %}
+The username identifying the signature chain to scan for transactions(optional if genesis is supplied or already logged in)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session can be provided in conjunction with the account name in order to deduce the register address of the account. The 
+
+`session`
+
+ parameter is only required when a name parameter is also provided without a namespace in the name string. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" %}
+The name identifying the NXS account to list transactions for. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the object was created in the callers namespace (their username), then the username can be omitted from the name if the 
+
+`session`
+
+ parameter is provided (as we can deduce the username from the session)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="address" %}
+The register address of the NXS account to list transactions for. This is optional if the name is provided 
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="verbose" %}
+Optional, determines how much transaction data to include in the response. Supported values are:&#x20;
+
+`default` : hash, contracts\
+`summary` : type, version, sequence, timestamp, operation, and confirmations.
+
+`detail` : genesis, nexthash, prevhash, pubkey and signature.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account transactions list" %}
+```json
+[
+    {
+        "txid": "01034b39cb3635d370f97339e6f87b8751d4c0d62676da7d6ec20416966f298f47dea99603d03a74e638b0d50b31b1e721790e5b103abfe3353a709ccf5d1e7c",
+        "contracts": [
+            {
+                "OP": "CREDIT",
+                "txid": "01e73b498dbabbf4629ad674b9ae3824b96cca83199c25a67901db53b271d19acf1411b0c4f9a3d8ded80860ffe2dcf683d2d227a675d453303b31f86f868f9e",
+                "contract": 0,
+                "proof": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+                "to": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+                "to_name": "default",
+                "amount": 76.450762,
+                "token": "0",
+                "token_name": "NXS"
+            },
+            {
+                "OP": "FEE",
+                "from": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P",
+                "from_name": "default",
+                "amount": 0.1
+            }
+        ]
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/account/transactions
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    genesis: "GENESIS HASH IDENTIFYING THE SIGCHAIN", //optional if username is supplied or already logged in
+    username: "USERNAME", //optional if genesis is supplied or already logged in
+    // session: "YOUR_SESSION_ID", //optional
+    name: "username:name", //name identifying the nxs account to list transactions for. optional if the address is provided. 
+    // address: "REGISTER ADDRESS OF THE NXS ACCOUNT TO LIST TRANSACTIONS FOR", //optional if the name is provided.
+    // verbose: "detail", //optional or "summary","none"
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/account/transactions`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "genesis": "GENESIS HASH IDENTIFYING THE SIGCHAIN", # optional if username is supplied or already logged in
+    "username": "USERNAME",  # optional if genesis is supplied or already logged in
+    # "session": "YOUR_SESSION_ID", #optional
+    "name": "username:name", # name identifying the nxs account to list transactions for. optional if the address is provided.
+    # "address": "REGISTER ADDRESS OF THE NXS ACCOUNT TO LIST TRANSACTIONS FOR", #optional if the name is provided.
+    # "verbose": "detail", #optional or "summary","none"
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/account/transactions", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters:
 
