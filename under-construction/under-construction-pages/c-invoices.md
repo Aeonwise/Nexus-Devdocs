@@ -423,9 +423,9 @@ This will list all invoices issued or received by the signature chain.
 
 #### Endpoint:
 
-`/users/list/invoices`
+`invoices/list/invoices`
 
-{% swagger method="post" path="/users/list/invoices" baseUrl="http://api.nexus-interactions.io:8080" summary="list/invoices" %}
+{% swagger method="post" path="/invoices/list/invoices" baseUrl="http://api.nexus-interactions.io:8080" summary="list/invoices" %}
 {% swagger-description %}
 This will list all invoices issued or received by the signature chain
 {% endswagger-description %}
@@ -528,7 +528,7 @@ let data = {
     // offset: 10, //optional
     // where: "FILTERING SQL QUERY" //optional
 }
-fetch(`${SERVER_URL}/users/list/invoices`, {
+fetch(`${SERVER_URL}/invoices/list/invoices`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -552,7 +552,7 @@ data = {
     # "offset": 10, #optional
     # "where": "FILTERING SQL QUERY" #optional
 }
-response = requests.post(f"{SERVER_URL}/users/list/invoices", json=data)
+response = requests.post(f"{SERVER_URL}/invoices/list/invoices", json=data)
 print(response.json())
 ```
 {% endtab %}

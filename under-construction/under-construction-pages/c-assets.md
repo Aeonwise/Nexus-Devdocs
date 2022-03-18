@@ -457,7 +457,7 @@ This will list off all of the assets owned by a signature chain.
 
 `/assets/list/assets`
 
-{% swagger method="post" path="/users/list/assets" baseUrl="http://api.nexus-interactions.io:8080" summary="/list/assets" %}
+{% swagger method="post" path="/assets/list/assets" baseUrl="http://api.nexus-interactions.io:8080" summary="/list/assets" %}
 {% swagger-description %}
 This will list off all of the assets owned by a signature chain
 {% endswagger-description %}
@@ -532,7 +532,7 @@ let data = {
     // offset: 10, //optional
     where: "FILTERING SQL QUERY"
 }
-fetch(`${SERVER_URL}/users/list/assets`, {
+fetch(`${SERVER_URL}/assets/list/assets`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -555,7 +555,7 @@ data = {
     # "offset": 10, #optional
     "where": "FILTERING SQL QUERY"
 }
-response = requests.post(f"{SERVER_URL}/users/list/assets", json=data)
+response = requests.post(f"{SERVER_URL}/assets/list/assets", json=data)
 print(response.json())
 ```
 {% endtab %}

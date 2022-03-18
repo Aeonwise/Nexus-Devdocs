@@ -276,9 +276,9 @@ This will list off all of the supply chain items (append registers) owned by a s
 
 #### Endpoint:
 
-`/users/list/items`
+`/supply/list/items`
 
-{% swagger method="post" path="/users/list/items" baseUrl="http://api.nexus-interactions.io:8080" summary="list/items" %}
+{% swagger method="post" path="/supply/list/items" baseUrl="http://api.nexus-interactions.io:8080" summary="list/items" %}
 {% swagger-description %}
 This will list off all of the supply chain items (append registers) owned by a signature chain
 {% endswagger-description %}
@@ -340,7 +340,7 @@ let data = {
     // offset: 10, //optional
     // where: "FILTERING SQL QUERY" //optional
 }
-fetch(`${SERVER_URL}/users/list/items`, {
+fetch(`${SERVER_URL}/supply/list/items`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -363,7 +363,7 @@ data = {
     # "offset": 10, #optional
     # "where": "FILTERING SQL QUERY" #optional
 }
-response = requests.post(f"{SERVER_URL}/users/list/items", json=data)
+response = requests.post(f"{SERVER_URL}/supply/list/items", json=data)
 print(response.json())
 ```
 {% endtab %}
