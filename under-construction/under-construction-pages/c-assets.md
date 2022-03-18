@@ -2,7 +2,7 @@
 description: ASSETS API
 ---
 
-# c-assets
+# c-ASSETS
 
 An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports several formats for defining the object data structures giving users and developers varying levels of functionality, including per-field type definition and mutability.
 
@@ -444,6 +444,181 @@ print(response.json())
 `<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.
 
 ***
+
+### `list/assets`
+
+This will list off all of the assets owned by a signature chain.
+
+{% hint style="info" %}
+**NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
+{% endhint %}
+
+#### Endpoint:
+
+`/assets/list/assets`
+
+{% swagger method="post" path="/users/list/assets" baseUrl="http://api.nexus-interactions.io:8080" summary="/list/assets" %}
+{% swagger-description %}
+This will list off all of the assets owned by a signature chain
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="genesis" required="false" %}
+The genesis hash identifying the signature chain (optional if username is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="username" required="false" %}
+The username identifying the signature chain (optional if genesis is supplied)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" required="false" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" required="false" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" required="false" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" required="false" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="assets list" %}
+```json
+[
+    {
+        "name": "myasset1",
+        "address": "88dFaTWNYpoGuXtgkWrbQVfsJJ3Sfth5AP9yWqioxCLhHmTu6xo",
+        "created": "1553227256",
+        "modified": "1553227256",
+        "owner": "bf501d4f3d81c31f62038984e923ad01546ff678e305a7cc11b1931742524ce1",
+        "serial_number": "123456",
+        "description": "This is the description of my asset",
+        "shelf_location": "A9S2"
+    },
+    {
+        "name": "myasset2",
+        "address": "8B7SMKmECgYU1ydBQbzp5FCSe4AnkU2EwLE59D7eQDBpixmLZ2c",
+        "created": "1553227128",
+        "modified": "1553227128",
+        "owner": "bf501d4f3d81c31f62038984e923ad01546ff678e305a7cc11b1931742524ce1",
+        "serial_number": "78901234",
+        "description": "This is the description of another asset",
+        "shelf_location": "A3S6"
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/list/assets
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    genesis: "GENESIS_ID",
+    username: "YOUR_USERNAME",
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    where: "FILTERING SQL QUERY"
+}
+fetch(`${SERVER_URL}/users/list/assets`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "genesis": "GENESIS_ID",
+    "username": "YOUR_USERNAME",
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    "where": "FILTERING SQL QUERY"
+}
+response = requests.post(f"{SERVER_URL}/users/list/assets", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
+
+`username` : The username identifying the signature chain (optional if genesis is supplied).
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "name": "myasset1",
+        "address": "88dFaTWNYpoGuXtgkWrbQVfsJJ3Sfth5AP9yWqioxCLhHmTu6xo",
+        "created": "1553227256",
+        "modified": "1553227256",
+        "owner": "bf501d4f3d81c31f62038984e923ad01546ff678e305a7cc11b1931742524ce1",
+        "serial_number": "123456",
+        "description": "This is the description of my asset",
+        "shelf_location": "A9S2"
+    },
+    {
+        "name": "myasset2",
+        "address": "8B7SMKmECgYU1ydBQbzp5FCSe4AnkU2EwLE59D7eQDBpixmLZ2c",
+        "created": "1553227128",
+        "modified": "1553227128",
+        "owner": "bf501d4f3d81c31f62038984e923ad01546ff678e305a7cc11b1931742524ce1",
+        "serial_number": "78901234",
+        "description": "This is the description of another asset",
+        "shelf_location": "A3S6"
+    }
+]
+```
+
+#### Return values:
+
+`created` : The UNIX timestamp when the asset was created.
+
+`modified` : The UNIX timestamp when the asset was last modified.
+
+`name` : The name identifying the asset. For privacy purposes, this is only included in the response if the caller is the owner of the asset
+
+`address` : The register address of the asset.
+
+`owner` : The genesis hash of the signature chain that owns this asset.
+
+`ownership` : Only included for tokenized assets, this is the percentage of the asset owned by the caller, based on the number of tokens owned
+
+`<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.
+
+### ``
 
 ### `update/asset`
 
