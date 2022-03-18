@@ -13,79 +13,205 @@ The following methods are currently supported by this API
 
 ### list/accounts
 
+This will list all known NXS and token accounts.
 
+#### Endpoint:
+
+`/register/list/accounts`
+
+{% swagger method="post" path="/register/list/accounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/accounts" %}
+{% swagger-description %}
+This will list all known trust accounts
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="sort" %}
+Determines which field the results should be sorted on. Values can be 
+
+`balance`
+
+, 
+
+`stake`
+
+, or 
+
+`trust`
+
+. Default is 
+
+`trust`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="order" %}
+Determines the order of the sort. Values can be 
+
+`desc`
+
+ for descending (the default) or 
+
+`asc`
+
+ for ascending
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="trustaccounts list" %}
+```json
+[
+     {
+        "owner": "b1221f91b67502d908e1d835d0b455297a20e8bedaf93cc9870a69c89d9d5311",
+        "version": 1,
+        "created": 1643642075,
+        "modified": 1644544090,
+        "type": "OBJECT",
+        "balance": 934.0,
+        "token": "0",
+        "ticker": "NXS",
+        "total": 934.0
+     },
+     {
+        "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+        "version": 1,
+        "created": 1644350882,
+        "modified": 1644350882,
+        "type": "OBJECT",
+        "balance": 0.0,
+        "token": "8DGvmgAzEAmYkeUTN5SpgVjDH5zLEirTKNS9gbwqb559Z5Q7xeT",
+        "ticker": "Chalet Token",
+        "total": 0.0
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/trustaccounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // sort: "trust", //determines which field the results should be sorted on , values can be balance, stake, or trust
+    // order: "desc", //determines the order of the sort, values can be asc or desc. Default is desc
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/register/list/accounts`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "sort": "trust", #determines which field the results should be sorted on , values can be balance, stake, or trust
+    # "order": "desc", #determines the order of the sort, values can be asc or desc. Default is desc
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/register/list/accounts", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`sort` : Determines which field the results should be sorted on. Values can be `balance`, `stake`, or `trust`. Default is `trust`
+
+`order` : Determines the order of the sort. Values can be `desc` for descending (the default) or `asc` for ascending.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b1221f91b67502d908e1d835d0b455297a20e8bedaf93cc9870a69c89d9d5311",
+        "version": 1,
+        "created": 1643642075,
+        "modified": 1644544090,
+        "type": "OBJECT",
+        "balance": 934.0,
+        "token": "0",
+        "ticker": "NXS",
+        "total": 934.0
+    },
+    {
+        "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+        "version": 1,
+        "created": 1644350882,
+        "modified": 1644350882,
+        "type": "OBJECT",
+        "balance": 0.0,
+        "token": "8DGvmgAzEAmYkeUTN5SpgVjDH5zLEirTKNS9gbwqb559Z5Q7xeT",
+        "ticker": "Chalet Token",
+        "total": 0.0
+    }
+]
+```
+
+#### Return values:
+
+`address` : The register address of the trust account
+
+`owner` : The genesis hash of the trust account owner
+
+`created` : The UNIX timestamp when the account was created.
+
+`modified` : The UNIX timestamp when the account was last modified.
+
+`balance` : The current NXS balance of the trust account. This is general account balance that is not staked.
+
+`stake` : The amount of NXS currently staked in the trust account.
+
+`trust` : The current raw trust score of the trust account.
+
+`stakerate` : The current annual reward rate earned for staking as an annual percent.
 
 ### list/names
 
-```
-register/list/accounts WHERE 'object.name=d*'
-```
-
-The above will return all accounts that start with a letter 'd'.
-
-#### Following wildcard
-
-The following demonstrates how to check with wildcards.
-
-```
-register/list/accounts WHERE 'object.name=*d'
-```
-
-This above will return all accounts that have a name ending with letter 'd'.
-
-### Examples
-
-To filter, you can use where='statements' or follow the command with WHERE string:
-
-#### Filtering objects with WHERE clause
-
-The below clause will filter all name object registers, that are Global names that start with letter 'P', or any objects that start with letter 'S'.
-
-```
-register/list/names WHERE '(object.namespace=*GLOBAL* AND object.name=P*) OR object.name=S*'
-```
-
-Using the object class i.e. 'object.namespace' will invoke the filter on the binary object.
-
-#### Filtering objects with where=
-
-The below clause will filter all name object registers, that are Global names that start with letter 'P', or any objects that start with letter 'S'.
-
-```
-register/list/names where='(object.namespace=*GLOBAL* AND object.name=P*) OR object.name=S*'
-```
-
-#### Filtering with multiple operators
-
-The below will return all NXS accounts that have a balance greater than 10 NXS.
-
-```
-register/list/accounts WHERE 'object.token=0 AND object.balance>10'
-```
-
-#### Creating logical grouping
-
-The following demonstrates how to query using multiple recursive levels.
-
-```
-register/list/accounts WHERE '(object.token=0 AND object.balance>10) OR (object.token=8Ed7Gzybwy3Zf6X7hzD4imJwmA2v1EYjH2MNGoVRdEVCMTCdhdK AND object.balance>1)'
-```
-
-This will give all NXS accounts with balance greater than 10, or all accounts for token '8Ed7Gzybwy3Zf6X7hzD4imJwmA2v1EYjH2MNGoVRdEVCMTCdhdK' with balance greater than 1.
-
-#### More complex queries
-
-There is no current limit to the number of levels of recursion, such as:
-
-```
-register/list/names WHERE '((object.name=d* AND object.namespace=~GLOBAL~) OR (object.name=e* AND object.namespace=send.to)) OR object.namespace=*s'
-```
-
-The above command will return all objects starting with letter 'd' that are global names, or all objects starting with letter 'e' in the 'send.to' namespace, or finally all objects that are in a namespace that ends with the letter 's'.
-
 ### `list/trust`
 
-This will list all known trust accounts
+This will list all known trust accounts.
 
 #### Endpoint:
 
