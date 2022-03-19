@@ -14,13 +14,13 @@ Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/account
 
 The following methods are currently supported by this API
 
-`create/local`\
+_``_[_`create/local`_](c-session-1.md#create-local)\
 `create/remote`\
 `load/session`\
 `load/session`\
-[`save/session`](c-session-1.md#save-session)\
-[`load/session`](c-session-1.md#load-session)\
-[`has/session`](c-session-1.md#has-session)
+[_`save/session`_](c-session-1.md#save-session)\
+[_`load/session`_](c-session-1.md#load-session)\
+[_`has/session`_](c-session-1.md#has-session)_``_
 
 
 
