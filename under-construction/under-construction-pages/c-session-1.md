@@ -14,9 +14,157 @@ Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/account
 
 The following methods are currently supported by this API
 
+`create/local`\
+`create/remote`\
+`load/session`\
+`load/session`\
 [`save/session`](c-session-1.md#save-session)\
 [`load/session`](c-session-1.md#load-session)\
 [`has/session`](c-session-1.md#has-session)
+
+
+
+
+
+### `create/local`
+
+This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
+
+#### Endpoint:
+
+`/session/create/local`
+
+{% swagger method="post" path="/session/create/local" baseUrl="http://api.nexus-interactions.io:8080" summary="create/local" %}
+{% swagger-description %}
+This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="session saved" %}
+```javascript
+{
+    success:true
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/save/session
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN"
+}
+fetch(`${SERVER_URL}/session/create/local`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN"
+}
+response = requests.post(f"{SERVER_URL}/session/create/local", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`pin` : The PIN for this signature chain.
+
+#### Return value JSON object:
+
+#### Return values:
+
+`success` : Boolean flag indicating that the session was saved successfully .
+
+
+
+
+
+### `create/remote`
+
+This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
+
+#### Endpoint:
+
+`/session/create/remote`
+
+{% swagger method="post" path="/session/create/remote" baseUrl="http://api.nexus-interactions.io:8080" summary="create/remote" %}
+{% swagger-description %}
+This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="session saved" %}
+```javascript
+{
+    success:true
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/save/session
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN"
+}
+fetch(`${SERVER_URL}/session/create/remote`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN"
+}
+response = requests.post(f"{SERVER_URL}/session/create/remote", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`pin` : The PIN for this signature chain.
+
+#### Return value JSON object:
+
+#### Return values:
+
+`success` : Boolean flag indicating that the session was saved successfully .
 
 ### `save/session`
 

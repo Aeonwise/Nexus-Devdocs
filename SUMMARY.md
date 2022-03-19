@@ -85,7 +85,7 @@
   * [c-SYSTEM](under-construction/under-construction-pages/c-system.md)
   * [c-LEDGER](under-construction/under-construction-pages/c-ledger.md)
   * [c-USERS](under-construction/under-construction-pages/users.md)
-  * [C-AUTHORIZE](under-construction/under-construction-pages/c-authorize.md)
+  * [C-PROFILE](under-construction/under-construction-pages/c-profile.md)
   * [c-SESSION](under-construction/under-construction-pages/c-session-1.md)
   * [C-MARKET](under-construction/under-construction-pages/c-market.md)
 * [Nexus - Blockchain of Choice](under-construction/nexus-blockchain-of-choice.md)
