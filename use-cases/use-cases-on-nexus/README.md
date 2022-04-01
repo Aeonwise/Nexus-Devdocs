@@ -10,6 +10,8 @@ This section is being updated and is a work in progress
 
 Nexus can encompass a lot of use-cases today using API's and with the upcoming Tritium++ we will bring in the more powerful developer tools with Advanced Contracts and security to interact with dapps.
 
+![](../../.gitbook/assets/Usecase.webp)
+
 ### Use-cases Using Nexus
 
 {% content-ref url="assets-nfts/" %}
