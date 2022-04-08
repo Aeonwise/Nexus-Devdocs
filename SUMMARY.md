@@ -2,6 +2,7 @@
 
 * [Nexus Developer Documentation](README.md)
 * [Quick Start](quick-start.md)
+* [Nexus Explorer](https://nexplorer.nexus-interactions.io)
 
 ## Why Nexus?
 

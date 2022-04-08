@@ -28,6 +28,14 @@ Seasoned Ethereum developer want to try your hands on Nexus. Check the link belo
 [ethereum-to-nexus.md](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
 {% endcontent-ref %}
 
+## Use-cases
+
+We have listed a few use-cases which can be build on Nexus.
+
+{% content-ref url="use-cases/use-cases-on-nexus/" %}
+[use-cases-on-nexus](use-cases/use-cases-on-nexus/)
+{% endcontent-ref %}
+
 ## Mainnet
 
 Learn how to setup a mainnet node to power you DApps, stake or just to learn how things work:
