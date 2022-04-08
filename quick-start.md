@@ -6,7 +6,7 @@ description: Quickly get to the topic of choice
 
 ## Why Nexus?
 
-If you are new here, then we highly recommend to go through this section which will detail why Nexus should be the blockchain of choice to power dapps
+If you are new here, then we highly recommend to go through this section which will detail why Nexus should be the blockchain of choice to power dapps.
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
@@ -14,7 +14,7 @@ If you are new here, then we highly recommend to go through this section which w
 
 ## Nexus For Developers:
 
-If you have settled on Nexus then go through this section to understand Nexus design and the various components which are critical for a great experience
+If you have settled on Nexus then go through this section to understand Nexus design and the various components which are critical for a great experience.
 
 {% content-ref url="nexus-for-developers/understanding-nexus/" %}
 [understanding-nexus](nexus-for-developers/understanding-nexus/)
@@ -22,7 +22,7 @@ If you have settled on Nexus then go through this section to understand Nexus de
 
 ## Ethereum Ecosystem to Nexus
 
-Seasoned Ethereum developer want to try your hands on Nexus. Check the link below
+Seasoned Ethereum developer want to try your hands on Nexus. Check the link below:
 
 {% content-ref url="nexus-for-developers/understanding-nexus/ethereum-to-nexus.md" %}
 [ethereum-to-nexus.md](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
@@ -30,7 +30,7 @@ Seasoned Ethereum developer want to try your hands on Nexus. Check the link belo
 
 ## Use-cases
 
-We have listed a few use-cases which can be build on Nexus.
+We have listed a few use-cases which can be build on Nexus. Check the link below:
 
 {% content-ref url="use-cases/use-cases-on-nexus/" %}
 [use-cases-on-nexus](use-cases/use-cases-on-nexus/)
@@ -62,7 +62,7 @@ Run a Private Network powered by the Nexus core for Enterprises or Organisation,
 
 ## API keys
 
-Nexus API's talk to the nexus node and the API authentication keys have to be configured in the node. [Click here](api/api-overview/#security) for more information
+Nexus API's talk to the nexus node and the API authentication keys have to be configured in the node. [Click here](api/api-overview/#security) for more information.
 
 {% hint style="info" %}
 API uses HTTP basic authentication and SSL will be available in the future
