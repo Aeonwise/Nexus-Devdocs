@@ -9,7 +9,7 @@ This guide will help to setup a node on the nexus testnet. No permission is requ
 The node configuration will differ as per the individual application requirement or amount of transactions generated.
 
 {% hint style="info" %}
-If you need any help on the node specifications for a particular application do contact developer support
+If you need any help on the node specifications for a particular application do contact developer support [here](https://t.me/NexusDevelopers).
 {% endhint %}
 
 ## 1. Before you start:
