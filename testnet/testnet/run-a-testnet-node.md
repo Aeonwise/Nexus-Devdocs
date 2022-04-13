@@ -15,6 +15,7 @@ If you need any help on the node specifications for a particular application do 
 ## 1. Before you start:
 
 * A computer with a minimum of 1 CPU, 1GB RAM, 20GB hard space, Raspberry Pi 4 with 2 GB RAM.
+* VPS with 1GB RAM is sufficient for normal usage.
 * [Ubuntu server 20.04 LTS](https://ubuntu.com/download/server#downloads) for AMD/IA64 or [Ubuntu IOT](https://ubuntu.com/download/raspberry-pi/thank-you?version=20.04.3\&architecture=server-arm64+raspi) for Raspberry Pi. (Use any linux distribution of choice, but this guide is tailored for ubuntu)
 * USB drive or SD card to install ubuntu
 * Etcher – To burn the OS image file to USB/SD card
