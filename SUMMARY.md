@@ -68,6 +68,10 @@
     * [SYSTEM](api/api-overview/tritium++-api/system.md)
     * [REGISTER](api/api-overview/tritium++-api/register-1.md)
 
+## Legacy
+
+* [RPC](legacy/rpc.md)
+
 ## Fees
 
 * [💰 Fee Structure](fees/fee-structure.md)
