@@ -2,7 +2,7 @@
 description: Legacy Chain Remote Procedure Calls (RPC)
 ---
 
-# RPC
+# 🤖 RPC
 
 Nexus started out as a clone of peercoin and today it has upgraded to an advanced contract platform. Nexus still supports the legacy chain which uses Remote Procedure Calls (RPC). Some exchanges still use RPC. The legacy support will be stopped in the future and is not recommended for normal users. Tritium is far superior and also does away with key management and regular backups.
 

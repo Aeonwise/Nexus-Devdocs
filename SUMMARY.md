@@ -70,7 +70,7 @@
 
 ## Legacy
 
-* [RPC](legacy/rpc.md)
+* [🤖 RPC](legacy/rpc.md)
 
 ## Fees
 
