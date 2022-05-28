@@ -79,6 +79,7 @@
 ## Under Construction
 
 * [API SSL Configuration](under-construction/api-ssl-configuration.md)
+* [Install LetsEncrypt SSL](under-construction/install-letsencrypt-ssl.md)
 * [Under Construction Pages](under-construction/under-construction-pages/README.md)
   * [Page 1](under-construction/under-construction-pages/page-1/README.md)
     * [c-TOKENS](under-construction/under-construction-pages/page-1/c-tokens.md)

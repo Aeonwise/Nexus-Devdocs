@@ -25,3 +25,5 @@ Testnet Ports:
 * Testnet mining LLP port: 8325
 * Testnet P2P port: 8326
 * Testnet P2P SSL port: 6326
+
+The nexus core API can be secured with Secure Sockets Layer/ Transport Layer Security SSL/TLS&#x20;
