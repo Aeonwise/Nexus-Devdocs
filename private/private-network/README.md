@@ -39,5 +39,5 @@ Nexus private mode is a great alternative to private blockchains such as Ethereu
 If the idea of building on a private blockchain sounds interesting, try out Nexus Private mode[.](https://www.blockchain-council.org/certifications/certified-blockchain-professional-expert/)&#x20;
 
 {% hint style="info" %}
-We have a private node setup for testing at [http://private.nexus.io:8070/](http://private.nexus.io:8070/)
+We have a private node setup for testing at [http://private.nexus.io:8070/](http://private.nexus.io:8070)
 {% endhint %}

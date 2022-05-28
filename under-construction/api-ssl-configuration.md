@@ -96,6 +96,8 @@ F10YlqcOmeX1uFmKbdi/XorGlkCoMF3TDx8rmp9DBiB/
 -----END CERTIFICATE-----
 ```
 
+Copy the SSL files to /home/\<user>/certs&#x20;
+
 To configure SSL you need the following options in your nexus.conf file and they should point to the  location of these files. The "`sslcabundle`" is optional configuration, but is a requirement for connecting to certain applications securely.
 
 {% hint style="info" %}
@@ -103,8 +105,20 @@ For connecting to Bubble applications, it is a prerequisite to include the cabun
 {% endhint %}
 
 ```
-#SSL Configuration
+#SSL Configuration for Nexus nodes
+#Enable SSL for API
+apissl=1
+#Enable SSL for RPC
+rpcssl=1 
 sslcertificate=<pathtocertifcateandname>  
 sslcertificatekey=<pathtoprivatekeyandname>
 sslcabundle=<pathtocabundleandname>
 ```
+
+Restart the node for the changes to take effect.
+
+Check if your node is using ssl&#x20;
+
+
+
+openssl rsa -in privkey.pem -out private.key

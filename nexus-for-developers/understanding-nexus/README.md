@@ -61,7 +61,7 @@ Nexus makes it very simple to generate tokens with the UI wallet and as of today
 
 ### Fungible Token
 
-A fungible token is something that is identical in nature and interchangeable. These tokens can be divided and exchanged for another. Generally, most [**cryptocurrencies**](https://phemex.com/blogs/what-are-cryptocurrencies) are considered to be fungible. For example, a [**Bitcoin**](https://phemex.com/academy/what-is-bitcoin) is fungible. You can [**trade**](https://phemex.com/) one Bitcoin for another, and you will end up with the exact same thing. Other examples of fungible asset classes are bonds, commodities, cryptocurrencies, and precious metals.
+A fungible token is something that is identical in nature and interchangeable. These tokens can be divided and exchanged for another. Generally, most [**cryptocurrencies**](https://phemex.com/blogs/what-are-cryptocurrencies) are considered to be fungible. For example, a [**Bitcoin**](https://phemex.com/academy/what-is-bitcoin) is fungible. You can [**trade**](https://phemex.com) one Bitcoin for another, and you will end up with the exact same thing. Other examples of fungible asset classes are bonds, commodities, cryptocurrencies, and precious metals.
 
 ### Non-Fungible Token
 
