@@ -11,7 +11,7 @@ This guide is tailored for ubuntu / raspian distributions
 ## **1. Before Starting this guide:**
 
 * A computer with a minimum of 1 CPU, 2 GB RAM and 64GB hard disk space, Raspberry Pi 4 with 2 GB RAM with 64 GB SD card.&#x20;
-* For VPS 1GB RAM is sufficient for normal usage, for dapp backend configuration contact [here](https://explorer.nexus.io).
+* For VPS 1GB RAM is sufficient for normal usage, for dapp backend configuration contact [here](https://explorer.nexus.io/).
 * [Ubuntu server 20.04 LTS](https://ubuntu.com/download/server) for AMD/IA 64 or [Ubuntu IOT](https://ubuntu.com/download/iot) for Raspberry Pi or any distribution of choice
 * [Etcher ](https://www.balena.io/etcher/)– To burn the image file to SD card
 * Putty if using SSH via windows.

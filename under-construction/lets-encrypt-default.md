@@ -1,10 +1,14 @@
 ---
-description: Procedure to install Lets Encrypt single certificate
+description: Procedure to install Let's Encrypt single certificate
 ---
 
-# Install LetsEncrypt SSL
+# Let's Encrypt (Default)
 
+{% hint style="info" %}
+This guide is tailored for Ubuntu and if you need the same for other OS's use the below link:
+{% endhint %}
 
+{% embed url="https://certbot.eff.org/" %}
 
 1.  **SSH into the server**
 

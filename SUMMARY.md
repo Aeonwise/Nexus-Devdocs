@@ -79,7 +79,8 @@
 ## Under Construction
 
 * [API SSL Configuration](under-construction/api-ssl-configuration.md)
-* [Install LetsEncrypt SSL](under-construction/install-letsencrypt-ssl.md)
+* [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)
+* [Let's Encrypt (Default)](under-construction/lets-encrypt-default.md)
 * [Under Construction Pages](under-construction/under-construction-pages/README.md)
   * [Page 1](under-construction/under-construction-pages/page-1/README.md)
     * [c-TOKENS](under-construction/under-construction-pages/page-1/c-tokens.md)
