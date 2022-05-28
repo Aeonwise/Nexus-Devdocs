@@ -2,7 +2,7 @@
 
 * [Nexus Developer Documentation](README.md)
 * [Quick Start](quick-start.md)
-* [Nexus Explorer](https://explorer.nexus.io)
+* [Nexus Explorer](https://explorer.nexus.io/)
 
 ## Why Nexus?
 
@@ -78,6 +78,7 @@
 
 ## Under Construction
 
+* [API SSL Configuration](under-construction/api-ssl-configuration.md)
 * [Under Construction Pages](under-construction/under-construction-pages/README.md)
   * [Page 1](under-construction/under-construction-pages/page-1/README.md)
     * [c-TOKENS](under-construction/under-construction-pages/page-1/c-tokens.md)
