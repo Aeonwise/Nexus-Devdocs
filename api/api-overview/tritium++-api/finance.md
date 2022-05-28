@@ -159,10 +159,10 @@ The following methods are currently supported by this API
 
 [`create/account`](finance.md#create-account)\
 [`debit/account`](finance.md#debit-account)\
-[`credit/account`](../../../getting-started/tritium++-api/broken-reference/)\
+[`credit/account`](finance.md#credit-account)\
 [`get/account`](finance.md#get-account)\
 [`list/accounts`](finance.md#list-accounts)\
-[`list/account/transactions`](finance.md#list-account-transactions)\
+[`transactions/account`](finance.md#list-account-transactions)\
 [`get/stakeinfo`](finance.md#get-stakeinfo)\
 [`set/stake`](finance.md#set-stake)\
 [`migrate/accounts`](finance.md#migrate-accounts)\
@@ -1320,7 +1320,7 @@ print(response.json())
 
 ***
 
-### `list/account/transactions`
+### `transactions/account`
 
 This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 
@@ -1330,11 +1330,11 @@ This will list off all of the transactions related to a given account. You DO NO
 
 #### Endpoint:
 
-`/finance/list/account/transactions`
+`/finance/transactions/accounts`
 
-{% swagger method="post" path="/finance/list/account/transactions" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
+{% swagger method="post" path="/finance/transactions/accounts" baseUrl="http://api.nexus-interactions.io:8080" summary="transactions/account" %}
 {% swagger-description %}
-This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
+This will list off all of the transactions related to a given account. This does not include trust accounts.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="genesis" %}
