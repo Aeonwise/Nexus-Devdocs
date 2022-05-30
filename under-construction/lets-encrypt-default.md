@@ -85,4 +85,21 @@ This guide is tailored for Ubuntu and if you need the same for other OS's use th
 
     To confirm that your site is set up properly, visit `https://yourwebsite.com/` in your browser and look for the lock icon in the URL bar.
 
+If running the node as an `user` you need to give proper permission to the lets encrypt folder so the&#x20;
+
+```javascript
+// Create group with root and nodeuser as members
+$ sudo addgroup nodecert
+$ sudo adduser <user> nodecert
+$ sudo adduser root nodecert
+
+// Make the relevant letsencrypt folders owned by said group.
+$ sudo chgrp -R nodecert /etc/letsencrypt/live
+$ sudo chgrp -R nodecert /etc/letsencrypt/archive
+
+// Allow group to open relevant folders
+$ sudo chmod -R 750 /etc/letsencrypt/live
+$ sudo chmod -R 750 /etc/letsencrypt/archive
+```
+
 \
