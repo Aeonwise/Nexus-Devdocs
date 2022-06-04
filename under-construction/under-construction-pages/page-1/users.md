@@ -25,10 +25,7 @@ The following methods are currently supported by this API&#x20;
 [`transactions/master`](users.md#transactions-master)\
 [`notifications/master`](users.md#notifications-master)\
 [`status/master`](users.md#status-master)\
-`load/session`\
-`has/session`
 
-***
 
 ## `create/master`
 

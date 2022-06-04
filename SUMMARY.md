@@ -67,7 +67,6 @@
     * [FINANCE](api/api-overview/tritium++-api/finance.md)
     * [SYSTEM](api/api-overview/tritium++-api/system.md)
     * [REGISTER](api/api-overview/tritium++-api/register-1.md)
-    * [PROFILES](api/api-overview/tritium++-api/users.md)
 
 ## Legacy
 
@@ -97,3 +96,4 @@
     * [C-PROFILE](under-construction/under-construction-pages/page-1/c-profile.md)
     * [SESSIONS](under-construction/under-construction-pages/page-1/sessions.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
+    * [PROFILES](under-construction/under-construction-pages/page-1/users.md)
