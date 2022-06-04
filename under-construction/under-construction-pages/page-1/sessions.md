@@ -1,26 +1,24 @@
-# c-SESSION
+# SESSIONS
 
-The Users API provides methods for creating and managing user sessions. A user is synonymous with a signature chain.
+The Sessions API provides methods for creating and managing profile sessions. A profile is synonymous with a signature chain.
 
 ### `Named Shortcuts`
 
 For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
 
-For example `/session/login/user/myusername` is a shortcut to `users/login/user?username=myusername`.
-
-Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/accounts?username=myusername`.
+For example `/sessions/create/local/myusername` is a shortcut to `sessions/create/local?username=myusername`.
 
 ### `Methods`
 
 The following methods are currently supported by this API
 
-_``_[_`create/local`_](c-session-1.md#create-local)\
-`create/remote`\
-`load/session`\
-`load/session`\
-[_`save/session`_](c-session-1.md#save-session)\
-[_`load/session`_](c-session-1.md#load-session)\
-[_`has/session`_](c-session-1.md#has-session)_``_
+__[_`create/local`_](sessions.md#create-local)\
+`unlock/local`\
+`lock/local`\
+`save/local`\
+_`load/local`_\
+_`terminate/local`_\
+_`has/session`_
 
 
 
@@ -28,7 +26,7 @@ _``_[_`create/local`_](c-session-1.md#create-local)\
 
 ### `create/local`
 
-This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
+This will create a local session for your profile with this specific API instance. Username, password, and pin fields are mandatory for creating the session.
 
 #### Endpoint:
 
@@ -58,6 +56,8 @@ PIN for the user account
 // /users/save/session
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 let data = {
+    username: "YOUR_USERNAME",
+    password: "YOUR_SECRET"
     pin: "YOUR_PIN"
 }
 fetch(`${SERVER_URL}/session/create/local`, {
@@ -76,6 +76,8 @@ fetch(`${SERVER_URL}/session/create/local`, {
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_SECRET"
     "pin": "YOUR_PIN"
 }
 response = requests.post(f"{SERVER_URL}/session/create/local", json=data)
@@ -85,6 +87,10 @@ print(response.json())
 {% endtabs %}
 
 #### Parameters:
+
+`username` : The username associated with this signature chain.
+
+`password` : The password to be associated with this signature chain.
 
 `pin` : The PIN for this signature chain.
 
@@ -166,15 +172,15 @@ print(response.json())
 
 `success` : Boolean flag indicating that the session was saved successfully .
 
-### `save/session`
+### `save/local`
 
 This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
 
 #### Endpoint:
 
-`/users/save/session`
+`/sessions/save/local`
 
-{% swagger method="post" path="/users/save/session" baseUrl="http://api.nexus-interactions.io:8080" summary="save/session" %}
+{% swagger method="post" path="/sessions/save/local" baseUrl="http://api.nexus-interactions.io:8080" summary="save/local" %}
 {% swagger-description %}
 This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
 {% endswagger-description %}
@@ -200,7 +206,7 @@ const SERVER_URL = "http://api.nexus-interactions.io:8080"
 let data = {
     pin: "YOUR_PIN"
 }
-fetch(`${SERVER_URL}/users/save/session`, {
+fetch(`${SERVER_URL}/sessions/save/local`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
