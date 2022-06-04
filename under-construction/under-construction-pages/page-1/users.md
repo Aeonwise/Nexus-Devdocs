@@ -23,10 +23,10 @@ Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/account
 The following methods are currently supported by this API
 
 `create/master`\
-[`update/user`](users.md#update-user)\
-[`get/status`](users.md#get-status)\
-[`list/notifications`](users.md#list-notifications)\
-[`process/notifications`](users.md#process-notifications)\
+`update/credentials`\
+`update/recovery`\
+`recover/master`\
+`transactions/master`\
 [`list/transactions`](users.md#list-transactions)\
 [`save/session`](users.md#save-session)\
 [`load/session`](users.md#load-session)\
@@ -985,7 +985,7 @@ This will list off all of the tokens that were created by a particular signature
 
 ***
 
-## `list/transactions`
+## `transactions/master`
 
 This will list off all of the transactions for the requested signature chain genesis or username (either can be used). You DO NOT need to be logged in to use this command. If you are using single-user API mode and are logged in, then neither username or genesis are required. It will return transactions for the currently logged in user.
 
@@ -993,7 +993,7 @@ This will list off all of the transactions for the requested signature chain gen
 
 #### Endpoint:
 
-`/users/list/transactions`
+`/profiles/transactions/master`
 
 #### Parameters:
 
