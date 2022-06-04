@@ -2,7 +2,7 @@
 description: USERS API
 ---
 
-# USERS
+# c-USERS
 
 The Users API provides methods for creating and managing users. A user is synonymous with a signature chain.
 
@@ -22,11 +22,7 @@ Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/account
 
 The following methods are currently supported by this API
 
-[`create/user`](users.md#create-user)\
-[`login/user`](users.md#login-user)\
-[`logout/user`](users.md#logout-user)\
-[`unlock/user`](users.md#unlock-user)\
-[`lock/user`](users.md#lock-user)\
+`create/master`\
 [`update/user`](users.md#update-user)\
 [`get/status`](users.md#get-status)\
 [`list/notifications`](users.md#list-notifications)\
@@ -38,19 +34,23 @@ The following methods are currently supported by this API
 
 ***
 
-## `create/user`
+## `create/master`
 
 This will create a new user account (signature chain) for use on the network. The user account is secured by a combination of username, password, and PIN.
 
-**NOTE** : username must be a minimum of 2 characters\
-**NOTE** : password must be a minimum of 8 characters\
-**NOTE** : pin must be a minimum of 4 characters
+{% hint style="info" %}
+**NOTE:**&#x20;
+
+* Username must be a minimum of 2 characters.
+* Password must be a minimum of 8 characters.
+* Pin must be a minimum of 4 characters
+{% endhint %}
 
 #### Endpoint:
 
-`/users/create/user`
+`/profiles/create/master`
 
-{% swagger method="post" path="users/create/user" baseUrl="http://test1api.nexus-interations.io:7080/" summary="Create new user account" %}
+{% swagger method="post" path="profiles/create/master" baseUrl="http://test1api.nexus-interations.io:7080/" summary="Create new user account" %}
 {% swagger-description %}
 This will create a new user account (signature chain) for use on the network. The user account is secured by a combination of username, password, and PIN.
 
@@ -98,7 +98,7 @@ data = {
     password: "YOUR_SECRET",
     pin: "YOUR_PIN"
 }
-fetch(`${SERVER_URL}/users/create/user`, {
+fetch(`${SERVER_URL}/profiles/create/master`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
