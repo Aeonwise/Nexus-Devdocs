@@ -20,14 +20,16 @@ Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/account
 
 ### `Methods`
 
-The following methods are currently supported by this API
+The following methods are currently supported by this API&#x20;
 
-`create/master`\
-`update/credentials`\
-`update/recovery`\
+
+
+[`create/master`](users.md#create-master-1)\
+[`update/credentials`](users.md#update-credentials)\
+[`update/recovery`](users.md#update-credentials-1)\
 `recover/master`\
 `transactions/master`\
-[`list/transactions`](users.md#list-transactions)\
+`list/transactions`\
 [`save/session`](users.md#save-session)\
 [`load/session`](users.md#load-session)\
 [`has/session`](users.md#has-session)
@@ -149,23 +151,9 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 #### Return values:
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the user.
+`success` : The boolean value for the transaction.
 
-`hash` : The hash of the transaction that created the user.
-
-`nexthash` : The hash of the next transaction in the sequence.
-
-`prevhash` : The hash of the previous transaction in the sequence.
-
-`pubkey` : The public key.
-
-`signature` : The signature hash.
-
-`sequence` : The sequence number of this transaction within the signature chain.
-
-`timestamp` : The Unix timestamp of when the transaction was created.
-
-`version` : The serialization version of the transaction.
+`txid` : The ID (hash) of the transaction that includes the master profile creation.
 
 ***
 
@@ -241,10 +229,8 @@ let data = {
     session: "YOUR_SESSION_ID",
     password: "YOUR_SECRET",
     pin: "YOUR_PIN",
-    // recovery: "your recovery seed phrase", //optional
     new_password: "NEW_PASSWORD",
     new_pin: "NEW_PIN",
-    // new_recovery: "your new recovery seed phrase", //optional
 }
 fetch(`${SERVER_URL}/profiles/update/credentials`, {
         method: 'POST',
@@ -265,10 +251,8 @@ data = {
     "session": "YOUR_SESSION_ID",
     "password": "YOUR_SECRET",
     "pin": "YOUR_PIN",
-    # "recovery": "your recovery seed phrase", #optional
     "new_password": "NEW_PASSWORD",
     "new_pin": "NEW_PIN",
-    # "new_recovery": "your new recovery seed phrase", #optional
 }
 response = requests.post(f"{SERVER_URL}/profiles/update/credentials", json=data)
 print(response.json())
