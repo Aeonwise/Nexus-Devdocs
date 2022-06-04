@@ -1,40 +1,18 @@
-# API SSL Configuration
+---
+description: Setup SSL for API's & RPC calls
+---
 
-Mainnet Ports:
+# SSL Configuration
 
-* Tritium mainnet port: 9888
-* Tritium mainnet port SSL: 7888
-* Mainnet time LLP port: 9324
-* Mainnet API port: 8080
-* Mainnet API SSL port: 8443
-* Mainnet RPC port: 9336
-* Mainnet RPC SSL port: 7336
-* Mainnet mining LLP port: 9325
-* Mainnet P2P port: 9326
-* Mainnet P2P SSL port: 7326
+The nexus core API, RPC, P2P and node communications can be secured with Secure Sockets Layer (SSL) or Transport Layer Security (TLS). This guide will help you to setup SSL for your Nexus node.
 
-Testnet Ports:
+#### What certificate formats and extensions does Nexus support?
 
-* Tritium testnet port: 8888
-* Tritium testnet port SSL: 7888
-* Testnet time LLP port: 8329
-* Testnet API port: 7080
-* Testnet API SSL port: 7443
-* Testnet RPC port: 8336
-* Testnet RPC SSL port: 6336
-* Testnet mining LLP port: 8325
-* Testnet P2P port: 8326
-* Testnet P2P SSL port: 6326
-
-The nexus core API, RPC, P2P and node communications can be secured with Secure Sockets Layer (SSL) or Transport Layer Security (TLS). This guide will help you to&#x20;
-
-
-
-Nexus supports the PEM format
-
-PEM (**P**rivacy **E**nhanced **M**ail) is the most common format for X.509 certificates, CSRs, and cryptographic keys. A PEM file is a text file containing one or more items in Base64 ASCII encoding, each with plain-text headers and footers (e.g. `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`). A single PEM file could contain an end-entity certificate, a private key, or multiple certificates forming a complete chain of trust.&#x20;
+Nexus supports the PEM format. PEM (**P**rivacy **E**nhanced **M**ail) is the most common format for X.509 certificates, CSRs, and cryptographic keys. A PEM file is a text file containing one or more items in Base64 ASCII encoding, each with plain-text headers and footers (e.g. `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`). A single PEM file could contain an end-entity certificate, a private key, or multiple certificates forming a complete chain of trust.&#x20;
 
 PEM files are usually seen with the extensions `.crt`, `.pem`, `.cer`, and `.key` (for private keys), but you may also see them with different extensions like`.ca-bundle`.
+
+#### SSL Purchase and Files
 
 If you have purchased a valid SSL/TLS certificate it will consist of two or three files
 
@@ -96,13 +74,23 @@ F10YlqcOmeX1uFmKbdi/XorGlkCoMF3TDx8rmp9DBiB/
 -----END CERTIFICATE-----
 ```
 
-Copy the SSL files to /home/\<user>/certs&#x20;
+#### Setup SSL for the Node:
 
-To configure SSL you need the following options in your nexus.conf file and they should point to the  location of these files. The "`sslcabundle`" is optional configuration, but is a requirement for connecting to certain applications securely.
+Copy the SSL files provided by the CA authority to /home/\<user>/certs. &#x20;
 
 {% hint style="info" %}
 For connecting to Bubble applications, it is a prerequisite to include the cabundle.
 {% endhint %}
+
+To configure SSL, add the below options in the nexus.conf file and those should point to the  location of the particular files. The "`sslcabundle`" is an optional configuration, but is a requirement for connecting to certain applications securely.
+
+To open the config file, use the command below:
+
+```
+nano ~/.Nexus/nexus.conf
+```
+
+Add the below lines of code to the configuration file and save.
 
 ```
 #SSL Configuration for Nexus nodes
@@ -115,10 +103,11 @@ sslcertificatekey=<pathtoprivatekeyandname>
 sslcabundle=<pathtocabundleandname>
 ```
 
+Use Ctrl+s & Ctrl+x to save and exit nano editor.
+
 Restart the node for the changes to take effect.
 
-Check if your node is using ssl&#x20;
+Check if your node is using ssl.&#x20;
 
 
 
-openssl rsa -in privkey.pem -out private.key
