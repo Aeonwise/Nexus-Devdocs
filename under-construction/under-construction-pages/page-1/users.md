@@ -464,11 +464,9 @@ The following example changes the recovery seed to a new seed on the sig chain
 
 ### `recover/master`
 
-This method provides the user with the ability to set or change the recovery seed for the profile.
+This method provides the user with the ability to recover the profile in case of a lost password.
 
-Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
-
-This method requires the profile to create a session.
+This method requires that the user not having a session.
 
 #### Endpoint:
 
