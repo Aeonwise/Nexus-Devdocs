@@ -1,22 +1,16 @@
 ---
-description: USERS API
+description: PROFILES API
 ---
 
-# c-USERS
+# PROFILES
 
-The Users API provides methods for creating and managing users. A user is synonymous with a signature chain.
-
-{% hint style="info" %}
-The Tritium++ Users API differs a little from Tritium
-{% endhint %}
+The profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain.
 
 ### `Named Shortcuts`
 
 For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
 
-For example `/users/login/user/myusername` is a shortcut to `users/login/user?username=myusername`.
-
-Similarly `/users/list/accounts/myusername` is a shortcut to `users/list/accounts?username=myusername`.
+For example `/profiles/create/master/myusername` is a shortcut to `profiles/create/master?username=myusername`.
 
 ### `Methods`
 
@@ -130,7 +124,7 @@ print(response.json())
 
 #### Parameters:
 
-`username` : The username to be associated with this user. The signature chain genesis (used to uniquely identify user accounts) is a hash of this username, therefore the username must be unique on the blockchain.
+`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
 {% hint style="danger" %}
 If user forgets the username, he looses access to his nexus assets. There is no option to change the username.  Be careful when you choose a username (case sensitive) and make a point to back it up.&#x20;
@@ -470,6 +464,148 @@ The following example changes the recovery seed to a new seed on the sig chain
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
 ***
+
+### `recover/master`
+
+This method provides the user with the ability to set or change the recovery seed for the profile.
+
+Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
+
+This method requires the profile to create a session.
+
+#### Endpoint:
+
+`/profiles/recover/master`
+
+{% swagger method="post" path="/profiles/recover/master" baseUrl="http://api.nexus-interactions.io:8080" summary="recover/master" %}
+{% swagger-description %}
+This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" required="false" %}
+When using multi-user API mode the session parameter must be supplied to identify which user to update
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="password" required="true" %}
+The current password for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The current pin for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="recovery" required="false" %}
+The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via
+
+`new_recovery`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="new_password" required="true" %}
+The new password for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="new_pin" required="true" %}
+The new pin for this user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="new_recovery" required="false" %}
+new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
+
+**NOTE**
+
+: the recovery seed is case sensitive
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="user credentials updated" %}
+```json
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /users/update/user
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    session: "YOUR_SESSION_ID",
+    password: "YOUR_SECRET",
+    pin: "YOUR_PIN",
+    recovery: "your recovery seed phrase", //Not required when setting the recovery phrase for the first time.
+    new_recovery: "your new recovery seed phrase",
+}
+fetch(`${SERVER_URL}/profiles/update/recovery`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "session": "YOUR_SESSION_ID",
+    "password": "YOUR_SECRET",
+    "pin": "YOUR_PIN",
+    "recovery": "your recovery seed phrase", #Not required optional when setting the recovery phrase for the first time.
+    "new_recovery": "your new recovery seed phrase",
+}
+response = requests.post(f"{SERVER_URL}/profiles/update/recovery", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+`username` : The username identifying the profile.
+
+`password` : The new password for this signature chain.
+
+`pin` : The new pin for this signature chain.
+
+`recovery` : The existing recovery seed for this signature chain.&#x20;
+
+{% hint style="danger" %}
+The recovery phrase is case sensitive
+{% endhint %}
+
+#### Example 1:
+
+The following example recovers the profile n the sig chain
+
+```
+{
+    "username": "John Doe"
+    "password": "password1",
+    "pin": "1234",
+    "recovery": "this is the recovery seed that I wish to use"
+}
+```
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "017fbb86583c0e15c0fb994a1f4c70d97f2c084533748ccfd25cd36e5aef9c2e7f89f15f2ec9f2d73769fef9d7a8a28cd018c9907ebf1bf74e4f89837c900091"
+}
+[Completed in 15242.801822 ms]
+```
+
+#### Return values:
+
+`txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
+
+
 
 ### `status/master`
 

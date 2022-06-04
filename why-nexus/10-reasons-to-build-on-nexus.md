@@ -4,7 +4,7 @@ description: Why you should consider building with Nexus?
 
 # 🔟 10 Reasons to Build on Nexus?
 
-There is an increasing number of smart contract platforms rolling out in the crypto space, with many becoming household names. However, a dark horse in the race to be the most efficient and secure blockchain is ‘[Nexus](https://www.nexus.io)’. Given its low market cap, most people have never heard of this seven year old blockchain, yet it delivers far more than many of the leading smart contract platforms today.&#x20;
+There is an increasing number of smart contract platforms rolling out in the crypto space, with many becoming household names. However, a dark horse in the race to be the most efficient and secure blockchain is ‘[Nexus](https://www.nexus.io/)’. Given its low market cap, most people have never heard of this seven year old blockchain, yet it delivers far more than many of the leading smart contract platforms today.&#x20;
 
 The Nexus [roadmap](https://www.nexus.io/roadmap) is extensive, with massive upgrades and new features still to come, many of which are just around the corner. However, let’s now focus on the top 10 reasons to build on Nexus based on its current capabilities. All these features can be used by developers on the public network or their own private chain.&#x20;
 
@@ -16,7 +16,7 @@ Nexus was designed from its inception with composability in mind. The team and t
 
 ### **2: Fueling the No-Code Movement**
 
-[Bubble](https://bubble.io) is a leader in the no-code movement, which offers a powerful point-and-click web editor and cloud hosting platform that allows users to build fully customizable web applications and workflows. Nexus’ [bubble plugin](https://www.nexus.io/bubble) contains several API calls that interact directly with the Nexus' blockchain. It is a powerful tool for anyone eager to build tokenized peer-to-peer NFT (Non fungible token) marketplaces, visual art galleries, music and video streaming platforms, social networks, and many other services, creations, and ideas for the Web3 era.&#x20;
+[Bubble](https://bubble.io/?utm\_source=prwire\&utm\_medium=pr\&utm\_campaign=fc2021\&utm\_content=micaward) is a leader in the no-code movement, which offers a powerful point-and-click web editor and cloud hosting platform that allows users to build fully customizable web applications and workflows. Nexus’ [bubble plugin](https://www.nexus.io/bubble) contains several API calls that interact directly with the Nexus' blockchain. It is a powerful tool for anyone eager to build tokenized peer-to-peer NFT (Non fungible token) marketplaces, visual art galleries, music and video streaming platforms, social networks, and many other services, creations, and ideas for the Web3 era.&#x20;
 
 ### **3: Easy Token & Asset (NFT) Creation**
 
