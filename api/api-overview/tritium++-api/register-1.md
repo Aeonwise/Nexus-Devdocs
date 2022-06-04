@@ -1,5 +1,5 @@
 ---
-description: Register API
+description: REGISTER API
 ---
 
 # REGISTER
