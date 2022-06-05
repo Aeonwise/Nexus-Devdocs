@@ -22,9 +22,9 @@ The following methods are currently supported by this API&#x20;
 [`update/credentials`](users.md#update-credentials)\
 [`update/recovery`](users.md#update-credentials-1)\
 [`recover/master`](users.md#recover-master)\
-[`transactions/master`](users.md#transactions-master)\
-[`notifications/master`](users.md#notifications-master)\
 [`status/master`](users.md#status-master)\
+[`notifications/master`](users.md#notifications-master)\
+[`transactions/master`](users.md#transactions-master)\
 
 
 ## `create/master`
@@ -514,7 +514,7 @@ The recovery phrase is case sensitive
 
 #### Example 1:
 
-The following example recovers the sig chain
+The following example recovers the signature chain
 
 ```
 {
@@ -545,7 +545,7 @@ The following example recovers the sig chain
 
 ### `status/master`
 
-Return status information for the currently logged in user
+Return status information for the currently logged in user or session
 
 #### Endpoint:
 
@@ -560,30 +560,16 @@ Return status information for the currently logged in user
 When using multi-user API mode the session parameter must be supplied to identify which user to return the status for.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="pin" required="true" %}
-PIN for the user account. This should only be supplied in multi-user mode and only if the caller requires the 
-
-`username`
-
- to be included in the response. In single user mode the username is always returned 
-{% endswagger-parameter %}
-
 {% swagger-response status="200: OK" description="User status" %}
 ```json
 {
-    "username": "bob",
-    "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269ae000",
-    "confirmed": true,
-    "recovery": true,
-    "transactions": 272,
-    "notifications": 10,
-    "unlocked": {
-        "mining": false,
-        "notifications": false,
-        "staking": false,
-        "transactions": false
-    }
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "confirmed": true,
+    "recovery": true,
+    "crypto": true,
+    "transactions": 10
 }
+[Completed in 1.609584 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -640,19 +626,17 @@ print(response.json())
 
 #### Return values:
 
-`genesis` : The signature chain genesis hash for the currently logged in profile.
+`genesis` : The signature chain genesis hash for the currently logged in signature chain.
 
 `confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
 
-`recovery` : Flag indicating whether the recovery seed has been set for this profile.
+`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
 
-`crypto` : Flag indicating whether the crypto object register has been set for this profile.
+`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
 
-`transactions` : The total transaction count in this sig chain
+`transactions` : The total transaction count in this signature chain
 
 ***
-
-
 
 ### `notifications/master`
 
