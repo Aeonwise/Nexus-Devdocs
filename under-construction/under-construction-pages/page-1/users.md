@@ -25,6 +25,7 @@ The following methods are currently supported by this API&#x20;
 [`status/master`](users.md#status-master)\
 [`notifications/master`](users.md#notifications-master)\
 [`transactions/master`](users.md#transactions-master)\
+`create/crypto`\
 
 
 ## `create/master`
@@ -557,7 +558,7 @@ Return status information for the currently logged in user
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
-When using multi-user API mode the session parameter must be supplied to identify which user to return the status for.
+When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="User status" %}
@@ -609,7 +610,7 @@ print(response.json())
 
 #### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which user to return the status for.
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
 
 #### Return value JSON object:
 
@@ -842,7 +843,7 @@ An array of contracts deifned as:
 
 ### `transactions/master`
 
-This will list off all of the transactions for the requested signature chain genesis or username (either can be used). You DO NOT need to be logged in to use this command. If you are using single-user API mode and are logged in, then neither username or genesis are required. It will return transactions for the currently logged in user.
+This will list off all of the transactions for the requested signature chain genesis or username (either can be used). If you are using single-user API mode and are logged in, then neither username or genesis are required. It will return transactions for the currently logged in user.
 
 {% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
@@ -964,10 +965,6 @@ print(response.json())
 
 #### Parameters:
 
-`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
-
-`username` : The username identifying the signature chain (optional if genesis is supplied).
-
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 
 * `default` : hash
@@ -988,26 +985,39 @@ print(response.json())
 
 ```
 {
-    "txid": "222fafd56cf1fa5dc8d274d83dc49d1fcd4ecee958c62338fa865c7d43e5ed9f0abb843fdbf5b161dd1d1b9e2e64a9a1cb3a32657b8559b03ef60210257f8206",
+    "txid": "01285bbd668df2bfc67515c7e9d4818b23095c10ae0585e2aa6626c018c6253fed7852dd8598ddd0668574c05a7b02eb4c89a6cf4804fcfa2bf5e7e0ffab4e77",
+    "type": "tritium first",
+    "version": 4,
+    "sequence": 0,
+    "timestamp": 1654261755,
+    "blockhash": "aae806d080e8ce32d14aded37987e6969d791414328fdde96a510630727c94b0588c0ba479f8f6afe0f90a6fdf295b0a61815774b237d70c51adfbf1ac640d662802541f6125c64d43566d1347792b5f45c0ac868ac988742b9a98fb0adbc4ba76540a3538b9acce2e8ee987079ff05bdbc57d6e4c3ada9e87d41bf6e01001ab",
+    "confirmations": 8,
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "nexthash": "da9562e126398dc3e5a7c70448dffb4404425132dc8f8249c910d1c7c8103932",
+    "prevhash": "2446c05789a16d5a0709a65f74c469277fc5691f895766819de6ddcf78286e52e5a07682375bcf14e3e343f98cb5047a3349f967fd573892e08422f03180d53e",
+    "pubkey": "032b69f4bb5c812d9f6b01e055941b2ecb2ba52e86a054847b7e2925e50540a3e8a4e477bba33d6bbd7e7da51d85a9b4f9604327f0f616030712f0762539ac4cda",
+    "signature": "308184024001653b3b52c04ceb250abdb861ed24e7d2c797d377576dcc7d09b2d0aa3b0aa1afba1488872e4c6b04ef559c79c237f4b0a15519a8ed6e3bb27fbef50bf45246024035ea2174418e41e9c2ecf0b4fdd2d5e4d18665124c7a87da8b1eb72714dae8825ce8c9c8223057368e1e2eecd2703287ac73e8b003e67a39d3fd763d41d39c86",
     "contracts": [
         {
-            "OP": "COINBASE",
-            "genesis": "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2",
-            "nonce": 3,
-            "amount": 76499504
+            "id": 0,
+            "OP": "CREATE",
+            "address": "89AVoe5S8gjZpVngYoYtqJbSr9fGsdsoXShxnyNaEGPvMMeDnT6",
+            "type": "OBJECT",
+            "standard": "CRYPTO",
+            "object": {
+                "app1": "0000000000000000000000000000000000000000000000000000000000000000",
+                "app2": "0000000000000000000000000000000000000000000000000000000000000000",
+                "app3": "0000000000000000000000000000000000000000000000000000000000000000",
+                "auth": "02b5dbda57225afab10ca271ff513beab748306cff028798e2b64505db59f252",
+                "cert": "0000000000000000000000000000000000000000000000000000000000000000",
+                "lisp": "0000000000000000000000000000000000000000000000000000000000000000",
+                "network": "025193caf52ce6065951a438d30696f7548e12e0ebadd60359141029c1c4d870",
+                "sign": "02efc8e11c7097520080718b5dd0e92267292401678fcecb317bde79df64311c",
+                "verify": "0000000000000000000000000000000000000000000000000000000000000000"
+            }
         }
-    ],
-    "type": "tritium base",
-    "version": 1,
-    "sequence": 10,
-    "timestamp": 1560196174,
-    "confirmations": 6,
-    "genesis": "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2",
-    "nexthash": "117ac949f88a65f6466e2b332e88abb1b7548cc7a09fdf6512ef4d96b44c1b2e",
-    "prevhash": "cdfd0721fd860f52046a4752c6e67a30b11541662f89815091800f54c994455ecf20994651c38d32c0d8a3c3affc32d88977987c25af30c4c907b9666802c229",
-    "pubkey": "095afa24f8dcdf15ac8c7701d7a0429ca866b2881ad5a2e59af77d8c6ebeb04a150b5ecc23d4c60593d583022cefea32cdca51f8dd476653208c72a14150ae85567e90f90e649a67fd1a32e501ea135ee88859e2606aa8ec22f524e784c8e9e9722401512028878fa1a56606e4481641b58295d6879e665f1e180777d011e709d120b1214f647bf68713be98c0b968d86815c22a1d9a7128e780e910c8ad82c595b20504772b8c842507d4a26a9345500829a1d4b28665507e1789a526eb6be60662fb4da11e0cd50bd78e698ba0f4220b1798bc64492910dc84876a6c95ace3563e7a23da96627d7b04a1284606d029567bb26a0a412a4a8a82a09dc7062968894b11c22410d8711b90e33f4d20a5385a969d69b05118d2d17585c999e1ef35a97444c8b2da5b54c1ce556da90477c2020bb780e402daa0f4bdee92b5745433f71e4a30a42816f518e2a0da4d38fa49ce136e18aadfcef9463ad641e05b4220f54139605c5328c27fd0d5cf1329f8928094aeebbd70f116e8271e7bb280e7f4aac58115bb0064920a36fcb028f50b0b376553a6af00334899abe5be0cad14b435b377c6514680a58072691947181fa0a85b70ad15e585265e7f8bc6c22954a5bf95065815cc18771eb1a486ad6810b80c4a38f92716500220804324ff01728e3b4e87b9a34984a1456f7ab14459e4859e62961eedbb788e820b4580d12fe0266aec3a82da88c190b94d715a01793c69bf16d94bb89abc5e116f03792aa2e8306604ce559415f74948ebb3e63b8371d0e58a0d5b2798aadeb4a5dafbd44a4ca27e0a523e57a49600c826208fe4932848eb82a7c96b32bb19bb5a2e1c64ffa31756d484eddd521eae75bcf633227783d7ad0150c6198c2754c2e166e34ac00cc488573d40b82ad650e25221e414b419c66450ec266516605759e985ec1cd3f7ebc89525cf67aa2401a3cc2469e686a97f00e47484499554fa2917616e9d9c5d6f42f9d32438910fd1c00bc10a2a9234856ec6021aa69b76da10299e73540ce3175328ccb68c0b1d1878e584bd40b60af0c323c49aad7efef783d5049dae18a53794a5432f30b6c4ec6e0a43dc11f5d869f04dbe5eb963240e716ce220c75a165e6a8b5b33cb318c985e50e5d26aa9c25c2b746b4f3edcc318cae0b060a8dcc628878070b60c24f9e35a9596a0c4e1278d1a9d5b33c8e76984340cf7ec991e767c071b47d47e2ba89cb99145bcae716f402fcdb5416ab7d3b0d50b1ec4399a076faa",
-    "signature": "29381098b52dd52a0f4d2f82ec4fcab2c5044ad4f9bb299c713be43345b4c215c8125936ab3445a6bde280e5f22bbf35d588458ed5169f25f0711efc2299bc6d7885c96c4cd978149dd5a1bc3b554e9bc3b8c5cbaf1d3185202ca3778c42d1d8161eeab49c05b3733e90959e7d626e96b75adc5ba18e514f36cac68ad111e8f1a8e9a2710cd5252cc54121d0b39459ec49662531a250e64e1d2571c863c8697dc91f04551dfb3517555e91014f4a36a2763452ac1698d32cadd727b1dca320c6c0efc0a6cc63f8d8e850ec5592b0d6358b25fa0246f50a7ba89161cab487f4d6925f43a3978367300c59f1f64bac24cdb1ea6ce3d7457620c9b2c508a6619f29a91a19f816393b57503ff7059954dac507fd5ab756ee1c5b861352b9e5086fb6fe388c317e59778c79a7a1ccd2152543bf56ed58c8cfefb788ecef56c9ae84ab26f71545926d1c26b91a6bc20896b99087c3eb36720c9998cb7018c2247d321c7eadf4c6d1def93b451c4ddb94123ef8691fa83f81eddc426a5cc1afbeb1f615331a97eda571e57b8cf2b46eb25cdd19691d3b8723786e9b4476afdb7e99adc56e5d237d33311f09162c74fc24c5386458a4290a7d1b8b870fdeae68e689675b5290c9704d7f1323d1657bdc2c6be2914a7de447d7c475f8ce74487b6225958831cdbbc1887af2c8016141568bd51e039c648c6541578067b2c626fe40455791ae345d0d5702356567fcda5c24365ed6b039cd9b0286dffad2c982044ae2f0b38e76deac4b19e5bac5773e45eaa78125b13df9db726cffe8c6e266cb68520ce3febf4a66fd66225f639e095ea6bdb833529a5f2bb1c9b1c544c17dee717256b471ab703d11541d55f0f78bd60d7e671f9a22a2328b70fb034b8f6459f155a17c21ad2750ce7282257980ba571c6296"
-},
+    ]
+}
 ```
 
 #### Return values:
