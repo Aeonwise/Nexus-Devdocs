@@ -7,7 +7,7 @@ description: Setup SSL for API's & RPC calls
 The nexus core API, RPC, P2P and node communications can be secured with Secure Sockets Layer (SSL) or Transport Layer Security (TLS). This guide will help you to setup SSL for your Nexus node.
 
 {% hint style="info" %}
-Nexus already has provided security, for unauthorised API calls by incorporating API credentials and also whitelisting of IP address for making API calls.
+Nexus has provided security, for unauthorised API calls by incorporating API credentials and also whitelisting of IP address for making API calls.
 
 We cannot add quantum resistance algorithms to API calls, as the internet only uses SSL/TLS encryption and will not work with post quantum algorithms. Even if we implement them it will break compatibility with existing systems.
 {% endhint %}
@@ -18,15 +18,15 @@ Nexus supports the PEM format. PEM (**P**rivacy **E**nhanced **M**ail) is the mo
 
 PEM files are usually seen with the extensions `.crt`, `.pem`, `.cer`, and `.key` (for private keys), but you may also see them with different extensions like`.ca-bundle`.
 
-#### SSL Purchase and Files
+#### SSL  Files
 
-If you have purchased a valid SSL/TLS certificate it will consist of two or three files
+When purchasing a valid SSL/TLS certificate it will consist of two or three files
 
 * certificate
 * privatekey
 * cabundle - optional
 
-Most SSL vendors will provide the first two files, but some may not provide the cabundle. If you have not received, then you need to build the  ca-bundle manually.
+Most SSL vendors will provide the first two files, but some may not provide the cabundle. If you have not received, then you need to build the ca-bundle manually.
 
 #### **What does a PEM certificate look like?** <a href="#ftoc-heading-3" id="ftoc-heading-3"></a>
 
@@ -85,10 +85,10 @@ F10YlqcOmeX1uFmKbdi/XorGlkCoMF3TDx8rmp9DBiB/
 Copy the SSL files provided by the CA authority to /home/\<user>/certs. &#x20;
 
 {% hint style="info" %}
-For connecting to Bubble applications, it is a prerequisite to include the cabundle.
+For connecting to Bubble applications successfully, it is a prerequisite to include the cabundle.
 {% endhint %}
 
-To configure SSL, add the below options in the nexus.conf file and those should point to the  location of the particular files. The "`sslcabundle`" is an optional configuration, but is a requirement for connecting to certain applications securely.
+To configure SSL, add the below options in the nexus.conf file and those should point to the  location of the particular files. The "`sslcabundle`" is an optional configuration, but is a requirement for connecting to certain applications.
 
 To open the config file, use the command below:
 
