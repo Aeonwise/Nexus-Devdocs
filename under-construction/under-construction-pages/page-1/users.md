@@ -29,14 +29,14 @@ The following methods are currently supported by this API&#x20;
 
 ## `create/master`
 
-This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN.
+This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN
 
 {% hint style="info" %}
 **NOTE:**&#x20;
 
 &#x20;_username_ must be a minimum of 3 characters\
 &#x20;_password_ must be a minimum of 8 characters\
-&#x20;_PIN_ must be a minimum of 4 characters
+&#x20;_pin_ must be a minimum of 4 characters
 {% endhint %}
 
 #### Endpoint:
@@ -51,7 +51,7 @@ This will create a new master profile (signature chain) for use on the network. 
 
 _username_ must be a minimum of 3 characters\
 _password_ must be a minimum of 8 characters\
-_PIN_ must be a minimum of 4 characters
+pin must be a minimum of 4 characters
 {% endswagger-description %}
 
 {% swagger-parameter in="header" name="username" required="true" %}
@@ -143,11 +143,9 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 ### `update/credentials`
 
-This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
+This method provides the user with the ability to change the password and pin, for this signature chain.
 
 Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
-
-If setting a recovery....
 
 This method requires the user to already be logged in.
 
@@ -172,12 +170,6 @@ The current password for this user account
 The current pin for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="recovery" required="false" %}
-The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via
-
-`new_recovery`
-{% endswagger-parameter %}
-
 {% swagger-parameter in="body" name="new_password" required="true" %}
 The new password for this user account
 {% endswagger-parameter %}
@@ -186,19 +178,13 @@ The new password for this user account
 The new pin for this user account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="new_recovery" required="false" %}
-new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
-
-**NOTE**
-
-: the recovery seed is case sensitive
-{% endswagger-parameter %}
-
 {% swagger-response status="200: OK" description="user credentials updated" %}
 ```json
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "01417fb5d5cde01677790b0c1f4b72e04f8eab2eece8ea9f0f122b891a916794c82210cb2613375e46783d376a84763c4e9e4d763ed092f908eaf1b3cd7641ec"
 }
+[Completed in 9943.302462 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -244,23 +230,15 @@ print(response.json())
 {% endtab %}
 {% endtabs %}
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which user to update.
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
 `password` : The existing password for this signature chain.
 
 `pin` : The existing pin for this signature chain.
 
-`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery`
-
 `new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
 
 `new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
-
-`new_recovery` : The new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
-
-{% hint style="danger" %}
-The recovery phrase is case sensitive
-{% endhint %}
 
 #### Example 1:
 
@@ -275,27 +253,19 @@ The following example changes the existing password from `password1` to `passwor
 }
 ```
 
-#### Example 2:
-
-The following example sets the initial recovery seed on the sig chain
-
-```
-{
-    "password": "password1",
-    "pin": "1234",
-    "new_recovery": "this is the recovery seed that I wish to use"
-}
-```
-
 #### Return value JSON object:
 
 ```
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "01417fb5d5cde01677790b0c1f4b72e04f8eab2eece8ea9f0f122b891a916794c82210cb2613375e46783d376a84763c4e9e4d763ed092f908eaf1b3cd7641ec"
 }
+[Completed in 9943.302462 ms]
 ```
 
 #### Return values:
+
+`success` : Boolean flag indicating that the `profile` was saved successfully.
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
