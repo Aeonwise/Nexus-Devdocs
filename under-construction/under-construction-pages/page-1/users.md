@@ -1078,4 +1078,114 @@ print(response.json())
 
 ***
 
-## ``
+***
+
+## `create/crypto`
+
+This will initialize the crypto object register in case of an old signature chain and convert it into a profile for use on the network.&#x20;
+
+{% hint style="info" %}
+**NOTE:**&#x20;
+
+&#x20;_username_ must be a minimum of 3 characters\
+&#x20;_password_ must be a minimum of 8 characters\
+&#x20;_pin_ must be a minimum of 4 characters
+{% endhint %}
+
+#### Endpoint:
+
+`/profiles/create/crypto`
+
+{% swagger method="post" path="/profiles/create/crypto" baseUrl="http://api.nexus-interactions.io:8080" summary="create/master" %}
+{% swagger-description %}
+This will initialize the crypto object register in case of an old signature chain and convert it into a profile for use on the network.
+
+**NOTE** :&#x20;
+
+_username_ must be a minimum of 3 characters\
+_password_ must be a minimum of 8 characters\
+pin must be a minimum of 4 characters
+{% endswagger-description %}
+
+{% swagger-parameter in="header" name="username" required="true" %}
+The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="password" required="true" %}
+Password for the profile
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="pin" required="true" %}
+The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions)
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="user account created" %}
+```json
+{
+    "success": true,
+    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+//  /users/create/user
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    username: "YOUR_USERNAME",
+    password: "YOUR_SECRET",
+    pin: "YOUR_PIN"
+}
+fetch(`${SERVER_URL}/profiles/create/crypto`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_SECRET",
+    "pin": "YOUR_PIN"
+}
+response = requests.post(f"{SERVER_URL}/profiles/create/crypto", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+
+`password` : The password to be associated with this user.
+
+`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+}
+```
+
+#### Return values:
+
+`success` : Boolean flag indicating that the `profile` was saved successfully .
+
+`txid` : The ID (hash) of the transaction that includes the master profile creation.
+
+***
