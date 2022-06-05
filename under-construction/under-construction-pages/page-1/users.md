@@ -155,7 +155,7 @@ This method requires the user to already be logged in.
 
 {% swagger method="post" path="/profiles/update/credentials" baseUrl="http://api.nexus-interactions.io:8080" summary="update/credentials" %}
 {% swagger-description %}
-This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
+This method provides the user with the ability to change the password and pin, for this signature chain.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -273,11 +273,9 @@ The following example changes the existing password from `password1` to `passwor
 
 ### `update/recovery`
 
-This method provides the user with the ability to set or change the recovery seed for the profile.
+This method provides the user with the ability to set or change the recovery seed for this signature chain.
 
-Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
-
-This method requires the profile to create a session.
+This method requires the user to be logged in.
 
 #### Endpoint:
 
@@ -285,7 +283,7 @@ This method requires the profile to create a session.
 
 {% swagger method="post" path="/profiles/update/recovery" baseUrl="http://api.nexus-interactions.io:8080" summary="update/recovery" %}
 {% swagger-description %}
-This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
+This method provides the user with the ability to set or change the recovery seed for this signature chain.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="session" required="false" %}
@@ -301,32 +299,24 @@ The current pin for this user account
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="recovery" required="false" %}
-The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via
+The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via 
 
 `new_recovery`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="new_password" required="true" %}
-The new password for this user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="new_pin" required="true" %}
-The new pin for this user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="new_recovery" required="false" %}
+{% swagger-parameter in="body" name="new_recovery" required="true" %}
 new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
 
-**NOTE**
-
-: the recovery seed is case sensitive
+**NOTE**: the recovery seed is case sensitive
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="user credentials updated" %}
 ```json
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
 }
+[Completed in 18533.182336 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -415,11 +405,15 @@ The following example changes the recovery seed to a new seed on the sig chain
 
 ```
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
 }
+[Completed in 18533.182336 ms]
 ```
 
 #### Return values:
+
+`success` : Boolean flag indicating that the `profile` was saved successfully.
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
