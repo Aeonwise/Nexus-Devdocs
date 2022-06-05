@@ -6,6 +6,12 @@ description: Setup SSL for API's & RPC calls
 
 The nexus core API, RPC, P2P and node communications can be secured with Secure Sockets Layer (SSL) or Transport Layer Security (TLS). This guide will help you to setup SSL for your Nexus node.
 
+{% hint style="info" %}
+Nexus already has provided security, for unauthorised API calls by incorporating API credentials and also whitelisting of IP address for making API calls.
+
+We cannot add quantum resistance algorithms to API calls, as the internet only uses SSL/TLS encryption and will not work with post quantum algorithms. Even if we implement them it will break compatibility with existing systems.
+{% endhint %}
+
 #### What certificate formats and extensions does Nexus support?
 
 Nexus supports the PEM format. PEM (**P**rivacy **E**nhanced **M**ail) is the most common format for X.509 certificates, CSRs, and cryptographic keys. A PEM file is a text file containing one or more items in Base64 ASCII encoding, each with plain-text headers and footers (e.g. `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`). A single PEM file could contain an end-entity certificate, a private key, or multiple certificates forming a complete chain of trust.&#x20;
