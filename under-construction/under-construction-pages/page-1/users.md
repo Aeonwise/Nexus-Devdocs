@@ -6,6 +6,8 @@ description: PROFILES API
 
 The profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain.
 
+Profiles API will provide sub-profiles, which can be managed under the master profiles. The sub-profiles will be available in the next update.
+
 ### `Named Shortcuts`
 
 For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
@@ -15,8 +17,6 @@ For example `/profiles/create/master/myusername` is a shortcut to `profiles/crea
 ### `Methods`
 
 The following methods are currently supported by this API&#x20;
-
-
 
 [`create/master`](users.md#create-master-1)\
 [`update/credentials`](users.md#update-credentials)\
@@ -55,15 +55,15 @@ _pin_ must be a minimum of 4 characters
 {% endswagger-description %}
 
 {% swagger-parameter in="header" name="username" required="true" %}
-The username to be associated with this user. The signature chain genesis (used to uniquely identify user accounts) is a hash of this username, therefore the username must be unique on the blockchain
+The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="password" required="true" %}
-password for the user account
+Password for the profile
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="pin" required="true" %}
-The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify a user account (such as sending or claiming transactions)
+The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions)
 {% endswagger-parameter %}
 
 {% swagger-response status="201: Created" description="user account created" %}
@@ -129,7 +129,7 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 `password` : The password to be associated with this user.
 
-`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify a user account (such as sending or claiming transactions).
+`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
 
 #### Return value JSON object:
 
@@ -142,7 +142,7 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 #### Return values:
 
-`success` : The boolean value for the transaction.
+`success` : Boolean flag indicating that the `profile` was saved successfully .
 
 `txid` : The ID (hash) of the transaction that includes the master profile creation.
 
