@@ -265,7 +265,7 @@ The following example changes the existing password from `password1` to `passwor
 
 #### Return values:
 
-`success` : Boolean flag indicating that the `profile` was saved successfully.
+`success` : Boolean flag indicating that the credentials were saved successfully.
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
@@ -368,12 +368,12 @@ print(response.json())
 
 `pin` : The existing pin for this signature chain.
 
-`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery`
+`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
 
-`new_recovery` : The new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
+`new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
 
 {% hint style="danger" %}
-The recovery phrase is case sensitive
+The recovery seed is case sensitive.
 {% endhint %}
 
 #### Example 1:
@@ -390,7 +390,7 @@ The following example sets the initial recovery seed on the sig chain
 
 #### Example 2:
 
-The following example changes the recovery seed to a new seed on the sig chain
+The following example updates the recovery seed on the sig chain
 
 ```
 {
@@ -413,7 +413,7 @@ The following example changes the recovery seed to a new seed on the sig chain
 
 #### Return values:
 
-`success` : Boolean flag indicating that the `profile` was saved successfully.
+`success` : Boolean flag indicating that the recovery seed was saved or changed successfully.
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
@@ -421,9 +421,9 @@ The following example changes the recovery seed to a new seed on the sig chain
 
 ### `recover/master`
 
-This method provides the user with the ability to recover the profile in case of a lost password.
+This method provides the user with the ability to recover the profile in case of a lost password and pin.
 
-This method requires that the user not having a session.
+This method requires that the user is not logged in.
 
 #### Endpoint:
 
@@ -431,48 +431,32 @@ This method requires that the user not having a session.
 
 {% swagger method="post" path="/profiles/recover/master" baseUrl="http://api.nexus-interactions.io:8080" summary="recover/master" %}
 {% swagger-description %}
-This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain.
+This method provides the user with the ability to recover the profile in case of a lost password and pin..
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="session" required="false" %}
-When using multi-user API mode the session parameter must be supplied to identify which user to update
+{% swagger-parameter in="body" name="username" required="true" %}
+The username identifying the profile.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="password" required="true" %}
-The current password for this user account
+The new password for this sig chain.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="pin" required="true" %}
-The current pin for this user account
+The new pin for this sig chain
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="recovery" required="false" %}
-The existing recovery seed for this user account. This is only required if an existing recovery seed is being updated via
-
-`new_recovery`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="new_password" required="true" %}
-The new password for this user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="new_pin" required="true" %}
-The new pin for this user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="new_recovery" required="false" %}
-new recovery seed to set on this sig chain. This is optional if new\_pin or new\_password is provided. The recovery seed must be a minimum of 40 characters.
-
-**NOTE**
-
-: the recovery seed is case sensitive
+{% swagger-parameter in="body" name="recovery" required="true" %}
+The existing recovery seed for this sig chain.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="user credentials updated" %}
 ```json
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "017fbb86583c0e15c0fb994a1f4c70d97f2c084533748ccfd25cd36e5aef9c2e7f89f15f2ec9f2d73769fef9d7a8a28cd018c9907ebf1bf74e4f89837c900091"
 }
+[Completed in 15242.801822 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -484,11 +468,10 @@ new recovery seed to set on this sig chain. This is optional if new\_pin or new\
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
 let data = {
-    session: "YOUR_SESSION_ID",
+    username: "YOUR_USERNAME",
     password: "YOUR_SECRET",
     pin: "YOUR_PIN",
-    recovery: "your recovery seed phrase", //Not required when setting the recovery phrase for the first time.
-    new_recovery: "your new recovery seed phrase",
+    recovery: "your recovery seed phrase",
 }
 fetch(`${SERVER_URL}/profiles/update/recovery`, {
         method: 'POST',
@@ -506,11 +489,10 @@ fetch(`${SERVER_URL}/profiles/update/recovery`, {
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
-    "session": "YOUR_SESSION_ID",
+    "username": "YOUR_USERNAME",
     "password": "YOUR_SECRET",
     "pin": "YOUR_PIN",
-    "recovery": "your recovery seed phrase", #Not required optional when setting the recovery phrase for the first time.
-    "new_recovery": "your new recovery seed phrase",
+    "recovery": "your recovery seed phrase",
 }
 response = requests.post(f"{SERVER_URL}/profiles/update/recovery", json=data)
 print(response.json())
@@ -532,7 +514,7 @@ The recovery phrase is case sensitive
 
 #### Example 1:
 
-The following example recovers the profile n the sig chain
+The following example recovers the sig chain
 
 ```
 {
@@ -554,6 +536,8 @@ The following example recovers the profile n the sig chain
 ```
 
 #### Return values:
+
+`success` : Boolean flag indicating that the recovery was completed successfully.
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
