@@ -18,7 +18,7 @@ __[_`create/local`_](sessions.md#create-local)\
 `save/local`\
 _`load/local`_\
 _`terminate/local`_\
-_`has/session`_
+_`status/local`_
 
 
 
@@ -546,7 +546,7 @@ PIN for the user account
 {% tabs %}
 {% tab title="Javascript" %}
 ```javascript
-// /users/load/session
+// /sessions/load/local
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 let data = {
     // genesis: "GENESIS_ID", //optional
@@ -581,8 +581,6 @@ print(response.json())
 
 #### Parameters:
 
-`genesis` : The genesis hash identifying the signature chain to load the session for (optional if username is supplied).
-
 `username` : The username identifying the signature chain to load the session for (optional if genesis is supplied).
 
 `pin` : The PIN for this signature chain.
@@ -591,8 +589,8 @@ print(response.json())
 
 ```
 {
-    "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-    "session": "0000000000000000000000000000000000000000000000000000000000000000"
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "session": "2ef9de11b19af82984ddf93275e7ba22c11fe9659d0667f79311c46732bbb7a4"
 }
 ```
 
@@ -675,6 +673,125 @@ print(response.json())
 `success` : Flag indicating if the call was successful
 
 ***
+
+### `status/local`
+
+Return status information for the current local session.
+
+#### Endpoint:
+
+`/sessions/status/local`
+
+{% swagger method="post" path="/sessions/status/local" baseUrl="http://api.nexus-interactions.io:8080" summary="status/local" %}
+{% swagger-description %}
+Return status information for the current local session.
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" required="false" %}
+When using multi-user API mode the session parameter must be supplied to identify which user to return the status for.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+PIN for the user account. This should only be supplied in multi-user mode and only if the caller requires the 
+
+`username`
+
+ to be included in the response. In single user mode the username is always returned 
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="User status" %}
+```json
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "accessed": 1653680627,
+    "location": "local",
+    "unlocked": {
+        "mining": false,
+        "notifications": true,
+        "staking": false,
+        "transactions": false
+    }
+}
+[Completed in 0.080333 ms]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// /sessions/status/local
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+let data = {
+    session: "YOUR_SESSION_ID",
+    pin: "YOUR_PIN",
+}
+fetch(`${SERVER_URL}/sessions/status/local`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "session": "YOUR_SESSION_ID",
+    "pin": "YOUR_PIN",
+}
+response = requests.post(f"{SERVER_URL}/sessions/status/local", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which user to return the status for.
+
+`pin` : The pin for the signature chain. This should only be supplied in multi-user mode.&#x20;
+
+#### Return value JSON object:
+
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "accessed": 1653680627,
+    "location": "local",
+    "unlocked": {
+        "mining": false,
+        "notifications": true,
+        "staking": false,
+        "transactions": false
+    }
+}
+[Completed in 0.080333 ms]
+```
+
+#### Return values:
+
+`genesis` : The signature chain genesis hash for the currently logged in user.
+
+`accessed` : The unix timestamp at which the signature chain was last accessed.
+
+`location` : The location of session, `local` or `remote`.
+
+`unlocked` : This will contain child elements describing which functions the session is currently unlocked for
+
+`mining` : Boolean flag indicating whether the users sig chain is unlocked for mining.
+
+`notifications` : Boolean flag indicating whether the users sig chain is unlocked for processing notifications.
+
+`staking` : Boolean flag indicating whether the users sig chain is unlocked for staking.
+
+`transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
 
 ## `has/session`
 
