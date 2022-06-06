@@ -6,29 +6,156 @@ description: PROFILES API
 
 The profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain.
 
+{% hint style="info" %}
 Profiles API will provide sub-profiles, which can be managed under the master profiles. The sub-profiles will be available in the next update.
+{% endhint %}
 
-### `Named Shortcuts`
+The full supported endpoint of the `profiles` URI is as follows:
 
-For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
+```
+profiles/verb/noun/filter/operator
+```
 
-For example `/profiles/create/master/myusername` is a shortcut to `profiles/create/master?username=myusername`.
+The minimum required components of the URI are:
+
+```
+profiles/verb/noun
+```
+
+## `Supported Filters`
+
+This command-set supports single or csv field-name filters.
+
+**Example:**
+
+```
+profiles/list/accounts/balance,ticker
+```
+
+The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
+
+### `Recursive Filtering`
+
+Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+
+```
+finance/transactions/account/contracts.OP
+```
+
+When using recursive filtering, the nested hiearchy is retained.
+
+```
+[
+    {
+        "contracts": [
+            {
+                "OP": "CREATE"
+            }
+        ]
+    },
+    {
+        "contracts": [
+            {
+                "OP": "CREDIT"
+            }
+        ]
+    }
+]
+```
+
+***
+
+## `Supported Verbs`
+
+The following verbs are currently supported by this API command-set:
+
+`create` - Generate a new object of supported type.\
+`update` - Claim funds issued to account from debit.\
+`recover` - Issue funds from supported type.\
+`status` - Get object of supported type.\
+`notifications` - List all objects owned by given user.\
+`transactions` - List all transactions that modified specified object.
+
+## `Supported Nouns`
+
+The following nouns are supported for this API command-set:
+
+\[`master`] - The default profile that controls all sub-profiles.\
+\[`auth`] - A crypto object register for login auth.\
+\[`credentials`] -  Profile credentials used to secure profiles.\
+\[`recovery`] - An object selection noun allowing mixed accounts of different tokens.\
+
+
+## `create`
+
+Create a new object register specified by given noun.
+
+```
+profiles/create/noun
+```
+
+This command does not support the `credentials` or `recovery` nouns.
+
+### Parameters:
+
+`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+
+`password` : The password to be associated with this user.
+
+`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
+
+{% hint style="danger" %}
+If user forgets the username, he looses access to his nexus assets. There is no option to change the username.  Be careful when you choose a username (case sensitive) and make a point to back it up.&#x20;
+{% endhint %}
+
+### Results:
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+```
+{
+    "success": true,
+    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
+    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
+}
+```
+
+***
+
+
 
 ### `Methods`
 
 The following methods are currently supported by this API&#x20;
 
-[`create/master`](profiles.md#create-master-1)\
-[`update/credentials`](profiles.md#update-credentials)\
-[`update/recovery`](profiles.md#update-credentials-1)\
-[`recover/master`](profiles.md#recover-master)\
-[`status/master`](profiles.md#status-master)\
-[`notifications/master`](profiles.md#notifications-master)\
-[`transactions/master`](profiles.md#transactions-master)\
-[`create/auth`](profiles.md#create-auth)\
+[`create/master`](users.md#create-master-1)\
+[`update/credentials`](users.md#update-credentials)\
+[`update/recovery`](users.md#update-credentials-1)\
+[`recover/master`](users.md#recover-master)\
+[`status/master`](users.md#status-master)\
+[`notifications/master`](users.md#notifications-master)\
+[`transactions/master`](users.md#transactions-master)\
+[`create/auth`](users.md#create-auth)\
 
 
 ## `create/master`
+
+master: the default profile they controls all sub profiles&#x20;
+
+auth: key for generating login credentials&#x20;
+
+Supported verbs:
+
+
+
+create - create cryptographic primitive used for profiles&#x20;
+
+\
+
+
+Supported Nouns: master, auth&#x20;
 
 This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN
 

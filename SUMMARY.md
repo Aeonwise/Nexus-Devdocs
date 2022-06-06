@@ -92,7 +92,7 @@
     * [C-PROFILE](under-construction/under-construction-pages/page-1/c-profile.md)
     * [SESSIONS](under-construction/under-construction-pages/page-1/sessions.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
-    * [PROFILES](under-construction/under-construction-pages/page-1/profiles.md)
+    * [PROFILES](under-construction/under-construction-pages/page-1/users.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
     * [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)
     * [Let's Encrypt (Default)](under-construction/lets-encrypt-default.md)
