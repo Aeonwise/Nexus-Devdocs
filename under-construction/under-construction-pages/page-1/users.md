@@ -13,7 +13,7 @@ Profiles API will provide sub-profiles, which can be managed under the master pr
 The full supported endpoint of the `profiles` URI is as follows:
 
 ```
-profiles/verb/noun/filter/operator
+profiles/verb/noun/filter
 ```
 
 The minimum required components of the URI are:
@@ -86,7 +86,45 @@ The following nouns are supported for this API command-set:
 \[`recovery`] - An object selection noun allowing mixed accounts of different tokens.\
 
 
-## `create`
+## `Sorting / Filtering`
+
+The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
+
+`limit`: The number of records to return. _Default: 100_.
+
+`page`: Zero-indexed page number that depends on `limit` for page boundaries.
+
+`offset`: Alternative to `page`, offset can be used to page the results by index.
+
+`order`: Descending **desc** or ascending **asc** as only permitted values.
+
+`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
+
+```
+{
+    "modified": 1621782289,
+    "json": {
+        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
+        "date": "12-21-2020"
+    }
+}
+```
+
+`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
+
+#### Alternative input
+
+The `limit` and `offset` parameters can be given with the following format:
+
+```
+limit=100.10
+```
+
+This above will map to the parameters of `limit=100` and `offset=10`.
+
+```
+finance/get/balances/balance/sumreate
+```
 
 Create a new object register specified by given noun.
 
@@ -122,11 +160,7 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 }
 ```
 
-***
-
-
-
-### `Methods`
+## `Methods`
 
 The following methods are currently supported by this API&#x20;
 
@@ -141,21 +175,6 @@ The following methods are currently supported by this API&#x20;
 
 
 ## `create/master`
-
-master: the default profile they controls all sub profiles&#x20;
-
-auth: key for generating login credentials&#x20;
-
-Supported verbs:
-
-
-
-create - create cryptographic primitive used for profiles&#x20;
-
-\
-
-
-Supported Nouns: master, auth&#x20;
 
 This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN
 
