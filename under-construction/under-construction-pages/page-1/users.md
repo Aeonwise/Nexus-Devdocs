@@ -25,7 +25,7 @@ The following methods are currently supported by this API&#x20;
 [`status/master`](users.md#status-master)\
 [`notifications/master`](users.md#notifications-master)\
 [`transactions/master`](users.md#transactions-master)\
-`create/auth`\
+[`create/auth`](users.md#create-auth)\
 
 
 ## `create/master`
