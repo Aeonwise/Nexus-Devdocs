@@ -102,78 +102,6 @@ print(response.json())
 
 
 
-***
-
-### `terminate/local`
-
-This will terminate the active session, and delete the profile credentials stored in encrypted memory.
-
-#### Endpoint:
-
-`/sessions/terminate/local`
-
-{% swagger method="post" path="/users/logout/user" baseUrl="http://api.nexus-interactions.io:8080" summary="logout/user" %}
-{% swagger-description %}
-This will log you the particular user and delete user credentials stored in encrypted memory
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="session" type="" required="false" %}
-session ID
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="user logged out" %}
-```json
-{
-  success : true
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-
-data = {
-    session: "YOUR_SESSION_ID"
-}
-fetch(`${SERVER_URL}/users/logout/user`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-data = {
-    "session": "YOUR_SESSION_ID"
-}
-response = requests.post(f"{SERVER_URL}/users/logout/user", json=data)
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-`session` : For multi-user API mode (configured with multiuser=1), the session is required to identify which session you are logging out of. For single-user API mode the session should not be supplied.
-
-#### Return value JSON object:
-
-#### Return values:
-
-`success` : Flag indicating if the call was successful
-
-***
-
 ### `unlock/local`
 
 This will unlock your signature chain and cache the PIN in encrypted memory to be used for all subsequent API calls. This method is only available when using single-user API mode (multiuser=0).
@@ -673,6 +601,78 @@ print(response.json())
 `genesis` : The signature chain genesis hash is echoed back to confirm the session has been loaded for the correct user.
 
 `session` : The session ID for the resumed session. NOTE: in multi-user mode this will be a NEW session ID, generated at the point the session is loaded. The previous session ID is not persisted and restored. When not in multi-user mode this will always be 0
+
+***
+
+### `terminate/local`
+
+This will terminate the active session, and delete the profile credentials stored in encrypted memory.
+
+#### Endpoint:
+
+`/sessions/terminate/local`
+
+{% swagger method="post" path="/sessions/terminate/local" baseUrl="http://api.nexus-interactions.io:8080" summary="terminate/local" %}
+{% swagger-description %}
+This will log you the particular user and delete user credentials stored in encrypted memory
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" type="" required="false" %}
+session ID
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="user logged out" %}
+```json
+{
+  success : true
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+
+data = {
+    session: "YOUR_SESSION_ID",
+    pin: "YOUR_PIN"
+}
+fetch(`${SERVER_URL}/sessions/terminate/local`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "session": "YOUR_SESSION_ID",
+    "pin": "YOUR_PIN"
+}
+response = requests.post(f"{SERVER_URL}/sessions/terminate/local", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`session` : For multi-user API mode (configured with multiuser=1), the session is required to identify which session you are logging out of. For single-user API mode the session should not be supplied.
+
+#### Return value JSON object:
+
+#### Return values:
+
+`success` : Flag indicating if the call was successful
 
 ***
 
