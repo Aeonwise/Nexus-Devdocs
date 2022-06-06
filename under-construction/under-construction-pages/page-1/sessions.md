@@ -1,6 +1,6 @@
 # SESSIONS
 
-The Sessions API provides methods for creating and managing profile sessions. A profile is synonymous with a signature chain.
+The Sessions API provides methods for creating and managing sessions. A session is synonymous with a user login into the signature chain.
 
 ### `Named Shortcuts`
 
@@ -13,12 +13,12 @@ For example `/sessions/create/local/myusername` is a shortcut to `sessions/creat
 The following methods are currently supported by this API
 
 __[_`create/local`_](sessions.md#create-local)\
-`unlock/local`\
-`lock/local`\
-`save/local`\
-_`load/local`_\
-_`terminate/local`_\
-_`status/local`_
+[`unlock/local`](sessions.md#unlock-local)\
+[`lock/local`](sessions.md#lock-user)\
+[`save/local`](sessions.md#save-local)\
+[_`load/local`_](sessions.md#load-local)\
+[_`terminate/local`_](sessions.md#terminate-local)\
+[_status/local_](sessions.md#status-local)__
 
 
 
@@ -112,7 +112,7 @@ The `pin` field is mandatory for unlock. The mining/staking/transactions/notific
 
 #### Endpoint:
 
-`/users/unlock/user`
+`/session/unlock/local`
 
 {% swagger method="post" path="/sessions/unlock/local" baseUrl="http://api.nexus-interactions.io:8080" summary="unlock/local" %}
 {% swagger-description %}
@@ -171,7 +171,7 @@ data = {
     staking: false,
     transactions: false,
 }
-fetch(`${SERVER_URL}/users/unlock/user`, {
+fetch(`${SERVER_URL}/sessions/unlock/local`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -217,7 +217,7 @@ print(response.json())
 #### Return value JSON object:
 
 ```
-{{
+{
     "unlocked": {
         "mining": false,
         "notifications": true,
@@ -242,7 +242,7 @@ print(response.json())
 
 ***
 
-### `lock/user`
+### `lock/local`
 
 This will lock your signature chain, making it unavailable for use unless it is either unlocked or the PIN is passed in to all API requests. Only available in single-user API mode (multiuser=0).
 
@@ -252,9 +252,9 @@ The mining/staking/transactions/notifications parameters are optional and, if su
 
 #### Endpoint:
 
-`/users/lock/user`
+`/sessions/lock/local`
 
-{% swagger method="post" path="/users/lock/user" baseUrl="http://api.nexus-interactions.io:8080" summary="lock/user" %}
+{% swagger method="post" path="/sessions/lock/local" baseUrl="http://api.nexus-interactions.io:8080" summary="lock/local" %}
 {% swagger-description %}
 This will lock your signature chain, making it unavailable for use unless it is either unlocked or the PIN is passed in to all API requests. Only available in single-user API mode (multiuser=0)
 {% endswagger-description %}
@@ -301,7 +301,7 @@ data = {
     staking: false,
     transactions: false,
 }
-fetch(`${SERVER_URL}/users/lock/user`, {
+fetch(`${SERVER_URL}/sessions/lock/local`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -323,7 +323,7 @@ data = {
     "staking": False,
     "transactions": False,
 }
-response = requests.post(f"{SERVER_URL}/users/lock/user", json=data)
+response = requests.post(f"{SERVER_URL}/sessions/lock/local", json=data)
 print(response.json())
 ```
 {% endtab %}
@@ -365,74 +365,6 @@ print(response.json())
 `transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
 
 ***
-
-### `create/remote`
-
-This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
-
-#### Endpoint:
-
-`/session/create/remote`
-
-{% swagger method="post" path="/session/create/remote" baseUrl="http://api.nexus-interactions.io:8080" summary="create/remote" %}
-{% swagger-description %}
-This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="pin" required="true" %}
-PIN for the user account
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="session saved" %}
-```javascript
-{
-    success:true
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-// /users/save/session
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-let data = {
-    pin: "YOUR_PIN"
-}
-fetch(`${SERVER_URL}/session/create/remote`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-data = {
-    "pin": "YOUR_PIN"
-}
-response = requests.post(f"{SERVER_URL}/session/create/remote", json=data)
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-`pin` : The PIN for this signature chain.
-
-#### Return value JSON object:
-
-#### Return values:
-
-`success` : Boolean flag indicating that the session was saved successfully .
 
 ### `save/local`
 
@@ -502,21 +434,25 @@ print(response.json())
 
 #### Return value JSON object:
 
+```
+// Some code
+```
+
 #### Return values:
 
 `success` : Boolean flag indicating that the session was saved successfully .
 
 ***
 
-## `load/session`
+## `load/local`
 
 Loads a previously saved session from the local database. In addition to restoring the logged in status of the user, the session resumes the unlocked status that was active at the time it was saved. The users PIN is required as this is used (in conjunction with the genesis) to decrypt the session data loaded from the local database.
 
 #### Endpoint:
 
-`/users/load/session`
+`/sessions/load/local`
 
-{% swagger method="post" path="/users/load/session" baseUrl="http://api.nexus-interactions.io:8080" summary="load/session" %}
+{% swagger method="post" path="/sessions/load/local" baseUrl="http://api.nexus-interactions.io:8080" summary="load/local" %}
 {% swagger-description %}
 Loads a previously saved session from the local database. In addition to restoring the logged in status of the user, the session resumes the unlocked status that was active at the time it was saved. The users PIN is required as this is used (in conjunction with the genesis) to decrypt the session data loaded from the local database.
 {% endswagger-description %}
@@ -549,11 +485,10 @@ PIN for the user account
 // /sessions/load/local
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 let data = {
-    // genesis: "GENESIS_ID", //optional
-    username: "YOUR_USERNAME", // optional 
+    session: "YOUR_SESSION_ID", 
     pin: "YOUR_PIN"
 }
-fetch(`${SERVER_URL}/users/load/session`, {
+fetch(`${SERVER_URL}/sessions/load/local`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -569,8 +504,7 @@ fetch(`${SERVER_URL}/users/load/session`, {
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
-    # "genesis": "GENESIS_ID", #optional
-    "username": "YOUR_USERNAME",  # optional
+    "session": "YOUR_SESSION_ID",
     "pin": "YOUR_PIN"
 }
 response = requests.post(f"{SERVER_URL}/users/load/session", json=data)
@@ -581,7 +515,7 @@ print(response.json())
 
 #### Parameters:
 
-`username` : The username identifying the signature chain to load the session for (optional if genesis is supplied).
+`session` : For multi-user API mode (configured with multiuser=1), the session is required to identify which session you are logging out of. For single-user API mode the session should not be supplied.
 
 `pin` : The PIN for this signature chain.
 
@@ -792,91 +726,3 @@ print(response.json())
 `staking` : Boolean flag indicating whether the users sig chain is unlocked for staking.
 
 `transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
-
-## `has/session`
-
-Determines whether a previously saved session exists in the local database for the specified user.
-
-#### Endpoint:
-
-`/users/has/session`
-
-{% swagger method="post" path="/users/has/session" baseUrl="http://api.nexus-interactions.io:8080" summary="has/session" %}
-{% swagger-description %}
-Determines whether a previously saved session exists in the local database for the specified user
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="genesis" %}
-The genesis hash identifying the signature chain to check the session for (optional if username is supplied)
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="username" %}
-The username identifying the signature chain to check the session for (optional if genesis is supplied)
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="has session" %}
-```json
-{
-    "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-    "has": true
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-// /users/has/session
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-let data = {
-    // genesis: "GENESIS_ID", //optional
-    username: "YOUR_USERNAME", // optional 
-}
-fetch(`${SERVER_URL}/users/has/session`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-data = {
-    # "genesis": "GENESIS_ID", #optional
-    "username": "YOUR_USERNAME",  # optional
-}
-response = requests.post(f"{SERVER_URL}/users/has/session", json=data)
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-`genesis` : The genesis hash identifying the signature chain to check the session for (optional if username is supplied).
-
-`username` : The username identifying the signature chain to check the session for (optional if genesis is supplied).
-
-#### Return value JSON object:
-
-```
-{
-    "genesis": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-    "has": true
-}
-```
-
-#### Return values:
-
-`genesis` : The signature chain genesis hash is echoed back to confirm the session has been checked for the correct user.
-
-`has` : Boolean flag indicating whether the session exists in the local database or not
-
-***
