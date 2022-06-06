@@ -2,7 +2,7 @@
 description: LEDGER API
 ---
 
-# c-ledger
+# c-LEDGER
 
 The Ledger API provides users with access to data held by the ledger such as blocks and transactions.
 
@@ -10,81 +10,20 @@ The Ledger API provides users with access to data held by the ledger such as blo
 
 The following methods are currently supported by this API
 
-[`get/blockhash`](c-ledger.md#get-blockhash)\
-[`get/block`](c-ledger.md#get-block)\
-[`list/blocks`](c-ledger.md#list-blocks)\
-[`get/transaction`](c-ledger.md#get-transaction)\
-[`submit/transaction`](c-ledger.md#submit-transaction)\
-[`void/transaction`](c-ledger.md#void-transaction)\
-[`get/mininginfo`](c-ledger.md#get-mininginfo)
 
-***
 
-### `get/blockhash`
+get/block\
+`get/blockhash`\
+`get/info`\
+`get/transaction`\
+`list/blocks`\
+`list/transactions`\
+`get/transaction`\
+`submit/transaction`\
+`void/transaction`\
+`sync/headers`
 
-Retrieves the hash of the block for the given height.
-
-#### Endpoint:
-
-`/ledger/get/blockhash`
-
-{% swagger method="post" path="/ledger/get/blockhash" baseUrl="http://api.nexus-interactions.io:8080" summary="Get blockhash" %}
-{% swagger-description %}
-Retrieves the hash of the block for the given height
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="height" required="true" %}
-The block height to retrieve the hash for
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="blockhash" %}
-```javascript
-{
-"result": {
-"hash": "f175d2e4951db8046939807085f8841ef2cf65141bd0ef7c356edb7a9ffae61c95b1c8a4049af9202c3ef7a198c47ac5df7db2ed750c7890e3d240c45eabdb7f10162e8843c44dea582c5042fb9ef6b003ab719912faa6bfe4c822f35aeb7252d02cb0e880eb5234e5f621b8ea917432f907731eb4e478440df981fee2983ac8"
-}
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-// ledger/get/blockhash
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-let height = 4180579
-fetch(`${SERVER_URL}/ledger/get/blockhash?height=${height}`)
-  .then(resp => resp.json())
-  .then(json => console.log(json))
-  .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-height = 4000000  #This is the block height or block count
-response = requests.get(f"{SERVER_URL}/ledger/get/blockhash?height={height}")
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-`height` : The block height to retrieve the hash for.
-
-#### Return value JSON object:
-
-#### Return values:
-
-`hash` : The hash of the block.
-
-***
-
-### `get/block`
+## `get/block`
 
 Retrieves block data for the given block hash or height.
 
@@ -320,6 +259,70 @@ Either the hash or the height needs to be supplied, but not both. Retrieving blo
 `token_name` : The name of the token that the transaction relates to.
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+
+## `get/blockhash`
+
+Retrieves the hash of the block for the given height.
+
+#### Endpoint:
+
+`/ledger/get/blockhash`
+
+{% swagger method="post" path="/ledger/get/blockhash" baseUrl="http://api.nexus-interactions.io:8080" summary="Get blockhash" %}
+{% swagger-description %}
+Retrieves the hash of the block for the given height
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="height" required="true" %}
+The block height to retrieve the hash for
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="blockhash" %}
+```javascript
+{
+"result": {
+"hash": "f175d2e4951db8046939807085f8841ef2cf65141bd0ef7c356edb7a9ffae61c95b1c8a4049af9202c3ef7a198c47ac5df7db2ed750c7890e3d240c45eabdb7f10162e8843c44dea582c5042fb9ef6b003ab719912faa6bfe4c822f35aeb7252d02cb0e880eb5234e5f621b8ea917432f907731eb4e478440df981fee2983ac8"
+}
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// ledger/get/blockhash
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let height = 4180579
+fetch(`${SERVER_URL}/ledger/get/blockhash?height=${height}`)
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+height = 4000000  #This is the block height or block count
+response = requests.get(f"{SERVER_URL}/ledger/get/blockhash?height={height}")
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`height` : The block height to retrieve the hash for.
+
+#### Return value JSON object:
+
+#### Return values:
+
+`hash` : The hash of the block.
+
+***
 
 }
 
