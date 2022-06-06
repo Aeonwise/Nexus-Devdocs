@@ -18,14 +18,14 @@ For example `/profiles/create/master/myusername` is a shortcut to `profiles/crea
 
 The following methods are currently supported by this API&#x20;
 
-[`create/master`](users.md#create-master-1)\
-[`update/credentials`](users.md#update-credentials)\
-[`update/recovery`](users.md#update-credentials-1)\
-[`recover/master`](users.md#recover-master)\
-[`status/master`](users.md#status-master)\
-[`notifications/master`](users.md#notifications-master)\
-[`transactions/master`](users.md#transactions-master)\
-[`create/auth`](users.md#create-auth)\
+[`create/master`](profiles.md#create-master-1)\
+[`update/credentials`](profiles.md#update-credentials)\
+[`update/recovery`](profiles.md#update-credentials-1)\
+[`recover/master`](profiles.md#recover-master)\
+[`status/master`](profiles.md#status-master)\
+[`notifications/master`](profiles.md#notifications-master)\
+[`transactions/master`](profiles.md#transactions-master)\
+[`create/auth`](profiles.md#create-auth)\
 
 
 ## `create/master`
