@@ -102,113 +102,15 @@ print(response.json())
 
 
 
-### `login/user`
-
-This will start a session for your user account with this specific API instance. Username, password, and pin fields are mandatory for login.
-
-#### Endpoint:
-
-`/users/login/user`
-
-{% swagger method="post" path="/users/login/user" baseUrl="http://api.nexus-interactions.io:8080" summary="login/user" %}
-{% swagger-description %}
-This will start a session for your user account with this specific API instance. Username, password, and pin fields are mandatory for login
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="username" required="true" type="" %}
-The username for the user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="Password" required="true" %}
-The password for the user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="pin" required="true" %}
-PIN for the user account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="Content-Type" required="false" %}
-application/json
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="user logged in" %}
-```json
-{
-    "genesis": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1",
-    "session": "5e9d8aa625a1838f60f30e12058089169e32c968389f365428f7b0c878bb47f8"
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-
-data = {
-    username: "YOUR_USERNAME",
-    password: "YOUR_SECRET",
-    pin: "YOUR_PIN"
-}
-fetch(`${SERVER_URL}/users/login/user`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-data = {
-    "username": "YOUR_USERNAME",
-    "password": "YOUR_SECRET",
-    "pin": "YOUR_PIN"
-}
-response = requests.post(f"{SERVER_URL}/users/login/user", json=data)
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-`username` : The username associated with this signature chain.
-
-`password` : The password to be associated with this signature chain.
-
-`pin` : The PIN for this signature chain.
-
-#### Return value JSON object:
-
-```
-{
-    "genesis": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1",
-    "session": "5e9d8aa625a1838f60f30e12058089169e32c968389f365428f7b0c878bb47f8"
-}
-```
-
-#### Return values:
-
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the user.
-
-`session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
-
 ***
 
-### `logout/user`
+### `terminate/local`
 
-This will log you out of this specific API, and delete your credentials stored in encrypted memory.
+This will terminate the active session, and delete the profile credentials stored in encrypted memory.
 
 #### Endpoint:
 
-`/users/logout/user`
+`/sessions/terminate/local`
 
 {% swagger method="post" path="/users/logout/user" baseUrl="http://api.nexus-interactions.io:8080" summary="logout/user" %}
 {% swagger-description %}
