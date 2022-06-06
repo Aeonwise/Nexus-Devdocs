@@ -25,7 +25,7 @@ The following methods are currently supported by this API&#x20;
 [`status/master`](users.md#status-master)\
 [`notifications/master`](users.md#notifications-master)\
 [`transactions/master`](users.md#transactions-master)\
-`create/crypto`\
+`create/auth`\
 
 
 ## `create/master`
@@ -1076,29 +1076,17 @@ print(response.json())
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-***
+## `create/auth`
 
-***
-
-## `create/crypto`
-
-This will initialize the crypto object register in case of an old signature chain and convert it into a profile for use on the network.&#x20;
-
-{% hint style="info" %}
-**NOTE:**&#x20;
-
-&#x20;_username_ must be a minimum of 3 characters\
-&#x20;_password_ must be a minimum of 8 characters\
-&#x20;_pin_ must be a minimum of 4 characters
-{% endhint %}
+This will create a crypto object register for login auth for signature chains created with Tritium, for use with Tritium++. Existing users need to run this API to convert their tritium accounts to be compatible with profiles. The interface wallet will do this automatically.
 
 #### Endpoint:
 
-`/profiles/create/crypto`
+`/profiles/create/auth`
 
-{% swagger method="post" path="/profiles/create/crypto" baseUrl="http://api.nexus-interactions.io:8080" summary="create/master" %}
+{% swagger method="post" path="/profiles/create/auth" baseUrl="http://api.nexus-interactions.io:8080" summary="create/auth" %}
 {% swagger-description %}
-This will initialize the crypto object register in case of an old signature chain and convert it into a profile for use on the network.
+This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN.
 
 **NOTE** :&#x20;
 
@@ -1139,7 +1127,7 @@ let data = {
     password: "YOUR_SECRET",
     pin: "YOUR_PIN"
 }
-fetch(`${SERVER_URL}/profiles/create/crypto`, {
+fetch(`${SERVER_URL}/profiles/create/auth`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -1159,7 +1147,7 @@ data = {
     "password": "YOUR_SECRET",
     "pin": "YOUR_PIN"
 }
-response = requests.post(f"{SERVER_URL}/profiles/create/crypto", json=data)
+response = requests.post(f"{SERVER_URL}/profiles/create/master", json=data)
 print(response.json())
 ```
 {% endtab %}
@@ -1167,11 +1155,11 @@ print(response.json())
 
 #### Parameters:
 
-`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+`username` : The username identifying the signature chain.
 
-`password` : The password to be associated with this user.
+`password` : The password for the signature chain.
 
-`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
+`pin` : Pin for the signature chain.
 
 #### Return value JSON object:
 

@@ -20,11 +20,7 @@ __[_`create/local`_](sessions.md#create-local)\
 [_`terminate/local`_](sessions.md#terminate-local)\
 [_status/local_](sessions.md#status-local)__
 
-
-
-
-
-### `create/local`
+## `create/local`
 
 This will create a local session for your profile with this specific API instance. Username, password, and pin fields are mandatory for creating the session.
 
@@ -100,9 +96,7 @@ print(response.json())
 
 `success` : Boolean flag indicating that the session was saved successfully .
 
-
-
-### `unlock/local`
+## `unlock/local`
 
 This will unlock your signature chain and cache the PIN in encrypted memory to be used for all subsequent API calls. This method is only available when using single-user API mode (multiuser=0).
 
@@ -240,9 +234,7 @@ print(response.json())
 
 `transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
 
-***
-
-### `lock/local`
+## `lock/local`
 
 This will lock your signature chain, making it unavailable for use unless it is either unlocked or the PIN is passed in to all API requests. Only available in single-user API mode (multiuser=0).
 
@@ -364,9 +356,7 @@ print(response.json())
 
 `transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
 
-***
-
-### `save/local`
+## `save/local`
 
 This will save the users session to the local database, allowing the session to be resumed at a later time without the need to create or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
 
