@@ -140,9 +140,7 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 `txid` : The ID (hash) of the transaction that includes the master profile creation.
 
-***
-
-### `update/credentials`
+## `update/credentials`
 
 This method provides the user with the ability to change the password and pin, for this signature chain.
 
@@ -270,9 +268,7 @@ The following example changes the existing password from `password1` to `passwor
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
-***
-
-### `update/recovery`
+## `update/recovery`
 
 This method provides the user with the ability to set or change the recovery seed for this signature chain.
 
@@ -418,9 +414,7 @@ The following example updates the recovery seed on the sig chain
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
-***
-
-### `recover/master`
+## `recover/master`
 
 This method provides the user with the ability to recover the profile in case of a lost password and pin.
 
@@ -542,9 +536,7 @@ The following example recovers the signature chain
 
 `txid` : The ID (hash) of the transaction that includes the update to the signature chain credentials.
 
-
-
-### `status/master`
+## `status/master`
 
 Return status information for the currently logged in user or session
 
@@ -637,9 +629,7 @@ print(response.json())
 
 `transactions` : The total transaction count in this signature chain
 
-***
-
-### `notifications/master`
+## `notifications/master`
 
 This will list of all of the transactions sent to a particular genesis or username. It is useful for identifying transactions that you need to accept such as credits.
 
@@ -839,9 +829,7 @@ An array of contracts deifned as:
 
 `dividend_payment` : Flag indicating that this debit is a split dividend payment to a tokenized asset
 
-***
-
-### `transactions/master`
+## `transactions/master`
 
 This will list off all of the transactions for the requested signature chain genesis or username (either can be used). If you are using single-user API mode and are logged in, then neither username or genesis are required. It will return transactions for the currently logged in user.
 
