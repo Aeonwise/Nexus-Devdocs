@@ -12,8 +12,8 @@ The following methods are currently supported by this API
 
 
 
-get/block\
-`get/blockhash`\
+[`get/block`](c-ledger.md#get-block)\
+[`get/blockhash`](c-ledger.md#get-blockhash)\
 `get/info`\
 `get/transaction`\
 `list/blocks`\
@@ -324,11 +324,137 @@ print(response.json())
 
 ***
 
+### `get/info`
+
+Retrieves mining related data for the ledger.
+
+#### Endpoint:
+
+`/ledger/get/info`
+
+{% swagger method="get" path="/ledger/get/info" baseUrl="http://api.nexus-interactions.io:8080" summary="get/info" %}
+{% swagger-description %}
+Retrieves mining related data for the ledger.
+{% endswagger-description %}
+
+{% swagger-response status="200: OK" description="Mining information" %}
+```javascript
+{
+"result": {
+"blocks": 4187383,
+"timestamp": 1639466841,
+"stakeDifficulty": 470.34551638219693,
+"primeDifficulty": 7.9926008,
+"hashDifficulty": 1854.1598715225612,
+"stakeHeight": 1347186,
+"primeHeight": 1464823,
+"hashHeight": 1375377,
+"primeReserve": 52.603552,
+"hashReserve": 97.449141,
+"primeValue": 2.206934,
+"hashValue": 2.206926,
+"pooledtx": 0,
+"primesPerSecond": 5649859746,
+"hashPerSecond": 2949078396266
 }
+}
+```
+{% endswagger-response %}
+{% endswagger %}
 
-***
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/mininginfo
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+fetch(`${SERVER_URL}/ledger/get/info`)
+  .then(resp => resp.json())
+  .then(json => console.log(json))
+  .catch(error => console.log(error))
+```
+{% endtab %}
 
-### `list/blocks`
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+response = requests.get(f"{SERVER_URL}/ledger/get/info")
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`None.`
+
+#### Return value JSON object:
+
+```
+{
+    "stake": {
+        "height": 0,
+        "weight": 0,
+        "timespan": 0,
+        "fees": 0,
+        "difficulty": 0
+    },
+    "prime": {
+        "height": 0,
+        "weight": 0,
+        "timespan": 0,
+        "fees": 0,
+        "difficulty": 0
+    },
+    "hash": {
+        "height": 0,
+        "weight": 0,
+        "timespan": 0,
+        "fees": 0,
+        "difficulty": 0
+    },
+    "height": 23,
+    "timestamp": 1654341926,
+    "checkpoint": "deecfbef95517742861bd3bfa8f1bee77e6ba1b172961756dafe4a35f2e23efbb6eac0858af7b541636f91c41a8955eee98738e4a5779cbe14dcf5c3030dae378694c78c28199265cd05815e354686885d6598cf17226b1158dc5c7ab519ca5599c72a60df7b7ee79904523bc03dad2a2a65acc837dff4ed5399e9398a2b9302"
+}
+[Completed in 0.384917 ms]
+```
+
+#### Return values:
+
+`blocks` : The current block height.
+
+`timestamp` : The Unix timestamp of the last block.
+
+`stakeDifficulty` : The current difficulty of the stake channel.
+
+`primeDifficulty` : The current difficulty of the prime channel.
+
+`hashDifficulty` : The current difficulty of the hash channel.
+
+`stakeHeight` : The current number of blocks for the stake channel.
+
+`primeHeight` : The current number of blocks for the prime channel.
+
+`hashHeight` : The current number of blocks for the hash channel.
+
+`primeReserve` : The amount of NXS in the reserve balance for the prime channel.
+
+`hashReserve` : The amount of NXS in the reserve balance for the hash channel.
+
+`primeValue` : The block reward for the next prime block to be found.
+
+`hashValue` : The block reward for the next hash block to be found.
+
+`pooledtx` : The number of transactions currently in the mempool.
+
+`primesPerSecond` : The average number of primes per second currently being calculated by the whole network.
+
+`hashPerSecond` : The average number of hashes per second currently being calculated by the whole network.
+
+`totalConnections` : The number of connections to the mining LLP of this node.
+
+## `list/blocks`
 
 Retrieves an array of block data for a sequential range of blocks from a given hash or height.
 
@@ -1017,126 +1143,3 @@ print(response.json())
 #### Return values:
 
 `hash` : The transaction hash of the credit/claim transaction, if successfully committed to the mempool / broadcast.
-
-***
-
-### `get/mininginfo`
-
-Retrieves mining related data for the ledger.
-
-#### Endpoint:
-
-`/ledger/get/mininginfo`
-
-{% swagger method="get" path="/ledger/get/mininginfo" baseUrl="http://api.nexus-interactions.io:8080" summary="Get mininginfo" %}
-{% swagger-description %}
-Retrieves mining related data for the ledger.
-{% endswagger-description %}
-
-{% swagger-response status="200: OK" description="Mining information" %}
-```javascript
-{
-"result": {
-"blocks": 4187383,
-"timestamp": 1639466841,
-"stakeDifficulty": 470.34551638219693,
-"primeDifficulty": 7.9926008,
-"hashDifficulty": 1854.1598715225612,
-"stakeHeight": 1347186,
-"primeHeight": 1464823,
-"hashHeight": 1375377,
-"primeReserve": 52.603552,
-"hashReserve": 97.449141,
-"primeValue": 2.206934,
-"hashValue": 2.206926,
-"pooledtx": 0,
-"primesPerSecond": 5649859746,
-"hashPerSecond": 2949078396266
-}
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-// get/mininginfo
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-fetch(`${SERVER_URL}/ledger/get/mininginfo`)
-  .then(resp => resp.json())
-  .then(json => console.log(json))
-  .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-response = requests.get(f"{SERVER_URL}/ledger/get/mininginfo")
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-#### Return value JSON object:
-
-```
-{
-    "blocks": 20267,
-    "timestamp": 1554269575,
-    "stakeDifficulty": 0.0,
-    "primeDifficulty": 3.8210223,
-    "hashDifficulty": 0.0,
-    "stakeHeight"   : 1,
-    "primeHeight"   : 1,
-    "hashHeight"    : 2,
-    "primeReserve": 21852246.988376,
-    "hashReserve": 0.0,
-    "primeValue": 74.893038,
-    "hashValue": 1.0,
-    "pooledtx": 0,
-    "primesPerSecond": 6764,
-    "hashPerSecond": 0,
-    "totalConnections": 0
-}
-```
-
-#### Return values:
-
-`blocks` : The current block height.
-
-`timestamp` : The Unix timestamp of the last block.
-
-`stakeDifficulty` : The current difficulty of the stake channel.
-
-`primeDifficulty` : The current difficulty of the prime channel.
-
-`hashDifficulty` : The current difficulty of the hash channel.
-
-`stakeHeight` : The current number of blocks for the stake channel.
-
-`primeHeight` : The current number of blocks for the prime channel.
-
-`hashHeight` : The current number of blocks for the hash channel.
-
-`primeReserve` : The amount of NXS in the reserve balance for the prime channel.
-
-`hashReserve` : The amount of NXS in the reserve balance for the hash channel.
-
-`primeValue` : The block reward for the next prime block to be found.
-
-`hashValue` : The block reward for the next hash block to be found.
-
-`pooledtx` : The number of transactions currently in the mempool.
-
-`primesPerSecond` : The average number of primes per second currently being calculated by the whole network.
-
-`hashPerSecond` : The average number of hashes per second currently being calculated by the whole network.
-
-`totalConnections` : The number of connections to the mining LLP of this node.
-
-***
