@@ -139,6 +139,8 @@ This command does not support the `master` or `auth` nouns.
 
 `pin` : The existing pin for this signature chain.
 
+### update/credentials
+
 `new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
 
 `new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
@@ -270,6 +272,129 @@ This command only supports the `master` noun.
 `crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
 
 `transactions` : The total transaction count in this signature chain
+
+
+
+## `transactions`
+
+Get the profile status specified by given noun.
+
+```
+profiles/transactions/noun
+```
+
+This command only supports the `master` noun.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+
+`verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
+
+* `default` : hash
+* `summary` : type, version, sequence, timestamp, operation, and confirmations.
+* `detail` : genesis, nexthash, prevhash, pubkey and signature.
+
+`order` : The transaction order, based on signature chain sequence. 'asc' for oldest first, 'desc' for most recent first. The default is 'desc'.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+### Results:
+
+```
+[
+    {
+        "txid": "01eb59a0c4e6c47dd2a8d3a4aa7d83514aab6f5c976207889f786e5947c0eb971065fe6e0f8fc6b7d75157f9dac0cf0c178c15e441ff360c3046c84e1fe799ca",
+        "type": "tritium first",
+        "version": 4,
+        "sequence": 0,
+        "timestamp": 1653674591,
+        "blockhash": "dc2712f6598a4a8c60f14c707dae4705f773fb1f60b89efd1e0163ee1d7cf823e8d73e6a3fb9f7eb73e72d7764647eb889abebc2aca34f3090dbe1409af511a301409fb8f04409bf97693dc0d908d05d9b62b949aae423196b508b3840419d1df548e72e006c75a6c69d8075693f2c8f6f7d10213a07c03bf9ff250e55a1eeef",
+        "confirmations": 23,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "CREATE",
+                "address": "89AVoe5S8gjZpVngYoYtqJbSr9fGsdsoXShxnyNaEGPvMMeDnT6",
+                "type": "OBJECT",
+                "standard": "CRYPTO",
+                "object": {
+                    "app1": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "app2": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "app3": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "auth": "02b5dbda57225afab10ca271ff513beab748306cff028798e2b64505db59f252",
+                    "cert": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "lisp": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "network": "025193caf52ce6065951a438d30696f7548e12e0ebadd60359141029c1c4d870",
+                    "sign": "02efc8e11c7097520080718b5dd0e92267292401678fcecb317bde79df64311c",
+                    "verify": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
+            }
+        ]
+    }
+]
+[Completed in 0.616625 ms]
+```
+
+`txid` : The transaction hash.
+
+`type` : The description of the transaction (`legacy` | `tritium base` | `trust` | `genesis` | `user`).
+
+`version` : The serialization version of the transaction.
+
+`sequence` : The sequence number of this transaction within the signature chain.
+
+`timestamp` : The Unix timestamp of when the transaction was created.
+
+`blockhash` : The hash of the block that this transaction is included in. Blank if not yet included in a block.
+
+`confirmations` : The number of confirmations that this transaction obtained by the network.
+
+`genesis` : The signature chain genesis hash.
+
+`nexthash` : The hash of the next transaction in the sequence.
+
+`prevhash` : the hash of the previous transaction in the sequence.
+
+`pubkey` : The public key.
+
+`signature` : The signature hash.
+
+`contracts` : The array of contracts bound to this transaction and their details with opcodes.\
+{\
+`id` : The sequential ID of this contract within the transaction.
+
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+
+`txid` : The transaction that was credited / claimed.
+
+`contract` : The ID of the contract within the transaction that was credited / claimed.
+
+`proof` : The register address proving the credit.
+
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+
+`amount` : the token amount of the transaction.
+
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+
+`token_name` : The name of the token that the transaction relates to.
+
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
 ## `Methods`
 
@@ -1229,40 +1354,38 @@ print(response.json())
 #### Return value JSON object:
 
 ```
-{
-    "txid": "01285bbd668df2bfc67515c7e9d4818b23095c10ae0585e2aa6626c018c6253fed7852dd8598ddd0668574c05a7b02eb4c89a6cf4804fcfa2bf5e7e0ffab4e77",
-    "type": "tritium first",
-    "version": 4,
-    "sequence": 0,
-    "timestamp": 1654261755,
-    "blockhash": "aae806d080e8ce32d14aded37987e6969d791414328fdde96a510630727c94b0588c0ba479f8f6afe0f90a6fdf295b0a61815774b237d70c51adfbf1ac640d662802541f6125c64d43566d1347792b5f45c0ac868ac988742b9a98fb0adbc4ba76540a3538b9acce2e8ee987079ff05bdbc57d6e4c3ada9e87d41bf6e01001ab",
-    "confirmations": 8,
-    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
-    "nexthash": "da9562e126398dc3e5a7c70448dffb4404425132dc8f8249c910d1c7c8103932",
-    "prevhash": "2446c05789a16d5a0709a65f74c469277fc5691f895766819de6ddcf78286e52e5a07682375bcf14e3e343f98cb5047a3349f967fd573892e08422f03180d53e",
-    "pubkey": "032b69f4bb5c812d9f6b01e055941b2ecb2ba52e86a054847b7e2925e50540a3e8a4e477bba33d6bbd7e7da51d85a9b4f9604327f0f616030712f0762539ac4cda",
-    "signature": "308184024001653b3b52c04ceb250abdb861ed24e7d2c797d377576dcc7d09b2d0aa3b0aa1afba1488872e4c6b04ef559c79c237f4b0a15519a8ed6e3bb27fbef50bf45246024035ea2174418e41e9c2ecf0b4fdd2d5e4d18665124c7a87da8b1eb72714dae8825ce8c9c8223057368e1e2eecd2703287ac73e8b003e67a39d3fd763d41d39c86",
-    "contracts": [
-        {
-            "id": 0,
-            "OP": "CREATE",
-            "address": "89AVoe5S8gjZpVngYoYtqJbSr9fGsdsoXShxnyNaEGPvMMeDnT6",
-            "type": "OBJECT",
-            "standard": "CRYPTO",
-            "object": {
-                "app1": "0000000000000000000000000000000000000000000000000000000000000000",
-                "app2": "0000000000000000000000000000000000000000000000000000000000000000",
-                "app3": "0000000000000000000000000000000000000000000000000000000000000000",
-                "auth": "02b5dbda57225afab10ca271ff513beab748306cff028798e2b64505db59f252",
-                "cert": "0000000000000000000000000000000000000000000000000000000000000000",
-                "lisp": "0000000000000000000000000000000000000000000000000000000000000000",
-                "network": "025193caf52ce6065951a438d30696f7548e12e0ebadd60359141029c1c4d870",
-                "sign": "02efc8e11c7097520080718b5dd0e92267292401678fcecb317bde79df64311c",
-                "verify": "0000000000000000000000000000000000000000000000000000000000000000"
+[
+    {
+        "txid": "01eb59a0c4e6c47dd2a8d3a4aa7d83514aab6f5c976207889f786e5947c0eb971065fe6e0f8fc6b7d75157f9dac0cf0c178c15e441ff360c3046c84e1fe799ca",
+        "type": "tritium first",
+        "version": 4,
+        "sequence": 0,
+        "timestamp": 1653674591,
+        "blockhash": "dc2712f6598a4a8c60f14c707dae4705f773fb1f60b89efd1e0163ee1d7cf823e8d73e6a3fb9f7eb73e72d7764647eb889abebc2aca34f3090dbe1409af511a301409fb8f04409bf97693dc0d908d05d9b62b949aae423196b508b3840419d1df548e72e006c75a6c69d8075693f2c8f6f7d10213a07c03bf9ff250e55a1eeef",
+        "confirmations": 23,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "CREATE",
+                "address": "89AVoe5S8gjZpVngYoYtqJbSr9fGsdsoXShxnyNaEGPvMMeDnT6",
+                "type": "OBJECT",
+                "standard": "CRYPTO",
+                "object": {
+                    "app1": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "app2": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "app3": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "auth": "02b5dbda57225afab10ca271ff513beab748306cff028798e2b64505db59f252",
+                    "cert": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "lisp": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "network": "025193caf52ce6065951a438d30696f7548e12e0ebadd60359141029c1c4d870",
+                    "sign": "02efc8e11c7097520080718b5dd0e92267292401678fcecb317bde79df64311c",
+                    "verify": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
             }
-        }
-    ]
-}
+        ]
+    }
+]
+[Completed in 0.616625 ms]
 ```
 
 #### Return values:
