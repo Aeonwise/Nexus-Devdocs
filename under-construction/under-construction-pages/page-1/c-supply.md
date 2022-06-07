@@ -29,7 +29,7 @@ The operators only work with the profiles `transactions` and `notifications` ver
 **Example:**
 
 ```
-profile/transactions/master/contracts.amount/sum
+supply/transactions/master/contracts.amount/sum
 ```
 
 **Result:**
@@ -50,7 +50,7 @@ The filters only work with the profiles `transactions` and `notifications` verbs
 **Example:**
 
 ```
-profiles/notifications/master/amount,ticker
+supply/list/items/address,name
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
@@ -60,7 +60,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-profiles/transactions/master/contracts.OP
+supply/get/item/contracts.OP
 ```
 
 When using recursive filtering, the nested hierarchy is retained.

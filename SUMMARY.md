@@ -66,16 +66,16 @@
 
 ## Tritium++ API
 
-* [⚙ Tritium++ Overview](tritium++-api/tritium++-overview.md)
-* [How-to-API: Tritium++](tritium++-api/how-to-api-tritium++/README.md)
-  * [API Template](tritium++-api/how-to-api-tritium++/api-template.md)
-  * [Query DSL](tritium++-api/how-to-api-tritium++/register.md)
-  * [⚙ Tritium++ API](tritium++-api/how-to-api-tritium++/tritium++-api/README.md)
-    * [PROFILES](tritium++-api/how-to-api-tritium++/tritium++-api/profiles.md)
-    * [SESSIONS](tritium++-api/how-to-api-tritium++/tritium++-api/sessions.md)
-    * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
-    * [SYSTEM](tritium++-api/how-to-api-tritium++/tritium++-api/system.md)
-    * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
+* [⚙ Tritium++ Overview](tritium++-api/tritium++-overview/README.md)
+  * [How-to-API: Tritium++](tritium++-api/tritium++-overview/how-to-api-tritium++/README.md)
+    * [API Template](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template.md)
+    * [Query DSL](tritium++-api/tritium++-overview/how-to-api-tritium++/register.md)
+    * [⚙ Tritium++ API](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/README.md)
+      * [PROFILES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles.md)
+      * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions.md)
+      * [FINANCE](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance.md)
+      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
+      * [REGISTER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register.md)
 
 ## Legacy
 
@@ -98,7 +98,6 @@
     * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [c-SYSTEM](under-construction/under-construction-pages/page-1/c-system.md)
     * [c-LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)
-    * [C-PROFILE](under-construction/under-construction-pages/page-1/c-profile.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
     * [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)

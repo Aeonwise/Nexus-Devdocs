@@ -24,6 +24,220 @@ Global Names and Names that have been created within a namespace can also be tra
 Signature chains and user accounts are used interchangeably
 {% endhint %}
 
+The full supported endpoint of the profiles URI is as follows:
+
+```
+names/verb/noun/filter/operator
+```
+
+The minimum required components of the URI are:
+
+```
+names/verb/noun
+```
+
+## `Supported Operators`
+
+The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
+
+[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
+[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
+
+**Example:**
+
+```
+profile/transactions/master/contracts.amount/sum
+```
+
+**Result:**
+
+This command will return a sum of the balances for all accounts:
+
+```
+{
+    "amount": 5150.0
+}
+[Completed in 2.440583 ms]
+```
+
+## `Supported Filters`
+
+The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
+
+**Example:**
+
+```
+profiles/notifications/master/amount,ticker
+```
+
+The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
+
+#### `Recursive Filtering`
+
+Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+
+```
+profiles/transactions/master/contracts.OP
+```
+
+When using recursive filtering, the nested hierarchy is retained.
+
+```
+[
+    {
+        "contracts": [
+            {
+                "OP": "DEBIT"
+            }
+        ]
+    },
+    {
+        "contracts": [
+            {
+                "OP": "WRITE"
+            }
+        ]
+    }
+]
+[Completed in 0.722042 ms]
+```
+
+## `Supported Verbs`
+
+The following verbs are currently supported by this API command-set:
+
+[`create`](c-names.md#create) - Generate a new object of supported type.\
+[`update`](c-names.md#update) - Updates the specified object registers.\
+[`recover`](c-names.md#recover) - Recovers a profile account.\
+[`status`](c-names.md#status) - Status information of a profile.\
+[`notifications`](c-names.md#notifications) - List all notifications that modified specified object.\
+[`transactions`](c-names.md#notifications-1) - List all transactions that modified specified object.
+
+## `Supported Nouns`
+
+The following nouns are supported for this API command-set:
+
+\[`master`] - The default profile that controls all sub-profiles.\
+\[`auth`] - A crypto object register for login auth.\
+\[`credentials`] -  Credentials used to secure profiles.\
+\[`recovery`] - An object which represents recovery for the profile.
+
+## `Sorting / Filtering`
+
+The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
+
+`limit`: The number of records to return. _Default: 100_.
+
+`page`: Zero-indexed page number that depends on `limit` for page boundaries.
+
+`offset`: Alternative to `page`, offset can be used to page the results by index.
+
+`order`: Descending **desc** or ascending **asc** as only permitted values.
+
+`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
+
+```
+{
+    "modified": 1621782289,
+    "json": {
+        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
+        "date": "12-21-2020"
+    }
+}
+```
+
+`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
+
+#### Alternative input
+
+The `limit` and `offset` parameters can be given with the following format:
+
+```
+limit=100.10
+```
+
+This above will map to the parameters of `limit=100` and `offset=10`.
+
+```
+finance/get/balances/balance/sumreate
+```
+
+## `create`
+
+Create a new object register specified by given noun.
+
+```
+profiles/create/noun
+```
+
+This command does not support the `credentials` or `recovery` nouns.
+
+### Parameters:
+
+`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+
+`password` : The password to be associated with this profile.
+
+`pin` : The PIN to be associates with this profile
+
+### Results:
+
+```
+{
+    "success": true,
+    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+}
+```
+
+`success` : Boolean flag indicating that the session was saved successfully.
+
+`txid` : The ID (hash) of the transaction that includes the created object.
+
+## `update`
+
+Update an object register specified by given noun.
+
+```
+profiles/update/noun
+```
+
+This command does not support the `master` or `auth` nouns.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+
+`password` : The existing password for this signature chain.
+
+`pin` : The existing pin for this signature chain.
+
+### update/credentials
+
+`new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
+
+`new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
+
+### update/recovery
+
+`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
+
+`new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
+
+### Results:
+
+```
+{
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+}
+[Completed in 18533.182336 ms]
+```
+
+`success` : Boolean flag indicating that the session was saved successfully.
+
+`txid` : The ID (hash) of the transaction for the updated object.
+
 ### `Methods`
 
 The following methods are currently supported by this API
