@@ -71,7 +71,7 @@ The following verbs are currently supported by this API command-set:
 
 [`create`](users.md#create) - Generate a new object of supported type.\
 [`update`](users.md#update) - Updates the specified object registers.\
-`recover` - Recovers a profile account.\
+[`recover`](users.md#recover) - Recovers a profile account.\
 `status` - Get object of supported type.\
 `notifications` - List all objects owned by given user.\
 `transactions` - List all transactions that modified specified object.
@@ -83,8 +83,7 @@ The following nouns are supported for this API command-set:
 \[`master`] - The default profile that controls all sub-profiles.\
 \[`auth`] - A crypto object register for login auth.\
 \[`credentials`] -  Profile credentials used to secure profiles.\
-\[`recovery`] - An object selection noun allowing mixed accounts of different tokens.\
-
+\[`recovery`] - An object selection noun allowing mixed accounts of different tokens.
 
 ## `Sorting / Filtering`
 
@@ -240,6 +239,43 @@ This command only supports the `master` noun.
 `success` : Boolean flag indicating that the session was saved successfully.
 
 `txid` : The ID (hash) of the transaction for the recovered object.
+
+## `status`
+
+Get the profile status specified by given noun.
+
+```
+profiles/status/noun
+```
+
+This command only supports the `master` noun.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+
+### Results:
+
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "confirmed": true,
+    "recovery": true,
+    "crypto": true,
+    "transactions": 10
+}
+[Completed in 0.108500 ms]
+```
+
+`genesis` : The signature chain genesis hash for the currently logged in signature chain.
+
+`confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
+
+`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
+
+`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
+
+`transactions` : The total transaction count in this signature chain
 
 ## ``
 
