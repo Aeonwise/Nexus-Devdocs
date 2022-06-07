@@ -4,7 +4,13 @@ description: PROFILES API
 
 # PROFILES
 
-The profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain. The full supported endpoint of the `profiles` URI is as follows:
+The profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain.
+
+{% hint style="info" %}
+Profiles API will provide sub-profiles, which can be managed under the master profiles. The sub-profiles will be available in the next update.
+{% endhint %}
+
+The full supported endpoint of the `profiles` URI is as follows:
 
 ```
 profiles/verb/noun
