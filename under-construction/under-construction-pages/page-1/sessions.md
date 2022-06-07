@@ -2,114 +2,13 @@
 
 The Sessions API provides methods for creating and managing sessions. A session is synonymous with a user login into the signature chain.
 
-The full supported endpoint of the `sessions` URI is as follows:
+### `Named Shortcuts`
 
-```
-sessions/verb/noun
-```
+For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
 
-The minimum required components of the URI are:
+For example `/sessions/create/local/myusername` is a shortcut to `sessions/create/local?username=myusername`.
 
-```
-sessions/verb/noun
-```
-
-## `Supported Verbs`
-
-The following verbs are currently supported by this API command-set:
-
-`create` - Generate a new object of supported type.\
-`update` - Claim funds issued to account from debit.\
-`recover` - Issue funds from supported type.\
-`status` - Get object of supported type.\
-`notifications` - List all objects owned by given user.\
-`transactions` - List all transactions that modified specified object.
-
-## `Supported Nouns`
-
-The following nouns are supported for this API command-set:
-
-\[`master`] - The default profile that controls all sub-profiles.\
-\[`auth`] - A crypto object register for login auth.\
-\[`credentials`] -  Profile credentials used to secure profiles.\
-\[`recovery`] - An object selection noun allowing mixed accounts of different tokens.\
-
-
-## `Sorting / Filtering`
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_.
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
-
-```
-finance/get/balances/balance/sumreate
-```
-
-Create a new object register specified by given noun.
-
-```
-profiles/create/noun
-```
-
-This command does not support the `credentials` or `recovery` nouns.
-
-### Parameters:
-
-`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
-
-`password` : The password to be associated with this user.
-
-`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
-
-{% hint style="danger" %}
-If user forgets the username, he looses access to his nexus assets. There is no option to change the username.  Be careful when you choose a username (case sensitive) and make a point to back it up.&#x20;
-{% endhint %}
-
-### Results:
-
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
-
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
-
-```
-{
-    "success": true,
-    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
-    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
-}
-```
-
-## `Methods`
+### `Methods`
 
 The following methods are currently supported by this API
 

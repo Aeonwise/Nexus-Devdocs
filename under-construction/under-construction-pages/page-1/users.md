@@ -13,7 +13,7 @@ Profiles API will provide sub-profiles, which can be managed under the master pr
 The full supported endpoint of the `profiles` URI is as follows:
 
 ```
-profiles/verb/noun/filter
+profiles/verb/noun
 ```
 
 The minimum required components of the URI are:
@@ -69,8 +69,8 @@ When using recursive filtering, the nested hiearchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-`create` - Generate a new object of supported type.\
-`update` - Updates the specified object registers.\
+[`create`](users.md#create) - Generate a new object of supported type.\
+[`update`](users.md#update) - Updates the specified object registers.\
 `recover` - Recovers a profile account.\
 `status` - Get object of supported type.\
 `notifications` - List all objects owned by given user.\
@@ -132,10 +132,6 @@ Create a new object register specified by given noun.
 profiles/create/noun
 ```
 
-This command does not support the `credentials` or `recovery` nouns.
-
-###
-
 ## `create`
 
 Create a new object register specified by given noun.
@@ -161,6 +157,50 @@ This command does not support the `credentials` or `recovery` nouns.
     "success": true,
     "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
 }
+```
+
+`success` : Boolean flag indicating that the session was saved successfully.
+
+`txid` : The ID (hash) of the transaction that includes the created object.
+
+
+
+## `update`
+
+Update an object register specified by given noun.
+
+```
+profiles/update/noun
+```
+
+This command does not support the `master` or `auth` nouns.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+
+`password` : The existing password for this signature chain.
+
+`pin` : The existing pin for this signature chain.
+
+`new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
+
+`new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
+
+### update/recovery
+
+`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
+
+`new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
+
+### Results:
+
+```
+{
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+}
+[Completed in 18533.182336 ms]
 ```
 
 `success` : Boolean flag indicating that the session was saved successfully.
