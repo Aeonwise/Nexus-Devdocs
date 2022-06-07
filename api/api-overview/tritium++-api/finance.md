@@ -87,6 +87,10 @@ The following nouns are supported for this API command-set:
 
 **Example:**
 
+```
+finance/debit/any
+```
+
 The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
 
 ***

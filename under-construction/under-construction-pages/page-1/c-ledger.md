@@ -49,7 +49,7 @@ This command-set supports single or csv field-name filters.
 **Example:**
 
 ```
-finance/list/accounts/balance,ticker
+ledger/list/tranasctions/type,version
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
@@ -102,15 +102,17 @@ The following nouns are supported for this API command-set:
 \[`blockhash`] - An object register containing a token-id, balance, and trust.\
 \[`info`] - An object register containing a token-id, balance, supply, and decimals.\
 \[`transactions`] - An object selection noun allowing mixed accounts of different tokens.\
-\[`headers`] - An object selection noun to collect all accounts for given token type.
+\[`headers`] - An object selection noun to collect all accounts for given token type.\
+\[`any`] - An object selection noun allowing mixed accounts of different tokens.\
+\[`all`] - An object selection noun to collect all accounts for given token type.
 
 **Example:**
 
 ```
-finance/debit/any
+ledger/list/tranactions
 ```
 
-The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
+The above command will list all the transactions a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
 
 ***
 
