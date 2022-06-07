@@ -19,8 +19,8 @@ sessions/verb/noun
 The following verbs are currently supported by this API command-set:
 
 [`create`](sessions.md#create) - Generate a new session type specified by the noun.\
-`lock/unlock` - Unlock the session to carry out specified operations.\
-`save/load` - Save the session to the local database.\
+[`unlock/lock`](sessions.md#unlock-lock) - Unlock/lock the session to carry out specified operations.\
+[`save/load`](sessions.md#save-load) - Save/load the session to the local database.\
 `terminate` - Terminates a session specified by the noun.\
 `status` - Returns status information for the session type specified by the noun.
 
@@ -30,42 +30,6 @@ The following nouns are supported for this API command-set:
 
 \[`local`] - The location of the session.\
 
-
-## `Sorting / Filtering`
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_.
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create`
 
