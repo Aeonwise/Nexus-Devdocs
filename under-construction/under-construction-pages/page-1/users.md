@@ -29,9 +29,9 @@ The following verbs are currently supported by this API command-set:
 [`create`](users.md#create) - Generate a new object of supported type.\
 [`update`](users.md#update) - Updates the specified object registers.\
 [`recover`](users.md#recover) - Recovers a profile account.\
-[`status`](users.md#status) - Status information of a profile.\
-[`notifications`](users.md#notifications) - List all notifications that modified specified object.\
-[`transactions`](users.md#notifications-1) - List all transactions that modified specified object.
+[`status`](users.md#status) - Get object of supported type.\
+`notifications` - List all objects owned by given user.\
+`transactions` - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -39,8 +39,8 @@ The following nouns are supported for this API command-set:
 
 \[`master`] - The default profile that controls all sub-profiles.\
 \[`auth`] - A crypto object register for login auth.\
-\[`credentials`] -  Credentials used to secure profiles.\
-\[`recovery`] - An object which represents recovery for the profile.
+\[`credentials`] -  Profile credentials used to secure profiles.\
+\[`recovery`] - An object selection noun allowing mixed accounts of different tokens.
 
 ## `Sorting / Filtering`
 
@@ -82,6 +82,12 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 finance/get/balances/balance/sumreate
 ```
 
+Create a new object register specified by given noun.
+
+```
+profiles/create/noun
+```
+
 ## `create`
 
 Create a new object register specified by given noun.
@@ -112,6 +118,8 @@ This command does not support the `credentials` or `recovery` nouns.
 `success` : Boolean flag indicating that the session was saved successfully.
 
 `txid` : The ID (hash) of the transaction that includes the created object.
+
+
 
 ## `update`
 
@@ -265,6 +273,8 @@ This command only supports the `master` noun.
 
 `transactions` : The total transaction count in this signature chain
 
+
+
 ## `transactions`
 
 Get the profile status specified by given noun.
@@ -285,7 +295,15 @@ This command only supports the `master` noun.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-#### [Sorting / Filtering](users.md#sorting-filtering) Parameters
+`order` : The transaction order, based on signature chain sequence. 'asc' for oldest first, 'desc' for most recent first. The default is 'desc'.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
 
 ### Results:
 
@@ -377,10 +395,6 @@ This command only supports the `master` noun.
 `token_name` : The name of the token that the transaction relates to.
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
-
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
-
-**}**
 
 ## `Methods`
 

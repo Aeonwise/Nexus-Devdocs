@@ -4,7 +4,218 @@ description: LEDGER API
 
 # c-LEDGER
 
-The Ledger API provides users with access to data held by the ledger such as blocks and transactions.
+The Ledger API provides users with access to data held by the ledger such as blocks and transactions. The full supported endpoint of the ledger URI is as follows:
+
+```
+finance/verb/noun/filter/operator
+```
+
+The minimum required components of the URI are:
+
+```
+finance/verb/noun
+```
+
+### `Supported Operators`
+
+The following operators are supported for this API command-set:
+
+[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
+[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
+
+**Example:**
+
+```
+finance/list/accounts/balance/sum
+```
+
+**Result:**
+
+This command will return a sum of the balances for all accounts:
+
+```
+{
+    "balance": 333.376
+}
+```
+
+***
+
+### `Supported Filters`
+
+This command-set supports single or csv field-name filters.
+
+**Example:**
+
+```
+finance/list/accounts/balance,ticker
+```
+
+The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
+
+#### `Recursive Filtering`
+
+Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+
+```
+finance/transactions/account/contracts.OP
+```
+
+When using recursive filtering, the nested hiearchy is retained.
+
+```
+[
+    {
+        "contracts": [
+            {
+                "OP": "CREATE"
+            }
+        ]
+    },
+    {
+        "contracts": [
+            {
+                "OP": "CREDIT"
+            }
+        ]
+    }
+]
+```
+
+***
+
+### `Supported Nouns`
+
+The following nouns are supported for this API command-set:
+
+\[`account`] - An object register containing a token-id and balance.\
+\[`trust`] - An object register containing a token-id, balance, and trust.\
+\[`token`] - An object register containing a token-id, balance, supply, and decimals.\
+\[`any`] - An object selection noun allowing mixed accounts of different tokens.\
+\[`all`] - An object selection noun to collect all accounts for given token type.
+
+**Example:**
+
+```
+finance/debit/any
+```
+
+The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
+
+***
+
+### `Supported Verbs`
+
+The following verbs are currently supported by this API command-set:
+
+[`burn`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#burn) - Remove a given token from circulation.\
+[`create`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#create) - Generate a new object of supported type.\
+[`credit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#credit) - Claim funds issued to account from debit.\
+[`debit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#debit) - Issue funds from supported type.\
+[`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
+[`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#list) - List all objects owned by given user.\
+[`history`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#history) - Generate the history of all last states.\
+[`transactions`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#transactions) - List all transactions that modified specified object.
+
+### `Direct Endpoints`
+
+The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
+
+[`get/balances`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#create)\
+[`get/stakeinfo`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#credit)\
+[`migrate/accounts`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#debit)\
+[`set/stake`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get)
+
+Direct endpoints support filters and operators.
+
+***
+
+### `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
+
+The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
+
+`limit`: The number of records to return. _Default: 100_.
+
+`page`: Zero-indexed page number that depends on `limit` for page boundaries.
+
+`offset`: Alternative to `page`, offset can be used to page the results by index.
+
+`order`: Descending **desc** or ascending **asc** as only permitted values.
+
+`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
+
+```
+{
+    "modified": 1621782289,
+    "json": {
+        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
+        "date": "12-21-2020"
+    }
+}
+```
+
+`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
+
+#### Alternative input
+
+The `limit` and `offset` parameters can be given with the following format:
+
+```
+limit=100.10
+```
+
+This above will map to the parameters of `limit=100` and `offset=10`.
+
+```
+finance/get/balances/balance/sum
+```
+
+***
+
+## `create` <a href="#user-content-create" id="user-content-create"></a>
+
+Create a new object register specified by given noun.
+
+```
+finance/create/noun
+```
+
+This command does not support the `any` or `all` nouns.
+
+### Parameters:
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
+
+`data` : Optional for **any** noun, allows caller to add arbitrary data to object.
+
+**create/token**
+
+`supply` : Required by **noun** `token` that sets the maximum token supply.
+
+`decimals` : Required by **noun** `token` that sets the total number of significant figures. Defaults to 2.
+
+**create/account**
+
+`token` : Required by **noun** `account` as a _Base58_ encoded address or ticker name. Defaults to `NXS`.
+
+### Results:
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+```
+{
+    "success": true,
+    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
+    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
+}
+```
 
 ### `Methods`
 
@@ -142,39 +353,32 @@ Either the hash or the height needs to be supplied, but not both. Retrieving blo
 
 ```
 {
-    "hash": "677444ec303ad3a0f408725e287529348f21f8b94c15e742469c30d6b9cd8eb17e3c2f059de8c83a663fe753704c0ababf5599f319b2ee63c1ed243b3abc4820ae9960254ed095e09a7bcd11b10f225865e6da8f7ca696e0445dac822e2dcc9d3de15b1759daf084447abcb0cc8b04a1e06d27d876c0c85b53fe3428a4095621",
-    "proofhash": "39e2015948c026622b9abfc2cfe5dc2f9784965fd9eca511d8792db37c272802a864e2319fdbfe845ec2b65a7b0dee1f6bf0e4a9da5e76875022c39f6c8252746875be31bbadbfffca7cf9297101313c50d064fec9443b3f3545cc3ff7813898da7f7f845dda937875e603b125fbd085b5b4a81ddf05e1fcd0cbdbac13788d85",
-    "size": 727,
-    "height": 7,
-    "channel": 1,
-    "version": 6,
-    "merkleroot": "1c667a87798a57e4432774e746204f589cfd35877a38863b3e8230dde2852af6b14110c619b7e225371038751043d38b555da2f0c91e6351ed0286dbdcd520b5",
-    "time": "2019-03-22 03:58:55 UTC",
-    "nonce": 118903990760413130,
-    "bits": "01871a07",
-    "difficulty": 2.5631239,
-    "mint": 76.499339,
-    "previousblockhash": "c5aa84cde4a771e42dbbda542a34e82c12c7bde05d63ae7f5b1684f1ff8c2cf8f173f82a73c5c68c3d00d953bdcf74c205fb853d00584ec9f970e8cc35f43049757846f3833873eaceb2d7a76bc91187a2d6289c11ff3072b7bffed4f38c163cb82a1dd037c30ff8169c37ca1af23fe0f1e6022ce6b35508a1de38c108292cee",
-    "nextblockhash": "d4078f2b2041aa8bd21f10c640fa57faee59c1545298ffe7360095721d8007a487bea0749b579cbee1cba24c5bbedd643c722d6f4e19b0a08eccc933399fb9950a5e689bd7886f40490a88480bd1b9272993ff522f12e78bf92b0947399f4cc57727dbfeb8d8a8f8e8695b05ef2aba94b39280f222c3e2e6a9904fba1a7626fb",
+    "hash": "7b68f0011baa6e3d3fa77c6941d8dfed92b3263630a44a109555a5d283239f7a7b8463dbdc3b93a7a90e75190bd1df44e375e461c88ff779ab59979fc8b4690d149f08964812b0e059030d01e6f8ffb1c059cd7423ed2d7fc9570e98206ca30313d28a72bab07832584faba5ee861bd9f3f00d25c12690052974757bb0febed0",
+    "proofhash": "8efae9f99be3ceb91be886365ba1c38ded9fa8c0afd70223074376bb7164cb808bde38c3976ef324b2ee830fae2af601f6e3235a3e0eb7dc682cb8cc1048da250e068f30ed4d69b417182759c2a11989df04f7df94728de9707ac4b359ba3e99c63e112e0df321089f6c6d98614bc8e1519f7894383a1dfb46eb9a3ab2442be9",
+    "size": 861,
+    "height": 2,
+    "channel": 3,
+    "version": 8,
+    "merkleroot": "d11d74bc3e82f6e157f8da5a61594def1706f9c15adccd2c3d95843f2d2b1d6478c956805a9f81d50ad503cea90081eb4dc97b77f3ae7e5ecc6cd650518e9882",
+    "timestamp": 1654281061,
+    "date": "2022-06-03 18:31:01 UTC",
+    "nonce": 1,
+    "bits": "7e7fffff",
+    "difficulty": 31.999515,
+    "mint": 0.0,
+    "previousblockhash": "aae806d080e8ce32d14aded37987e6969d791414328fdde96a510630727c94b0588c0ba479f8f6afe0f90a6fdf295b0a61815774b237d70c51adfbf1ac640d662802541f6125c64d43566d1347792b5f45c0ac868ac988742b9a98fb0adbc4ba76540a3538b9acce2e8ee987079ff05bdbc57d6e4c3ada9e87d41bf6e01001ab",
+    "nextblockhash": "cf6b4c38951b359186c5ec315ce55fa7d891f59d601dd8cca5cb53f9ac89bc2814eaf646c79d9a1ba98d0a50020b6e33b01ee1cd5dd0b1fb9333918ced312e8ebc0faa8e5d088f3c1a563aa176a028e44c5cad71f1a8d82b6e2c571ecfff7385325a652f1940c890265914c166879878f5f3a24ddb07491320e0f90d0ced5137",
     "tx": [
         {
-            "type": "tritium base",
-            "version": 1,
-            "sequence": 6,
-            "timestamp": 1553227128,
-            "genesis": "2aa5f479a8f121332eca4bb28d9d1beb13ea066f5efb90e8b6e6490fecb6b5ea",
-            "nexthash": "5efc8a9437d93e894defd50f8ba73a0b2b5529cc593d5e4a7ea413022a9c35e9",
-            "prevhash": "ef2526856b28b04121c5cf586423167521e1a6f50b464e321105e34f48af6adf6cd8bc72e3fd7ac14bfcf94b458db4745cba257bacf7d05da48a4f1cd5f8b205",
-            "pubkey": "02323a1213c0dd330d459176fa493137aa5691d541537ee41e8101d794039d015e6ea8e4c8926134701614e4085b7964ab4070fa14acf577cc5b759a7df06c9c4b",
-            "signature": "30818402402f2a5cf5c2d6c21c70ea4a0d25ac5eae006536823a74b0ca1c772aa9aa68afe7eef7512780b23feed43ae970daee8e22491e570980b5f0a766010b209026aaa6024008a5246199fd62d75a5b0a7bab49aa8a4ad10095bb09d8a46b307363940423a0b018ae5b5d9314e5b5f4a583d99f7343db97e2ae3b8f70a9322c4a27b98fd2a6",
-            "hash": "1c667a87798a57e4432774e746204f589cfd35877a38863b3e8230dde2852af6b14110c619b7e225371038751043d38b555da2f0c91e6351ed0286dbdcd520b5",
-            "operation": "Coinbase(nonce=3, amount=76499339)"
+            "txid": "016af51b4a6f67a7663754b1865cc53fd2dae9c682f820437e826c4494087b79583a00a8b37c2ee78e7f00a04bafdc88687cd14da00236ac6d73586fa4855673"
+        },
+        {
+            "txid": "0119082785a2b4308c6fe5b4f0c73cee154f2c580d256f25391805bcb39965d7e7f2359f783807fa2c3217ca09f8002d7a1cf2dbdb79603e6d0c4f9533b48037"
         }
     ]
 }
+[Completed in 1.475897 ms]Return values:
 ```
-
-#### Return values:
 
 `hash` : The hash of the block.
 
