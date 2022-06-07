@@ -14,8 +14,8 @@ Supply chain solutions built using Nexus "_Supply API"_ can provide the end-to-e
 
 Find below the link to the Supply API:
 
-{% content-ref url="../../tritium-api/api-overview/tritium-api/supply.md" %}
-[supply.md](../../tritium-api/api-overview/tritium-api/supply.md)
+{% content-ref url="../../api/api-overview/tritium-api/supply.md" %}
+[supply.md](../../api/api-overview/tritium-api/supply.md)
 {% endcontent-ref %}
 
 ### Industry Use-Cases

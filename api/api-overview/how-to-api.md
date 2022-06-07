@@ -2,7 +2,7 @@
 description: This page will help you how to use the API
 ---
 
-# How-to-API
+# How-to-API - Tritium
 
 ### The Nexus API Interface
 

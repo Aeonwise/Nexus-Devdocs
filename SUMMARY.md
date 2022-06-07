@@ -48,30 +48,31 @@
 
 ## Tritium API
 
-* [⚙ Tritium API Overview](tritium-api/api-overview/README.md)
-  * [How-to-API - Tritium](tritium-api/api-overview/how-to-api.md)
-  * [⚙ Tritium API](tritium-api/api-overview/tritium-api/README.md)
-    * [SYSTEM](tritium-api/api-overview/tritium-api/system.md)
-    * [USERS](tritium-api/api-overview/tritium-api/users.md)
-    * [FINANCE](tritium-api/api-overview/tritium-api/finance.md)
-    * [LEDGER](tritium-api/api-overview/tritium-api/ledger.md)
-    * [TOKENS](tritium-api/api-overview/tritium-api/tokens.md)
-    * [ASSETS](tritium-api/api-overview/tritium-api/assets.md)
-    * [INVOICES](tritium-api/api-overview/tritium-api/invoices.md)
-    * [NAMES](tritium-api/api-overview/tritium-api/names.md)
-    * [CRYPTO](tritium-api/api-overview/tritium-api/crypto.md)
-    * [SUPPLY](tritium-api/api-overview/tritium-api/supply.md)
-    * [OBJECTS](tritium-api/api-overview/tritium-api/objects.md)
-  * [⚙ Tritium++ API](tritium-api/api-overview/tritium++-api/README.md)
-    * [Query DSL](tritium-api/api-overview/tritium++-api/register.md)
-    * [FINANCE](tritium-api/api-overview/tritium++-api/finance.md)
-    * [SYSTEM](tritium-api/api-overview/tritium++-api/system.md)
-    * [REGISTER](tritium-api/api-overview/tritium++-api/register-1.md)
+* [⚙ Tritium API Overview](api/api-overview/README.md)
+  * [How-to-API - Tritium](api/api-overview/how-to-api.md)
+  * [⚙ Tritium API](api/api-overview/tritium-api/README.md)
+    * [SYSTEM](api/api-overview/tritium-api/system.md)
+    * [USERS](api/api-overview/tritium-api/users.md)
+    * [FINANCE](api/api-overview/tritium-api/finance.md)
+    * [LEDGER](api/api-overview/tritium-api/ledger.md)
+    * [TOKENS](api/api-overview/tritium-api/tokens.md)
+    * [ASSETS](api/api-overview/tritium-api/assets.md)
+    * [INVOICES](api/api-overview/tritium-api/invoices.md)
+    * [NAMES](api/api-overview/tritium-api/names.md)
+    * [CRYPTO](api/api-overview/tritium-api/crypto.md)
+    * [SUPPLY](api/api-overview/tritium-api/supply.md)
+    * [OBJECTS](api/api-overview/tritium-api/objects.md)
 
 ## Tritium++ API
 
 * [⚙ Tritium++ API Overview](tritium++-api/tritium++-api-overview.md)
-* [How-to-API: Tritium++](tritium++-api/how-to-api-tritium++.md)
+* [How-to-API: Tritium++](tritium++-api/how-to-api-tritium++/README.md)
+  * [API Template](tritium++-api/how-to-api-tritium++/api-template.md)
+* [⚙ Tritium++ API](tritium++-api/tritium++-api/README.md)
+  * [Query DSL](tritium++-api/tritium++-api/register.md)
+  * [FINANCE](tritium++-api/tritium++-api/finance.md)
+  * [SYSTEM](tritium++-api/tritium++-api/system.md)
+  * [REGISTER](tritium++-api/tritium++-api/register-1.md)
 
 ## Legacy
 

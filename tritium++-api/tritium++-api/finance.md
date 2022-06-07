@@ -16,9 +16,9 @@ The minimum required components of the URI are:
 
 The following operators are supported for this API command-set:
 
-[`array`](../../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
-[`mean`](../../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](../../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
+[`array`](../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
+[`mean`](../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
 
 **Example:**
 
@@ -99,23 +99,23 @@ The above command will create a debit contract withdrawing from a random sample 
 
 The following verbs are currently supported by this API command-set:
 
-[`burn`](../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
-[`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
-[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
-[`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
-[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
+[`burn`](../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
+[`create`](../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
+[`credit`](../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`debit`](../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
+[`get`](../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`history`](../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
+[`transactions`](../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
 
 ## `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/balances`](../../../getting-started/tritium++-api/broken-reference/)\
-[`get/stakeinfo`](../../../getting-started/tritium++-api/broken-reference/)\
-[`migrate/accounts`](../../../getting-started/tritium++-api/broken-reference/)\
-[`set/stake`](../../../getting-started/tritium++-api/broken-reference/)
+[`get/balances`](../../getting-started/tritium++-api/broken-reference/)\
+[`get/stakeinfo`](../../getting-started/tritium++-api/broken-reference/)\
+[`migrate/accounts`](../../getting-started/tritium++-api/broken-reference/)\
+[`set/stake`](../../getting-started/tritium++-api/broken-reference/)
 
 Direct endpoints support filters and operators.
 
