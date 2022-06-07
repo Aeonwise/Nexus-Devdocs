@@ -89,7 +89,7 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](supply.md#create) - Generate a new object of supported type.\
+[`create`](c-supply.md#create) - Generate a new object of supported type.\
 `get` - Get object of supported type.\
 `list` - List all objects owned by given user.\
 `update` - Update a specified object.\
@@ -236,12 +236,12 @@ This command only supports the `item` noun.
 
 The following methods are currently supported by this API
 
-[`create/item`](supply.md#create-item)\
-[`get/item`](supply.md#get-item)\
-[`update/item`](supply.md#update-item)\
-[`transfer/item`](supply.md#transfer-item)\
-[`claim/item`](supply.md#claim-item)\
-[`list/item/history`](supply.md#list-item-history)
+[`create/item`](c-supply.md#create-item)\
+[`get/item`](c-supply.md#get-item)\
+[`update/item`](c-supply.md#update-item)\
+[`transfer/item`](c-supply.md#transfer-item)\
+[`claim/item`](c-supply.md#claim-item)\
+[`list/item/history`](c-supply.md#list-item-history)
 
 ***
 

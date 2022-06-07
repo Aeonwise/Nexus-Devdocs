@@ -94,7 +94,7 @@
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
     * [c-NAMES](under-construction/under-construction-pages/page-1/c-names.md)
-    * [SUPPLY](under-construction/under-construction-pages/page-1/supply.md)
+    * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
     * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [c-SYSTEM](under-construction/under-construction-pages/page-1/c-system.md)
     * [c-LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)

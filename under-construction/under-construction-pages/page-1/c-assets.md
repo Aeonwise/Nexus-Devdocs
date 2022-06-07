@@ -15,13 +15,13 @@ The `raw` format differs from the other formats in that the asset data is not st
 The full supported endpoint of the finance URI is as follows:
 
 ```
-finance/verb/noun/filter/operator
+assets/verb/noun/filter/operator
 ```
 
 The minimum required components of the URI are:
 
 ```
-finance/verb/noun
+assets/verb/noun
 ```
 
 ### `Supported Operators`
@@ -35,7 +35,7 @@ The following operators are supported for this API command-set:
 **Example:**
 
 ```
-finance/list/accounts/balance/sum
+assets/list/accounts/balance/sum
 ```
 
 **Result:**
@@ -47,26 +47,6 @@ This command will return a sum of the balances for all accounts:
     "balance": 333.376
 }
 ```
-
-### `Supported Nouns`
-
-The following nouns are supported for this API command-set:
-
-\[`account`] - An object register containing a token-id and balance.\
-\[`trust`] - An object register containing a token-id, balance, and trust.\
-\[`token`] - An object register containing a token-id, balance, supply, and decimals.\
-\[`any`] - An object selection noun allowing mixed accounts of different tokens.\
-\[`all`] - An object selection noun to collect all accounts for given token type.
-
-**Example:**
-
-```
-finance/debit/any
-```
-
-The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
-
-***
 
 ### `Supported Verbs`
 
@@ -80,6 +60,26 @@ The following verbs are currently supported by this API command-set:
 [`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#list) - List all objects owned by given user.\
 [`history`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#history) - Generate the history of all last states.\
 [`transactions`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#transactions) - List all transactions that modified specified object.
+
+### `Supported Nouns`
+
+The following nouns are supported for this API command-set:
+
+\[`assets`] - An object register containing a token-id and balance.\
+\[`any`] - An object selection noun allowing mixed accounts of different tokens.\
+\[`all`] - An object selection noun to collect all accounts for given token type.
+
+**Example:**
+
+```
+assets/list/asset
+```
+
+The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
+
+***
+
+### ``
 
 ### `Direct Endpoints`
 
