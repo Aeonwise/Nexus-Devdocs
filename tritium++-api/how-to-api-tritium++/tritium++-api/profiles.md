@@ -7,7 +7,7 @@ description: PROFILES API
 The Profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain. The full supported endpoint of the profiles URI is as follows:
 
 ```
-profiles/verb/noun
+profiles/verb/noun/filter/operator
 ```
 
 The minimum required components of the URI are:
