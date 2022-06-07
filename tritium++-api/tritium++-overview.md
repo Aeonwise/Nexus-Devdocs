@@ -1,4 +1,8 @@
-# ⚙ Tritium++ API Overview
+---
+description: Tritium++ API Overview
+---
+
+# ⚙ Tritium++ Overview
 
 ### Nexus API Overview
 

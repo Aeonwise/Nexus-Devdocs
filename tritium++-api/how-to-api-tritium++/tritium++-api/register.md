@@ -8,8 +8,8 @@ description: REGISTER API
 
 The following methods are currently supported by this API
 
-[`list/accounts`](register-1.md#list-accounts)\
-[`list/names`](register-1.md#list-names)``
+[`list/accounts`](register.md#list-accounts)\
+[`list/names`](register.md#list-names)``
 
 ### list/accounts
 

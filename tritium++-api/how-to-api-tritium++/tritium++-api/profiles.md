@@ -4,7 +4,7 @@ description: PROFILES API
 
 # PROFILES
 
-The profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain. The full supported endpoint of the `profiles` URI is as follows:
+The Profiles API provides methods for creating and managing profiles. A profile is synonymous with a signature chain. The full supported endpoint of the profiles URI is as follows:
 
 ```
 profiles/verb/noun
@@ -20,12 +20,12 @@ profiles/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](users.md#create) - Generate a new object of supported type.\
-[`update`](users.md#update) - Updates the specified object registers.\
-[`recover`](users.md#recover) - Recovers a profile account.\
-[`status`](users.md#status) - Status information of a profile.\
-[`notifications`](users.md#notifications) - List all notifications that modified specified object.\
-[`transactions`](users.md#notifications-1) - List all transactions that modified specified object.
+[`create`](profiles.md#create) - Generate a new object of supported type.\
+[`update`](profiles.md#update) - Updates the specified object registers.\
+[`recover`](profiles.md#recover) - Recovers a profile account.\
+[`status`](profiles.md#status) - Status information of a profile.\
+[`notifications`](profiles.md#notifications) - List all notifications that modified specified object.\
+[`transactions`](profiles.md#notifications-1) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -304,7 +304,7 @@ This command only supports the `master` noun.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-#### [Sorting / Filtering](users.md#sorting-filtering) Parameters
+#### [Sorting / Filtering](profiles.md#sorting-filtering) Parameters
 
 ### Results:
 
@@ -405,14 +405,14 @@ This command only supports the `master` noun.
 
 The following methods are currently supported by this API&#x20;
 
-[`create/master`](users.md#create-master-1)\
-[`update/credentials`](users.md#update-credentials)\
-[`update/recovery`](users.md#update-credentials-1)\
-[`recover/master`](users.md#recover-master)\
-[`status/master`](users.md#status-master)\
-[`notifications/master`](users.md#notifications-master)\
-[`transactions/master`](users.md#transactions-master)\
-[`create/auth`](users.md#create-auth)\
+[`create/master`](profiles.md#create-master-1)\
+[`update/credentials`](profiles.md#update-credentials)\
+[`update/recovery`](profiles.md#update-credentials-1)\
+[`recover/master`](profiles.md#recover-master)\
+[`status/master`](profiles.md#status-master)\
+[`notifications/master`](profiles.md#notifications-master)\
+[`transactions/master`](profiles.md#transactions-master)\
+[`create/auth`](profiles.md#create-auth)\
 
 
 ## `create/master`
