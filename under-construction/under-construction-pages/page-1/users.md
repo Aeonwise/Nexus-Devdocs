@@ -205,7 +205,43 @@ This command does not support the `master` or `auth` nouns.
 
 `success` : Boolean flag indicating that the session was saved successfully.
 
-`txid` : The ID (hash) of the transaction that includes the created object.
+`txid` : The ID (hash) of the transaction for the updated object.
+
+## `recover`
+
+Update an object register specified by given noun.
+
+```
+profiles/recover/noun
+```
+
+This command only supports the `master` noun.
+
+### Parameters:
+
+`username` : The username identifying the profile.
+
+`password` : The new password for this signature chain.
+
+`pin` : The new pin for this signature chain.
+
+`recovery` : The existing recovery seed for this signature chain.&#x20;
+
+### Results:
+
+```
+{
+    "success": true,
+    "txid": "017fbb86583c0e15c0fb994a1f4c70d97f2c084533748ccfd25cd36e5aef9c2e7f89f15f2ec9f2d73769fef9d7a8a28cd018c9907ebf1bf74e4f89837c900091"
+}
+[Completed in 15242.801822 ms]
+```
+
+`success` : Boolean flag indicating that the session was saved successfully.
+
+`txid` : The ID (hash) of the transaction for the recovered object.
+
+## ``
 
 ## `Methods`
 
