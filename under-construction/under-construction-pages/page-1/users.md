@@ -22,49 +22,6 @@ The minimum required components of the URI are:
 profiles/verb/noun
 ```
 
-## `Supported Filters`
-
-This command-set supports single or csv field-name filters.
-
-**Example:**
-
-```
-profiles/list/accounts/balance,ticker
-```
-
-The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
-
-### `Recursive Filtering`
-
-Nested JSON objects and arrays can be filtered recursively using the `.` operator.
-
-```
-finance/transactions/account/contracts.OP
-```
-
-When using recursive filtering, the nested hiearchy is retained.
-
-```
-[
-    {
-        "contracts": [
-            {
-                "OP": "CREATE"
-            }
-        ]
-    },
-    {
-        "contracts": [
-            {
-                "OP": "CREDIT"
-            }
-        ]
-    }
-]
-```
-
-***
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
@@ -72,7 +29,7 @@ The following verbs are currently supported by this API command-set:
 [`create`](users.md#create) - Generate a new object of supported type.\
 [`update`](users.md#update) - Updates the specified object registers.\
 [`recover`](users.md#recover) - Recovers a profile account.\
-`status` - Get object of supported type.\
+[`status`](users.md#status) - Get object of supported type.\
 `notifications` - List all objects owned by given user.\
 `transactions` - List all transactions that modified specified object.
 
@@ -277,7 +234,42 @@ This command only supports the `master` noun.
 
 `transactions` : The total transaction count in this signature chain
 
-## ``
+## `notifications`
+
+Get the profile status specified by given noun.
+
+```
+profiles/notifications/noun
+```
+
+This command only supports the `master` noun.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+
+### Results:
+
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "confirmed": true,
+    "recovery": true,
+    "crypto": true,
+    "transactions": 10
+}
+[Completed in 0.108500 ms]
+```
+
+`genesis` : The signature chain genesis hash for the currently logged in signature chain.
+
+`confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
+
+`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
+
+`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
+
+`transactions` : The total transaction count in this signature chain
 
 ## `Methods`
 
