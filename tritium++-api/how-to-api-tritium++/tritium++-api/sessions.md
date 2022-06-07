@@ -165,6 +165,33 @@ These commands only supports the `local` noun.
 
 `session` : When using multi-user API mode, an additional session value is returned to identify the sessions.
 
+## `terminate`
+
+This will terminate an active session specified by given noun.
+
+```
+sessions/create/noun
+```
+
+This command only supports the `local` noun.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+
+`pin` : The PIN for this signature chain.
+
+### Results:
+
+```
+{
+    "success": true
+}
+[Completed in 1656.089478 ms]
+```
+
+`success` : Boolean flag indicating that the session was terminated successfully .
+
 ## `status`
 
 Get the profile status specified by given noun.
@@ -194,7 +221,6 @@ This command only supports the `local` noun.
     }
 }
 [Completed in 0.080333 ms]
-
 ```
 
 `genesis` : The signature chain genesis hash for the currently logged in user.
