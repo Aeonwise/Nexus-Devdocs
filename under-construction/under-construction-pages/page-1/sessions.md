@@ -2,13 +2,176 @@
 
 The Sessions API provides methods for creating and managing sessions. A session is synonymous with a user login into the signature chain.
 
-### `Named Shortcuts`
+The full supported endpoint of the `sessions` URI is as follows:
 
-For each API method we support an alternative endpoint that includes the username at the end of the the URI. This shortcut removes the need to include the username or address as an additional parameter.
+```
+sessions/verb/noun
+```
 
-For example `/sessions/create/local/myusername` is a shortcut to `sessions/create/local?username=myusername`.
+The minimum required components of the URI are:
 
-### `Methods`
+```
+sessions/verb/noun
+```
+
+## `Supported Verbs`
+
+The following verbs are currently supported by this API command-set:
+
+`create` - Generate a new session type specified by the noun.\
+`unlock` - Unlock the session to carry out specified operations.\
+`lock` - Lock the session as to disable specified operations.\
+`save` - Save the session to the local database.\
+`load` - Loads a saved session from the local database.\
+`terminate` - Terminates a session specified by the noun.\
+`status` - Returns status information for the session type specified by the noun.
+
+## `Supported Nouns`
+
+The following nouns are supported for this API command-set:
+
+\[`local`] - The location of the session.\
+
+
+## `Sorting / Filtering`
+
+The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
+
+`limit`: The number of records to return. _Default: 100_.
+
+`page`: Zero-indexed page number that depends on `limit` for page boundaries.
+
+`offset`: Alternative to `page`, offset can be used to page the results by index.
+
+`order`: Descending **desc** or ascending **asc** as only permitted values.
+
+`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
+
+```
+{
+    "modified": 1621782289,
+    "json": {
+        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
+        "date": "12-21-2020"
+    }
+}
+```
+
+`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
+
+#### Alternative input
+
+The `limit` and `offset` parameters can be given with the following format:
+
+```
+limit=100.10
+```
+
+This above will map to the parameters of `limit=100` and `offset=10`.
+
+## `create`
+
+Create a new session specified by given noun.
+
+```
+sessions/create/noun
+```
+
+This command only supports the `local` noun.
+
+### Parameters:
+
+`username` : The username associated with this signature chain.
+
+`password` : The password to be associated with this signature chain.
+
+`pin` : The PIN for this signature chain.
+
+### Results:
+
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "session": "0aad63e028dd9e0f31f0b566831fea9dfc7db68fc2ba482a8ce975656971a67e"
+}
+[Completed in 1659.509829 ms]
+```
+
+`genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
+
+`session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
+
+## ``
+
+## `status`
+
+Get the profile status specified by given noun.
+
+```
+sessions/status/noun
+```
+
+This command only supports the `local` noun.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+
+### Results:
+
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "accessed": 1653680627,
+    "location": "local",
+    "unlocked": {
+        "mining": false,
+        "notifications": true,
+        "staking": false,
+        "transactions": false
+    }
+}
+[Completed in 0.080333 ms]
+
+```
+
+`genesis` : The signature chain genesis hash for the currently logged in signature chain.
+
+`confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
+
+`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
+
+`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
+
+`transactions` : The total transaction count in this signature chain
+
+### Parameters:
+
+`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+
+`password` : The password to be associated with this user.
+
+`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
+
+{% hint style="danger" %}
+If user forgets the username, he looses access to his nexus assets. There is no option to change the username.  Be careful when you choose a username (case sensitive) and make a point to back it up.&#x20;
+{% endhint %}
+
+### Results:
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+```
+{
+    "success": true,
+    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
+    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
+}
+```
+
+## `Methods`
 
 The following methods are currently supported by this API
 
@@ -18,7 +181,7 @@ __[_`create/local`_](sessions.md#create-local)\
 [`save/local`](sessions.md#save-local)\
 [_`load/local`_](sessions.md#load-local)\
 [_`terminate/local`_](sessions.md#terminate-local)\
-[_status/local_](sessions.md#status-local)__
+[_`status/local`_](sessions.md#status-local)_``_
 
 ## `create/local`
 
@@ -92,9 +255,19 @@ print(response.json())
 
 #### Return value JSON object:
 
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "session": "0aad63e028dd9e0f31f0b566831fea9dfc7db68fc2ba482a8ce975656971a67e"
+}
+[Completed in 1659.509829 ms]
+```
+
 #### Return values:
 
-`success` : Boolean flag indicating that the session was saved successfully .
+`genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
+
+`session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
 
 ## `unlock/local`
 
