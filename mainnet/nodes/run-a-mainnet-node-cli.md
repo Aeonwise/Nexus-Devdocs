@@ -204,7 +204,7 @@ tar -xf tritium.tar.gz -C ~/.Nexus
 
 ## **6. API's To Control Node:**
 
-To interact with the nexus core daemon, use API commands via the terminal. Change the location to \~/LLL-TAO folder for the API’s to work. To run the node, stake and transact we will only be using the system, users and finance API’s. If you have any doubts refer to the API documentation [here](../../api/api-overview/tritium-api/).
+To interact with the nexus core daemon, use API commands via the terminal. Change the location to \~/LLL-TAO folder for the API’s to work. To run the node, stake and transact we will only be using the system, users and finance API’s. If you have any doubts refer to the API documentation [here](../../tritium-api/api-overview/tritium-api/).
 
 ### **Before we start:**
 

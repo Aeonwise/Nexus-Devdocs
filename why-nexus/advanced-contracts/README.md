@@ -76,8 +76,8 @@ A global search of entire chain takes 1 to 2 seconds. Running the first register
 
 For more information, check out the link below:
 
-{% content-ref url="../../api/api-overview/tritium++-api/register.md" %}
-[register.md](../../api/api-overview/tritium++-api/register.md)
+{% content-ref url="../../tritium-api/api-overview/tritium++-api/register.md" %}
+[register.md](../../tritium-api/api-overview/tritium++-api/register.md)
 {% endcontent-ref %}
 
 ### Conditional Contracts

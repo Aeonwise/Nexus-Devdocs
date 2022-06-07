@@ -30,8 +30,8 @@ As said before being a unique architecture; the options to build on Nexus are as
 
 Today development is made possible with the REST API which is a higher level API. This empowers  web developers and even no-code developers to build blockchain applications.
 
-{% content-ref url="../../api/api-overview/" %}
-[api-overview](../../api/api-overview/)
+{% content-ref url="../../tritium-api/api-overview/" %}
+[api-overview](../../tritium-api/api-overview/)
 {% endcontent-ref %}
 
 ### Contracts on Nexus
