@@ -101,7 +101,43 @@ This command only supports the `local` noun.
 
 `session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
 
-## ``
+## `unlock`
+
+This will unlock the session specified by given noun and cache the PIN in encrypted memory to be used for all subsequent API calls for the unlocked operations.
+
+```
+sessions/unlock/noun
+```
+
+This command only supports the `local` noun.
+
+### Parameters:
+
+`pin` : The PIN for this signature chain.
+
+`session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
+
+`mining` : This boolean value determines whether the logged in users signature chain can be used for mining.
+
+`notifications` : This boolean value determines whether the logged in users signature chain can be used for processing notifications.
+
+`staking` : This boolean value determines whether the logged in users signature chain can be used for staking.
+
+`transactions` : This boolean value determines whether the logged in users signature chain can be used for creating or claiming transactions.
+
+### Results:
+
+```
+{
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "session": "0aad63e028dd9e0f31f0b566831fea9dfc7db68fc2ba482a8ce975656971a67e"
+}
+[Completed in 1659.509829 ms]
+```
+
+`genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
+
+`session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
 
 ## `status`
 
@@ -135,41 +171,21 @@ This command only supports the `local` noun.
 
 ```
 
-`genesis` : The signature chain genesis hash for the currently logged in signature chain.
+`genesis` : The signature chain genesis hash for the currently logged in user.
 
-`confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
+`accessed` : The unix timestamp at which the signature chain was last accessed.
 
-`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
+`location` : The location of session, `local` or `remote`.
 
-`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
+`unlocked` : This will contain child elements describing which functions the session is currently unlocked for
 
-`transactions` : The total transaction count in this signature chain
+`mining` : Boolean flag indicating whether the users sig chain is unlocked for mining.
 
-### Parameters:
+`notifications` : Boolean flag indicating whether the users sig chain is unlocked for processing notifications.
 
-`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+`staking` : Boolean flag indicating whether the users sig chain is unlocked for staking.
 
-`password` : The password to be associated with this user.
-
-`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
-
-{% hint style="danger" %}
-If user forgets the username, he looses access to his nexus assets. There is no option to change the username.  Be careful when you choose a username (case sensitive) and make a point to back it up.&#x20;
-{% endhint %}
-
-### Results:
-
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
-
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
-
-```
-{
-    "success": true,
-    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
-    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
-}
-```
+`transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
 
 ## `Methods`
 

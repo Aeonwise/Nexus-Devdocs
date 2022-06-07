@@ -29,9 +29,9 @@ The following verbs are currently supported by this API command-set:
 [`create`](users.md#create) - Generate a new object of supported type.\
 [`update`](users.md#update) - Updates the specified object registers.\
 [`recover`](users.md#recover) - Recovers a profile account.\
-[`status`](users.md#status) - Get object of supported type.\
-`notifications` - List all objects owned by given user.\
-`transactions` - List all transactions that modified specified object.
+[`status`](users.md#status) - Status information of a profile.\
+[`notifications`](users.md#notifications) - List all notifications that modified specified object.\
+[`transactions`](users.md#notifications-1) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -39,8 +39,8 @@ The following nouns are supported for this API command-set:
 
 \[`master`] - The default profile that controls all sub-profiles.\
 \[`auth`] - A crypto object register for login auth.\
-\[`credentials`] -  Profile credentials used to secure profiles.\
-\[`recovery`] - An object selection noun allowing mixed accounts of different tokens.
+\[`credentials`] -  Credentials used to secure profiles.\
+\[`recovery`] - An object which represents recovery for the profile.
 
 ## `Sorting / Filtering`
 
@@ -82,12 +82,6 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 finance/get/balances/balance/sumreate
 ```
 
-Create a new object register specified by given noun.
-
-```
-profiles/create/noun
-```
-
 ## `create`
 
 Create a new object register specified by given noun.
@@ -118,8 +112,6 @@ This command does not support the `credentials` or `recovery` nouns.
 `success` : Boolean flag indicating that the session was saved successfully.
 
 `txid` : The ID (hash) of the transaction that includes the created object.
-
-
 
 ## `update`
 
@@ -253,27 +245,50 @@ This command only supports the `master` noun.
 ### Results:
 
 ```
-{
-    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
-    "confirmed": true,
-    "recovery": true,
-    "crypto": true,
-    "transactions": 10
-}
-[Completed in 0.108500 ms]
+[
+    {
+        "id": 0,
+        "OP": "DEBIT",
+        "from": "8EW4ALiZxtiRHFGqND5Yah8oYiRaXBLEHBcrovshCDLT1ZE5ENk",
+        "to": "8C96zrYqeyYYiRDQ9pWZkxgzMhmV7nxDUEeE8fBCufgWfJ4cnJ1",
+        "amount": 150.0,
+        "token": "8EW4ALiZxtiRHFGqND5Yah8oYiRaXBLEHBcrovshCDLT1ZE5ENk",
+        "ticker": "NEX",
+        "reference": 0,
+        "timestamp": 1654620671,
+        "txid": "012e6dc669cad475b0974308ba719bf5d69c0d7623e31399a3d83ca8e095b63ed7ac98709c08a5a15c543dd91c85c7cbb91082c355fa548435545cfb1b912a8f"
+    }
+]
+[Completed in 0.256792 ms]
 ```
 
-`genesis` : The signature chain genesis hash for the currently logged in signature chain.
+An array of contracts deifned as:
 
-`confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
+`OP` : The contract operation. Can be `COINBASE`, `DEBIT`, `FEE`, `TRANSFER`.
 
-`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
+`txid` : The transaction that was credited / claimed.
 
-`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
+`suppressed`: If the caller included the optional `suppressed` flag, then the response will include this field to indicate whether this notification is currently being suppressed or not.
 
-`transactions` : The total transaction count in this signature chain
+`from` : For `DEBIT` transactions, the register address of the account that the debit is being made from.
 
+`from_name` : For `DEBIT` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
 
+`to` : For `DEBIT` transactions, the register address of the account that the debit is being made to.
+
+`to_name` : For `DEBIT` transactions, the name of the account that the debit is being made to. Only included if the name can be resolved.
+
+`amount` : the token amount of the transaction.
+
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+
+`ticker` : The name of the token that the transaction relates to.
+
+`reference` : For `DEBIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+
+`proof` : The register address of the token account proving the the split dividend debit.
+
+`dividend_payment` : Flag indicating that this debit is a split dividend payment to a tokenized asset
 
 ## `transactions`
 
@@ -295,15 +310,7 @@ This command only supports the `master` noun.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-`order` : The transaction order, based on signature chain sequence. 'asc' for oldest first, 'desc' for most recent first. The default is 'desc'.
-
-`limit` : The number of records to return for the current page. The default is 100.
-
-`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
-
-`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
-
-`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+#### [Sorting / Filtering](users.md#sorting-filtering) Parameters
 
 ### Results:
 
@@ -395,6 +402,10 @@ This command only supports the `master` noun.
 `token_name` : The name of the token that the transaction relates to.
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+
+}
 
 ## `Methods`
 
