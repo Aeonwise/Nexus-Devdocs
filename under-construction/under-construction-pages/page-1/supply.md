@@ -2,7 +2,7 @@
 description: SUPPLY API
 ---
 
-# c-SUPPLY
+# SUPPLY
 
 The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a `data` value and this value can be updated over time. Items are stored in an APPEND register, meaning that changes to the item are recorded in sequence in the register. This in turn means that a history of changes to the `data` field, as well as the history of ownership of the item, can be obtained.
 
@@ -60,7 +60,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-supply/get/item/contracts.OP
+supply/list/items/contracts.OP
 ```
 
 When using recursive filtering, the nested hierarchy is retained.
@@ -89,21 +89,21 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-supply.md#create) - Generate a new object of supported type.\
-[`update`](c-supply.md#update) - Updates the specified object registers.\
-[`recover`](c-supply.md#recover) - Recovers a profile account.\
-[`status`](c-supply.md#status) - Status information of a profile.\
-[`notifications`](c-supply.md#notifications) - List all notifications that modified specified object.\
-[`transactions`](c-supply.md#notifications-1) - List all transactions that modified specified object.
+[`create`](supply.md#create) - Generate a new object of supported type.\
+`get` - Get object of supported type.\
+`list` - List all objects owned by given user.\
+`update` - Update a specified object.\
+`transfer` - Transfer a specified object register.\
+`claim` - Claim a specified object register.\
+`history` - Generate the history of all last states.\
+
 
 ## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`master`] - The default profile that controls all sub-profiles.\
-\[`auth`] - A crypto object register for login auth.\
-\[`credentials`] -  Credentials used to secure profiles.\
-\[`recovery`] - An object which represents recovery for the profile.
+\[`items`] - The default profile that controls all sub-profiles.\
+
 
 ## `Sorting / Filtering`
 
@@ -141,27 +141,39 @@ limit=100.10
 
 This above will map to the parameters of `limit=100` and `offset=10`.
 
-```
-finance/get/balances/balance/sumreate
-```
-
 ## `create`
 
 Create a new object register specified by given noun.
 
 ```
-profiles/create/noun
+supply/create/noun
 ```
 
-This command does not support the `credentials` or `recovery` nouns.
+This command does not support the This command only supports the `item` noun.
 
 ### Parameters:
 
-`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+``
 
-`password` : The password to be associated with this profile.
+`pin` : The PIN for this signature chain.
 
-`pin` : The PIN to be associates with this profile
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the asset should be created with. For single-user API mode the session should not be supplied.
+
+`name` : An optional name to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address.
+
+`format` : The format the caller is using to define the asset. Values can be `basic` (the default), `raw`, `JSON`, `ANSI` (not currently supported), or `XML` (not currently supported). This is an optional field and the value `basic` is assumed if omitted.
+
+`data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
+
+`<fieldname>=<value>` : If format is `basic`, then the caller can provide additional = pairs for each piece of data to store in the asset.
+
+`json` : If format is `JSON`, then this field will hold the json definition of the asset as a JSON array of objects representing each field in the object. It uses the following format:
+
+* `name` : The name of the data field.
+* `type` : The data type to use for this field. Values can be `uint8`, `uint16`, `uint32`, `uint64`, `uint256`, `uint512`, `uint1024`, `string`, or `bytes`.
+* `value` : The default value of the field.
+* `mutable` : The boolean field to indicate whether the field is writable (true) or read-only (false).
+* `maxlength`: Only applicable to `string` or `bytes` fields where `mutable`=true, this is the maximum number of characters (bytes) that can be stored in the field. If no maxlength parameter is provided then we will default the field size to the length of the default value rounded up to the nearest 64 bytes.
 
 ### Results:
 
@@ -184,7 +196,7 @@ Update an object register specified by given noun.
 profiles/update/noun
 ```
 
-This command does not support the `master` or `auth` nouns.
+This command only supports the `item` noun.
 
 ### Parameters:
 
@@ -224,12 +236,12 @@ This command does not support the `master` or `auth` nouns.
 
 The following methods are currently supported by this API
 
-[`create/item`](c-supply.md#create-item)\
-[`get/item`](c-supply.md#get-item)\
-[`update/item`](c-supply.md#update-item)\
-[`transfer/item`](c-supply.md#transfer-item)\
-[`claim/item`](c-supply.md#claim-item)\
-[`list/item/history`](c-supply.md#list-item-history)
+[`create/item`](supply.md#create-item)\
+[`get/item`](supply.md#get-item)\
+[`update/item`](supply.md#update-item)\
+[`transfer/item`](supply.md#transfer-item)\
+[`claim/item`](supply.md#claim-item)\
+[`list/item/history`](supply.md#list-item-history)
 
 ***
 

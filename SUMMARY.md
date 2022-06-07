@@ -66,16 +66,16 @@
 
 ## Tritium++ API
 
-* [⚙ Tritium++ Overview](tritium++-api/tritium++-overview/README.md)
-  * [How-to-API: Tritium++](tritium++-api/tritium++-overview/how-to-api-tritium++/README.md)
-    * [API Template](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template.md)
-    * [Query DSL](tritium++-api/tritium++-overview/how-to-api-tritium++/register.md)
-    * [⚙ Tritium++ API](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/README.md)
-      * [PROFILES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles.md)
-      * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions.md)
-      * [FINANCE](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance.md)
-      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
-      * [REGISTER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register.md)
+* [⚙ Tritium++ Overview](tritium++-api/tritium++-overview.md)
+  * [How-to-API: Tritium++](tritium++-api/how-to-api-tritium++/README.md)
+    * [API Template](tritium++-api/how-to-api-tritium++/api-template.md)
+    * [Query DSL](tritium++-api/how-to-api-tritium++/register.md)
+    * [⚙ Tritium++ API](tritium++-api/how-to-api-tritium++/tritium++-api/README.md)
+      * [PROFILES](tritium++-api/how-to-api-tritium++/tritium++-api/profiles.md)
+      * [SESSIONS](tritium++-api/how-to-api-tritium++/tritium++-api/sessions.md)
+      * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
+      * [SYSTEM](tritium++-api/how-to-api-tritium++/tritium++-api/system.md)
+      * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
 
 ## Legacy
 
@@ -94,7 +94,7 @@
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
     * [c-NAMES](under-construction/under-construction-pages/page-1/c-names.md)
-    * [c-SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
+    * [SUPPLY](under-construction/under-construction-pages/page-1/supply.md)
     * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [c-SYSTEM](under-construction/under-construction-pages/page-1/c-system.md)
     * [c-LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)
