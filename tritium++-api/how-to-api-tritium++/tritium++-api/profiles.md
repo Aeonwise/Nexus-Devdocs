@@ -16,6 +16,73 @@ The minimum required components of the URI are:
 profiles/verb/noun
 ```
 
+## `Supported Operators`
+
+The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
+
+[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
+[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
+
+**Example:**
+
+```
+profile/transactions/master/contracts.amount/sum
+```
+
+**Result:**
+
+This command will return a sum of the balances for all accounts:
+
+```
+{
+    "amount": 5150.0
+}
+[Completed in 2.440583 ms]
+```
+
+## `Supported Filters`
+
+The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
+
+**Example:**
+
+```
+profiles/notifications/master/amount,ticker
+```
+
+The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
+
+#### `Recursive Filtering`
+
+Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+
+```
+profiles/transactions/master/contracts.OP
+```
+
+When using recursive filtering, the nested hierarchy is retained.
+
+```
+[
+    {
+        "contracts": [
+            {
+                "OP": "DEBIT"
+            }
+        ]
+    },
+    {
+        "contracts": [
+            {
+                "OP": "WRITE"
+            }
+        ]
+    }
+]
+[Completed in 0.722042 ms]
+```
+
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
