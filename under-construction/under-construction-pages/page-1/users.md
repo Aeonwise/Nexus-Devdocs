@@ -70,8 +70,8 @@ When using recursive filtering, the nested hiearchy is retained.
 The following verbs are currently supported by this API command-set:
 
 `create` - Generate a new object of supported type.\
-`update` - Claim funds issued to account from debit.\
-`recover` - Issue funds from supported type.\
+`update` - Updates the specified object registers.\
+`recover` - Recovers a profile account.\
 `status` - Get object of supported type.\
 `notifications` - List all objects owned by given user.\
 `transactions` - List all transactions that modified specified object.
@@ -134,31 +134,38 @@ profiles/create/noun
 
 This command does not support the `credentials` or `recovery` nouns.
 
+###
+
+## `create`
+
+Create a new object register specified by given noun.
+
+```
+profiles/create/noun
+```
+
+This command does not support the `credentials` or `recovery` nouns.
+
 ### Parameters:
 
 `username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
-`password` : The password to be associated with this user.
+`password` : The password to be associated with this profile.
 
-`pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
-
-{% hint style="danger" %}
-If user forgets the username, he looses access to his nexus assets. There is no option to change the username.  Be careful when you choose a username (case sensitive) and make a point to back it up.&#x20;
-{% endhint %}
+`pin` : The PIN to be associates with this profile
 
 ### Results:
 
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
-
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
-
 ```
 {
-    "success": true,
-    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
-    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
+    "success": true,
+    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
 }
 ```
+
+`success` : Boolean flag indicating that the session was saved successfully.
+
+`txid` : The ID (hash) of the transaction that includes the created object.
 
 ## `Methods`
 
