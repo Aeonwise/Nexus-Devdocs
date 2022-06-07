@@ -7,13 +7,13 @@ description: LEDGER API
 The Ledger API provides users with access to data held by the ledger such as blocks and transactions. The full supported endpoint of the ledger URI is as follows:
 
 ```
-finance/verb/noun/filter/operator
+ledger/verb/noun/filter/operator
 ```
 
 The minimum required components of the URI are:
 
 ```
-finance/verb/noun
+ledger/verb/noun
 ```
 
 ### `Supported Operators`
@@ -27,7 +27,7 @@ The following operators are supported for this API command-set:
 **Example:**
 
 ```
-finance/list/accounts/balance/sum
+ledger/list/accounts/balance/sum
 ```
 
 **Result:**
@@ -59,7 +59,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-finance/transactions/account/contracts.OP
+ledger/list/transactions/contracts.OP
 ```
 
 When using recursive filtering, the nested hiearchy is retained.
@@ -83,17 +83,26 @@ When using recursive filtering, the nested hiearchy is retained.
 ]
 ```
 
-***
+### `Supported Verbs`
+
+The following verbs are currently supported by this API command-set:
+
+[`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
+[`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#list) - List all objects owned by given session.\
+`submit` - To submit the modified object state to the mempool.\
+`void` - To void a debit transaction and credit it back to the same account.\
+`sync`- Claim funds issued to account from debit.\
+
 
 ### `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`account`] - An object register containing a token-id and balance.\
-\[`trust`] - An object register containing a token-id, balance, and trust.\
-\[`token`] - An object register containing a token-id, balance, supply, and decimals.\
-\[`any`] - An object selection noun allowing mixed accounts of different tokens.\
-\[`all`] - An object selection noun to collect all accounts for given token type.
+\[`block`] - An object register containing a token-id and balance.\
+\[`blockhash`] - An object register containing a token-id, balance, and trust.\
+\[`info`] - An object register containing a token-id, balance, supply, and decimals.\
+\[`transactions`] - An object selection noun allowing mixed accounts of different tokens.\
+\[`headers`] - An object selection noun to collect all accounts for given token type.
 
 **Example:**
 
@@ -105,18 +114,7 @@ The above command will create a debit contract withdrawing from a random sample 
 
 ***
 
-### `Supported Verbs`
-
-The following verbs are currently supported by this API command-set:
-
-[`burn`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#burn) - Remove a given token from circulation.\
-[`create`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#create) - Generate a new object of supported type.\
-[`credit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#credit) - Claim funds issued to account from debit.\
-[`debit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#debit) - Issue funds from supported type.\
-[`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
-[`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#list) - List all objects owned by given user.\
-[`history`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#history) - Generate the history of all last states.\
-[`transactions`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#transactions) - List all transactions that modified specified object.
+### ``
 
 ### `Direct Endpoints`
 
