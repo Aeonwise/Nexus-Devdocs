@@ -75,7 +75,8 @@
         * [PROFILE METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/profile-methods.md)
       * [SESSIONS](tritium++-api/how-to-api-tritium++/tritium++-api/sessions.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
-      * [SYSTEM](tritium++-api/how-to-api-tritium++/tritium++-api/system.md)
+      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system/README.md)
+        * [SYSTEM METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system/system.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
 
 ## Legacy
@@ -97,7 +98,6 @@
     * [c-NAMES](under-construction/under-construction-pages/page-1/c-names.md)
     * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
     * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
-    * [c-SYSTEM](under-construction/under-construction-pages/page-1/c-system.md)
     * [c-LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
