@@ -74,6 +74,7 @@
       * [PROFILES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/README.md)
         * [PROFILE METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/profile-methods.md)
       * [SESSIONS](tritium++-api/how-to-api-tritium++/tritium++-api/sessions.md)
+      * [SESSIONS METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions-methods.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
