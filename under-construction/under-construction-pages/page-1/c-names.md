@@ -47,7 +47,7 @@ The operators only work with the profiles `transactions` and `notifications` ver
 **Example:**
 
 ```
-profile/transactions/master/contracts.amount/sum
+names/transactions/master/contracts.amount/sum
 ```
 
 **Result:**
@@ -68,7 +68,7 @@ The filters only work with the profiles `transactions` and `notifications` verbs
 **Example:**
 
 ```
-profiles/notifications/master/amount,ticker
+names/notifications/master/amount,ticker
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
@@ -78,7 +78,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-profiles/transactions/master/contracts.OP
+names/transactions/master/contracts.OP
 ```
 
 When using recursive filtering, the nested hierarchy is retained.
@@ -108,20 +108,20 @@ When using recursive filtering, the nested hierarchy is retained.
 The following verbs are currently supported by this API command-set:
 
 [`create`](c-names.md#create) - Generate a new object of supported type.\
-[`update`](c-names.md#update) - Updates the specified object registers.\
-[`recover`](c-names.md#recover) - Recovers a profile account.\
-[`status`](c-names.md#status) - Status information of a profile.\
-[`notifications`](c-names.md#notifications) - List all notifications that modified specified object.\
-[`transactions`](c-names.md#notifications-1) - List all transactions that modified specified object.
+[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+`transfer` - Transfer ownership of a specific object register.\
+`claim` - Claim ownership of a specific object registers.\
+`history` - Generate the history of all last states.\
+
 
 ## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`master`] - The default profile that controls all sub-profiles.\
-\[`auth`] - A crypto object register for login auth.\
-\[`credentials`] -  Credentials used to secure profiles.\
-\[`recovery`] - An object which represents recovery for the profile.
+\[`name`] - The default profile that controls all sub-profiles.\
+\[`namespace`] - A crypto object register for login auth.\
+
 
 ## `Sorting / Filtering`
 
@@ -165,34 +165,52 @@ finance/get/balances/balance/sumreate
 
 ## `create`
 
-Create a new object register specified by given noun.
+This will create a new object register specified by given noun.
 
 ```
-profiles/create/noun
+names/create/noun
 ```
 
-This command does not support the `credentials` or `recovery` nouns.
+This command supports the `name` or `namespace` nouns.
 
 ### Parameters:
 
-`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+`pin` : The PIN for this signature chain.
 
-`password` : The password to be associated with this profile.
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the namespace should be created with. For single-user API mode the session should not be supplied.
 
-`pin` : The PIN to be associates with this profile
+#### `create/namespace`
 
-### Results:
+`namespace` : A name to identify the namespace. A hash of the name will determine the register address.
+
+#### create/name
+
+`name` : The name of the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
+
+`namespace` : This optional field allows callers to specify the namespace that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global).
+
+`global` : This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored.
+
+`register_address` : The 256-bit hexadecimal register address of the  object that this Name will point to.
+
+#### Return value JSON object:
 
 ```
 {
     "success": true,
-    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+    "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5",
+    "txid": "01dc4d11a9b3418832796ad6c9ca90ba18897b0ec24be44667f0fb0172481775925fa5fc568d54d8cac1e18a81beb552cbbb8cf242210a70233a79355e5a056f"
 }
+[Completed in 4981.591417 ms]
 ```
 
-`success` : Boolean flag indicating that the session was saved successfully.
+#### Return values:
 
-`txid` : The ID (hash) of the transaction that includes the created object.
+`success` : Boolean flag indicating that the namespace was created successfully .
+
+`address` : The register address for this namespace.
+
+`txid` : The ID (hash) of the transaction that includes the namespace creation.
 
 ## `update`
 

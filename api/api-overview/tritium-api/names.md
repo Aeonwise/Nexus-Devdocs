@@ -696,7 +696,7 @@ print(response.json())
 
 `global` : This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored.
 
-`register_address` : The 256-bit hexadecimal register address of the the object that this Name will point to.
+`register_address` : The 256-bit hexadecimal register address of the object that this Name will point to.
 
 #### Example
 
