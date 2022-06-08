@@ -191,7 +191,7 @@ This command supports the `name` or `namespace` nouns.
 
 `global` : This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored.
 
-`register_address` : The 256-bit hexadecimal register address of the  object that this Name will point to.
+`register_address` : The 256-bit hexadecimal register address of the object that this Name will point to.
 
 #### Return value JSON object:
 
@@ -212,49 +212,110 @@ This command supports the `name` or `namespace` nouns.
 
 `txid` : The ID (hash) of the transaction that includes the namespace creation.
 
-## `update`
+## `get`
 
-Update an object register specified by given noun.
+Retrieves the object information specified by given noun.
 
 ```
-profiles/update/noun
+names/get/noun
 ```
 
-This command does not support the `master` or `auth` nouns.
+This command supports the `name` or `namespace` nouns.
 
 ### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
-`password` : The existing password for this signature chain.
+#### get/namespace
 
-`pin` : The existing pin for this signature chain.
+`name` : The name identifying the namespace. This is optional if the address is provided.
 
-### update/credentials
+`address` : The register address of the namespace to be transferred. This is optional if the name is provided.
 
-`new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
+#### `get/name`
 
-`new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
+`name` : The name identifying the name object. The name should be in the format username:name (for local names) or name.namespace (for names in a global namespace). If the `name` parameter is provided then all other parameters are ignored.
 
-### update/recovery
-
-`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
-
-`new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
+`register_address` : The register address to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if `name` is provided.
 
 ### Results:
 
+#### `get/namespace`
+
+#### Return value JSON object:
+
 ```
 {
-    "success": true,
-    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+    "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "version": 1,
+    "created": 1654698239,
+    "modified": 1654698239,
+    "type": "OBJECT",
+    "namespace": "nexenture",
+    "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5"
 }
-[Completed in 18533.182336 ms]
+[Completed in 0.174417 ms]
+
 ```
 
-`success` : Boolean flag indicating that the session was saved successfully.
+#### Return values:
 
-`txid` : The ID (hash) of the transaction for the updated object.
+`owner` : The genesis hash of the signature chain that owns this namespace.
+
+`version` : The serialization version of the namespace.
+
+`created` : The UNIX timestamp when the namespace was created.
+
+`modified` : The UNIX timestamp when the namespace was last modified.
+
+`type` : The description of the register `OBJECT`
+
+`namespace` : The name identifying the object register.&#x20;
+
+`address` : The register address of the namespace.
+
+#### `get/name`
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b743770768128f7ca2c15cb859b01583c2d5c5c772dc5564b3e7e48c4d0d54f4",
+        "version": 1,
+        "created": 1654620478,
+        "modified": 1654620478,
+        "type": "OBJECT",
+        "register": "8C96zrYqeyYYiRDQ9pWZkxgzMhmV7nxDUEeE8fBCufgWfJ4cnJ1",
+        "name": "Nex_Token",
+        "namespace": "",
+        "address": "8HXCoGDXsYBxQeGJUTvTX3HpjtNZYu5h75yetyjradHRwczw3FV"
+    }
+]
+[Completed in 0.291792 ms]
+```
+
+#### Return values:
+
+`owner` : The genesis hash of the signature chain that owns this Name.
+
+`version` : The serialization version of the Name.
+
+`created` : The UNIX timestamp when the Name was created.
+
+`modified` : The UNIX timestamp when the Name was last modified.
+
+`type` : The description of the register `OBJECT`
+
+`register` : The register address of the the object that this Name points to.
+
+`name` : The name identifying the object register.
+
+`namespace` : The namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
+
+`address` : The register address of the Name.
+
+``
 
 ### `Methods`
 

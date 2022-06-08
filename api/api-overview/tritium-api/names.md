@@ -204,6 +204,8 @@ print(response.json())
 
 `name` : The name identifying the namespace. This is optional if the address is provided.
 
+`address` : The register address of the namespace to be transferred. This is optional if the name is provided.
+
 #### Return value JSON object:
 
 ```
