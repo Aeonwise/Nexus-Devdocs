@@ -6,9 +6,9 @@ description: SYSTEM API
 
 The System API provides public access to information about this node. This includes data such as the version of software the node is running, ledger and mempool state, node IP address, and connected peers.
 
-### `Methods`
+### `Direct Endpoints`
 
-The following methods are currently supported by this API
+The following commands are direct endpoints and thus do not support the `verb` and `noun` structure available above.
 
 [`stop`](system.md#stop)\
 [`get/info`](system.md#get-info)\
@@ -25,44 +25,51 @@ Initiate node shutdown sequence.
 
 `/system/stop`
 
-#### Parameters:
-
-`password`: Provide a password in the configuration file which will help prevent accidental remote shutdown (optional). Use the password to authenticate the shutdown.
-
-#### Return value JSON object:
-
-`Nexus server stopping`
-
-{% swagger method="get" path="/system/stop" baseUrl="http://api.nexus.io" summary="Node shutdown" %}
+{% swagger method="get" path="/system/stop" baseUrl="http://api.nexus-interactions.io:8080" summary="stop" %}
 {% swagger-description %}
-Initiate node shutdown sequence
+Initiate node shutdown sequence.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="password" required="false" %}
-password to enable authenticated shutdown
+{% swagger-parameter in="body" name="password" %}
+A password which should match the one supplied in the config file, to make sure that the node is not stopped accidentally with this method.
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Nexus server stopping" %}
+{% swagger-response status="200: OK" description="server stopped" %}
 ```javascript
 Nexus server stopping
 ```
 {% endswagger-response %}
 {% endswagger %}
 
+#### Parameters:&#x20;
+
+`password` : A password which should match the one supplied in the config file, to make sure that the node is not stopped accidentally with this method. This is optional if a stop password is not supplied in the config.
+
+#### Return value JSON object:
+
+`Nexus server stopping`
+
 {% tabs %}
 {% tab title="Javascript" %}
 ```javascript
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 
-data = {password: "YOUR_PASSWORD"}
 fetch(`${SERVER_URL}/system/stop`,{
-    method: 'POST',
+    method: 'GET',
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
 })
 .then(resp => resp.json())
 .then(json => console.log(json)) // nexus server stopping
 .catch(error => console.log(error)) // Some Error Occured
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+response = requests.post(f"{SERVER_URL}/system/stop")
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -75,12 +82,12 @@ Returns a summary of information about this node
 
 `/system/get/info`
 
-{% swagger method="get" path=":8080/system/get/info" baseUrl="http://api.nexus-interactions.io" summary="Node Information" %}
+{% swagger method="get" path=":8080/system/get/info" baseUrl="http://api.nexus-interactions.io" summary="get/info" %}
 {% swagger-description %}
 Returns a summary of information about this node
 {% endswagger-description %}
 
-{% swagger-response status="200: OK" description="Node Information" %}
+{% swagger-response status="200: OK" description="node information" %}
 ```javascript
 {
   "result": {
@@ -127,9 +134,16 @@ fetch(`${SERVER_URL}/system/get/info`, {
 .catch(error => console.log(error))
 ```
 {% endtab %}
-{% endtabs %}
 
-#### Return values:
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+response = requests.get(f"{SERVER_URL}/system/get/info")
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 `version` : The daemon software version.
 
@@ -179,13 +193,13 @@ Returns metrics and statistics for the ledger, registers, etc
 
 `/system/get/metrics`
 
-{% swagger method="get" path="/system/get/metrics" baseUrl="http://api.nexus-interactions.io:8080" summary="Blockchain Metrics" %}
+{% swagger method="get" path="/system/get/metrics" baseUrl="http://api.nexus-interactions.io:8080" summary="get/metrics" %}
 {% swagger-description %}
 Returns metrics and statistics for the ledger, registers, etc
 {% endswagger-description %}
 
-{% swagger-response status="200: OK" description="Blockchain Metrics" %}
-```javascript
+{% swagger-response status="200: OK" description="blockchain metrics" %}
+```json
 {
   "result": {
     "registers": {
@@ -247,6 +261,15 @@ fetch(`${SERVER_URL}/system/get/metrics`)
 .then(resp => resp.json())
 .then(json => console.log(json))
 .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+response = requests.get(f"{SERVER_URL}/system/get/metrics")
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -333,7 +356,9 @@ fetch(`${SERVER_URL}/system/get/metrics`)
 
 `stake` : Total amount of NXS currently being staked network-wide).
 
-`trust` : Total trust score of all trust accounts being staked. }
+`trust` : Total trust score of all trust accounts being staked.
+
+&#x20;}
 
 `supply` : Metrics on NXS supply rates.\
 {\
@@ -367,8 +392,6 @@ fetch(`${SERVER_URL}/system/get/metrics`)
 `ambassador` : Amount of NXS in the prime channel reserves.\
 }
 
-***
-
 ### `list/peers`
 
 Returns a summary of information about the peers currently connected to this node. The return array is sorted by the peer `score` value.
@@ -377,90 +400,53 @@ Returns a summary of information about the peers currently connected to this nod
 
 `/system/list/peers`
 
-{% swagger method="get" path="/system/list/peers" baseUrl="http://api.nexus-interactions.io:8080" summary="List connected peers" %}
+{% swagger method="get" path="/system/list/peers" baseUrl="http://api.nexus-interactions.io:8080" summary="list/peers" %}
 {% swagger-description %}
 Returns a summary of information about the peers currently connected to this node. The return array is sorted by the peer score value.
 {% endswagger-description %}
 
-{% swagger-response status="200: OK" description="List peers" %}
-```javascript
-[
+{% swagger-response status="200: OK" description="peers list" %}
+```json
+{
+  "result": [
     {
-        "address": "109.187.187.55:8888",
-        "type": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
-        "version": 3010000,
-        "session": 13591814304884184032,
-        "outgoing": true,
-        "height": 47189,
-        "best": "dddbe73c9e86ba92f6ba",
-        "latency": 151,
-        "lastseen": 1639212275,
-        "connects": 11,
-        "drops": 3,
-        "fails": 1583,
-        "score": -22055.0
+      "address": "104.248.2.51:9888",
+      "type": "5.0.5 Tritium CLI [LLD][x64]",
+      "version": 30000,
+      "session": 7046197205965029000,
+      "outgoing": true,
+      "height": 4178263,
+      "best": "64604ef1745cec24eeef",
+      "latency": 353,
+      "lastseen": 1638986374,
+      "connects": 43,
+      "drops": 42,
+      "fails": 0,
+      "score": 10980
     },
     {
-        "address": "29.85.126.121:8888",
-        "type": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
-        "version": 3010000,
-        "session": 4816396900022677033,
-        "outgoing": true,
-        "height": 0,
-        "best": "00007171ddac6e07b1f1",
-        "latency": 158,
-        "lastseen": 1639212275,
-        "connects": 5,
-        "drops": 0,
-        "fails": 19,
-        "score": 8540.0
-    },
-    {
-        "address": "42.53.52.223:8888",
-        "type": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
-        "version": 3010000,
-        "session": 8708530595238045774,
-        "outgoing": true,
-        "height": 47189,
-        "best": "dddbe73c9e86ba92f6ba",
-        "latency": 167,
-        "lastseen": 1639212277,
-        "connects": 72,
-        "drops": 22,
-        "fails": 1550,
-        "score": -15360.0
-    },
-    {
-        "address": "16.9.45.190:8888",
-        "type": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
-        "version": 3010000,
-        "session": 14221545872908411114,
-        "outgoing": true,
-        "height": 47189,
-        "best": "dddbe73c9e86ba92f6ba",
-        "latency": 308,
-        "lastseen": 1639212278,
-        "connects": 83,
-        "drops": 17,
-        "fails": 2969,
-        "score": -24695.0
-    },
-    {
-        "address": "41.97.107.147:8888",
-        "type": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
-        "version": 3010000,
-        "session": 5703523918450669428,
-        "outgoing": true,
-        "height": 47189,
-        "best": "dddbe73c9e86ba92f6ba",
-        "latency": 36,
-        "lastseen": 1639212279,
-        "connects": 10,
-        "drops": 4,
-        "fails": 5555,
-        "score": -29340.0
+      "address": "83.76.253.28:9888",
+      "type": "5.0.5 Tritium CLI [LLD][x64]",
+      "version": 30000,
+      "session": 6452724524911455000,
+      "outgoing": true,
+      "height": 4178263,
+      "best": "64604ef1745cec24eeef",
+      "latency": 260,
+      "lastseen": 1638986379,
+      "connects": 956,
+      "drops": 950,
+      "fails": 8,
+      "score": 21990
     }
-]
+  ],
+  "info": {
+    "method": "system/list/peers",
+    "status": "active",
+    "address": "103.89.235.214:27157",
+    "latency": "1.567808 ms"
+  }
+}
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -474,6 +460,15 @@ fetch(`${SERVER_URL}/system/list/peers`)
 .then(resp => resp.json())
 .then(json => console.log(json))
 .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+response = requests.get(f"{SERVER_URL}/system/list/peers")
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -563,13 +558,13 @@ This will return the LISP Endpoint Identifiers (EID's) currently configured for 
 
 `/system/list/lisp-eids`
 
-{% swagger method="get" path="/system/list/lisp-eids" baseUrl="http://api.nexus-interactions.io:8080" summary="Returns LISP Endpoint Identifers (EID" %}
+{% swagger method="get" path="/system/list/lisp-eids" baseUrl="http://api.nexus-interactions.io:8080" summary="list/lisp-eids" %}
 {% swagger-description %}
 This will return the LISP Endpoint Identifiers (EID's) currently configured for this node. If the lispers.net API is not running / available then this will return an empty array.
 {% endswagger-description %}
 
-{% swagger-response status="200: OK" description="List Lisp-eids" %}
-```javascript
+{% swagger-response status="200: OK" description="LISP-EID" %}
+```json
 {
  [
     {
@@ -599,14 +594,26 @@ This will return the LISP Endpoint Identifiers (EID's) currently configured for 
 {% endswagger-response %}
 {% endswagger %}
 
+{% tabs %}
+{% tab title="Javascript" %}
 ```javascript
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
-
 fetch(`${SERVER_URL}/system/list/lisp-eids`)
 .then(resp => resp.json())
 .then(json => console.log(json))
 .catch(error => console.log(error))
 ```
+{% endtab %}
+
+{% tab title="Python" %}
+```javascript
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+response = requests.get(f"{SERVER_URL}/system/list/lisp-eids")
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
 
 #### Parameters: `NONE`
 
@@ -663,7 +670,7 @@ Validates a register / legacy address .
 
 `/system/validate/address`
 
-{% swagger method="post" path="/system/validate/address" baseUrl="http://api.nexus-interactions.io" summary="Validates a register / legacy address " %}
+{% swagger method="post" path="/system/validate/address" baseUrl="http://api.nexus-interactions.io" summary="validate/address " %}
 {% swagger-description %}
 Validates a register / legacy address
 {% endswagger-description %}
@@ -672,15 +679,14 @@ Validates a register / legacy address
 The base58 encoded register or legacy address to check
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="address valid" %}
-```javascript
+{% swagger-response status="200: OK" description="address validated" %}
+```json
 {
-    "address": "8CmjM4n8haU26RHRNeeP9NzXkEboN1bfgY7piEcv5AMd1brrJWd",
-    "valid": true,
+    "address": "8BuhE1y5oard3cEWqCSYK35bC6LdPRvcPR8N7GXYNatTw6De8eK",
+    "is_valid": true,
     "type": "OBJECT",
-    "mine": true,
-    "standard": "ACCOUNT"
-}
+    "object_type": "ACCOUNT"
+} 
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -699,6 +705,18 @@ fetch(`${SERVER_URL}/system/validate/address`,{
 .then(resp => resp.json())
 .then(json => console.log(json))
 .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Pyhton" %}
+```python
+//import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "address": "8BuhE1y5oard3cEWqCSYK35bC6LdPRvcPR8N7GXYNatTw6De8eK"
+}
+response = requests.post(f"{SERVER_URL}/system/validate/address", json=data)
+print(response.json())
 ```
 {% endtab %}
 {% endtabs %}
@@ -729,5 +747,3 @@ fetch(`${SERVER_URL}/system/validate/address`,{
 `object_type` : If the `type` is `OBJECT` this field contains the standard object type of the object register. Values can be `ACCOUNT`, `CRYPTO`, `NAME`, `NAMESPACE`, `REGISTER`, `TOKEN`, `TRUST`, or `UNKNOWN`.
 
 `is_mine` : If the `type` is `LEGACY` this boolean flag indicates if the private key for the address is held in the local wallet.
-
-***

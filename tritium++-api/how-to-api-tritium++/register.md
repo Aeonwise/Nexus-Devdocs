@@ -1,5 +1,5 @@
 ---
-description: Database Query Domain specific Language
+description: Database Query - Domain specific Language
 ---
 
 # Query DSL

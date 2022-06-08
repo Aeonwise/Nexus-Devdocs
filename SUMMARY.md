@@ -75,8 +75,7 @@
         * [PROFILE METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/profile-methods.md)
       * [SESSIONS](tritium++-api/how-to-api-tritium++/tritium++-api/sessions.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
-      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system/README.md)
-        * [SYSTEM METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system/system.md)
+      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
 
 ## Legacy
@@ -100,6 +99,7 @@
     * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [c-LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
+  * [SYSTEM METHODS](under-construction/under-construction-pages/system.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
     * [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)
     * [Let's Encrypt (Default)](under-construction/lets-encrypt-default.md)

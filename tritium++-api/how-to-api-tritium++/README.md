@@ -60,37 +60,51 @@ You will need to parse out the values of the result object in your corresponding
 
 Note that you will be parsing for the error key now, and there will be no results. This allows you the choice as a programmer to check for the existence of the "error" key to check for errors, or check for the existence of the "result" key to find if it executed successfully. The choice is yours how you handle it, just know that it is an either / or situation. You will get only one or the other.
 
-### Users API
+### Profiles API
 
-The Users API is responsible for maintaining user account level functions. DO NOT USE this API on a foreign node you are not the manager of. Your username and password are stored in secure allocators, but the remote endpoint can still gather your credentials when you submit an API call. This API is meant for a service node you control only.
+The Profiles API is responsible for maintaining user account level functions. DO NOT USE this API on a foreign node you are not the manager of. Your username and password are stored in secure allocators, but the remote endpoint can still gather your credentials when you submit an API call. This API is meant for a service node you control only.
 
-The Users API can be found in the following repo path:
+The Profiles API can be found in the link below:
 
-LLL-TAO/docs/API/USERS.MD
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/" %}
+[profiles](../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/)
+{% endcontent-ref %}
 
 {% hint style="info" %}
 **NOTE** : Login sessions do not persist if you restart your node. They are stored in secure allocator in memory only, do not cache them on disk otherwise you could open potential security issues.
 {% endhint %}
 
+### Sessions API
+
+The Sessions API is responsible for maintaining user account level functions. DO NOT USE this API on a foreign node you are not the manager of. Your username and password are stored in secure allocators, but the remote endpoint can still gather your credentials when you submit an API call. This API is meant for a service node you control only.
+
+The Users API can be found in the following repo path:
+
+{% content-ref url="tritium++-api/sessions.md" %}
+[sessions.md](tritium++-api/sessions.md)
+{% endcontent-ref %}
+
 ### Finance API
 
-The Finance API provides methods for sending and receiving NXS coins or other tokens between users / accounts, creating accounts, and managing staking.
+The Finance API provides methods for creating tokens, accounts, sending and receiving NXS coins or other tokens between users / accounts and managing staking.
 
 The Finance API can be found in the following repo path:
 
-LLL-TAO/docs/API/FINANCE.MD
+{% content-ref url="tritium++-api/finance.md" %}
+[finance.md](tritium++-api/finance.md)
+{% endcontent-ref %}
 
-NOTE: some of the commands in this API require LOGIN. Make sure to use the users API to login before using LOGIN required commands.
+NOTE: All the commands in this API require LOGIN. Make sure to use the sessions API to create session before using session required commands.
 
 ### Assets API
 
-The assets API is designed for managing of digital assets, by recording meta-data that represents the specific asset. It also provides functionality to tokenize the assets themselves, in relation to having an asset owned by many individuals.
+The Assets API is designed for managing of digital assets, by recording meta-data that represents the specific asset. It also provides functionality to tokenize the assets themselves, in relation to having an asset owned by many individuals.
 
-The Assets API can be found in the following repo path:
+The Assets API can be found in the link below:
 
-LLL-TAO/docs/API/ASSETS.MD
 
-NOTE: some of the commands in this API require LOGIN. Make sure to use the users API to login before using LOGIN required commands.
+
+NOTE: All of the commands in this API require LOGIN. Make sure to use the users API to login before using LOGIN required commands.
 
 ### Tokens API
 
@@ -108,17 +122,13 @@ NOTE: some of the commands in this API require LOGIN. Make sure to use the users
 
 The ledger API provides access to the ledger, primarily to create and retrieve blocks and transactions, but also to query for ledger state information.
 
-The Ledger API can be found in the following repo path:
 
-LLL-TAO/docs/API/LEDGER.MD
 
 ### Supply API
 
 The supply API is responsible for handling supply chain logistics. It's main aim is designed for managing the routes and movements along a supply chain, along with reviewing the history of events associated with changes of custody.
 
-The Supply API can be found in the following repo path:
 
-LLL-TAO/docs/API/SUPPLY.MD
 
 {% hint style="info" %}
 NOTE: some of the commands in this API require LOGIN. Make sure to use the users API to login before using LOGIN required commands.
@@ -128,14 +138,12 @@ NOTE: some of the commands in this API require LOGIN. Make sure to use the users
 
 The System API provides public access to information about this node. This includes data such as the version of software the node is running, ledger and mempool state, node IP address, and connected peers.
 
-The System API can be found in the following repo path:
+The System API can be found in the link below:
 
-LLL-TAO/docs/API/SYSTEM.MD
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/system.md" %}
+[system.md](../tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
+{% endcontent-ref %}
 
 ### Invoices API
 
 The Invoices API provides users and application developers the ability to issue and pay invoices on the Nexus blockchain. This API is a demonstration of how registers can be used to store arbitrary user data, and conditional contracts can be used to implement use-case rules. Invoices can be created and then sent to a recipient signature chain to be paid. The API supports invoices issued in NXS or any other token on the Nexus blockchain.
-
-The Invoices API can be found in the following repo path:
-
-LLL-TAO/docs/API/INVOICES.MD
