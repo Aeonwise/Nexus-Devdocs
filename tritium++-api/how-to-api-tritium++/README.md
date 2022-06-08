@@ -80,8 +80,8 @@ The Sessions API is responsible for maintaining user account level functions. DO
 
 The Users API can be found in the following repo path:
 
-{% content-ref url="tritium++-api/sessions.md" %}
-[sessions.md](tritium++-api/sessions.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/" %}
+[sessions](../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/)
 {% endcontent-ref %}
 
 ### Finance API
