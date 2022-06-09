@@ -77,7 +77,8 @@
         * [SESSIONS METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/sessions-methods.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
-      * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
+      * [REGISTER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register/README.md)
+        * [REGISTER METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register/register-methods.md)
 
 ## Legacy
 
