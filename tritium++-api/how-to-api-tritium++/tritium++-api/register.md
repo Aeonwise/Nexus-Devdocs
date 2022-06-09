@@ -194,13 +194,13 @@ register/list/accounts, trust/total/sum sort=total order=desc limit=none where='
 #### List all the namespaces created in ascending order (First to recent)
 
 ```
-register/list/namespaces?sort=created&order=asc
+register/list/namespaces sort=created order=asc
 ```
 
 #### List all the Global Names on the Network
 
 ```
-register/list/names?WHERE&object.namespace=~GLOBAL~
+register/list/names where=object.namespace=~GLOBAL~
 ```
 
 #### Create a rich list
