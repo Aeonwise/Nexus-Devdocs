@@ -6,6 +6,8 @@ description: REGISTER API
 
 The Register API gives direct access to the register data and this allows network wide information requested to be presented and does not need the user to be logged in.
 
+## Query DSL
+
 The Query DSL allows you to sort and filter recursively to any logical depth. This DSL can be used in conjunction with operators to sort, filter, and compute data in real-time.
 
 ### Selector Keys
@@ -92,14 +94,14 @@ register/list/names WHERE '((object.name=d* AND object.namespace=~GLOBAL~) OR (o
 
 The above command will return all objects starting with letter 'd' that are global names, or all objects starting with letter 'e' in the 'send.to' namespace, or finally all objects that are in a namespace that ends with the letter 's'.
 
-### `Supported Verbs`
+## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
 
 [`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#list) - List off all the object registers for the type requested.\
 
 
-### `Supported Nouns`
+## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
@@ -118,7 +120,7 @@ register/list/tokens
 
 The above command will list all the token information created on the Nexus blockchain.
 
-### `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
+## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
 
 The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
 
@@ -199,4 +201,10 @@ register/list/namespaces?sort=created&order=asc
 
 ```
 register/list/names?WHERE&object.namespace=~GLOBAL~
+```
+
+#### Create a rich list
+
+```
+register/list/accounts,trust sort=total order=desc page=0 where=(object.token=0)
 ```
