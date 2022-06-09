@@ -172,6 +172,31 @@ The parameters used are the query dsl, along with the sorting / filtering
 
 The results depend on the specified noun.
 
-###
+### Power of Query DSL
 
-***
+A few API calls which will showcase the power of registers, the LLD which is the database and the Query-DSL. This is going to be a powerful tool for developers.\
+
+
+{% hint style="info" %}
+All these calls will require the latest build of the core and will not work with the current stable version.
+{% endhint %}
+
+&#x20;
+
+#### To calculate the sum of all NXS on the tritium chain.
+
+```
+register/list/accounts, trust/total/sum sort=total order=desc limit=none where='object. token=0'
+```
+
+#### List all the namespaces created in ascending order (First to recent)
+
+```
+register/list/namespaces?sort=created&order=asc
+```
+
+#### List all the Global Names on the Network
+
+```
+register/list/names?WHERE&object.namespace=~GLOBAL~
+```
