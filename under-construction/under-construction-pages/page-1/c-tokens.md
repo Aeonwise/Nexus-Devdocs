@@ -32,9 +32,9 @@ The following methods are currently supported by this API
 
 ***
 
-## `create/account`
+### `create/account`
 
-Create a new account for receiving NXS or token account for receiving tokens.
+Create a new account for receiving NXS or tokens.&#x20;
 
 #### Endpoint:
 
@@ -42,8 +42,67 @@ Create a new account for receiving NXS or token account for receiving tokens.
 
 {% swagger method="post" path="/finance/create/account" baseUrl="http://api.nexus-interactions.io:8080" summary="create/account" %}
 {% swagger-description %}
-
+Create a new account for receiving NXS.
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="pin" required="true" %}
+The PIN for the user account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="session" required="false" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account should be created with. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token_name" required="false" %}
+Optional name of a token to create the account for. 
+
+`token`
+
+ can be supplied as an alternative to 
+
+`token_name`
+
+. Defaults to 
+
+`NXS`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token" required="false" %}
+Optional token address to create the account for. 
+
+`token_name`
+
+ can be supplied as an alternative to 
+
+`token`
+
+. Defaults to 
+
+`0`
+
+ (
+
+`NXS`
+
+)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" required="false" %}
+An optional name to identify the account. If provided a Name object will also be created in the users local namespace, allowing the account to be accessed/retrieved by name. If no name is provided the account will need to be accessed/retrieved by its 256-bit register address
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="data" required="false" %}
+This optional field allows callers to add arbitrary data to an account register
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Account created" %}
+```json
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% tabs %}
@@ -52,20 +111,21 @@ Create a new account for receiving NXS or token account for receiving tokens.
 // create/account
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
 let data = {
-  pin: "YOUR_PIN",
-  // session: "YOUR_SESSION_ID", //optional
-  // name: "TOKEN_NAME", //optional name to identify the account
-  token_name: "username:tokenname", //optional if the token address is supplied.
-  // token: "ADDRESS OF THE TOKEN", //optional if token_name is supplied
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    token_name: "NXS", // optional if token is passed
+    // token: "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",//optional if token_name is passed, Defaults to 0 (NXS)
+    // name: "NAME TO IDENTIFY THE ACCOUNT", //optional
+    // data: "OPTIONAL FIELD ALLOWS CALLERS TO ADD ARBITRARY DATA TO AN ACCOUNT REGISTER.",//optional
 }
-fetch(`${SERVER_URL}/tokens/create/account`, {
-  method: 'POST',
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(data)
-})
-  .then(resp => resp.json())
-  .then(json => console.log(json))
-  .catch(error => console.log(error))
+fetch(`${SERVER_URL}/finance/create/account`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
 ```
 {% endtab %}
 
@@ -76,14 +136,13 @@ SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
     "pin": "YOUR_PIN",
     # "session": "YOUR_SESSION_ID", #optional
-    # "name": "TOKEN_NAME", #optional name to identify the account
-    # optional if the token address is supplied.
-    "token_name": "username:tokenname",
-    # "token": "ADDRESS OF THE TOKEN", #optional if token_name is supplied
+    "token_name": "NXS",  # optional if token is passed
+    # "token": "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",#optional if token_name is passed, Defaults to 0 (NXS)
+    # "name": "NAME TO IDENTIFY THE ACCOUNT", #optional
+    # "data": "OPTIONAL FIELD ALLOWS CALLERS TO ADD ARBITRARY DATA TO AN ACCOUNT REGISTER.",#optional
 }
-response = requests.post(f"{SERVER_URL}/tokens/create/account", json=data)
+response = requests.post(f"{SERVER_URL}/finance/create/account", json=data)
 print(response.json())
-
 ```
 {% endtab %}
 {% endtabs %}
@@ -92,13 +151,45 @@ print(response.json())
 
 `pin` : The PIN for this signature chain.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the token account should be created with. For single-user API mode the session should not be supplied.
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account should be created with. For single-user API mode the session should not be supplied.
+
+`token_name` : Optional name of a token to create the account for. `token` can be supplied as an alternative to `token_name`. Defaults to `NXS`.
+
+`token` : Optional token address to create the account for. `token_name` can be supplied as an alternative to `token`. Defaults to `0` (`NXS`)
 
 `name` : An optional name to identify the account. If provided a Name object will also be created in the users local namespace, allowing the account to be accessed/retrieved by name. If no name is provided the account will need to be accessed/retrieved by its 256-bit register address.
 
-`token_name` : This is the name of the token that the account can be used for. The token name should be supplied in the format `username:tokenname`. This is optional if the token address is supplied.
+`data` : This optional field allows callers to add arbitrary data to an account register.
 
-`token` : This is the address of the token that the account can be used for. This is optional if token\_name is supplied.
+#### Example:
+
+This example creates a NXS account called "main".
+
+```
+{
+    "pin": "1234",
+    "name": "main"
+}
+```
+
+#### Return value JSON object:
+
+```
+{
+    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d",
+    "address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+}
+```
+
+#### Return values:
+
+`txid` : The ID (hash) of the transaction that includes the account creation.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+***
+
+## ``
 
 #### Example:
 
@@ -115,31 +206,6 @@ This example creates a token account called "main" for a token identified by the
 #### Example:
 
 This example creates a token account called "savings" for a token identified by its register address.
-
-```
-{
-    "pin": "1234",
-    "name": "savings",
-    "token": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
-}
-```
-
-#### Return value JSON object:
-
-```
-{
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d",
-    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
-}
-```
-
-#### Return values:
-
-`txid` : The ID (hash) of the transaction that includes the account creation.
-
-`address` : The register address for this token account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
-
-***
 
 ## `debit/account or trust`
 
@@ -381,7 +447,7 @@ The following example shows the json payload for a debit from an account called 
 
 #### Return values:
 
-`txid` : The ID (hash) of the transaction that includes the token debit.
+`txid` : The ID (hash) of the transaction that includes the debit.
 
 ## `credit/account or trust`
 

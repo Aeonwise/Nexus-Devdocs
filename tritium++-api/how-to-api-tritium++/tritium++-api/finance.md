@@ -75,6 +75,19 @@ When using recursive filtering, the nested hiearchy is retained.
 
 ***
 
+## `Supported Verbs`
+
+The following verbs are currently supported by this API command-set:
+
+[`burn`](../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
+[`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
+[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
+[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
+[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
+
 ## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
@@ -93,21 +106,6 @@ finance/debit/any
 
 The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
 
-***
-
-## `Supported Verbs`
-
-The following verbs are currently supported by this API command-set:
-
-[`burn`](../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
-[`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
-[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
-[`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
-[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
-
 ## `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
@@ -118,8 +116,6 @@ The following commands are direct endpoints and thus do not support the above `v
 [`set/stake`](../../../getting-started/tritium++-api/broken-reference/)
 
 Direct endpoints support filters and operators.
-
-***
 
 ## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
 
@@ -202,19 +198,66 @@ This command does not support the `any` or `all` nouns.
 
 ### Results:
 
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
-
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+``
 
 ```
 {
-    "success": true,
-    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
-    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
+    "success": true,
+    "address": "8BfLgEprhbHs82LxUkJR9jhQufRZf49g73Nt8XTGevfiyy7ijhb",
+    "txid": "01854fe4fdf0d59aebb3a880141484f0542af061cbebfd468db3fcecd13f63a986d990cf669ca4a60822a82b2d4fc7e7e474801a01bff86a35fd0a147a5a62da"
 }
+[Completed in 4973.117685 ms]
 ```
 
-***
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+## `debit`
+
+Deduct an amount of NXS or token specific by the noun and send it to another account or legacy UTXO address. Only NXS can be sent to the legacy address.
+
+This command supports the `any` wildcard noun.
+
+#### Parameters:
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+
+`from` : The name **identifying** the account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+
+`address` : The **register address** of the account to debit. This is optional if the name is provided.
+
+`amount` : The **amount** of NXS to debit.
+
+`to` : The name **identifying** the account to send to. This is optional if address\_to is provided. The name should be in username:name format
+
+`address_to` : The **register address** of the account to send to. This is optional if name\_to is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+
+`reference` : This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a `64-bit unsigned integer` in the range of 0 to 18446744073709551615
+
+`expires` : This optional field allows callers to specify an **expiration** for the debit transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+
+```
+{
+    "success": true,
+    "txid": "01f51d6b23b871fc8da848afa57cf066cb9e3b8fb845a666335e8c678ef5249e98d4f3e477659098918e4bb590472a63d0ed0a17fa87904fcff6316158e9edfd"
+}
+[Completed in 4979.735275 ms]
+```
+
+#### Return values:
+
+`success` : Boolean flag indicating that the debit  was successfull.&#x20;
+
+`txid` : The ID (hash) of the transaction that includes the debit.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+
 
 ## `credit` <a href="#user-content-credit" id="user-content-credit"></a>
 
@@ -230,6 +273,8 @@ This command supports the `any` wildcard noun.
 
 `txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
+####
+
 #### Return values:
 
 `txid` : The ID (hash) of the transaction that includes the account creation.
@@ -242,7 +287,7 @@ This command supports the `any` wildcard noun.
 
 ### `create/account`
 
-Create a new account for receiving NXS. The API supports an alternative endpoint that can include the account name in the URL. For example `/finance/create/account/savings` will resolve to `finance/create/account?name=savings`.
+Create a new account for receiving NXS and tokens. The API supports an alternative endpoint that can include the account name in the URL. For example `/finance/create/account/savings` will resolve to `finance/create/account?name=savings`.
 
 #### Endpoint:
 
