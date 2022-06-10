@@ -11,10 +11,10 @@ The Finance API provides methods for creating fungible tokens, creating accounts
 The following methods are currently supported by this API
 
 [`create/account`](c-tokens.md#create-account)\
-`debit/account or trust` \
-`credit/account or trust`\
-`get/account or trust`\
-`list/accounts` \
+[`debit/account or trust`](c-tokens.md#debit-account-or-trust)\
+[`credit/account or trust`](c-tokens.md#credit-account)\
+[`get/account or trust`](c-tokens.md#get-account)\
+`list/accounts`\
 `transactions/accounts or trust`\
 `create/token`\
 `debit/token`\
@@ -383,7 +383,7 @@ The following example shows the json payload for a debit from an account called 
 
 `txid` : The ID (hash) of the transaction that includes the token debit.
 
-## `credit/account`
+## `credit/account or trust`
 
 Increment an amount received from another NXS account to an account owned by your signature chain or increment an amount received from another token account to an account owned by your signature chain.&#x20;
 
@@ -541,7 +541,7 @@ The following example shows the json payload for a credit to an account called "
 
 ***
 
-## `get/account`
+## `get/account or trust`
 
 Retrieves information about a NXS account or a token account.&#x20;
 
@@ -700,13 +700,11 @@ print(response.json())
 
 ***
 
-## `transactions/account`
+## `transactions/account or trust`
 
 This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 
 {% hint style="info" %}
-**NOTE** : The returned transaction data will only include contracts that related to the requested account. Any other contracts are omitted from the transaction result.
-
 **NOTE** : If you use the username parameter it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
 {% endhint %}
 
@@ -714,7 +712,7 @@ This will list off all of the transactions related to a given account. You DO NO
 
 `/finance/transactions/account`
 
-{% swagger method="post" path="/finance/transactions/account" baseUrl="http://api.nexus-interactions.io:8080" summary="list/account/transactions" %}
+{% swagger method="post" path="/finance/transactions/account" baseUrl="http://api.nexus-interactions.io:8080" summary="transactions/account" %}
 {% swagger-description %}
 This will list off all of the transactions related to a given account. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
 {% endswagger-description %}
