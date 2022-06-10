@@ -88,35 +88,27 @@ Returns a summary of information about this node
 {% endswagger-description %}
 
 {% swagger-response status="200: OK" description="node information" %}
-```javascript
+```json
 {
-  "result": {
     "version": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
     "protocolversion": 3010000,
     "walletversion": 10001,
-    "timestamp": 1638985630,
-    "hostname": "api",
-    "directory": "/home/user/.Nexus/",
-    "address": "45.32.123.165",
+    "timestamp": 1654848090,
+    "hostname": "localhost",
+    "directory": "/home/nexus/.Nexus/",
+    "address": "172.105.36.92",
     "private": false,
     "hybrid": false,
-    "multiuser": true,
-    "sessions": 6,
+    "multiuser": false,
     "litemode": false,
-    "blocks": 4178248,
+    "blocks": 4479612,
     "synchronizing": false,
     "synccomplete": 100,
-    "syncprogress": 0,
-    "txtotal": 1,
-    "connections": 31
-  },
-  "info": {
-    "method": "system/get/info",
-    "status": "active",
-    "address": "10.10.101.101:27155",
-    "latency": "0.494391 ms"
-  }
+    "syncprogress": 100,
+    "txtotal": 0,
+    "connections": 15
 }
+[Completed in 0.115028 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -145,6 +137,33 @@ print(response.json())
 {% endtab %}
 {% endtabs %}
 
+#### Return value JSON object:
+
+```
+{
+    "version": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
+    "protocolversion": 3010000,
+    "walletversion": 10001,
+    "timestamp": 1654848090,
+    "hostname": "localhost",
+    "directory": "/home/nexus/.Nexus/",
+    "address": "172.105.36.92",
+    "private": false,
+    "hybrid": false,
+    "multiuser": false,
+    "litemode": false,
+    "blocks": 4479612,
+    "synchronizing": false,
+    "synccomplete": 100,
+    "syncprogress": 100,
+    "txtotal": 0,
+    "connections": 15
+}
+[Completed in 0.115028 ms]
+```
+
+#### Return values:
+
 `version` : The daemon software version.
 
 `protocolversion` : The LLP version.
@@ -165,7 +184,7 @@ print(response.json())
 
 `sessions` : Only returned in multiuser mode. This shows the number of user sessions currently logged in to the node.
 
-`clientmode` : Flag indicating whether this node is running in client mode.
+`litemode` : Flag indicating whether this node is running in client mode.
 
 `legacy_unsupported` : Flag indicating whether this node has been compiled with support for the legacy UTxO wallet. If it has not then all of the legacy wallet functions (available via the legacy RPC) are not available. This flag is currently omitted from the response if it has been compiled with legacy support, hence it will only be included if it is true.
 
@@ -201,53 +220,46 @@ Returns metrics and statistics for the ledger, registers, etc
 {% swagger-response status="200: OK" description="blockchain metrics" %}
 ```json
 {
-  "result": {
     "registers": {
-      "total": 175059,
-      "account": 86428,
-      "append": 0,
-      "crypto": 29388,
-      "name": 58219,
-      "name_global": 18,
-      "name_namespaced": 29,
-      "namespace": 13,
-      "object": 69,
-      "object_tokenized": 23,
-      "raw": 0,
-      "readonly": 360,
-      "token": 91
+        "total": 182199,
+        "account": 90556,
+        "append": 0,
+        "crypto": 30110,
+        "name": 60114,
+        "name_global": 37,
+        "name_namespaced": 29,
+        "namespace": 14,
+        "object": 122,
+        "object_tokenized": 51,
+        "raw": 0,
+        "readonly": 651,
+        "token": 131
     },
-    "sig_chains": 29388,
+    "sig_chains": 30110,
     "trust": {
-      "total": 491,
-      "stake": 25985364,
-      "trust": 7050474315
+        "total": 501,
+        "stake": 28120483.0,
+        "trust": 8234400574
     },
     "supply": {
-      "total": 72219002.863206,
-      "target": 69892243.017788,
-      "inflationrate": 3.3290673541924036,
-      "minute": 4.15395,
-      "hour": 249.23414,
-      "day": 5980.03409,
-      "week": 41790.959354,
-      "month": 166204.447078
+        "total": 73584291.341529,
+        "target": 70938540.694046,
+        "inflationrate": 3.729637826768922,
+        "minute": 3.775454,
+        "hour": 226.524922,
+        "day": 5435.32689,
+        "week": 37991.719644,
+        "month": 151197.159898
     },
     "reserves": {
-      "ambassador": 132.163967,
-      "developer": 188.918715,
-      "fee": 61688.638,
-      "hash": 118.467741,
-      "prime": 83.770769
+        "ambassador": 195.666785,
+        "developer": 46.470805,
+        "fee": 105885.167,
+        "hash": 89.305775,
+        "prime": 46.2076
     }
-  },
-  "info": {
-    "method": "system/get/metrics",
-    "status": "active",
-    "address": "103.89.235.214:27044",
-    "latency": "3659.265501 ms"
-  }
 }
+[Completed in 5127.594432 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -279,44 +291,45 @@ print(response.json())
 ```
 {
     "registers": {
-        "total": 54732,
-        "account": 14190,
+        "total": 182199,
+        "account": 90556,
         "append": 0,
-        "crypto": 13375,
-        "name": 26847,
-        "name_global": 2,
-        "name_namespaced": 1,
-        "namespace": 5,
-        "object": 3,
-        "object_tokenized": 1,
+        "crypto": 30110,
+        "name": 60114,
+        "name_global": 37,
+        "name_namespaced": 29,
+        "namespace": 14,
+        "object": 122,
+        "object_tokenized": 51,
         "raw": 0,
-        "readonly": 0,
-        "token": 32
+        "readonly": 651,
+        "token": 131
     },
-    "sig_chains": 13375,
+    "sig_chains": 30110,
     "trust": {
-        "total": 280,
-        "stake": 21939510.0,
-        "trust": 3004859583
+        "total": 501,
+        "stake": 28120483.0,
+        "trust": 8234400574
     },
     "supply": {
-        "total": 65177607.726929,
-        "target": 64175336.948024,
-        "inflationrate": 1.5617694063947738,
-        "minute": 6.97545,
-        "hour": 418.519742,
-        "day": 10040.397562,
-        "week": 70104.681744,
-        "month": 277954.775646
+        "total": 73584291.341529,
+        "target": 70938540.694046,
+        "inflationrate": 3.729637826768922,
+        "minute": 3.775454,
+        "hour": 226.524922,
+        "day": 5435.32689,
+        "week": 37991.719644,
+        "month": 151197.159898
     },
     "reserves": {
-        "ambassador": 671.554894,
-        "developer": 510.261963,
-        "fee": 10946.79,
-        "hash": 156.374712,
-        "prime": 100.545744
+        "ambassador": 195.666785,
+        "developer": 46.470805,
+        "fee": 105885.167,
+        "hash": 89.305775,
+        "prime": 46.2076
     }
 }
+[Completed in 5127.594432 ms]
 ```
 
 #### Return values:
@@ -511,13 +524,7 @@ print(response.json())
       "score": 21990
     }
   ],
-  "info": {
-    "method": "system/list/peers",
-    "status": "active",
-    "address": "103.89.235.214:27157",
-    "latency": "1.567808 ms"
-  }
-}
+[Completed in 0.729357 ms]
 ```
 
 #### Return values:
