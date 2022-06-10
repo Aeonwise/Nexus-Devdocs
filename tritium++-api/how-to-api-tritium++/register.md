@@ -17,8 +17,6 @@ The following operators are supported for this API command-set:
 \[`object`] - This selector key will evaluate the comparison on the raw binary object.\
 \[`results`] - This selector key will evaluate the comparison on the results json.
 
-### `Selector Keys`
-
 ### Supported Objects
 
 The following object classes are supported:
