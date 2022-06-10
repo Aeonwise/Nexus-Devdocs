@@ -141,7 +141,9 @@ This example creates a token account called "savings" for a token identified by 
 
 ***
 
-## `debit/account`
+## `debit/account or trust`
+
+### `debit/account`
 
 Deduct an amount of NXS from an account and send it to another account or legacy UTXO address or deduct a token amount from a token account and send it to another token account.&#x20;
 
@@ -152,6 +154,14 @@ The method supports the ability to send to multiple recipients in one transactio
 #### Endpoint:
 
 `/finance/debit/account`
+
+#### `debit/trus`
+
+Deduct an amount of NXS from the Trust account and send it to another account. Trust is a different object compared to account.
+
+#### Endpoint:
+
+`/finance/debit/trust`
 
 {% swagger method="post" path="/finance/debit/account" baseUrl="http://api.nexus-interactions.io:8080" summary="debit/account" %}
 {% swagger-description %}
@@ -166,7 +176,7 @@ PIN for the user account
 For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) that owns the token account. For single-user API mode the session should not be supplied
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name" %}
+{% swagger-parameter in="body" name="from" %}
 The name identifying the token account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
 `session`
@@ -178,11 +188,11 @@ The name identifying the token account to debit. This is optional if the address
 The register address of the token account to debit. This is optional if the name is provided
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="amount" %}
+{% swagger-parameter in="body" name="amount" required="true" %}
 The amount of tokens to debit
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="name_to" %}
+{% swagger-parameter in="body" name="to" %}
 The name identifying the token account to send to. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the 
 
 `session`
@@ -207,29 +217,9 @@ This optional field allows callers to specify an expiration for the debit transa
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="receipient" %}
-This optional array can be provided as an alternative to the single 
+This optional array can be provided as an alternative. Each object in the array can have 
 
-`name_to`
-
-/
-
-`address_to`
-
-, 
-
-`amount`
-
-, 
-
-`reference`
-
-, and 
-
-`expires`
-
- fields. Each object in the array can have 
-
-`name_to`
+`to`
 
 /
 
@@ -253,8 +243,10 @@ This optional array can be provided as an alternative to the single
 {% swagger-response status="200: OK" description="Debit token account" %}
 ```json
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "014b0807a12f492ee455a7d8c3eeb703bb9197f4f7784bb0b8414a3401eb2cc11044691127821a2ebe6968b28cccc0c80d17fe00c692071db1658981765a79cb"
 }
+[Completed in 4976.634701 ms]
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -317,23 +309,23 @@ print(response.json())
 
 `pin` : The PIN for this signature chain.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) that owns the token account. For single-user API mode the session should not be supplied.
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied.
 
-`name` : The name identifying the token account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+`from` : The name identifying the account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
-`address` : The register address of the token account to debit. This is optional if the name is provided.
+`address` : The register address of the account to debit. This is optional if the name is provided.
 
-`amount` : The amount of tokens to debit.
+`amount` : The amount of NXS to debit.
 
-`name_to` : The name identifying the token account to send to. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+`to` : The name identifying the account to send to. This is optional if address\_to is provided. The name should be in username:name format
 
-`address_to` : The register address of the token account to send to. This is optional if the name is provided.
+`address_to` : The register address of the account to send to. This is optional if `to` is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
-`reference` : This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
+`reference` : This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a `64-bit unsigned integer` in the range of 0 to 18446744073709551615
 
 `expires` : This optional field allows callers to specify an expiration for the debit transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
 
-`recipients` : This optional array can be provided as an alternative to the single `name_to`/`address_to`, `amount`, `reference`, and `expires` fields. Each object in the array can have `name_to`/`address_to`, `amount`, `reference`, and `expires` fields, as described above. Up to 99 recipients can be included in the array.
+`recipients` : This optional array can be provided as an alternative. Each object in the array can have `to`/`address_to`, `amount`, `reference`, and `expires` fields, as described above. Up to 99 recipients can be included in the array.
 
 #### Example:
 
@@ -343,9 +335,9 @@ The following example shows the json payload for a debit of 10.5 tokens from an 
 {
     "pin": "1234",
     "session": "5e9d8aa625a1838f60f30e12058089169e32c968389f365428f7b0c878bb47f8",
-    "name": "main",
+    "from": "main",
     "amount": 10.5,
-    "name_to": "bob:savings"
+    "to": "bob:savings"
 }
 ```
 
@@ -381,15 +373,15 @@ The following example shows the json payload for a debit from an account called 
 
 ```
 {
-    "txid": "f9dcd28bce2563ab288fab76cf3ee5149ea938c735894ce4833b55e474e08e8a519e8005e09e2fc19623577a8839a280ca72b6430ee0bdf13b3d9f785bc7397d"
+    "success": true,
+    "txid": "014b0807a12f492ee455a7d8c3eeb703bb9197f4f7784bb0b8414a3401eb2cc11044691127821a2ebe6968b28cccc0c80d17fe00c692071db1658981765a79cb"
 }
+[Completed in 4976.634701 ms]
 ```
 
 #### Return values:
 
 `txid` : The ID (hash) of the transaction that includes the token debit.
-
-***
 
 ## `credit/account`
 
