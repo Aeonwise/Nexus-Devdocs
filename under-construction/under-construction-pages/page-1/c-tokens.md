@@ -2277,3 +2277,769 @@ print(response.json())
 `address` : The register address of the account.
 
 `balance` : The available balance of this account. This is the last confirmed balance for the account, and does not reflect and any new debits that have been made since the last block.
+
+
+
+### `get/stakeinfo`
+
+This will retrieve account values and staking metrics for the trust account belonging to the currently logged in signature chain. If called when the stake minter is not running, this method only returns trust account values. Staking metrics will return 0.
+
+#### Endpoint:
+
+`/finance/get/stakeinfo`
+
+{% swagger method="post" path="/finance/get/stakeinfo" baseUrl="http://api.nexus-interactions.io:8080" summary="get/stakeinfo" %}
+{% swagger-description %}
+This will retrieve account values and staking metrics for the trust account belonging to the currently logged in signature chain. If called when the stake minter is not running, this method only returns trust account values, Staking metrics will return 0
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fieldname" %}
+This optional field can be used to filter the response to return only a single field from the account
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```json
+{
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "balance": 150,
+    "stake": 5000,
+    "trust": 54322,
+    "new": false,
+    "staking": true,
+    "pooled": false,
+    "onhold": false,
+    "stakerate": 1.97,
+    "trustweight": 58.97,
+    "blockweight": 47.62,
+    "stakeweight": 54.03,
+    "change": false
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/stakeinfo
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    fieldname: "FILTERING FIELD NAME" //optional
+}
+fetch(`${SERVER_URL}/finance/get/stakeinfo`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "fieldname": "FILTERING FIELD NAME"  # optional
+}
+response = requests.post(f"{SERVER_URL}/finance/get/stakeinfo", json=data)
+print(response.json())
+
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
+
+`fieldname`: This optional field can be used to filter the response to return only a single field from the account.
+
+#### Return value JSON object:
+
+```
+{
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+    "balance": 150,
+    "stake": 5000,
+    "trust": 54322,
+    "new": false,
+    "staking": true,
+    "pooled": false,
+    "onhold": false,
+    "stakerate": 1.97,
+    "trustweight": 58.97,
+    "blockweight": 47.62,
+    "stakeweight": 54.03,
+    "change": false
+}
+```
+
+#### Return values:
+
+`address` : The register address of the trust account.
+
+`balance` : The current NXS balance of the trust account. This is general account balance that is not staked.
+
+`stake` : The amount of NXS currently staked in the trust account.
+
+`trust` : The current raw trust score of the trust account.
+
+`new` : Indicates whether trust account is new (true, staking Genesis) or established (false, staking Trust).
+
+`staking` : Indicates whether staking is actively running for user account (when false, weight metrics will be 0).
+
+`pooled` : Flag indicating whether pooled staking is enabled or not
+
+`onhold` : When trust account is new, any change to balance requires a minimum wait period before staking begins. During this period, staking is on hold and this field returns true. "staking" field will still be true when on hold.
+
+`holdtime` : Conditional field. Only appears when onhold=true and will contain number of seconds remaining in hold period.
+
+`stakerate` : The current annual reward rate earned for staking as an annual percent.
+
+`trustweight` : The current trust weight applied to staking as a percent of maximum.
+
+`blockweight` : The current block weight applied to staking as a percent of maximum.
+
+`stakeweight` : The current stake weight (trust weight and block weight combined) as a percent of maximum.
+
+`change` : Indicates whether or not there is a pending request to change stake. The remaining fields only appear when this one is true.
+
+`amount` : Amount of stake change. Positive will be added to stake (moved from balance) and negative will unstake (move to balance).
+
+`requested` : Timestamp when the stake change request was created.
+
+`expires`: Timestamp when the stake change request expires, if assigned. Zero indicates does not expire.
+
+***
+
+### `set/stake`
+
+Creates a stake change request for a signature chain's trust account. This request will add or remove stake to set the stake value to the requested amount. If the new value is more than the current stake amount, it adds stake from the account balance. If the new value is less, it removes stake to the account balance (with appropriate trust penalty, if applicable).
+
+Requests are saved locally and take effect with the next stake block found by staking the signature chain's trust account. Because they are saved locally, you must continue to stake on the machine where it was created until the next stake block is found, or the request will not be processed.
+
+Until implemented, you can update the request by calling set/stake again.
+
+To remove a stake change request, you can either set an expiration time, or set the amount equal to the current trust account stake.
+
+#### Endpoint:
+
+`/finance/set/stake`
+
+{% swagger method="post" path="" baseUrl="http://api.nexus-interactions.io:8080" summary="set/stake" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// set/stake
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    pin: "YOUR_PIN",
+    // session: "YOUR_SESSION_ID", //optional
+    amount: 1, // the new amount of NXS to stake 
+    expires: 0, // the new expiration time of the stake in seconds. 0 means no expiration
+}
+fetch(`${SERVER_URL}/finance/set/stake`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "pin": "YOUR_PIN",
+    # "session": "YOUR_SESSION_ID", #optional
+    "amount": 1,  # the new amount of NXS to stake
+    "expires": 0,  # the new expiration time of the stake in seconds. 0 means no expiration
+}
+response = requests.post(f"{SERVER_URL}/finance/set/stake", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`pin` : The PIN for the signature chain.
+
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
+
+`amount` : The new amount of NXS to stake.
+
+`expires` : Optional field to assign the number of seconds until the stake change request expires. A value of zero indicates it does not expire. Default is zero if not passed.
+
+#### Return value JSON object:
+
+```
+{
+    "txid": "318b86d2c208618aaa13946a3b75f14472ebc0cce9e659f2830b17e854984b55606738f689d886800f21ffee68a3e5fd5a29818e88f8c5b13b9f8ae67739903d"
+}
+```
+
+#### Return values:
+
+`txid` : The ID (hash) of the transaction that includes the stake change.
+
+***
+
+### `migrate/accounts`
+
+{% hint style="danger" %}
+Depreciated
+{% endhint %}
+
+This method will migrate your legacy accounts to signature chain accounts, sending the balance across in the process. A new account will be created in your signature chain for each legacy account, with a corresponding matching name (unless flagged not to create names). The balance of each legacy account is sent to the newly created signature chain account in individual transactions. As such, each transaction incurs the default legacy fee of 0.01 NXS, which is deducted from the amount being migrated.
+
+The method uses the arbitrary `data` field in the account object register to track which legacy account it was created from. As a result, it is possible to invoke this method multiple times, and each time it will sweep any NXS from legacy accounts to existing signature chain accounts (as well as creating any necessary new accounts).
+
+#### Endpoint:
+
+`/finance/migrate/accounts`
+
+#### Parameters:
+
+`pin` : The PIN for the signature chain.
+
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
+
+`walletpassphrase` : Optional field to provide the wallet passphrase. This value is required if the wallet is not currently unlocked.
+
+`createname` : Optional boolean field indicating whether to create a Name record for the newly created signature chain accounts. If omitted, the default behaviour is to create a Name record, which incurs a fee of 1 NXS per account.
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "account": "default",
+        "address": "8BzPhYgcHAP26CYnCvHTQmPiBH7FBC2PAB4rR9YgWxcK7L4c46X",
+        "amount": 44.9,
+        "txid": "022fed45add52c82110411c703c070519ef1136f3fe401def06a9fe29b0fe378935f17c3846c8824410e197f1caea2aaae5e994530cf6ee3d06207dd46126171"
+    },
+    {
+        "account": "test1",
+        "address": "8CEwJUPAkQQuBbAoQtiiswwk38ASuUZ63JQ2yLakV2cEXPbsmsd",
+        "amount": 1.0,
+        "txid": "02b88a4a9972aafdf09461bd976617162b8f8df853f46a5e0d98d608b987d5d52a3cb67c3861e6b47b65721d83b4b47c851af32b01df3292d1e814242966b658"
+    }
+]
+```
+
+#### Return values:
+
+`account` : The legacy account name (and tritium account name, unless `createname=false` was explicitly set in the request)
+
+`address` : The register address of the signature chain account that the legacy funds have been migrated to.
+
+`amount` : The NXS amount transferred from the legacy account to the signature chain account.
+
+`txid` : If the the legacy send was successful, the ID (hash) of the legacy transaction.
+
+`error` : If the legacy send failed, this field includes the legacy send error message
+
+***
+
+### `get/balances`
+
+This will retrieve a summary of balance information across all accounts belonging to the currently logged in signature chain for a particular token type.
+
+#### Endpoint:
+
+`/finance/get/balances`
+
+{% swagger method="post" path="/finance/get/balances" baseUrl="http://api.nexus-interactions.io:8080" summary="get/balances" %}
+{% swagger-description %}
+This will retrieve a summary of balance information across all accounts belonging to the currently logged in signature chain for a particular token type
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token_name" %}
+Optional name of a token to return the balances for. 
+
+`token`
+
+ can be supplied as an alternative to 
+
+`token_name`
+
+. Defaults to 
+
+`NXS`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="token" %}
+Optional token address to return balances for. 
+
+`token_name`
+
+ can be supplied as an alternative to 
+
+`token`
+
+. Defaults to 
+
+`0`
+
+ (
+
+`NXS`
+
+)
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="account balance" %}
+```json
+{
+    "token_name": "NXS",
+    "token": "0000000000000000000000000000000000000000000000000000000000000000",
+    "available": 1000,
+    "pending": 50,
+    "unconfirmed": 5,
+    "stake": 5000,
+    "immature": 100
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// get/balances
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    token_name: "NXS", // optional if token is passed
+    // token: "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",//optional if token_name is passed, Defaults to 0 (NXS)
+}
+fetch(`${SERVER_URL}/finance/get/balances`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    "token_name": "NXS",  # optional if token is passed
+    # "token": "TOKEN ADDRESS TO CREATE THE ACCOUNT FOR",#optional if token_name is passed, Defaults to 0 (NXS)
+}
+response = requests.post(f"{SERVER_URL}/finance/get/balances", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied.
+
+`token_name` : Optional name of a token to return the balances for. `token` can be supplied as an alternative to `token_name`. Defaults to `NXS`.
+
+`token` : Optional token address to return balances for. `token_name` can be supplied as an alternative to `token`. Defaults to `0` (`NXS`)
+
+#### Return value JSON object:
+
+```
+{
+    "token_name": "NXS",
+    "token": "0000000000000000000000000000000000000000000000000000000000000000",
+    "available": 1000,
+    "pending": 50,
+    "unconfirmed": 5,
+    "stake": 5000,
+    "immature": 100
+}
+```
+
+#### Return values:
+
+`token_name` : The name of the token that these balances are for, if known.
+
+`token` : The register address of the token that these balances are for.
+
+`available` : The current balance across all accounts that is available to be spent.
+
+`pending` : The sum of all debit and coinbase transactions made to your accounts that are confirmed but have not yet been credited. This does NOT include immature and unconfirmed amounts.
+
+`unconfirmed` : The sum of all debit transactions made to your accounts that are not confirmed, or credits you have made to your accounts that are not yet confirmed (not yet included in a block).
+
+`immature` The sum of all coinbase transactions that have not yet reached maturity. Only included when returning NXS balances.
+
+`stake` : The amount of NXS currently staked in the trust account. Only included when returning NXS balances.
+
+***
+
+### `list/balances`
+
+This will retrieve a summary of balance information across all accounts for each coin/token type owned, belonging to the currently logged in signature chain.
+
+#### Endpoint:
+
+`/finance/list/balances`
+
+{% swagger method="post" path="/finance/list/balances" baseUrl="http://api.nexus-interactions.io:8080" summary="list/balances" %}
+{% swagger-description %}
+This will retrieve a summary of balance information across all accounts for each coin/token type owned, belonging to the currently logged in signature chain
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="session" %}
+For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="list balances" %}
+```json
+[
+     {
+        "token_name": "NXS",
+        "token": "0000000000000000000000000000000000000000000000000000000000000000",
+        "available": 17002.095753,
+        "pending": 1.0,
+        "unconfirmed": 0.0,
+        "stake": 9000.0,
+        "immature": 0.0
+    },
+    {
+        "token_name": "ABC",
+        "token": "d7885b8ce210375377ee23d6b54f922ddb64c9c8e70fabd392753337331bf29a",
+        "available": 250.0,
+        "pending": 0.0,
+        "unconfirmed": 0.0
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/balances
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // session: "YOUR_SESSION_ID", //optional
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/balances`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "session": "YOUR_SESSION_ID", #optional
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/balances", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+     {
+        "token_name": "NXS",
+        "token": "0000000000000000000000000000000000000000000000000000000000000000",
+        "available": 17002.095753,
+        "pending": 1.0,
+        "unconfirmed": 0.0,
+        "stake": 9000.0,
+        "immature": 0.0
+    },
+    {
+        "token_name": "ABC",
+        "token": "d7885b8ce210375377ee23d6b54f922ddb64c9c8e70fabd392753337331bf29a",
+        "available": 250.0,
+        "pending": 0.0,
+        "unconfirmed": 0.0
+    }
+]
+```
+
+#### Return values:
+
+`token_name` : The name of the token that these balances are for, if known.
+
+`token` : The register address of the token that these balances are for.
+
+`available` : The current balance across all accounts that is available to be spent.
+
+`pending` : The sum of all debit and coinbase transactions made to your accounts that are confirmed but have not yet been credited. This does NOT include immature and unconfirmed amounts.
+
+`unconfirmed` : The sum of all debit transactions made to your accounts that are not confirmed, or credits you have made to your accounts that are not yet confirmed (not yet included in a block).
+
+`immature` The sum of all coinbase transactions that have not yet reached maturity. Only included when returning NXS balances.
+
+`stake` : The amount of NXS currently staked in the trust account. Only included when returning NXS balances.
+
+***
+
+### `list/trustaccounts`
+
+This will list all known trust accounts
+
+#### Endpoint:
+
+`/finance/list/trustaccounts`
+
+{% swagger method="post" path="/finance/list/trustaccounts" baseUrl="http://api.nexus-interactions.io:8080" summary="list/trustaccounts" %}
+{% swagger-description %}
+This will list all known trust accounts
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="sort" %}
+Determines which field the results should be sorted on. Values can be 
+
+`balance`
+
+, 
+
+`stake`
+
+, or 
+
+`trust`
+
+. Default is 
+
+`trust`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="order" %}
+Determines the order of the sort. Values can be 
+
+`desc`
+
+ for descending (the default) or 
+
+`asc`
+
+ for ascending
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="limit" %}
+The number of records to return for the current page. The default is 100
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="page" %}
+Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="offset" %}
+An alternative to 
+
+`page`
+
+, offset can be used to return a set of (limit) results from a particular index
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="where" %}
+An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="trustaccounts list" %}
+```json
+[
+    {
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "a2cfad9f505f8166203df2685ee7cb8582be9ae017dcafa4ca4530cd5b4f1dca",
+        "created": 1569298627,
+        "modified": 1569359986,
+        "balance": 9.897773,
+        "stake": 1000000.0,
+        "stakerate": 0.5179354594112684
+    },
+    {
+        "address": "8FBtvmLSLqhVM9PsJ5Zzy1XzcZyP9XaEErjSoGPaoN5fBJaQbp8",
+        "owner": "a2e7b433a4dcb54c3b4dc1111d7945394dc3e140c9a400dc623b3f6d53ec758b",
+        "created": 1569306341,
+        "modified": 1569312960,
+        "balance": 0.004081,
+        "stake": 5000.0,
+        "stakerate": 0.5013274626265375
+    }
+]
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+// list/trustaccounts
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    // sort: "trust", //determines which field the results should be sorted on , values can be balance, stake, or trust
+    // order: "desc", //determines the order of the sort, values can be asc or desc. Default is desc
+    // limit: 50, //optional
+    // page: 1, //optional
+    // offset: 10, //optional
+    // where: "FILTERING SQL QUERY" //optional
+}
+fetch(`${SERVER_URL}/finance/list/trustaccounts`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    # "sort": "trust", #determines which field the results should be sorted on , values can be balance, stake, or trust
+    # "order": "desc", #determines the order of the sort, values can be asc or desc. Default is desc
+    # "limit": 50, #optional
+    # "page": 1, #optional
+    # "offset": 10, #optional
+    # "where": "FILTERING SQL QUERY" #optional
+}
+response = requests.post(f"{SERVER_URL}/finance/list/trustaccounts", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`sort` : Determines which field the results should be sorted on. Values can be `balance`, `stake`, or `trust`. Default is `trust`
+
+`order` : Determines the order of the sort. Values can be `desc` for descending (the default) or `asc` for ascending.
+
+`limit` : The number of records to return for the current page. The default is 100.
+
+`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
+
+`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
+
+`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "owner": "a2cfad9f505f8166203df2685ee7cb8582be9ae017dcafa4ca4530cd5b4f1dca",
+        "created": 1569298627,
+        "modified": 1569359986,
+        "balance": 9.897773,
+        "stake": 1000000.0,
+        "stakerate": 0.5179354594112684
+    },
+    {
+        "address": "8FBtvmLSLqhVM9PsJ5Zzy1XzcZyP9XaEErjSoGPaoN5fBJaQbp8",
+        "owner": "a2e7b433a4dcb54c3b4dc1111d7945394dc3e140c9a400dc623b3f6d53ec758b",
+        "created": 1569306341,
+        "modified": 1569312960,
+        "balance": 0.004081,
+        "stake": 5000.0,
+        "stakerate": 0.5013274626265375
+    }
+]
+```
+
+#### Return values:
+
+`address` : The register address of the trust account
+
+`owner` : The genesis hash of the trust account owner
+
+`created` : The UNIX timestamp when the account was created.
+
+`modified` : The UNIX timestamp when the account was last modified.
+
+`balance` : The current NXS balance of the trust account. This is general account balance that is not staked.
+
+`stake` : The amount of NXS currently staked in the trust account.
+
+`trust` : The current raw trust score of the trust account.
+
+`stakerate` : The current annual reward rate earned for staking as an annual percent.
