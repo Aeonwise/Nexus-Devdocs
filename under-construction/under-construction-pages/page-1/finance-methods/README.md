@@ -11,12 +11,12 @@ The Finance API provides methods for creating fungible tokens, creating accounts
 The following methods are currently supported by this API
 
 [`create/account`](./#create-account)\
-`debit/account`\
-`credit/account`\
-`get/account`\
+[`debit/account or trust`](./#debit-account-or-trust)\
+[`credit/account or trust`](./#credit-account)\
+[`get/account or trust`](./#get-account)\
 [`list/accounts`](./#list-accounts)\
-`transactions/accounts`\
-[`create/token`](./#create-token)\
+`transactions/accounts or trust`\
+`create/token`\
 [`debit/token`](./#debit-token)\
 [`credit/token`](./#credit-token)\
 [`get/token`](./#get-token)\
@@ -202,7 +202,7 @@ This example creates a token account called "main" for a token identified by the
 
 This example creates a token account called "savings" for a token identified by its register address.
 
-## `debit/account`
+## `debit/account or trust`
 
 ### `debit/account`
 
@@ -444,7 +444,7 @@ The following example shows the json payload for a debit from an account called 
 
 `txid` : The ID (hash) of the transaction that includes the debit.
 
-## `credit/account`
+## `credit/account or trust`
 
 Increment an amount received from another NXS account to an account owned by your signature chain or increment an amount received from another token account to an account owned by your signature chain.&#x20;
 
@@ -602,7 +602,7 @@ The following example shows the json payload for a credit to an account called "
 
 ***
 
-## `get/account`
+## `get/account or trust`
 
 Retrieves information about a NXS account or a token account.&#x20;
 

@@ -13,7 +13,7 @@ The following methods are currently supported by this API
 
 ### list/accounts
 
-This will list all known NXS and token accounts.
+This will list off all the NXS and token accounts on the Nexus blockchain.
 
 #### Endpoint:
 
@@ -211,7 +211,7 @@ print(response.json())
 
 ### `list/trust`
 
-This will list all known trust accounts.
+This will list off all the trust accounts on the Nexus blockchain.
 
 #### Endpoint:
 
@@ -427,7 +427,7 @@ print(response.json())
 
 ### `list/tokens`
 
-This will list off all of the tokens that were created by a particular signature chain.
+This will list off all of the tokens on the Nexus blockchain.
 
 {% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.

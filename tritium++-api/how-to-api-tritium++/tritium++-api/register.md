@@ -158,19 +158,21 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `list`
 
-This method provides the user with the ability to directly access the object register data specified by the noun and does not need the user to be logged in.
+This method provides the user with the ability to directly access the register data specified by the noun and does not need the user to be logged in.
 
 ```
 register/list/noun
 ```
 
+This command does not support the `master` or `auth` nouns.
+
 ### Parameters:
 
-The parameters used are [Query DSL](register.md#query-dsl), along with the [sorting / filtering](register.md#user-content-create)
+The parameters used are the query dsl, along with the sorting / filtering
 
 ### Results:
 
-The results depends on the specified noun.&#x20;
+The results depend on the specified noun.
 
 ### Power of Query DSL
 
