@@ -196,13 +196,29 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 ## `update`
 
-This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain. Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
+This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain specified by the noun.
 
 ```
 profiles/update/noun
 ```
 
 This command does not support the `master` or `auth` nouns.
+
+### update/credentials
+
+This method provides the user with the ability to change the password, pin for this signature chain. Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
+
+#### Endpoint:
+
+`/profiles/update/credentials`
+
+### update/recovery
+
+This method provides the user with the ability to set or change the restore seed for this signature chain.
+
+#### Endpoint:
+
+`/profiles/update/credentials`
 
 ### Parameters:
 
