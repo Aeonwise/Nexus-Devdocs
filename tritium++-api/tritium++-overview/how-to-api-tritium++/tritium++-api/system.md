@@ -43,7 +43,7 @@ Nexus server stopping
 
 #### Parameters:&#x20;
 
-`password` : A password to protect the node from accidental shutdown, this stop password is not the same used to login to the signature chain, but supplied in the config file. This is optional if a stop password is not supplied in the config.&#x20;
+`password` : A password to protect the node from accidental shutdown using the stop command. This is not the same password used to login to the signature chain, but one which is supplied in the config file with the stop option. This is optional if a stop password is not supplied in the config.&#x20;
 
 #### Return value JSON object:
 
