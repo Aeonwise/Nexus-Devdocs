@@ -149,7 +149,7 @@ profiles/create/noun
 
 This command does not support the `credentials` or `recovery` nouns.
 
-### create/master
+#### create/master
 
 This will create a new profile (signature chain) specified by given noun, for use on the network. The user account is secured by a combination of username, password, and PIN.
 
@@ -157,7 +157,7 @@ This will create a new profile (signature chain) specified by given noun, for us
 
 `/profiles/create/master`
 
-### create/auth
+#### create/auth
 
 This method will create a crypto object register for login auth for signature chains created with Tritium, for use with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
 
@@ -204,7 +204,7 @@ profiles/update/noun
 
 This command does not support the `master` or `auth` nouns.
 
-### update/credentials
+#### update/credentials
 
 This method provides the user with the ability to change the password, pin for this signature chain. Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
 
@@ -212,7 +212,7 @@ This method provides the user with the ability to change the password, pin for t
 
 `/profiles/update/credentials`
 
-### update/recovery
+#### update/recovery
 
 This method provides the user with the ability to set or change the restore seed for this signature chain.
 
@@ -228,13 +228,13 @@ This method provides the user with the ability to set or change the restore seed
 
 `pin` : The existing pin for this signature chain.
 
-### update/credentials
+#### update/credentials
 
 `new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
 
 `new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
 
-### update/recovery
+#### update/recovery
 
 `recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
 
