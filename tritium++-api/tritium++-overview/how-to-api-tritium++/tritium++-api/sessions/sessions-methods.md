@@ -1,4 +1,10 @@
+---
+description: SESSION API METHODS
+---
+
 # SESSIONS METHODS
+
+The page gives in-depth details on each of the Sessions API calls individually with code snippets.&#x20;
 
 ## `Methods`
 

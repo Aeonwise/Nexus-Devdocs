@@ -1,10 +1,10 @@
 ---
-description: Methods
+description: PROFILE API METHODS
 ---
 
 # PROFILE METHODS
 
-The page gives in-depth details on each of the Profiles API calls separately with code snippets.&#x20;
+The page gives in-depth details on each of the Profiles API calls individually with code snippets.&#x20;
 
 ## `Methods`
 

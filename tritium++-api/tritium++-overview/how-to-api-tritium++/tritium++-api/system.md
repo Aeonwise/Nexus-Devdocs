@@ -43,7 +43,7 @@ Nexus server stopping
 
 #### Parameters:&#x20;
 
-`password` : A password which should match the one supplied in the config file, to make sure that the node is not stopped accidentally with this method. This is optional if a stop password is not supplied in the config.
+`password` : A password to protect the node from accidental shutdown, this stop password is not the same used to login to the signature chain, but supplied in the config file. This is optional if a stop password is not supplied in the config.&#x20;
 
 #### Return value JSON object:
 
@@ -53,10 +53,13 @@ Nexus server stopping
 {% tab title="Javascript" %}
 ```javascript
 const SERVER_URL = "http://api.nexus-interactions.io:8080"
-
+let data = {
+    password: "YOUR_SECRET",
+}
 fetch(`${SERVER_URL}/system/stop`,{
     method: 'GET',
     headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
 })
 .then(resp => resp.json())
 .then(json => console.log(json)) // nexus server stopping
@@ -68,7 +71,10 @@ fetch(`${SERVER_URL}/system/stop`,{
 ```python
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
-response = requests.post(f"{SERVER_URL}/system/stop")
+data = {
+    "password": "YOUR_SECRET"
+}
+response = requests.post(f"{SERVER_URL}/system/stop", json=data)
 print(response.json())
 ```
 {% endtab %}
