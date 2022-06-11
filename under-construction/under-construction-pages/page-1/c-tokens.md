@@ -1821,11 +1821,9 @@ The following example shows the json payload for a burn of 100 tokens from an ac
 
 ## `transactions/token`
 
-This will list off all of the transactions related to a given token. You DO NOT need to be logged in to use this command. If you are logged in, then neither username or genesis are required as it will default to the logged in user.
+This will list off all of the transactions related to a given token.&#x20;
 
 {% hint style="info" %}
-**NOTE** : The returned transaction data will only include contracts that related to the requested token. Any other contracts are omitted from the transaction result.
-
 **NOTE** : If you use the username parameter it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
 {% endhint %}
 
@@ -2280,7 +2278,7 @@ print(response.json())
 
 
 
-### `get/stakeinfo`
+## `get/stakeinfo`
 
 This will retrieve account values and staking metrics for the trust account belonging to the currently logged in signature chain. If called when the stake minter is not running, this method only returns trust account values. Staking metrics will return 0.
 
@@ -2421,7 +2419,7 @@ print(response.json())
 
 ***
 
-### `set/stake`
+## `set/stake`
 
 Creates a stake change request for a signature chain's trust account. This request will add or remove stake to set the stake value to the requested amount. If the new value is more than the current stake amount, it adds stake from the account balance. If the new value is less, it removes stake to the account balance (with appropriate trust penalty, if applicable).
 
@@ -2560,7 +2558,7 @@ The method uses the arbitrary `data` field in the account object register to tra
 
 ***
 
-### `get/balances`
+## `get/balances`
 
 This will retrieve a summary of balance information across all accounts belonging to the currently logged in signature chain for a particular token type.
 
@@ -2702,7 +2700,7 @@ print(response.json())
 
 ***
 
-### `list/balances`
+## `list/balances`
 
 This will retrieve a summary of balance information across all accounts for each coin/token type owned, belonging to the currently logged in signature chain.
 
@@ -2856,7 +2854,7 @@ print(response.json())
 
 ***
 
-### `list/trustaccounts`
+## `list/trustaccounts`
 
 This will list all known trust accounts
 
