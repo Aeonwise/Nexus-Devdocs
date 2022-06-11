@@ -141,7 +141,7 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create`
 
-This will create a new profile (signature chain) specified by given noun, for use on the network. The user account is secured by a combination of username, password, and PIN.
+This will create a new object register specified by the noun.
 
 ```
 profiles/create/noun
