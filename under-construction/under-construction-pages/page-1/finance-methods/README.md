@@ -10,25 +10,22 @@ The Finance API provides methods for creating fungible tokens, creating accounts
 
 The following methods are currently supported by this API
 
-[`create/account`](c-tokens.md#create-account)\
-[`debit/account or trust`](c-tokens.md#debit-account-or-trust)\
-[`credit/account or trust`](c-tokens.md#credit-account)\
-[`get/account or trust`](c-tokens.md#get-account)\
-[`list/accounts`](c-tokens.md#list-accounts)\
+[`create/account`](./#create-account)\
+[`debit/account or trust`](./#debit-account-or-trust)\
+[`credit/account or trust`](./#credit-account)\
+[`get/account or trust`](./#get-account)\
+[`list/accounts`](./#list-accounts)\
 `transactions/accounts or trust`\
 `create/token`\
-`debit/token`\
-[`credit/token`](c-tokens.md#credit-token)\
-[`get/token`](c-tokens.md#get-token)\
-[`burn/token`](c-tokens.md#burn-token)\
-[`list/token/transactions`](c-tokens.md#list-token-transactions)\
-[`list/token/accounts`](c-tokens.md#list-token-accounts)\
-[`get/stakeinfo`](c-tokens.md#get-stakeinfo)\
-[`set/stake`](c-tokens.md#set-stake)\
-[`migrate/accounts`](c-tokens.md#migrate-accounts)\
-[`get/balances`](c-tokens.md#get-balances)\
-[`list/balances`](c-tokens.md#list-balances)\
-[`list/trustaccounts`](c-tokens.md#list-trustaccounts)
+[`debit/token`](./#debit-token)\
+[`credit/token`](./#credit-token)\
+[`get/token`](./#get-token)\
+[`burn/token`](./#burn-token)\
+[`list/token/transactions`](./#list-token-transactions)\
+[`list/token/accounts`](./#list-token-accounts)\
+[`get/stakeinfo`](./#get-stakeinfo)\
+[`set/stake`](./#set-stake)\
+[`get/balances`](./#get-balances)
 
 ***
 
@@ -153,9 +150,9 @@ print(response.json())
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account should be created with. For single-user API mode the session should not be supplied.
 
-`token_name` : Optional name of a token to create the account for. `token` can be supplied as an alternative to `token_name`. Defaults to `NXS`.
+`token` : Optional name of a token to create the account for. `token` can be supplied as an alternative to `token_name`. Defaults to `NXS`.
 
-`token` : Optional token address to create the account for. `token_name` can be supplied as an alternative to `token`. Defaults to `0` (`NXS`)
+`token_address` : Optional token address to create the account for. `token_name` can be supplied as an alternative to `token`. Defaults to `0` (`NXS`)
 
 `name` : An optional name to identify the account. If provided a Name object will also be created in the users local namespace, allowing the account to be accessed/retrieved by name. If no name is provided the account will need to be accessed/retrieved by its 256-bit register address.
 
@@ -188,8 +185,6 @@ This example creates a NXS account called "main".
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
 ***
-
-## ``
 
 #### Example:
 
