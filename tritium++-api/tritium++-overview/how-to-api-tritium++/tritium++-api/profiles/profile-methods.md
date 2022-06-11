@@ -1,17 +1,23 @@
+---
+description: Methods
+---
+
 # PROFILE METHODS
+
+The page gives in-depth details on each of the Profiles API calls separately with code snippets.&#x20;
 
 ## `Methods`
 
 The following methods are currently supported by this API&#x20;
 
 [`create/master`](profile-methods.md#create-master-1)\
+[`create/auth`](profile-methods.md#create-auth)\
 [`update/credentials`](profile-methods.md#update-credentials)\
 [`update/recovery`](profile-methods.md#update-credentials-1)\
 [`recover/master`](profile-methods.md#recover-master)\
 [`status/master`](profile-methods.md#status-master)\
 [`notifications/master`](profile-methods.md#notifications-master)\
 [`transactions/master`](profile-methods.md#transactions-master)\
-[`create/auth`](profile-methods.md#create-auth)\
 
 
 ## `create/master`
@@ -110,6 +116,106 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 `password` : The password to be associated with this user.
 
 `pin` : The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions).
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+}
+```
+
+#### Return values:
+
+`success` : Boolean flag indicating that the `profile` was saved successfully .
+
+`txid` : The ID (hash) of the transaction that includes the master profile creation.
+
+## `create/auth`
+
+This method will create a crypto object register for login auth for signature chains created with Tritium, for use with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
+
+#### Endpoint:
+
+`/profiles/create/auth`
+
+{% swagger method="post" path="/profiles/create/auth" baseUrl="http://api.nexus-interactions.io:8080" summary="create/auth" %}
+{% swagger-description %}
+This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN.
+
+**NOTE** :&#x20;
+
+_username_ must be a minimum of 3 characters\
+_password_ must be a minimum of 8 characters\
+pin must be a minimum of 4 characters
+{% endswagger-description %}
+
+{% swagger-parameter in="header" name="username" required="true" %}
+The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="password" required="true" %}
+Password for the profile
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="pin" required="true" %}
+The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions)
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="user account created" %}
+```json
+{
+    "success": true,
+    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% tabs %}
+{% tab title="Javascript" %}
+```javascript
+//  /users/create/user
+const SERVER_URL = "http://api.nexus-interactions.io:8080"
+let data = {
+    username: "YOUR_USERNAME",
+    password: "YOUR_SECRET",
+    pin: "YOUR_PIN"
+}
+fetch(`${SERVER_URL}/profiles/create/auth`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => console.log(error))
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+import requests
+SERVER_URL = "http://api.nexus-interactions.io:8080"
+data = {
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_SECRET",
+    "pin": "YOUR_PIN"
+}
+response = requests.post(f"{SERVER_URL}/profiles/create/master", json=data)
+print(response.json())
+```
+{% endtab %}
+{% endtabs %}
+
+#### Parameters:
+
+`username` : The username identifying the signature chain.
+
+`password` : The password for the signature chain.
+
+`pin` : Pin for the signature chain.
 
 #### Return value JSON object:
 
@@ -1038,102 +1144,4 @@ print(response.json())
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-## `create/auth`
-
-This method will create a crypto object register for login auth for signature chains created with Tritium, for use with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
-
-#### Endpoint:
-
-`/profiles/create/auth`
-
-{% swagger method="post" path="/profiles/create/auth" baseUrl="http://api.nexus-interactions.io:8080" summary="create/auth" %}
-{% swagger-description %}
-This will create a new master profile (signature chain) for use on the network. The master profile is secured by a combination of username, password, and PIN.
-
-**NOTE** :&#x20;
-
-_username_ must be a minimum of 3 characters\
-_password_ must be a minimum of 8 characters\
-pin must be a minimum of 4 characters
-{% endswagger-description %}
-
-{% swagger-parameter in="header" name="username" required="true" %}
-The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="password" required="true" %}
-Password for the profile
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="pin" required="true" %}
-The PIN can be a combination of letters/numbers/symbols or could be tied into an external digital fingerprint. The PIN is required for all API calls that modify the profile (such as sending or claiming transactions)
-{% endswagger-parameter %}
-
-{% swagger-response status="201: Created" description="user account created" %}
-```json
-{
-    "success": true,
-    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% tabs %}
-{% tab title="Javascript" %}
-```javascript
-//  /users/create/user
-const SERVER_URL = "http://api.nexus-interactions.io:8080"
-let data = {
-    username: "YOUR_USERNAME",
-    password: "YOUR_SECRET",
-    pin: "YOUR_PIN"
-}
-fetch(`${SERVER_URL}/profiles/create/auth`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(error => console.log(error))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-import requests
-SERVER_URL = "http://api.nexus-interactions.io:8080"
-data = {
-    "username": "YOUR_USERNAME",
-    "password": "YOUR_SECRET",
-    "pin": "YOUR_PIN"
-}
-response = requests.post(f"{SERVER_URL}/profiles/create/master", json=data)
-print(response.json())
-```
-{% endtab %}
-{% endtabs %}
-
-#### Parameters:
-
-`username` : The username identifying the signature chain.
-
-`password` : The password for the signature chain.
-
-`pin` : Pin for the signature chain.
-
-#### Return value JSON object:
-
-```
-{
-    "success": true,
-    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
-}
-```
-
-#### Return values:
-
-`success` : Boolean flag indicating that the `profile` was saved successfully .
-
-`txid` : The ID (hash) of the transaction that includes the master profile creation.
+`}`
