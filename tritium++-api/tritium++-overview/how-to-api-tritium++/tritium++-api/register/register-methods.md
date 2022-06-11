@@ -614,7 +614,7 @@ print(response.json())
 
 ## `list/names`
 
-This will list off all of the names created on the network.&#x20;
+This will list off all of the names created on the Nexus blockchain.&#x20;
 
 {% hint style="info" %}
 **NOTE** : If you use the username parameter, it will take slightly longer to calculate the username genesis with our brute-force protected hashing algorithm. For higher performance, use the genesis parameter.
@@ -760,13 +760,13 @@ print(response.json())
 
 ### `list/namespaces`
 
-This will list off all of the namespaces created on the network.
+This will list off all of the namespaces created on the Nexus blockchain.
 
 #### Endpoint:
 
 `/register/list/namespaces`
 
-{% swagger method="post" path="/users/list/namespaces" baseUrl="http://api.nexus-interactions.io:8080" summary="list/namespaces" %}
+{% swagger method="post" path="/register/list/namespaces" baseUrl="http://api.nexus-interactions.io:8080" summary="list/namespaces" %}
 {% swagger-description %}
 This will list off all of the namespaces owned by the signature chain
 {% endswagger-description %}
