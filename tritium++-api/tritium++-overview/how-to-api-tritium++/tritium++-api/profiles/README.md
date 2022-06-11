@@ -149,6 +149,22 @@ profiles/create/noun
 
 This command does not support the `credentials` or `recovery` nouns.
 
+### create/master
+
+This will create a new profile (signature chain) specified by given noun, for use on the network. The user account is secured by a combination of username, password, and PIN.
+
+#### Endpoint:
+
+`/profiles/create/master`
+
+### create/auth
+
+This method will create a crypto object register for login auth for signature chains created with Tritium, for use with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
+
+#### Endpoint:
+
+`/profiles/create/auth`
+
 ### Parameters:
 
 `username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
