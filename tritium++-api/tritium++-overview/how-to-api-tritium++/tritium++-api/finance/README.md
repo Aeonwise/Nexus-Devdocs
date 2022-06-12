@@ -16,9 +16,9 @@ The minimum required components of the URI are:
 
 The following operators are supported for this API command-set:
 
-[`array`](../../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
-[`mean`](../../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](../../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
+[`array`](../../../../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
+[`mean`](../../../../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](../../../../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
 
 **Example:**
 
@@ -79,14 +79,14 @@ When using recursive filtering, the nested hiearchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`burn`](../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
-[`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
-[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
-[`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
-[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
+[`burn`](../../../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
+[`create`](../../../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
+[`credit`](../../../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`debit`](../../../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
+[`get`](../../../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`history`](../../../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
+[`transactions`](../../../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -110,10 +110,10 @@ The above command will create a debit contract withdrawing from a random sample 
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/balances`](../../../getting-started/tritium++-api/broken-reference/)\
-[`get/stakeinfo`](../../../getting-started/tritium++-api/broken-reference/)\
-[`migrate/accounts`](../../../getting-started/tritium++-api/broken-reference/)\
-[`set/stake`](../../../getting-started/tritium++-api/broken-reference/)
+[`get/balances`](../../../../../getting-started/tritium++-api/broken-reference/)\
+[`get/stakeinfo`](../../../../../getting-started/tritium++-api/broken-reference/)\
+[`migrate/accounts`](../../../../../getting-started/tritium++-api/broken-reference/)\
+[`set/stake`](../../../../../getting-started/tritium++-api/broken-reference/)
 
 Direct endpoints support filters and operators.
 
@@ -157,18 +157,18 @@ finance/get/balances/balance/sum
 
 The following methods are currently supported by this API
 
-[`create/account`](finance.md#create-account)\
-[`debit/account`](finance.md#debit-account)\
-[`credit/account`](finance.md#credit-account)\
-[`get/account`](finance.md#get-account)\
-[`list/accounts`](finance.md#list-accounts)\
-[`transactions/account`](finance.md#list-account-transactions)\
-[`get/stakeinfo`](finance.md#get-stakeinfo)\
-[`set/stake`](finance.md#set-stake)\
-[`migrate/accounts`](finance.md#migrate-accounts)\
-[`get/balances`](finance.md#get-balances)\
-[`list/balances`](finance.md#list-balances)\
-[`list/trustaccounts`](finance.md#list-trustaccounts)
+[`create/account`](./#create-account)\
+[`debit/account`](./#debit-account)\
+[`credit/account`](./#credit-account)\
+[`get/account`](./#get-account)\
+[`list/accounts`](./#list-accounts)\
+[`transactions/account`](./#list-account-transactions)\
+[`get/stakeinfo`](./#get-stakeinfo)\
+[`set/stake`](./#set-stake)\
+[`migrate/accounts`](./#migrate-accounts)\
+[`get/balances`](./#get-balances)\
+[`list/balances`](./#list-balances)\
+[`list/trustaccounts`](./#list-trustaccounts)
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 

@@ -1224,7 +1224,11 @@ print(response.json())
 
 ## `create/token`
 
-Create a new token object register.&#x20;
+Create a new token object register along with a global name for that token. Global name is synonymous to a ticker symbol which identifies the token on the network.
+
+{% hint style="info" %}
+A Global Name will incur a fee of 2000 NXS along with the token generation fee. This fee will be deducted from the default account
+{% endhint %}
 
 #### Endpoint:
 
@@ -1311,9 +1315,11 @@ print(response.json())
 
 `session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the token should be created with. For single-user API mode the session should not be supplied.
 
-`name` : An optional name to identify the token. If provided a Name object will also be created in the users local namespace, allowing the token to be accessed/retrieved by name. If no name is provided the token will need to be accessed/retrieved by its 256-bit register address.
+`name` : An optional Global Name to identify the token network wide. If provided a Name object will also be created which will be recognised network wide, allowing the token to be accessed/retrieved by name. If no name is provided the token will need to be accessed/retrieved by its 256-bit register address.
 
-`supply` : The initial token supply amount. Must be a whole number amount.
+`supply` : The initial token supply amount.
+
+&#x20;Must be a whole number amount.
 
 `decimals` : The maximum number of decimal places that can be applied to token amounts. For example decimals=2 will allow a token amount to be given to 2 decimal places.
 

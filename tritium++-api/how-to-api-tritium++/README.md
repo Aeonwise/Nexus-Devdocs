@@ -90,8 +90,8 @@ The Finance API provides methods for creating tokens, accounts, sending and rece
 
 The Finance API can be found in the following repo path:
 
-{% content-ref url="tritium++-api/finance.md" %}
-[finance.md](tritium++-api/finance.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/finance/" %}
+[finance](../tritium++-overview/how-to-api-tritium++/tritium++-api/finance/)
 {% endcontent-ref %}
 
 NOTE: All the commands in this API require LOGIN. Make sure to use the sessions API to create session before using session required commands.

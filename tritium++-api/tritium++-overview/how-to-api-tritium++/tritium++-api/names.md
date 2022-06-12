@@ -2,7 +2,7 @@
 description: NAMES API
 ---
 
-# c-NAMES
+# NAMES
 
 Names and Namespaces are special kinds of object registers that are used as locators to other object registers in the blockchain. When an object register is first created (an asset for example) the caller can provide a name for the register. If a name is provided then a Name object register is also created with its register address based on a hash of the name. The Name object also has a address field, which is populated with the register address of the register (asset, token, account etc) that the Name "points" to. In this way, objects can be retrieved by name by first hashing the name to get the Name object's address, retrieving the Name object, and then using the address stored within it to retrieve the object register. A Name then, is best thought of as a named index to object registers.
 
@@ -107,9 +107,9 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-names.md#create) - Generate a new object of supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`create`](names.md#create) - Generate a new object of supported type.\
+[`get`](../../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
 `transfer` - Transfer ownership of a specific object register.\
 `claim` - Claim ownership of a specific object registers.\
 `history` - Generate the history of all last states.\
@@ -518,17 +518,17 @@ The return value is a JSON array of objects for each entry in the names history:
 
 The following methods are currently supported by this API
 
-[`create/namespace`](c-names.md#create-namespace)\
-[`get/namespace`](c-names.md#get-namespace)\
-[`transfer/namespace`](c-names.md#transfer-namespace)\
-[`claim/namespace`](c-names.md#claim-namespace)\
-[`list/namespace/history`](c-names.md#list-namespace-history)\
-[`create/name`](c-names.md#create-name)\
-[`get/name`](c-names.md#get-name)\
-[`update/name`](c-names.md#update-name)\
-[`transfer/name`](c-names.md#transfer-name)\
-[`claim/name`](c-names.md#claim-name)\
-[`list/name/history`](c-names.md#list-name-history)
+[`create/namespace`](names.md#create-namespace)\
+[`get/namespace`](names.md#get-namespace)\
+[`transfer/namespace`](names.md#transfer-namespace)\
+[`claim/namespace`](names.md#claim-namespace)\
+[`list/namespace/history`](names.md#list-namespace-history)\
+[`create/name`](names.md#create-name)\
+[`get/name`](names.md#get-name)\
+[`update/name`](names.md#update-name)\
+[`transfer/name`](names.md#transfer-name)\
+[`claim/name`](names.md#claim-name)\
+[`list/name/history`](names.md#list-name-history)
 
 ## `create/namespace`
 

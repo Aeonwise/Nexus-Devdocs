@@ -76,9 +76,12 @@
       * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/README.md)
         * [SESSIONS METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/sessions-methods.md)
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
-      * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
+      * [FINANCE](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance/README.md)
+        * [FINANCE METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance/finance-methods/README.md)
+          * [Page 3](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance/finance-methods/page-3.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
         * [REGISTER METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register/register-methods.md)
+      * [NAMES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/names.md)
 
 ## Legacy
 
@@ -92,12 +95,9 @@
 
 * [Under Construction Pages](under-construction/under-construction-pages/README.md)
   * [Page 1](under-construction/under-construction-pages/page-1/README.md)
-    * [FINANCE METHODS](under-construction/under-construction-pages/page-1/finance-methods/README.md)
-      * [Page 3](under-construction/under-construction-pages/page-1/finance-methods/page-3.md)
     * [c-OBJECTS](under-construction/under-construction-pages/page-1/c-objects.md)
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
-    * [c-NAMES](under-construction/under-construction-pages/page-1/c-names.md)
     * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
     * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [c-LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)

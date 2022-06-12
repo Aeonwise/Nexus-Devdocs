@@ -147,34 +147,27 @@ This will create a new signature chain or initialize the auth key for older sign
 profiles/create/noun
 ```
 
-This command supports only the `master` or `auth` nouns.
+This command does not support the `credentials` or `recovery` nouns.
 
 #### create/master
 
-This will create a new profile (signature chain) specified by given noun, for use on the network. The user account is secured by a combination of username, password, and PIN.
-
-#### Endpoint:
-
-`/profiles/create/master`
+This will create a new master profile specified by given noun, for use on the network. The master profile is secured by a combination of username, password, and PIN.
 
 #### create/auth
 
-This method will create a crypto object register for login auth for signature chains created with Tritium, for use with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
-
-#### Endpoint:
-
-`/profiles/create/auth`
+This method will initialize a `auth` crypto object register for login auth for signature chains created with Tritium, to be compatible with profiles with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
 
 ### Parameters:
 
-`username` : The username to be associated with this profile. The signature chain genesis (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+`username` : Required to **authenticate.** The username to be associated with this profile. The  `genesis` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
-`password` : The password to be associated with this profile.
+`password` : Required to **authenticate.** The password to be associated with this profile.
 
-`pin` : The PIN to be associated with this profile
+`pin` : Required to **authenticate.** The PIN to be associated with this profile
 
 {% hint style="danger" %}
-If user forgets the username, he looses access to his nexus assets. There is no option to change the username. Be careful when you choose a username as it is case-sensitive and make a point to back it up along with the password and pin.
+Username is part of the profile credentials, is case-sensitive and cannot be changed. Choose the username carefully and make a point to back it up along with the password and pin. \
+Don't use the colon ' : ' at the end of the username.
 {% endhint %}
 
 ### Results:
@@ -196,7 +189,7 @@ If user forgets the username, he looses access to his nexus assets. There is no 
 
 ## `update`
 
-This method provides the user with the ability to change the password, pin, or recovery seed for this signature chain specified by the noun.
+This method provides the user with the ability to change the password, pin, or recovery seed for a profile, specified by the noun.
 
 ```
 profiles/update/noun
@@ -222,23 +215,23 @@ This method provides the user with the ability to set or change the restore seed
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`password` : The existing password for this signature chain.
+`password` : Required to **authenticate.** The existing password for this signature chain.
 
-`pin` : The existing pin for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
 #### update/credentials
 
-`new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
+`new_password` : Required by **noun** `credentials.` The new password to set for for this signature chain. This is optional if new\_pin is provided
 
-`new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
+`new_pin` : Required by **noun** `credentials.` The new pin to set for this signature chain. This is optional if new\_password is provided.
 
 #### update/recovery
 
-`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
+`recovery` : Required by **noun** `recovery` The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
 
-`new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
+`new_recovery` : Required by **noun** `recovery.`The new recovery seed to set or change for this sig chain. The recovery seed must be a minimum of 40 characters.
 
 {% hint style="danger" %}
 NOTE
@@ -268,7 +261,7 @@ NOTE
 
 ## `recover`
 
-This recovers the profile (signature chain) specified by the noun, in case of lost password and pin . The user has to be logged out to recover his profile.&#x20;
+This recovers the profile specified by the noun, in case of lost password and pin. The user has to be logged out to recover his profile.&#x20;
 
 ```
 profiles/recover/noun
@@ -278,13 +271,13 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`username` : The username identifying the profile.
+`username` : Required to **identify.** The username identifying the profile for recovery.
 
-`password` : The new password for this signature chain.
+`password` : Required to **recover.** The new password to be associated with this profile.
 
-`pin` : The new pin for this signature chain.
+`pin` : Required if **recover.** The new PIN to be associated with this profile.
 
-`recovery` : The existing recovery seed for this signature chain.&#x20;
+`recovery` : Required to **authenticate**. The existing recovery seed for this profile.&#x20;
 
 ### Results:
 
@@ -316,7 +309,7 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 ### Results:
 
@@ -335,15 +328,15 @@ This command only supports the `master` noun.
 
 #### Return values:
 
-`genesis` : The signature chain genesis hash for the currently logged in signature chain.
+`genesis` : The genesis hash for the currently logged in profile.
 
-`confirmed` : Boolean flag indicating whether the genesis transaction for this signature chain has at least one confirmation.
+`confirmed` : Boolean flag indicating whether the genesis transaction for this profile has at least one confirmation.
 
-`recovery` : Flag indicating whether the recovery seed has been set for this signature chain.
+`recovery` : Flag indicating whether the recovery seed has been set for this profile.
 
-`crypto` : Flag indicating whether the crypto object register has been set for this signature chain.
+`crypto` : Flag indicating whether the crypto object register has been set for this profile.
 
-`transactions` : The total transaction count in this signature chain
+`transactions` : The total transaction count in this profile
 
 ## `notifications`
 
@@ -357,9 +350,9 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-#### [Sorting / Filtering](./#sorting-filtering) Parameters
+This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 ### Results:
 
@@ -425,7 +418,7 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 
@@ -433,7 +426,7 @@ This command only supports the `master` noun.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-#### [Sorting / Filtering](./#sorting-filtering) Parameters
+This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 ### Results:
 
