@@ -25,7 +25,7 @@ Initiate node shutdown sequence.
 
 `/system/stop`
 
-{% swagger method="get" path="/system/stop" baseUrl="http://api.nexus-interactions.io:8080" summary="stop" %}
+{% swagger method="post" path="/system/stop" baseUrl="http://api.nexus-interactions.io:8080" summary="stop" %}
 {% swagger-description %}
 Initiate node shutdown sequence.
 {% endswagger-description %}
@@ -57,7 +57,7 @@ let data = {
     password: "YOUR_SECRET",
 }
 fetch(`${SERVER_URL}/system/stop`,{
-    method: 'GET',
+    method: 'POST',
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(data)
 })

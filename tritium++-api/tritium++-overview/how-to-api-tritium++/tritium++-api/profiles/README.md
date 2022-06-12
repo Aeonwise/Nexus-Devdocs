@@ -141,13 +141,13 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create`
 
-This will create a new object register specified by the noun.
+This will create a new signature chain or initialize the auth key for older signature chains to make them compatible with profiles, specified by the noun.
 
 ```
 profiles/create/noun
 ```
 
-This command does not support the `credentials` or `recovery` nouns.
+This command supports only the `master` or `auth` nouns.
 
 #### create/master
 
@@ -174,7 +174,7 @@ This method will create a crypto object register for login auth for signature ch
 `pin` : The PIN to be associated with this profile
 
 {% hint style="danger" %}
-If user forgets the username, he looses access to his nexus assets. There is no option to change the username. Be careful when you choose a username as it is case-sensitive and make a point to back it up with the password and pin.
+If user forgets the username, he looses access to his nexus assets. There is no option to change the username. Be careful when you choose a username as it is case-sensitive and make a point to back it up along with the password and pin.
 {% endhint %}
 
 ### Results:
@@ -241,7 +241,11 @@ This method provides the user with the ability to set or change the restore seed
 `new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
 
 {% hint style="danger" %}
-The recovery phrase is case-sensitive
+NOTE
+
+* The recovery phrase is case-sensitive.
+* Make sure to type in the recovery phrase correctly and not copy paste which can add spaces if not done correctly.
+* Make sure to backup and recheck the recovery seed and create multiple offline backups. &#x20;
 {% endhint %}
 
 ### Results:

@@ -71,7 +71,7 @@ import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
     "username": "YOUR_USERNAME",
-    "password": "YOUR_SECRET"
+    "password": "YOUR_SECRET",
     "pin": "YOUR_PIN"
 }
 response = requests.post(f"{SERVER_URL}/session/create/local", json=data)
@@ -189,7 +189,7 @@ fetch(`${SERVER_URL}/sessions/unlock/local`, {
 import requests
 SERVER_URL = "http://api.nexus-interactions.io:8080"
 data = {
-    "session": "YOUR_SESSION_ID"
+    "session": "YOUR_SESSION_ID",
     "pin": "YOUR_PIN",
     "mining": True,
     "notifications": True,
