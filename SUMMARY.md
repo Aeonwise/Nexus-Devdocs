@@ -76,12 +76,12 @@
       * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/README.md)
         * [SESSIONS METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/sessions-methods.md)
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
-      * [FINANCE](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance/README.md)
-        * [FINANCE METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance/finance-methods/README.md)
-          * [Page 3](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/finance/finance-methods/page-3.md)
+      * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
+        * [FINANCE METHODS](under-construction/under-construction-pages/page-1/finance-methods/README.md)
+          * [Page 3](under-construction/under-construction-pages/page-1/finance-methods/page-3.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
         * [REGISTER METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register/register-methods.md)
-      * [NAMES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/names.md)
+      * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
 
 ## Legacy
 

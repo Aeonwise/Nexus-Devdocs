@@ -47,11 +47,11 @@ This command only supports the `local` noun.
 
 ### Parameters:
 
-`username` : The username associated with this signature chain.
+`username` : Required to **identify.** The username to create the session for.
 
-`password` : The password to be associated with this signature chain.
+`password` : Required to **authenticate.** The password for this profile.
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
 ### Results:
 
@@ -83,17 +83,17 @@ These commands only supports the `local` noun.
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`mining` : This boolean value determines whether the logged in users signature chain can be used for mining.
+`mining` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for mining.
 
-`notifications` : This boolean value determines whether the logged in users signature chain can be used for processing notifications.
+`notifications` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for processing notifications.
 
-`staking` : This boolean value determines whether the logged in users signature chain can be used for staking.
+`staking` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for staking.
 
-`transactions` : This boolean value determines whether the logged in users signature chain can be used for creating or claiming transactions.
+`transactions` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
 
 ### Results:
 
@@ -135,9 +135,9 @@ These commands only supports the `local` noun.
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which user to update.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 ### Results:
 
@@ -181,9 +181,9 @@ This command only supports the `local` noun.
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`pin` : The PIN for this signature chain.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 ### Results:
 
@@ -208,7 +208,7 @@ This command only supports the `local` noun.
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to return the status for.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 ### Results:
 
