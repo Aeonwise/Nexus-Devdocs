@@ -153,28 +153,19 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 finance/get/balances/balance/sum
 ```
 
-## `Methods`
-
-The following methods are currently supported by this API
-
-[`create/account`](finance.md#create-account)\
-[`debit/account`](finance.md#debit-account)\
-[`credit/account`](finance.md#credit-account)\
-[`get/account`](finance.md#get-account)\
-[`list/accounts`](finance.md#list-accounts)\
-[`transactions/account`](finance.md#list-account-transactions)\
-[`get/stakeinfo`](finance.md#get-stakeinfo)\
-[`set/stake`](finance.md#set-stake)\
-[`migrate/accounts`](finance.md#migrate-accounts)\
-[`get/balances`](finance.md#get-balances)\
-[`list/balances`](finance.md#list-balances)\
-[`list/trustaccounts`](finance.md#list-trustaccounts)
-
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
 Create a new object register specified by given noun.
 
 This command does not support the `any` or `all` nouns.
+
+#### create/account
+
+Create a new account to hold NXS or tokens
+
+#### create/token
+
+Create a new token object.
 
 #### Parameters:
 
@@ -184,13 +175,13 @@ This command does not support the `any` or `all` nouns.
 
 `name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
 
-`data` : Optional for **any** noun, allows caller to add arbitrary data to object.
+`data` : Optional for `any` **noun**, allows caller to add arbitrary data to object.
 
 ### **create/token**
 
 `supply` : Required by **noun** `token` that sets the maximum token supply.
 
-`decimals` : Required by **noun** `token` that sets the total number of significant figures. Defaults to 2.
+`decimals` : Required by **noun** `token` that sets the total number of significant figures. Defaults to    2.
 
 ### **create/account**
 
@@ -219,6 +210,14 @@ Deduct an amount of NXS or token specific by the noun and send it to another acc
 
 This command supports the `any` wildcard noun.
 
+#### debit/account
+
+This deducts an amount of NXS or tokens from a token account to send to other NXS or token accounts&#x20;
+
+#### debit/token
+
+This deducts an amount of tokens from a token generation account to send to a token account
+
 #### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
@@ -237,9 +236,9 @@ This command supports the `any` wildcard noun.
 
 `address_to` : The **register address** of the account to send to. This is optional if name\_to is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
-`reference` : This optional field allows callers to provide a reference, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a `64-bit unsigned integer` in the range of 0 to 18446744073709551615
+`reference` : Optional field allows callers to provide a r**eference**, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a `64-bit unsigned integer` in the range of 0 to 18446744073709551615
 
-`expires` : This optional field allows callers to specify an **expiration** for the debit transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+`expires` : Optional field allows callers to specify an **expiration** for the debit transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
 
 ```
 {
@@ -251,7 +250,7 @@ This command supports the `any` wildcard noun.
 
 #### Return values:
 
-`success` : Boolean flag indicating that the debit  was successfull.&#x20;
+`success` : Boolean flag indicating that the debit was successfull.&#x20;
 
 `txid` : The ID (hash) of the transaction that includes the debit.
 
@@ -283,7 +282,22 @@ This command supports the `any` wildcard noun.
 
 
 
+## `Methods`
 
+The following methods are currently supported by this API
+
+[`create/account`](finance.md#create-account)\
+[`debit/account`](finance.md#debit-account)\
+[`credit/account`](finance.md#credit-account)\
+[`get/account`](finance.md#get-account)\
+[`list/accounts`](finance.md#list-accounts)\
+[`transactions/account`](finance.md#list-account-transactions)\
+[`get/stakeinfo`](finance.md#get-stakeinfo)\
+[`set/stake`](finance.md#set-stake)\
+[`migrate/accounts`](finance.md#migrate-accounts)\
+[`get/balances`](finance.md#get-balances)\
+[`list/balances`](finance.md#list-balances)\
+[`list/trustaccounts`](finance.md#list-trustaccounts)
 
 ### `create/account`
 

@@ -173,11 +173,7 @@ names/create/noun
 
 `create/name`
 
-This will create a new name.
-
-```
-names/create/name
-```
+This will create a new local name or namespaced or global name
 
 `create/namespace`
 
@@ -187,23 +183,19 @@ This will create a new namespace.
 **NOTE** : Namespaces can only contain **lowercase letters, numbers, and periods (.)**.
 {% endhint %}
 
-```
-names/create/namespace
-```
-
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the namespace should be created with. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 #### create/name
 
-`name` : The name of the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
+`name` : The Name of the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
 
-`namespace` : This optional field allows callers to specify the namespace that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global).
+`namespace` : Optional field allows callers to specify the **namespace** that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global).
 
-`global` : This optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored.
+`global` : Optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored.
 
 `register_address` : The 256-bit hexadecimal register address of the object that this Name will point to.
 
