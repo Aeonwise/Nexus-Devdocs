@@ -66,8 +66,8 @@ The Profiles API is responsible for maintaining user account level functions. DO
 
 The Profiles API can be found in the link below:
 
-{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles.md" %}
-[profiles.md](../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/" %}
+[profiles](../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/)
 {% endcontent-ref %}
 
 {% hint style="info" %}
@@ -80,8 +80,8 @@ The Sessions API is responsible for maintaining user account level functions. DO
 
 The Users API can be found in the following repo path:
 
-{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions.md" %}
-[sessions.md](../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/" %}
+[sessions](../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/)
 {% endcontent-ref %}
 
 ### Finance API
@@ -90,8 +90,8 @@ The Finance API provides methods for creating tokens, accounts, sending and rece
 
 The Finance API can be found in the following repo path:
 
-{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/finance.md" %}
-[finance.md](../tritium++-overview/how-to-api-tritium++/tritium++-api/finance.md)
+{% content-ref url="tritium++-api/finance.md" %}
+[finance.md](tritium++-api/finance.md)
 {% endcontent-ref %}
 
 NOTE: All the commands in this API require LOGIN. Make sure to use the sessions API to create session before using session required commands.
