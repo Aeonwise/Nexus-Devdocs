@@ -22,11 +22,11 @@ sessions/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](./#create) - Generate a new session type specified by the noun.\
-[`unlock/lock`](./#unlock-lock) - Unlock/lock the session to carry out specified operations.\
-[`save/load`](./#save-load) - Save/load the session to the local database.\
-[`terminate`](./#terminate) - Terminates a session specified by the noun.\
-[`status`](./#status) - Returns status information for the session type specified by the noun.
+[`create`](sessions.md#create) - Generate a new session type specified by the noun.\
+[`unlock/lock`](sessions.md#unlock-lock) - Unlock/lock the session to carry out specified operations.\
+[`save/load`](sessions.md#save-load) - Save/load the session to the local database.\
+[`terminate`](sessions.md#terminate) - Terminates a session specified by the noun.\
+[`status`](sessions.md#status) - Returns status information for the session type specified by the noun.
 
 ## `Supported Nouns`
 

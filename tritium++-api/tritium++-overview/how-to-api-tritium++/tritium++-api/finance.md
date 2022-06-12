@@ -16,9 +16,9 @@ The minimum required components of the URI are:
 
 The following operators are supported for this API command-set:
 
-[`array`](../../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
-[`mean`](../../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](../../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
+[`array`](../../../../getting-started/tritium++-api/broken-reference/) - Generate a list of values given from a set of filtered results.\
+[`mean`](../../../../getting-started/tritium++-api/broken-reference/) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](../../../../getting-started/tritium++-api/broken-reference/) - Compute a sum of a set of values derived from filtered results.
 
 **Example:**
 
@@ -79,14 +79,14 @@ When using recursive filtering, the nested hiearchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`burn`](../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
-[`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
-[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
-[`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
-[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
+[`burn`](../../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
+[`create`](../../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
+[`credit`](../../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`debit`](../../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
+[`get`](../../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`history`](../../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
+[`transactions`](../../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -110,10 +110,10 @@ The above command will create a debit contract withdrawing from a random sample 
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/balances`](../../../getting-started/tritium++-api/broken-reference/)\
-[`get/stakeinfo`](../../../getting-started/tritium++-api/broken-reference/)\
-[`migrate/accounts`](../../../getting-started/tritium++-api/broken-reference/)\
-[`set/stake`](../../../getting-started/tritium++-api/broken-reference/)
+[`get/balances`](../../../../getting-started/tritium++-api/broken-reference/)\
+[`get/stakeinfo`](../../../../getting-started/tritium++-api/broken-reference/)\
+[`migrate/accounts`](../../../../getting-started/tritium++-api/broken-reference/)\
+[`set/stake`](../../../../getting-started/tritium++-api/broken-reference/)
 
 Direct endpoints support filters and operators.
 
@@ -224,15 +224,11 @@ This deducts an amount of tokens from a token generation account to send to a to
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
-
-`from` : The name **identifying** the account to debit. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
-
-`address` : The **register address** of the account to debit. This is optional if the name is provided.
+`from` : The name **identifying** the account to debit. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name.
 
 `amount` : The **amount** of NXS to debit.
 
-`to` : The name **identifying** the account to send to. This is optional if address\_to is provided. The name should be in username:name format
+`to` : The name or register address **identifying** the receiving account. This is optional if address\_to is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
 `address_to` : The **register address** of the account to send to. This is optional if name\_to is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
@@ -250,19 +246,23 @@ This deducts an amount of tokens from a token generation account to send to a to
 
 #### Return values:
 
-`success` : Boolean flag indicating that the debit was successfull.&#x20;
+`success` : Boolean flag indicating that the debit was successful.&#x20;
 
 `txid` : The ID (hash) of the transaction that includes the debit.
-
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
-
-
 
 ## `credit` <a href="#user-content-credit" id="user-content-credit"></a>
 
 Create a new object register specified by given noun.
 
 This command supports the `any` wildcard noun.
+
+#### credit/account
+
+Increment an amount received from a NXS account or tokens from a token or token account.
+
+#### credit/token
+
+Increment an amount of tokens received from a token account.
 
 #### Parameters:
 
@@ -272,15 +272,144 @@ This command supports the `any` wildcard noun.
 
 `txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
-####
-
 #### Return values:
 
-`txid` : The ID (hash) of the transaction that includes the account creation.
+```
+{
+    "success": true,
+    "txid": "01f51d6b23b871fc8da848afa57cf066cb9e3b8fb845a666335e8c678ef5249e98d4f3e477659098918e4bb590472a63d0ed0a17fa87904fcff6316158e9edfd"
+}
+[Completed in 4979.735275 ms]
+```
 
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+`success` : Boolean flag indicating that the debit was successful.&#x20;
 
+`txid` : The ID (hash) of the transaction that includes the credit.
 
+## `transactions`
+
+This will list off all of the transactions for the specified noun.
+
+```
+finance/transactions/noun
+```
+
+This command only supports the `master` noun.
+
+#### transactions/account
+
+Increment an amount received from a NXS account or tokens from a token or token account.
+
+#### tranactions/token
+
+Increment an amount of tokens received from a token account.
+
+### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
+
+* `default` : hash
+* `summary` : type, version, sequence, timestamp, operation, and confirmations.
+* `detail` : genesis, nexthash, prevhash, pubkey and signature.
+
+This method supports the [Sorting / Filtering](finance.md#sorting-filtering) parameters.
+
+### Results:
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "txid": "01eb59a0c4e6c47dd2a8d3a4aa7d83514aab6f5c976207889f786e5947c0eb971065fe6e0f8fc6b7d75157f9dac0cf0c178c15e441ff360c3046c84e1fe799ca",
+        "type": "tritium first",
+        "version": 4,
+        "sequence": 0,
+        "timestamp": 1653674591,
+        "blockhash": "dc2712f6598a4a8c60f14c707dae4705f773fb1f60b89efd1e0163ee1d7cf823e8d73e6a3fb9f7eb73e72d7764647eb889abebc2aca34f3090dbe1409af511a301409fb8f04409bf97693dc0d908d05d9b62b949aae423196b508b3840419d1df548e72e006c75a6c69d8075693f2c8f6f7d10213a07c03bf9ff250e55a1eeef",
+        "confirmations": 23,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "CREATE",
+                "address": "89AVoe5S8gjZpVngYoYtqJbSr9fGsdsoXShxnyNaEGPvMMeDnT6",
+                "type": "OBJECT",
+                "standard": "CRYPTO",
+                "object": {
+                    "app1": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "app2": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "app3": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "auth": "02b5dbda57225afab10ca271ff513beab748306cff028798e2b64505db59f252",
+                    "cert": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "lisp": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "network": "025193caf52ce6065951a438d30696f7548e12e0ebadd60359141029c1c4d870",
+                    "sign": "02efc8e11c7097520080718b5dd0e92267292401678fcecb317bde79df64311c",
+                    "verify": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
+            }
+        ]
+    }
+]
+[Completed in 0.616625 ms]
+```
+
+`txid` : The transaction hash.
+
+`type` : The description of the transaction (`legacy` | `tritium base` | `trust` | `genesis` | `user`).
+
+`version` : The serialization version of the transaction.
+
+`sequence` : The sequence number of this transaction within the signature chain.
+
+`timestamp` : The Unix timestamp of when the transaction was created.
+
+`blockhash` : The hash of the block that this transaction is included in. Blank if not yet included in a block.
+
+`confirmations` : The number of confirmations that this transaction obtained by the network.
+
+`genesis` : The signature chain genesis hash.
+
+`nexthash` : The hash of the next transaction in the sequence.
+
+`prevhash` : the hash of the previous transaction in the sequence.
+
+`pubkey` : The public key.
+
+`signature` : The signature hash.
+
+`contracts` : The array of contracts bound to this transaction and their details with opcodes.\
+{\
+`id` : The sequential ID of this contract within the transaction.
+
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+
+`txid` : The transaction that was credited / claimed.
+
+`contract` : The ID of the contract within the transaction that was credited / claimed.
+
+`proof` : The register address proving the credit.
+
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+
+`amount` : the token amount of the transaction.
+
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+
+`token_name` : The name of the token that the transaction relates to.
+
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
 
 ## `Methods`
 

@@ -87,12 +87,12 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](./#create) - Generate a new object of supported type.\
-[`update`](./#update) - Updates the specified object registers.\
-[`recover`](./#recover) - Recovers a profile account.\
-[`status`](./#status) - Status information of a profile.\
-[`notifications`](./#notifications) - List all notifications that modified specified object.\
-[`transactions`](./#notifications-1) - List all transactions that modified specified object.
+[`create`](profiles.md#create) - Generate a new object of supported type.\
+[`update`](profiles.md#update) - Updates the specified object registers.\
+[`recover`](profiles.md#recover) - Recovers a profile account.\
+[`status`](profiles.md#status) - Status information of a profile.\
+[`notifications`](profiles.md#notifications) - List all notifications that modified specified object.\
+[`transactions`](profiles.md#notifications-1) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -352,7 +352,7 @@ This command only supports the `master` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](profiles.md#sorting-filtering) parameters.
 
 ### Results:
 
@@ -426,7 +426,7 @@ This command only supports the `master` noun.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](profiles.md#sorting-filtering) parameters.
 
 ### Results:
 
