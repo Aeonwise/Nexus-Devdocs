@@ -27,7 +27,7 @@ The operators only work with the profiles `transactions` and `notifications` ver
 **Example:**
 
 ```
-names/transactions/master/contracts.amount/sum
+profile/transactions/master/contracts.amount/sum
 ```
 
 **Result:**
@@ -48,7 +48,7 @@ The filters only work with the profiles `transactions` and `notifications` verbs
 **Example:**
 
 ```
-names/notifications/master/amount,ticker
+names/list/name/created,address
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
