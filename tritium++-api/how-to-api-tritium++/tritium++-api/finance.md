@@ -343,6 +343,59 @@ This command only supports the `account` noun.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
+## `get`
+
+Retrieves information for a single object for a type specified by the noun
+
+```
+names/get/noun
+```
+
+`get/account`
+
+Retrieves information for a specified NXS or token account.
+
+`get/trust`
+
+Retrieves information for a specified `trust` account.
+
+`get/token`
+
+Retrieves information for a specified token address.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+
+`name` : The name identifying the account/trust/token. This is optional if the address is provided.
+
+`address` : The register address of the account/trust//token to be transferred. This is optional if the name is provided.
+
+### Results:
+
+#### Return value JSON object:
+
+```
+{
+    "owner": "b1b5b4f4197548886016586f95735f0cb8235183a9185b8720bd27502a2e2850",
+    "version": 1,
+    "created": 1638020495,
+    "modified": 1655118914,
+    "type": "OBJECT",
+    "balance": 300.536104,
+    "stake": 15000.0,
+    "token": "0",
+    "ticker": "NXS",
+    "trust": 3399813,
+    "age": "39 days, 8 hours, 23 minutes",
+    "rate": 3.0,
+    "address": "8EunQ82qVdnuQkX2gXKZr5P55kQRz4KbpaLdCVBjBNu8jeys4C4"
+}
+[Completed in 0.301107 ms]
+```
+
+#### Return values:
+
 ## `list`
 
 This will list off all of the object register details specified by the noun.&#x20;
@@ -373,7 +426,119 @@ The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorti
 
 ### Results:
 
+```
+[
+    {
+        "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+        "version": 1,
+        "created": 1654808816,
+        "modified": 1655061950,
+        "type": "OBJECT",
+        "balance": 5998.0,
+        "decimals": 2,
+        "currentsupply": 4002.0,
+        "maxsupply": 10000.0,
+        "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+        "ticker": "XYZ",
+        "address": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG"
+    }
+]
+[Completed in 0.473708 ms]
+```
+
 The results depends on the specified noun.&#x20;
+
+`created` : The UNIX timestamp when the account was created.
+
+`modified` : The UNIX timestamp when the account was last modified.
+
+`name` : The name identifying the account. For privacy purposes, this is only included in the response if the caller is the owner of the account
+
+`address` : The register address of the account.
+
+`ticker` : This will always be set to `NXS`.
+
+`token` : This will always be set to 0 for NXS accounts.
+
+`data` : The arbitrary data included in the account register. If no data was included during the account creation then this field will be omitted.
+
+`balance` : The available balance of this account. This is the last confirmed balance less any new debits that you have made since the last block
+
+`pending` : This is the sum of all confirmed debit transactions that have been made to this account, that have not yet been credited. To move coins from pending into the available balance you must create a corresponding credit transaction. NOTE: if configured to run, the events processor does this for you.
+
+`unconfirmed` : This is the sum of all unconfirmed debit transactions that have been made to this account PLUS the sum of all unconfirmed credits that you have for confirmed debit transactions. When someone makes a debit to your account it will immediately appear in the unconfirmed balance until that transaction is included in a block, at which point it moves into `pending`. When you (or the events processor) creates the corresponding credit transaction for that debit, the amount will move from `pending` back into `unconfirmed` until the credit transaction is included in a block, at which point the amount moves to `balance`.
+
+`stake` : Only returned for the trust account, this is the amount of NXS currently staked in the trust account.
+
+`count` : Only returned if the caller requested `count` : true. This is the number of transactions made to/from the account.
+
+## `history`
+
+This will get the history of the specified noun.
+
+```
+finance/history/noun
+```
+
+This command supports the `account, trust and token` nouns.
+
+#### history/account
+
+This lists all the NXS except '`trust` and token accounts for the logged in user.
+
+#### history/trust
+
+This lists the '`trust` account for the logged in user.
+
+#### history/token
+
+This lists all the token addresses for the logged in user.
+
+### Parameters:
+
+`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+
+`name` : The name identifying the account/trust/token. This is optional if the address is provided.
+
+`address` : The register address of the account/trust//token to be transferred. This is optional if the name is provided.
+
+### Results:
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+        "version": 1,
+        "created": 1654808903,
+        "modified": 1654809207,
+        "type": "OBJECT",
+        "balance": 1000.0,
+        "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+        "ticker": "XYZ",
+        "address": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
+        "name": "local:XYZToken",
+        "action": "CREDIT"
+    },
+    {
+        "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+        "version": 1,
+        "created": 1654808903,
+        "modified": 1654808903,
+        "type": "OBJECT",
+        "balance": 0.0,
+        "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+        "ticker": "XYZ",
+        "address": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
+        "name": "local:XYZToken",
+        "action": "CREATE"
+    }
+]
+[Completed in 12.427076 ms]
+```
+
+#### Return value :
 
 ## `transactions`
 

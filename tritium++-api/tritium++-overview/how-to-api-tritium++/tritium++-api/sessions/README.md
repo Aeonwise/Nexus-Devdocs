@@ -227,9 +227,9 @@ This command only supports the `local` noun.
 [Completed in 0.080333 ms]
 ```
 
-`genesis` : The signature chain genesis hash for the currently logged in user.
+`genesis` : The profile genesis hash for the currently logged in user.
 
-`accessed` : The unix timestamp at which the signature chain was last accessed.
+`accessed` : The unix timestamp at which the profile was last accessed.
 
 `location` : The location of session, `local` or `remote`.
 
@@ -237,8 +237,8 @@ This command only supports the `local` noun.
 
 `mining` : Boolean flag indicating whether the users sig chain is unlocked for mining.
 
-`notifications` : Boolean flag indicating whether the users sig chain is unlocked for processing notifications.
+`notifications` : Boolean flag indicating whether the users profile is unlocked for processing notifications.
 
-`staking` : Boolean flag indicating whether the users sig chain is unlocked for staking.
+`staking` : Boolean flag indicating whether the profile is unlocked for staking.
 
-`transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
+`transactions` : Boolean flag indicating whether the profile is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
