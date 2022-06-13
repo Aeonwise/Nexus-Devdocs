@@ -103,6 +103,7 @@
     * [PROFILE METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/profile-methods.md)
     * [REGISTER METHODS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/register/register-methods.md)
     * [Fin Methods](under-construction/under-construction-pages/page-1/fin-methods.md)
+    * [NAMES METHODS](under-construction/under-construction-pages/page-1/names-methods.md)
   * [SYSTEM METHODS](under-construction/under-construction-pages/system.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
     * [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)
