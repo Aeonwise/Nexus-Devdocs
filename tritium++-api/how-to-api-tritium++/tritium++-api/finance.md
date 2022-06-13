@@ -79,10 +79,10 @@ When using recursive filtering, the nested hiearchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`burn`](../../../getting-started/tritium++-api/broken-reference/) - Remove a given token from circulation.\
 [`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
-[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
 [`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
+[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`burn`](finance.md#user-content-create-2) - Remove a given token from circulation.\
 [`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
 [`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
 [`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
@@ -342,6 +342,38 @@ This command only supports the `account` noun.
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+## `list`
+
+This will list off all of the object register details specified by the noun.&#x20;
+
+```
+finance/list/noun
+```
+
+This command supports the `account, trust and token` nouns.
+
+#### list/account
+
+This lists all the NXS except '`trust` and token accounts for the logged in user.
+
+#### list/trust
+
+This lists the '`trust` account for the logged in user.
+
+#### list/token
+
+This lists all the token addresses for the logged in user.
+
+### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorting / filtering](finance.md#user-content-create)
+
+### Results:
+
+The results depends on the specified noun.&#x20;
 
 ## `transactions`
 
