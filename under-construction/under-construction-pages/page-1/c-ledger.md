@@ -252,7 +252,7 @@ This lists all the token addresses for the logged in user.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-The parameters used are [Query DSL](ledger.md#query-dsl), along with the [sorting / filtering](ledger.md#user-content-create)
+The parameters used are [Query DSL](c-ledger.md#query-dsl), along with the [sorting / filtering](c-ledger.md#user-content-create)
 
 ### Results:
 

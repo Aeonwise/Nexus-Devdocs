@@ -4,95 +4,86 @@ description: REGISTER API
 
 # REGISTER
 
-The Register API gives direct access to the register data and this allows network wide information requested to be presented and does not need the user to be logged in.
+The Register API gives direct access to the register data and this allows network wide information requested to be presented and does not need the user to be logged in.&#x20;
 
-## Query DSL
-
-The Query DSL allows you to sort and filter recursively to any logical depth. This DSL can be used in conjunction with operators to sort, filter, and compute data in real-time.
-
-### Selector Keys
-
-The following operators are supported for this API command-set:
-
-\[`object`] - This selector key will evaluate the comparison on the raw binary object.\
-\[`results`] - This selector key will evaluate the comparison on the results json.
-
-### Supported Objects
-
-The following object classes are supported:
-
-* object - operates on a raw object register
-* results - operates and filters based on the JSON results. This can be about 10x slower, so use sparingly.
-
-### Using wildcards
-
-If you are searching by a string parameter, you can includeM' as an any character wildcard match, so that you can search values based on a partial match.
+The full supported endpoint of the profiles URI is as follows:
 
 ```
-register/list/accounts WHERE 'object.name=d*'
+register/verb/noun/filter/operator
 ```
 
-The above will return all accounts that start with a letter 'd'.
-
-#### Following wildcard
-
-The following demonstrates how to check with wildcards.
+The minimum required components of the URI are:
 
 ```
-register/list/accounts WHERE 'object.name=*d'
+register/verb/noun
 ```
 
-This above will return all accounts that have a name ending with letter 'd'.
+## `Supported Operators`
 
-### Examples
+The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
 
-To filter, you can use where='statements' or follow the command with WHERE string:
+[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
+[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
+[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
 
-#### Filtering objects with WHERE clause
-
-The below clause will filter all name object registers, that are Global names that start with letter 'P', or any objects that start with letter 'S'.
-
-```
-register/list/names WHERE '(object.namespace=*GLOBAL* AND object.name=P*) OR object.name=S*'
-```
-
-Using the object class i.e. 'object.namespace' will invoke the filter on the binary object.
-
-#### Filtering objects with where=
-
-The below clause will filter all name object registers, that are Global names that start with letter 'P', or any objects that start with letter 'S'.
+**Example:**
 
 ```
-register/list/names where='(object.namespace=*GLOBAL* AND object.name=P*) OR object.name=S*'
+register/list/accounts
 ```
 
-#### Filtering with multiple operators
+**Result:**
 
-The below will return all NXS accounts that have a balance greater than 10 NXS.
-
-```
-register/list/accounts WHERE 'object.token=0 AND object.balance>10'
-```
-
-#### Creating logical grouping
-
-The following demonstrates how to query using multiple recursive levels.
+This command will return a sum of the balances for all accounts:
 
 ```
-register/list/accounts WHERE '(object.token=0 AND object.balance>10) OR (object.token=8Ed7Gzybwy3Zf6X7hzD4imJwmA2v1EYjH2MNGoVRdEVCMTCdhdK AND object.balance>1)'
+{
+    "amount": 5150.0
+}
+[Completed in 2.440583 ms]
 ```
 
-This will give all NXS accounts with balance greater than 10, or all accounts for token '8Ed7Gzybwy3Zf6X7hzD4imJwmA2v1EYjH2MNGoVRdEVCMTCdhdK' with balance greater than 1.
+## `Supported Filters`
 
-#### More complex queries
+The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
 
-There is no current limit to the number of levels of recursion, such as:
+**Example:**
 
 ```
-register/list/names WHERE '((object.name=d* AND object.namespace=~GLOBAL~) OR (object.name=e* AND object.namespace=send.to)) OR object.namespace=*s'
+register/list/names/created,address
 ```
 
-The above command will return all objects starting with letter 'd' that are global names, or all objects starting with letter 'e' in the 'send.to' namespace, or finally all objects that are in a namespace that ends with the letter 's'.
+The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
+
+#### `Recursive Filtering`
+
+Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+
+```
+register/list/tokens
+```
+
+When using recursive filtering, the nested hierarchy is retained.
+
+```
+[
+    {
+        "contracts": [
+            {
+                "OP": "DEBIT"
+            }
+        ]
+    },
+    {
+        "contracts": [
+            {
+                "OP": "WRITE"
+            }
+        ]
+    }
+]
+[Completed in 0.722042 ms]
+```
 
 ## `Supported Verbs`
 
@@ -166,15 +157,15 @@ register/list/noun
 
 ### Parameters:
 
-The parameters used are [Query DSL](register.md#query-dsl), along with the [sorting / filtering](register.md#user-content-create)
+The parameters used are Filtering -Query DSL, along with the [sorting / filtering](register.md#user-content-create)
 
 ### Results:
 
 The results depends on the specified noun.&#x20;
 
-### Power of Query DSL
+## Register API with Query DSL
 
-A few API calls which will showcase the power of registers, the LLD which is the database and the Query-DSL. This is going to be a powerful tool for developers.\
+A few register API calls which will showcase the power of registers, the LLD which is the database and the Query-DSL. This is going to be a powerful tool for developers.\
 
 
 {% hint style="info" %}

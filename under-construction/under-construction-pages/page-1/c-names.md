@@ -62,7 +62,7 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](names.md#create) - Generate a new object of supported type.\
+[`create`](c-names.md#create) - Generate a new object of supported type.\
 [`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
 [`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
 `transfer` - Transfer ownership of a specific object register.\
