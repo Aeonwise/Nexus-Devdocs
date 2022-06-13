@@ -228,7 +228,7 @@ This deducts an amount of NXS or tokens from a token account or token address to
 
 This deducts an amount of tokens from a token generation account to send to a token account
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -254,7 +254,7 @@ This deducts an amount of tokens from a token generation account to send to a to
 [Completed in 4979.735275 ms]
 ```
 
-#### Return values:
+### Return values:
 
 `success` : Boolean flag indicating that the debit was successful.&#x20;
 
@@ -278,7 +278,7 @@ Increment an amount received from a NXS account, token account or token address.
 
 Increment an amount of tokens received from a token account.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -310,7 +310,7 @@ finance/burn/noun
 
 This command only supports the `account` noun.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -320,7 +320,9 @@ This command only supports the `account` noun.
 
 `address` :  Optional for **identifying** the register address of the account to debit the tokens from the be burnt. This is optional if the `name` is provided.
 
-`data` : Optional for `any` **noun**, allows caller to add arbitrary data to object.
+`amount` : The amount of **tokens** to burn.
+
+`reference` : Optional field allows callers to provide a **reference**, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
 
 ### ****
 
