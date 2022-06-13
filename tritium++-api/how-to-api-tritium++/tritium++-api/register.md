@@ -181,27 +181,25 @@ A few API calls which will showcase the power of registers, the LLD which is the
 All these calls will require the latest build of the core and will not work with the current stable version.
 {% endhint %}
 
-&#x20;
-
-#### To calculate the sum of all NXS on the tritium chain.
+#### &#x20;To calculate the sum of all NXS on the tritium chain.
 
 ```
-register/list/accounts, trust/total/sum sort=total order=desc limit=none where='object. token=0'
+register/list/accounts,trust/total/sum sort=total order=desc limit=none where='object. token=0'
 ```
 
-#### List all the namespaces created in ascending order (First to recent)
+#### List all the namespaces created in ascending order (First to recent):
 
 ```
 register/list/namespaces sort=created order=asc
 ```
 
-#### List all the Global Names on the Network
+#### List all the Global Names on the Network:
 
 ```
 register/list/names where=object.namespace=~GLOBAL~
 ```
 
-#### Create a rich list
+#### Create a rich list:
 
 ```
 register/list/accounts,trust sort=total order=desc page=0 where=(object.token=0)
