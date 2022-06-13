@@ -76,8 +76,6 @@
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
-      * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
-      * [LEDGER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/ledger.md)
 
 ## Legacy
 
@@ -105,6 +103,8 @@
     * [Fin Methods](under-construction/under-construction-pages/page-1/fin-methods.md)
     * [NAMES METHODS](under-construction/under-construction-pages/page-1/names-methods.md)
     * [LEDGER METHODS](under-construction/under-construction-pages/page-1/ledger-methods.md)
+    * [LEDGER](under-construction/under-construction-pages/page-1/ledger.md)
+    * [NAMES](under-construction/under-construction-pages/page-1/names.md)
   * [SYSTEM METHODS](under-construction/under-construction-pages/system.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
     * [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)
