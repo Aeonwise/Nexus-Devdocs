@@ -7,38 +7,13 @@ description: NAMES API
 Names and Namespaces are special kinds of object registers that are used as locators to other object registers in the blockchain. The full supported endpoint of the Names URI is as follows:
 
 ```
-names/verb/noun/filter/operator
+names/verb/noun/filter
 ```
 
 The minimum required components of the URI are:
 
 ```
 names/verb/noun
-```
-
-## `Supported Operators`
-
-The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
-
-[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
-[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
-
-**Example:**
-
-```
-profile/transactions/master/contracts.amount/sum
-```
-
-**Result:**
-
-This command will return a sum of the balances for all accounts:
-
-```
-{
-    "amount": 5150.0
-}
-[Completed in 2.440583 ms]
 ```
 
 ## `Supported Filters`
@@ -58,7 +33,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-names/transactions/master/contracts.OP
+names/list/name/contracts.OP
 ```
 
 When using recursive filtering, the nested hierarchy is retained.
@@ -151,6 +126,8 @@ This will create a new object register specified by given noun.
 names/create/noun
 ```
 
+This command supports the  `name` and `namespace` nouns.
+
 `create/name`
 
 This will create a new local name or namespaced or global name
@@ -171,7 +148,7 @@ This will create a new namespace.
 
 #### create/name
 
-`name` : The Name of the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
+`name` : The name of the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
 
 `namespace` : Optional field allows callers to specify the **namespace** that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global).
 
@@ -181,7 +158,7 @@ This will create a new namespace.
 
 #### `create/namespace`
 
-`namespace` : A name to identify the namespace. A hash of the name will determine the register address.
+`namespace` : A name to **identify** the namespace. A hash of the name will determine the register address.
 
 ### Results:
 
@@ -322,23 +299,19 @@ This will create a new name.
 
 ## `transfer`
 
-This will transfer the specified noun
+This will initiate transfer ownership of the specified noun
+
+```
+names/transfer/noun
+```
 
 #### transfer/name
 
-This will transfer ownership of global names or names created in a namespace (with a name in the format of mynamespace::myname) can be transferred.&#x20;
-
-#### Endpoint:
-
-`/names/transfer/name`
+This will transfer ownership of global names or names created in a namespace (a name in the format of mynamespace::myname) can be transferred.&#x20;
 
 #### transfer/namespace
 
 This will transfer ownership of an namespace&#x20;
-
-#### Endpoint:
-
-`/names/transfer/namespace`
 
 ### Parameters:
 
@@ -350,9 +323,9 @@ This will transfer ownership of an namespace&#x20;
 
 `address` : The register address of the name to be transferred. This is optional if the name is provided.
 
-`username` : The username identifying the user account (sig-chain) to transfer the name to. This is optional if the destination is provided.
+`recipient` : The username identifying the user account (sig-chain) to transfer the name to. This is optional if the destination is provided.
 
-`destination` : The genesis hash of the signature chain to transfer the the name to. This is optional if the username is provided.
+`recipient` : The username of the profile to transfer the the name to. This is optional if the username is provided.
 
 `expires` : This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
 

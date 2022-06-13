@@ -351,6 +351,8 @@ Retrieves information for a single object for a type specified by the noun
 names/get/noun
 ```
 
+This command  supports the `account`, `trust` and `token` nouns.
+
 `get/account`
 
 Retrieves information for a specified NXS or token account.
@@ -404,7 +406,7 @@ This will list off all of the object register details specified by the noun.&#x2
 finance/list/noun
 ```
 
-This command supports the `account, trust and token` nouns.
+This command  supports the `account`, `trust` and `token` nouns.
 
 #### list/account
 
