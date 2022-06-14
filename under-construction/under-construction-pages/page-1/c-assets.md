@@ -48,25 +48,26 @@ This command will return a sum of the balances for all accounts:
 }
 ```
 
-## `Supported Verbs`
+### `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-assets.md#create) - Generate a new object of supported type.\
-`get` - Get object of supported type.\
-`list` - List all objects owned by given user.\
-`update` - Update a specified object.\
-`transfer` - Transfer a specified object register.\
-`claim` - Claim a specified object register.\
-`history` - Generate the history of all last states.\
+[`burn`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#burn) - Remove a given token from circulation.\
+[`create`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#create) - Generate a new object of supported type.\
+[`credit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#credit) - Claim funds issued to account from debit.\
+[`debit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#debit) - Issue funds from supported type.\
+[`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
+[`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#list) - List all objects owned by given user.\
+[`history`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#history) - Generate the history of all last states.\
+[`transactions`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#transactions) - List all transactions that modified specified object.
 
-
-## `Supported Nouns`
+### `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`items`] - The default profile that controls all sub-profiles.\
-
+\[`assets`] - An object register containing a token-id and balance.\
+\[`any`] - An object selection noun allowing mixed accounts of different tokens.\
+\[`all`] - An object selection noun to collect all accounts for given token type.
 
 **Example:**
 

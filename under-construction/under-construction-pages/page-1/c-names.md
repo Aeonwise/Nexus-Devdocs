@@ -65,9 +65,9 @@ The following verbs are currently supported by this API command-set:
 [`create`](c-names.md#create) - Generate a new object of supported type.\
 [`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
 [`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`transfer`](c-names.md#transfer) - Transfer ownership of a specific object register.\
-[`claim`](c-names.md#claim) - Claim ownership of a specific object registers.\
-[`history`](c-names.md#history) - Generate the history of all last states.\
+`transfer` - Transfer ownership of a specific object register.\
+`claim` - Claim ownership of a specific object registers.\
+`history` - Generate the history of all last states.\
 
 
 ## `Supported Nouns`
@@ -140,7 +140,7 @@ This will create a new namespace.
 **NOTE** : Namespaces can only contain **lowercase letters, numbers, and periods (.)**.
 {% endhint %}
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -159,6 +159,8 @@ This will create a new namespace.
 #### `create/namespace`
 
 `namespace` : A name to **identify** the namespace. A hash of the name will determine the register address.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -203,7 +205,7 @@ This will create a new name.
 names/get/namespace
 ```
 
-#### Parameters:
+### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
@@ -312,7 +314,7 @@ This will transfer ownership of global names or names created in a namespace (a 
 
 This will transfer ownership of an namespace&#x20;
 
-#### Parameters:
+### Parameters:
 
 `pin` : The PIN for this signature chain.
 
@@ -351,11 +353,19 @@ This method will claim ownership of the specified noun by the recipient to compl
 
 Names that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
 
+#### Endpoint:
+
+`/names/claim/name`
+
 #### claim/namespace
 
 Namespaces that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
 
-#### Parameters:
+#### Endpoint:
+
+`/names/claim/namespace`
+
+### Parameters:
 
 `pin` : The PIN for this signature chain.
 
@@ -388,19 +398,23 @@ Namespaces that have been transferred need to be claimed by the recipient before
 
 This will get the history and ownership of the specified noun.
 
-```
-names/history/noun
-```
-
 #### history/name
 
 This will get the history of a name as well as it's ownership.&#x20;
+
+#### Endpoint:
+
+`/names/history/name`
 
 #### history/namespace
 
 This will get the history of a namespace as well as it's ownership.&#x20;
 
-#### Parameters:
+#### Endpoint:
+
+`/names/history/namespace`
+
+### Parameters:
 
 `session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name.
 

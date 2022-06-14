@@ -40,11 +40,11 @@ This command will return a sum of the balances for all accounts:
 
 The following verbs are currently supported by this API command-set:
 
-`create` - Generate a new object of supported type.\
-`credit` - Claim funds issued to account from debit.\
-`debit` - Issue funds from supported type.\
+[`create`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#create) - Generate a new object of supported type.\
+[`credit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#credit) - Claim funds issued to account from debit.\
+[`debit`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#debit) - Issue funds from supported type.\
 [`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
-`list` - List all objects owned by given user.\
+[`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#list) - List all objects owned by given user.\
 [`history`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#history) - Generate the history of all last states.\
 [`transactions`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#transactions) - List all transactions that modified specified object.
 
