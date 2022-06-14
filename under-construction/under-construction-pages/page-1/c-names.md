@@ -197,11 +197,12 @@ This will create a new name.
 names/get/name
 ```
 
-`create/namespace`
+`get/namespace`
 
 This will create a new name.
 
 ```
+names/get/namespace
 ```
 
 ### Parameters:
@@ -210,15 +211,15 @@ This will create a new name.
 
 #### get/namespace
 
-`name` : The name identifying the namespace. This is optional if the address is provided.
+`name` : The name **identifying** the namespace. This is optional if the address is provided.
 
-`address` : The register address of the namespace to be transferred. This is optional if the name is provided.
+`address` : The **register address** of the namespace to be transferred. This is optional if the name is provided.
 
 #### `get/name`
 
-`name` : The name identifying the name object. The name should be in the format username:name (for local names) or name.namespace (for names in a global namespace). If the `name` parameter is provided then all other parameters are ignored.
+`name` : The name **identifying** the name object. If the `name` parameter is provided then all other parameters are ignored.
 
-`register_address` : The register address to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if `name` is provided.
+`address` : The r**egister address** to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if `name` is provided.
 
 #### Results:
 
@@ -233,7 +234,7 @@ This will create a new name.
     "created": 1654698239,
     "modified": 1654698239,
     "type": "OBJECT",
-    "namespace": "nexenture",
+    "namespace": "valkeryie",
     "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5"
 }
 [Completed in 0.174417 ms]
