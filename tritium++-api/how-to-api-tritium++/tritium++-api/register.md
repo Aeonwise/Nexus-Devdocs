@@ -155,17 +155,17 @@ This method provides the user with the ability to directly access the object reg
 register/list/noun
 ```
 
-#### Parameters:
+### Parameters:
 
 The parameters used are Filtering -Query DSL, along with the [sorting / filtering](register.md#user-content-create)
 
-#### Return values:
+### Results:
 
-The return values depends on the specified noun, check the return values of the specified API.
+The results depends on the specified noun. Check the result for the verb `list` and the specified `noun` under its API.
 
 ## Register API with Query DSL
 
-A few register API calls which will showcase the power of registers, LLD, which is the database and  Query-DSL. This is going to be a powerful tool for developers.\
+A few register API calls which will showcase the power of registers, the LLD which is the database and the Query-DSL. This is going to be a powerful tool for developers.\
 
 
 {% hint style="info" %}

@@ -122,11 +122,8 @@ The above command will list all the transactions a debit contract withdrawing fr
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/balances`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#create)\
-[`get/stakeinfo`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#credit)\
-[`migrate/accounts`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#debit)\
-[`set/stake`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get)
-
+`get/info`\
+`sync/headers`\
 Direct endpoints support filters and operators.
 
 ***
@@ -302,4 +299,92 @@ The results depends on the specified noun.&#x20;
 
 `count` : Only returned if the caller requested `count` : true. This is the number of transactions made to/from the account.
 
-## ``
+## `get/info`
+
+Retrieves mining related data for the ledger.
+
+```
+ledger/get/info
+```
+
+#### Parameters:
+
+\-None-
+
+#### Return value JSON object:
+
+```
+{
+    "blocks": 20267,
+    "timestamp": 1554269575,
+    "stakeDifficulty": 0.0,
+    "primeDifficulty": 3.8210223,
+    "hashDifficulty": 0.0,
+    "stakeHeight"   : 1,
+    "primeHeight"   : 1,
+    "hashHeight"    : 2,
+    "primeReserve": 21852246.988376,
+    "hashReserve": 0.0,
+    "primeValue": 74.893038,
+    "hashValue": 1.0,
+    "pooledtx": 0,
+    "primesPerSecond": 6764,
+    "hashPerSecond": 0,
+    "totalConnections": 0
+}
+```
+
+#### Return values:
+
+`blocks` : The current block height.
+
+`timestamp` : The Unix timestamp of the last block.
+
+`stakeDifficulty` : The current difficulty of the stake channel.
+
+`primeDifficulty` : The current difficulty of the prime channel.
+
+`hashDifficulty` : The current difficulty of the hash channel.
+
+`stakeHeight` : The current number of blocks for the stake channel.
+
+`primeHeight` : The current number of blocks for the prime channel.
+
+`hashHeight` : The current number of blocks for the hash channel.
+
+`primeReserve` : The amount of NXS in the reserve balance for the prime channel.
+
+`hashReserve` : The amount of NXS in the reserve balance for the hash channel.
+
+`primeValue` : The block reward for the next prime block to be found.
+
+`hashValue` : The block reward for the next hash block to be found.
+
+`pooledtx` : The number of transactions currently in the mempool.
+
+`primesPerSecond` : The average number of primes per second currently being calculated by the whole network.
+
+`hashPerSecond` : The average number of hashes per second currently being calculated by the whole network.
+
+`totalConnections` : The number of connections to the mining LLP of this node.
+
+
+
+## `sync/headers`
+
+Sync headers for lite mode.
+
+```
+ledger/sync/headers
+```
+
+#### Parameters:
+
+\-None-
+
+#### Return value JSON object:
+
+```
+```
+
+#### Return values:
