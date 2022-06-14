@@ -71,11 +71,12 @@
     * [API Template](tritium++-api/how-to-api-tritium++/api-template.md)
     * [🗄 Filtering -Query DSL](tritium++-api/how-to-api-tritium++/register.md)
     * [⚙ Tritium++ API](tritium++-api/how-to-api-tritium++/tritium++-api/README.md)
+      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
       * [PROFILES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/README.md)
       * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/README.md)
-      * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
+      * [LEDGER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/ledger.md)
 
 ## Legacy
 
@@ -103,7 +104,6 @@
     * [Fin Methods](under-construction/under-construction-pages/page-1/fin-methods.md)
     * [NAMES METHODS](under-construction/under-construction-pages/page-1/names-methods.md)
     * [LEDGER METHODS](under-construction/under-construction-pages/page-1/ledger-methods.md)
-    * [LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)
     * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
     * [SYSTEM METHODS](<tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system (1).md>)
   * [SYSTEM METHODS](under-construction/under-construction-pages/system.md)

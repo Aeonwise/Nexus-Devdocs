@@ -30,8 +30,6 @@ finance/list/accounts/balance/sum
 
 This command will return a sum of the balances for all accounts:
 
-***
-
 ## `Supported Filters`
 
 This command-set supports single or csv field-name filters.
@@ -206,9 +204,11 @@ Create a new token object.
 
 #### Return values: <a href="#user-content-credit" id="user-content-credit"></a>
 
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
+`success` : Boolean flag indicating that creating the new object register was successful.&#x20;
 
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+`address` : The register address for the newly created account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
 
 ## `debit`
 
@@ -226,7 +226,7 @@ This deducts an amount of NXS or tokens from a token account or token address to
 
 #### debit/token
 
-This deducts an amount of tokens from a token generation account to send to a token account
+This deducts an amount of tokens from a token address to send to a token account
 
 #### Parameters:
 
@@ -240,7 +240,7 @@ This deducts an amount of tokens from a token generation account to send to a to
 
 `to` : The name or register address **identifying** the receiving account. This is optional if address\_to is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
-`address_to` : The **register address** of the account to send to. This is optional if name\_to is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+`address_to` : The **register address** of the account to send to. This is optional if `to` is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
 `reference` : Optional field allows callers to provide a r**eference**, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a `64-bit unsigned integer` in the range of 0 to 18446744073709551615
 
@@ -341,9 +341,11 @@ This command only supports the `account` noun.
 
 #### Return values:
 
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
+`success` : Boolean flag indicating that the debit was successful.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
 
 ## `get`
 
@@ -355,15 +357,15 @@ names/get/noun
 
 This command  supports the `account`, `trust` and `token` nouns.
 
-`get/account`
+#### `get/account`
 
 Retrieves information for a specified NXS or token account.
 
-`get/trust`
+#### `get/trust`
 
 Retrieves information for a specified `trust` account.
 
-`get/token`
+#### `get/token`
 
 Retrieves information for a specified token address.
 
@@ -449,6 +451,10 @@ The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorti
 ```
 
 #### Return values:&#x20;
+
+`owner` : The genesis hash of the profile that owns this account.
+
+`version` : The daemon software version.
 
 `created` : The UNIX timestamp when the account was created.
 
