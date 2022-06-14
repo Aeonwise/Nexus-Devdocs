@@ -7,7 +7,7 @@ description: Filtering using  Query - Domain specific Language
 The Query DSL(Domian Specific Language) allows to sort and filter recursively to any logical depth. This DSL can be used in conjunction with operators to sort, filter, and compute data in real-time.
 
 {% hint style="info" %}
-The Query DSL can be applied to all `list` API commands with a **`where`** parameter with the 5.1 release
+The Query DSL can be applied to all `list` and `get` API commands with a **`where`** parameter with the 5.1 release
 {% endhint %}
 
 ### `Selector Keys`
