@@ -170,7 +170,7 @@ Username is part of the profile credentials, is case-sensitive and cannot be cha
 Don't use the colon ' : ' at the end of the username.
 {% endhint %}
 
-### Results:
+### Result:
 
 #### Return value JSON object:
 

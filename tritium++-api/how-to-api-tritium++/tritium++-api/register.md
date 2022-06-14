@@ -161,7 +161,7 @@ The parameters used are Filtering -Query DSL, along with the [sorting / filterin
 
 ### Results:
 
-The results depends on the specified noun.&#x20;
+The results depends on the specified noun. Check the result for the verb `list` and the specified `noun` under its API.
 
 ## Register API with Query DSL
 
