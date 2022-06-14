@@ -1,16 +1,6 @@
 # c-INVOICES
 
-The Invoices API provides users and application developers the ability to issue and pay invoices on the Nexus blockchain. This API is a demonstration of how registers can be used to store arbitrary user data, and conditional contracts can be used to implement use-case rules. Invoices can be created and then sent to a recipient signature chain to be paid. The sending of the invoice is implemented using a TRANSFER contract, transferring ownership of the invoice register to the recipient. A conditional contract is applied to the TRANSFER operation preventing the recipient from claiming ownership unless the invoice amount is paid to the issuer.
-
-The API supports invoices issued in NXS or any other token on the Nexus blockchain. The token currency of the payment account determines the token which must be used to pay the invoice.
-
-Invoices have mandatory fields that must be included when creating the invoice, such as recipient, payment account, and invoice line items each with a unit amount and quantity. Beyond these, callers are free to include any other fields in the JSON that they desire. This provides a flexible and extensible API where calling applications can create invoices as basic or detailed as they require.
-
-**NOTE**: The invoice JSON data must not exceed the maximum register size of 1Kb.
-
-Once created an invoice is stored in a read-only register, so a permanent and immutable record of the invoice is stored on the blockchain. The invoice is then transferred to the recipient who can see it as an outstanding invoice to be paid. The transfer transaction cannot be claimed - i.e. it remains outstanding - until the required invoice amount is paid to the nominated payment account. Once paid, the transfer is automatically claimed, passing ownership of the invoice register to the recipient signature chain.
-
-The full supported endpoint of the invoice URI is as follows:
+The Invoices API provides users and application developers the ability to issue and pay invoices on the Nexus blockchain. The full supported endpoint of the invoices URI is as follows:
 
 ```
 invoices/verb/noun/filter/operator
