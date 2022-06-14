@@ -45,7 +45,7 @@ sessions/create/noun
 
 This command only supports the `local` noun.
 
-### Parameters:
+#### Parameters:
 
 `username` : Required to **identify.** The username to create the session for.
 
@@ -53,7 +53,7 @@ This command only supports the `local` noun.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-### Results:
+#### Return value JSON object:
 
 ```
 {
@@ -62,6 +62,8 @@ This command only supports the `local` noun.
 }
 [Completed in 1659.509829 ms]
 ```
+
+#### Return values:
 
 `genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
 
@@ -81,7 +83,7 @@ sessions/lock/noun
 
 These commands only supports the `local` noun.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -95,7 +97,7 @@ These commands only supports the `local` noun.
 
 `transactions` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
 
-### Results:
+#### Return value JSON object:
 
 ```
 {
@@ -108,6 +110,8 @@ These commands only supports the `local` noun.
 }
 [Completed in 1664.238652 ms]
 ```
+
+#### Return values:
 
 `unlocked` : This will contain child elements describing which functions the session is currently unlocked for
 
@@ -133,15 +137,15 @@ sessions/load/noun
 
 These commands only supports the `local` noun.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-### Results:
-
 #### `save/local`
+
+#### Return value JSON object:
 
 ```
 {
@@ -151,11 +155,15 @@ These commands only supports the `local` noun.
 [Completed in 2.962459 ms]
 ```
 
+#### Return values:
+
 `genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
 
 `success` : Boolean flag indicating that the session was saved successfully .
 
 #### `load/local`
+
+#### Return value JSON object:
 
 ```
 {
@@ -164,6 +172,8 @@ These commands only supports the `local` noun.
 }
 [Completed in 0.072625 ms]
 ```
+
+#### Return values:
 
 `genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
 
@@ -179,13 +189,13 @@ sessions/create/noun
 
 This command only supports the `local` noun.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-### Results:
+#### Return value JSON object:
 
 ```
 {
@@ -193,6 +203,8 @@ This command only supports the `local` noun.
 }
 [Completed in 1656.089478 ms]
 ```
+
+#### Return values:
 
 `success` : Boolean flag indicating that the session was terminated successfully .
 
@@ -206,11 +218,11 @@ sessions/status/noun
 
 This command only supports the `local` noun.
 
-### Parameters:
+#### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-### Results:
+#### Return value JSON object:
 
 ```
 {
@@ -226,6 +238,8 @@ This command only supports the `local` noun.
 }
 [Completed in 0.080333 ms]
 ```
+
+#### Return values:
 
 `genesis` : The profile genesis hash for the currently logged in user.
 

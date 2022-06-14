@@ -171,7 +171,7 @@ Create a new account to hold NXS or tokens
 
 Create a new token object.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -193,9 +193,7 @@ Create a new token object.
 
 `token` : Required by **noun** `account` as a _Base58_ encoded address or ticker name. Defaults to `NXS`.
 
-### Results:
-
-``
+#### Return value JSON object:
 
 ```
 {
@@ -205,6 +203,8 @@ Create a new token object.
 }
 [Completed in 4973.117685 ms]
 ```
+
+#### Return values: <a href="#user-content-credit" id="user-content-credit"></a>
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
 
@@ -228,7 +228,7 @@ This deducts an amount of NXS or tokens from a token account or token address to
 
 This deducts an amount of tokens from a token generation account to send to a token account
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -246,6 +246,8 @@ This deducts an amount of tokens from a token generation account to send to a to
 
 `expires` : Optional field allows callers to specify an **expiration** for the debit transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be credited by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
 
+#### Return value JSON object:
+
 ```
 {
     "success": true,
@@ -254,7 +256,7 @@ This deducts an amount of tokens from a token generation account to send to a to
 [Completed in 4979.735275 ms]
 ```
 
-### Return values:
+#### Return values:
 
 `success` : Boolean flag indicating that the debit was successful.&#x20;
 
@@ -278,7 +280,7 @@ Increment an amount received from a NXS account, token account or token address.
 
 Increment an amount of tokens received from a token account.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -286,7 +288,7 @@ Increment an amount of tokens received from a token account.
 
 `txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
-#### Return values:
+#### Return value JSON object:
 
 ```
 {
@@ -295,6 +297,8 @@ Increment an amount of tokens received from a token account.
 }
 [Completed in 4979.735275 ms]
 ```
+
+#### Return values:
 
 `success` : Boolean flag indicating that the debit was successful.&#x20;
 
@@ -310,7 +314,7 @@ finance/burn/noun
 
 This command only supports the `account` noun.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -324,11 +328,7 @@ This command only supports the `account` noun.
 
 `reference` : Optional field allows callers to provide a **reference**, which the recipient can then use to relate the transaction to an order number, invoice number etc. The reference is be a 64-bit unsigned integer in the range of 0 to 18446744073709551615
 
-### ****
-
-### Results:
-
-``
+#### Return value JSON object:
 
 ```
 {
@@ -338,6 +338,8 @@ This command only supports the `account` noun.
 }
 [Completed in 4973.117685 ms]
 ```
+
+#### Return values:
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be omitted.
 
@@ -365,15 +367,13 @@ Retrieves information for a specified `trust` account.
 
 Retrieves information for a specified token address.
 
-### Parameters:
+#### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
 `address` : The register address of the account/trust//token to be transferred. This is optional if the name is provided.
-
-### Results:
 
 #### Return value JSON object:
 
@@ -420,13 +420,13 @@ This lists the '`trust` account for the logged in user.
 
 This lists all the token addresses for the logged in user.
 
-### Parameters:
+#### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorting / filtering](finance.md#user-content-create)
 
-### Results:
+#### Return value JSON object:
 
 ```
 [
@@ -448,7 +448,7 @@ The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorti
 [Completed in 0.473708 ms]
 ```
 
-The results depends on the specified noun.&#x20;
+#### Return values:&#x20;
 
 `created` : The UNIX timestamp when the account was created.
 
@@ -496,15 +496,13 @@ This lists the '`trust` account for the logged in user.
 
 This lists all the token addresses for the logged in user.
 
-### Parameters:
+#### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
 `address` : The register address of the account/trust//token to be transferred. This is optional if the name is provided.
-
-### Results:
 
 #### Return value JSON object:
 
@@ -560,7 +558,7 @@ Increment an amount received from a NXS account or tokens from a token or token 
 
 Increment an amount of tokens received from a token account.
 
-### Parameters:
+#### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -571,8 +569,6 @@ Increment an amount of tokens received from a token account.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](finance.md#sorting-filtering) parameters.
-
-### Results:
 
 #### Return value JSON object:
 
@@ -623,6 +619,8 @@ This method supports the [Sorting / Filtering](finance.md#sorting-filtering) par
 ]
 [Completed in 2.187165 ms]
 ```
+
+#### Return values:
 
 `txid` : The transaction hash.
 

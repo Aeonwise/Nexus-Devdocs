@@ -10,12 +10,12 @@ The System API provides public access to information about this node. This inclu
 
 The following commands are direct endpoints and thus do not support the `verb` and `noun` structure available above.
 
-[`stop`](system-methods.md#stop)\
-[`get/info`](system-methods.md#get-info)\
-[`get/metrics`](system-methods.md#get-metrics)\
-[`list/peers`](system-methods.md#list-peers)\
-[`list/lisp-eids`](system-methods.md#list-lisp-eids)\
-[`validate/address`](system-methods.md#validate-address)
+[`stop`](<system (1).md#stop>)\
+[`get/info`](<system (1).md#get-info>)\
+[`get/metrics`](<system (1).md#get-metrics>)\
+[`list/peers`](<system (1).md#list-peers>)\
+[`list/lisp-eids`](<system (1).md#list-lisp-eids>)\
+[`validate/address`](<system (1).md#validate-address>)
 
 ### `stop`
 

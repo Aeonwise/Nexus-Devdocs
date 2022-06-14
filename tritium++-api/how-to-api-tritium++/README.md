@@ -140,8 +140,8 @@ The System API provides public access to information about this node. This inclu
 
 The System API can be found in the link below:
 
-{% content-ref url="../../under-construction/under-construction-pages/page-1/system-methods.md" %}
-[system-methods.md](../../under-construction/under-construction-pages/page-1/system-methods.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/system (1).md" %}
+[system (1).md](<../tritium++-overview/how-to-api-tritium++/tritium++-api/system (1).md>)
 {% endcontent-ref %}
 
 ### Invoices API
