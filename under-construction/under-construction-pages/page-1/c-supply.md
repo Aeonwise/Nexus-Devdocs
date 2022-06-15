@@ -102,7 +102,7 @@ The following verbs are currently supported by this API command-set:
 
 The following nouns are supported for this API command-set:
 
-\[`items`] - The default profile that controls all sub-profiles.\
+\[`item`] - The default profile that controls all sub-profiles.\
 
 
 ## `Sorting / Filtering`
@@ -149,19 +149,17 @@ Create a new object register specified by given noun.
 supply/create/noun
 ```
 
-This command does not support the This command only supports the `item` noun.
+This command only supports the `item` noun.
 
-### Parameters:
+#### Parameters:
 
-``
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`pin` : The PIN for this signature chain.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the asset should be created with. For single-user API mode the session should not be supplied.
+`name` : Optional **name** to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address.
 
-`name` : An optional name to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address.
-
-`format` : The format the caller is using to define the asset. Values can be `basic` (the default), `raw`, `JSON`, `ANSI` (not currently supported), or `XML` (not currently supported). This is an optional field and the value `basic` is assumed if omitted.
+`format` : The format the caller is using to **define** the asset. Values can be `basic` (the default), `raw`, `JSON`, `ANSI` (not currently supported), or `XML` (not currently supported). This is an optional field and the value `basic` is assumed if omitted.
 
 `data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
 
@@ -175,7 +173,7 @@ This command does not support the This command only supports the `item` noun.
 * `mutable` : The boolean field to indicate whether the field is writable (true) or read-only (false).
 * `maxlength`: Only applicable to `string` or `bytes` fields where `mutable`=true, this is the maximum number of characters (bytes) that can be stored in the field. If no maxlength parameter is provided then we will default the field size to the length of the default value rounded up to the nearest 64 bytes.
 
-### Results:
+#### Return value JSON object:
 
 ```
 {
@@ -184,7 +182,9 @@ This command does not support the This command only supports the `item` noun.
 }
 ```
 
-`success` : Boolean flag indicating that the session was saved successfully.
+#### Return values:
+
+`success` : Boolean flag indicating that the item was saved successfully.
 
 `txid` : The ID (hash) of the transaction that includes the created object.
 
@@ -193,32 +193,18 @@ This command does not support the This command only supports the `item` noun.
 Update an object register specified by given noun.
 
 ```
-profiles/update/noun
+supply/update/noun
 ```
 
 This command only supports the `item` noun.
 
-### Parameters:
+#### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`password` : The existing password for this signature chain.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`pin` : The existing pin for this signature chain.
-
-### update/credentials
-
-`new_password` : The new password to set for for this signature chain. This is optional if new\_pin is provided
-
-`new_pin` : The new pin to set for this signature chain. This is optional if new\_password is provided.
-
-### update/recovery
-
-`recovery` : The existing recovery seed for this signature chain. This is only required if an existing recovery seed is being updated via `new_recovery.`
-
-`new_recovery` : The new recovery seed to set on this sig chain. The recovery seed must be a minimum of 40 characters.
-
-### Results:
+#### Return value JSON object:
 
 ```
 {
@@ -228,9 +214,163 @@ This command only supports the `item` noun.
 [Completed in 18533.182336 ms]
 ```
 
+#### Return values:
+
 `success` : Boolean flag indicating that the session was saved successfully.
 
 `txid` : The ID (hash) of the transaction for the updated object.
+
+## `get`
+
+Retrieves information for a single object for a type specified by the noun
+
+```
+supply/get/noun
+```
+
+This command only supports the `item` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+
+`address` : The register address of the item. This is optional if the name is provided.
+
+#### Return value JSON object:
+
+## list
+
+Retrieves information for a single object for a type specified by the noun
+
+```
+supply/list/noun
+```
+
+This command only supports the `item` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+#### Return value JSON object:
+
+## `transfer`
+
+This will initiate ownership transfer of the specified noun.
+
+```
+names/transfer/noun
+```
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : Optional name **identifying** the item to be transferred. This is optional if the address is provided.
+
+`address` : Optional register address to **identify** the item to be transferred. This is optional if the name is provided.
+
+`recipient` : Required to **identify** the profile to transfer the item to. This is optional if the username is provided.
+
+`expires` : This optional field allows callers to specify an **expiration** for the transfer transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+
+#### Return value JSON object:
+
+```
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+
+#### Return values:
+
+`txid` : The ID (hash) of the transaction that includes the name transfer.
+
+`address` : The register address for this name.
+
+## `claim`
+
+This method will claim ownership of the specified noun by the recipient to complete the transaction.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`txid` : Required the **transaction ID** (hash) of the item transfer transaction for which is being claimed.
+
+`name` : Optional field allows the user to **rename** an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+
+#### Return value JSON object:
+
+```
+{
+    "claimed":
+    [
+        "25428293b6631d2ff55b3a931926fec920e407a56f7759495e36089914718d68",
+        "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2"
+    ],
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+}
+```
+
+#### Return values:
+
+`claimed`: Array of addresses for each name that was claimed by the transaction
+
+`txid` : The ID (hash) of the transaction that includes the name transfer.
+
+***
+
+## `history`
+
+This will get the history of changes to an item, including both the data and it's ownership.
+
+```
+supply/history/noun
+```
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : The name **identifying** the `item`.  This is optional if the address is provided.
+
+`address` : The **register address** of the item. This is optional if the name is provided.
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "type": "CREATE",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "modified": 1560492280,
+        "checksum": 5612332250743384100,
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "name": "paul",
+        "namespace": "test",
+        "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+    }
+
+]
+```
+
+#### Return values:
+
+
 
 ### `Methods`
 

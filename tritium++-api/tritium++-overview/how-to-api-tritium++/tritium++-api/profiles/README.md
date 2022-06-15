@@ -159,7 +159,7 @@ This method will initialize a `auth` crypto object register for login auth for s
 
 #### Parameters:
 
-`username` : Required to **authenticate.** The username to be associated with this profile. The  `genesis` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+`username` : Required to **authenticate.** The username to be associated with this profile. The  `profileID` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
 `password` : Required to **authenticate.** The password to be associated with this profile.
 
@@ -269,9 +269,9 @@ This command only supports the `master` noun.
 
 `username` : Required to **identify.** The username identifying the profile for recovery.
 
-`password` : Required to **recover.** The new password to be associated with this profile.
+`password` : Required to **set** a new password**.** The new password to be associated with this profile.
 
-`pin` : Required if **recover.** The new PIN to be associated with this profile.
+`pin` : Required to **set** a new pin**.** The new PIN to be associated with this profile.
 
 `recovery` : Required to **authenticate**. The existing recovery seed for this profile.&#x20;
 
@@ -320,7 +320,7 @@ This command only supports the `master` noun.
 
 #### Return values:
 
-`genesis` : The genesis hash for the currently logged in profile.
+`genesis` : The profile hash for the currently logged in profile.
 
 `confirmed` : Boolean flag indicating whether the genesis transaction for this profile has at least one confirmation.
 
