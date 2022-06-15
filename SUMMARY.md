@@ -77,6 +77,9 @@
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
       * [LEDGER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/ledger.md)
+      * [NAMES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/names.md)
+      * [SUPPLY](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/supply.md)
+      * [ASSETS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/assets.md)
 
 ## Legacy
 
@@ -90,13 +93,10 @@
 
 * [Under Construction Pages](under-construction/under-construction-pages/README.md)
   * [Page 1](under-construction/under-construction-pages/page-1/README.md)
-    * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
-    * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
     * [SUPPLY METHODS](under-construction/under-construction-pages/page-1/supply-methods.md)
     * [c-OBJECTS](under-construction/under-construction-pages/page-1/c-objects.md)
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
-    * [ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [ASSET METHODS](under-construction/under-construction-pages/page-1/asset-methods.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
     * [FINANCE METHODS](under-construction/under-construction-pages/page-1/finance-methods/README.md)

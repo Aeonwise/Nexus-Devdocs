@@ -352,7 +352,7 @@ This command only supports the `account` noun.
 Retrieves information for a single object for a type specified by the noun
 
 ```
-names/get/noun
+finance/get/noun
 ```
 
 This command  supports the `account`, `trust` and `token` nouns.
@@ -554,15 +554,19 @@ This will list off all of the transactions for the specified noun.
 finance/transactions/noun
 ```
 
-This command only supports the `master` noun.
+This command supports the `account, trust and token` nouns.
 
-#### transactions/account
+#### `transactions/account`
 
-Increment an amount received from a NXS account or tokens from a token or token account.
+List out all the transactions for the  NXS account or token account.
 
-#### tranactions/token
+#### `transactions/trust`
 
-Increment an amount of tokens received from a token account.
+List out all the transactions for the trust account
+
+#### `tranactions/token`
+
+List out all the transactions for the token address.
 
 #### Parameters:
 

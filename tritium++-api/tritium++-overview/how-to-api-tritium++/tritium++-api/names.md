@@ -62,21 +62,25 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-names.md#create) - Generate a new object of supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-`transfer` - Transfer ownership of a specific object register.\
-`claim` - Claim ownership of a specific object registers.\
-`history` - Generate the history of all last states.\
+[`create`](names.md#create) - Generate a new object of supported type.\
+[`get`](../../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`transfer`](names.md#transfer) - Transfer ownership of an object register to a recipient.\
+[`claim`](names.md#claim) - Claim ownership of an object register from a transfer.\
+[`history`](names.md#history) - Generate the history of all last states.\
+[`transactions`](names.md#transactions) - List all transactions that modified specified object.\
+[`update`](names.md#update) -  Update an object register\
 
 
 ## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`name`] - The default profile that controls all sub-profiles.\
-\[`namespace`] - A crypto object register for login auth.\
-
+\[`name`] -  An object register containing a name object. \
+\[`namespace`] - An object register containing a namespace object. \
+\[`global`] - An object register which is recognised globally on the network. \
+\[`local`] - An object register which is recognised only within the context of a user profile.\
+\[`any`] - An object selection noun allowing mixed names and namespaces.
 
 ## `Sorting / Filtering`
 
@@ -140,7 +144,7 @@ This will create a new namespace.
 **NOTE** : Namespaces can only contain **lowercase letters, numbers, and periods (.)**.
 {% endhint %}
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -159,8 +163,6 @@ This will create a new namespace.
 #### `create/namespace`
 
 `namespace` : A name to **identify** the namespace. A hash of the name will determine the register address.
-
-### Results:
 
 #### Return value JSON object:
 
@@ -205,7 +207,7 @@ This will create a new name.
 names/get/namespace
 ```
 
-### Parameters:
+#### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
@@ -314,7 +316,7 @@ This will transfer ownership of global names or names created in a namespace (a 
 
 This will transfer ownership of an namespace&#x20;
 
-### Parameters:
+#### Parameters:
 
 `pin` : The PIN for this signature chain.
 
@@ -353,19 +355,11 @@ This method will claim ownership of the specified noun by the recipient to compl
 
 Names that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
 
-#### Endpoint:
-
-`/names/claim/name`
-
 #### claim/namespace
 
 Namespaces that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
 
-#### Endpoint:
-
-`/names/claim/namespace`
-
-### Parameters:
+#### Parameters:
 
 `pin` : The PIN for this signature chain.
 
@@ -398,23 +392,19 @@ Namespaces that have been transferred need to be claimed by the recipient before
 
 This will get the history and ownership of the specified noun.
 
+```
+names/history/noun
+```
+
 #### history/name
 
 This will get the history of a name as well as it's ownership.&#x20;
-
-#### Endpoint:
-
-`/names/history/name`
 
 #### history/namespace
 
 This will get the history of a namespace as well as it's ownership.&#x20;
 
-#### Endpoint:
-
-`/names/history/namespace`
-
-### Parameters:
+#### Parameters:
 
 `session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name.
 
@@ -460,4 +450,162 @@ The return value is a JSON array of objects for each entry in the names history:
 
 `register_address` : The register address that this name points to at this point in history
 
+## `transactions`
+
+This will list off all of the transactions for the specified noun.
+
+```
+names/transactions/noun
+```
+
+This command supports the `account, trust and token` nouns.
+
+#### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
+
+* `default` : hash
+* `summary` : type, version, sequence, timestamp, operation, and confirmations.
+* `detail` : genesis, nexthash, prevhash, pubkey and signature.
+
+This method supports the [Sorting / Filtering](names.md#sorting-filtering) parameters.
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "txid": "0123517ca0f1ca110c7b07de9e3c9b33ccbe717f96911e1449b7c73bb9695fbc9c14a58f01f5fb7e9b64756f658af91daec9f0f579df2fad8df61843defae833",
+        "type": "tritium user",
+        "version": 4,
+        "sequence": 23,
+        "timestamp": 1655061950,
+        "blockhash": "8b206ab2ee4b46a835f74af0ff5d4e0b395acdb94d66468a24083f2a5fd01a07a93956774001bab1a801d53d7bf6ed60ee84a573650eef1a9feaf6fa9beb308bd20b567663cc7ec4f85796b261164ef3452ebfaa13a60141b42fc49d6d2eb2792440925b1b19248ad9fe65e01d3742f2d3dec2817c56c8e4f6e03a10f4147308",
+        "confirmations": 4,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "DEBIT",
+                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
+                "amount": 1.0,
+                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "ticker": "XYZ",
+                "reference": 57891358795
+            }
+        ]
+    },
+    {
+        "txid": "01f1a3f9227a69382f9811a5b1497a865ace17ad83b03118b24f875f6ade83117887c35d08375c259aa1076b91f42206110314756a11a943760bb5c0dd0523d7",
+        "type": "tritium user",
+        "version": 4,
+        "sequence": 21,
+        "timestamp": 1655060214,
+        "blockhash": "048f3b308e8bd8c1aa31ec1ec2e136a9ccc91ec4498283d07fc5d0a00c8576e2c199567a44058222961f474626c6f2c5d7e774eee34c34f98acafaeb50b7abaaade7e9c641fe9727fe62533b1ec6bf2f75ffbf19d17d74671e2458bd73b6407b4bba1951fc84e1af11c2c4fbce1d05d7739e910fdb8a37197c1c422521e2e9f3",
+        "confirmations": 6,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "DEBIT",
+                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
+                "amount": 1.0,
+                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "ticker": "XYZ",
+                "reference": 0
+            }
+        ]
+    }
+]
+[Completed in 2.187165 ms]
+```
+
+#### Return values:
+
+`txid` : The transaction hash.
+
+`type` : The description of the transaction (`legacy` | `tritium base` | `trust` | `genesis` | `user`).
+
+`version` : The serialization version of the transaction.
+
+`sequence` : The sequence number of this transaction within the signature chain.
+
+`timestamp` : The Unix timestamp of when the transaction was created.
+
+`blockhash` : The hash of the block that this transaction is included in. Blank if not yet included in a block.
+
+`confirmations` : The number of confirmations that this transaction obtained by the network.
+
+`genesis` : The signature chain genesis hash.
+
+`nexthash` : The hash of the next transaction in the sequence.
+
+`prevhash` : the hash of the previous transaction in the sequence.
+
+`pubkey` : The public key.
+
+`signature` : The signature hash.
+
+`contracts` : The array of contracts bound to this transaction and their details with opcodes.\
+{\
+`id` : The sequential ID of this contract within the transaction.
+
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+
+`txid` : The transaction that was credited / claimed.
+
+`contract` : The ID of the contract within the transaction that was credited / claimed.
+
+`proof` : The register address proving the credit.
+
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+
+`amount` : the token amount of the transaction.
+
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+
+`token_name` : The name of the token that the transaction relates to.
+
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+
 ***
+
+## `update`
+
+This method provides the user with the ability to update fields specified by the noun
+
+```
+names/update/noun
+```
+
+This command does not support the `master` or `auth` nouns.
+
+#### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+}
+[Completed in 18533.182336 ms]
+```
+
+#### Return values:

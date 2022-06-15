@@ -147,7 +147,7 @@ This will create a new signature chain or initialize the auth key for older sign
 profiles/create/noun
 ```
 
-This command does not support the `credentials` or `recovery` nouns.
+This command only supports the `master` and `auth` nouns.
 
 #### create/master
 
@@ -155,7 +155,7 @@ This will create a new master profile specified by given noun, for use on the ne
 
 #### create/auth
 
-This method will initialize a `auth` crypto object register for login auth for signature chains created with Tritium, to be compatible with profiles with Tritium++. Existing users need to first convert their Tritium accounts to be compatible and login with Tritium++ profiles. The interface wallet will do this automatically.
+This method will initialize a `auth` crypto object register for login auth for signature chains created with the early release of Tritium, to be compatible with profiles with Tritium++. Existing users need to first convert their Tritium accounts to be compatible to login with Tritium++ profiles.&#x20;
 
 #### Parameters:
 
@@ -193,23 +193,15 @@ This method provides the user with the ability to change the password, pin, or r
 profiles/update/noun
 ```
 
-This command does not support the `master` or `auth` nouns.
+This command only supports the `credentials` and `recovery` nouns.
 
 #### update/credentials
 
 This method provides the user with the ability to change the password, pin for this signature chain. Updating the credentials will also result in each of the keys in the sig chain's Crypto object being regenerated based on the new password / pin.
 
-#### Endpoint:
-
-`/profiles/update/credentials`
-
 #### update/recovery
 
 This method provides the user with the ability to set or change the restore seed for this signature chain.
-
-#### Endpoint:
-
-`/profiles/update/credentials`
 
 #### Parameters:
 
@@ -251,9 +243,9 @@ NOTE
 
 #### Return values:
 
-`success` : Boolean flag indicating that the session was saved successfully.
+`success` : Boolean flag indicating that the profile was updated successfully.
 
-`txid` : The ID (hash) of the transaction for the updated object.
+`txid` : The ID (hash) of the transaction for the updated profile .
 
 ## `recover`
 

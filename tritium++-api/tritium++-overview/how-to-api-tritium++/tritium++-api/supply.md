@@ -6,41 +6,16 @@ description: SUPPLY API
 
 The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a `data` value and this value can be updated over time. Items are stored in an APPEND register, meaning that changes to the item are recorded in sequence in the register. This in turn means that a history of changes to the `data` field, as well as the history of ownership of the item, can be obtained.
 
-The full supported endpoint of the profiles URI is as follows:
+The full supported endpoint of the supply URI is as follows:
 
 ```
-profiles/verb/noun/filter/operator
+supply/verb/noun/filter
 ```
 
 The minimum required components of the URI are:
 
 ```
-profiles/verb/noun
-```
-
-## `Supported Operators`
-
-The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
-
-[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
-[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
-
-**Example:**
-
-```
-supply/transactions/master/contracts.amount/sum
-```
-
-**Result:**
-
-This command will return a sum of the balances for all accounts:
-
-```
-{
-    "amount": 5150.0
-}
-[Completed in 2.440583 ms]
+supply/verb/noun
 ```
 
 ## `Supported Filters`
@@ -89,12 +64,12 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-supply.md#create) - Generate a new object of supported type.\
+[`create`](supply.md#create) - Generate a new object of supported type.\
 `get` - Get object of supported type.\
 `list` - List all objects owned by given user.\
 `update` - Update a specified object.\
 `transfer` - Transfer a specified object register.\
-`claim` - Claim a specified object register.\
+`claim` - Claim ownership of an object register from a transfer.\
 `history` - Generate the history of all last states.\
 
 
@@ -102,8 +77,10 @@ The following verbs are currently supported by this API command-set:
 
 The following nouns are supported for this API command-set:
 
-\[`item`] - The default profile that controls all sub-profiles.\
-
+\[`item`] - An object register containing an item object.\
+\[`raw`] - An object register containing raw object.\
+\[`readonly`] - An object register containing read-only object.\
+\[`any`] - An object selection noun allowing mixed items.
 
 ## `Sorting / Filtering`
 
@@ -159,7 +136,7 @@ This command only supports the `item` noun.
 
 `name` : Optional **name** to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address.
 
-`format` : The format the caller is using to **define** the asset. Values can be `basic` (the default), `raw`, `JSON`, `ANSI` (not currently supported), or `XML` (not currently supported). This is an optional field and the value `basic` is assumed if omitted.
+`format` : Required to **identify** the format used to define the asset. Values can be `basic` (the default), `raw`, `JSON`, `ANSI` (not currently supported), or `XML` (not currently supported). This is an optional field and the value `basic` is assumed if omitted.
 
 `data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
 
@@ -203,6 +180,12 @@ This command only supports the `item` noun.
 `pin` : Required if **authenticate**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : Optional to  **identify** the item to update.  This is optional if the `address` is provided.
+
+`address` : Optional **register address** to identify the `item` to update. This is optional if the `name` is provided.
+
+`data` : The new value of the data field in this item
 
 #### Return value JSON object:
 
