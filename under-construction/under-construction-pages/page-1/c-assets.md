@@ -190,4 +190,160 @@ There is a limit of 1KB for asset data to be saved in the register, excluding th
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
 
-## ``
+## `get`
+
+Retrieves information for a single object for a type specified by the noun
+
+```
+assets/get/noun
+```
+
+This command only supports the `asset` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+
+`address` : The register address of the item. This is optional if the name is provided.
+
+#### Return value JSON object:
+
+## list
+
+Retrieves information for a single object for a type specified by the noun
+
+```
+assets/list/noun
+```
+
+This command only supports the `asset` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+#### Return value JSON object:
+
+## `transfer`
+
+This will initiate ownership transfer of the specified noun.
+
+```
+assets/transfer/noun
+```
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : Optional name **identifying** the item to be transferred. This is optional if the address is provided.
+
+`address` : Optional register address to **identify** the item to be transferred. This is optional if the name is provided.
+
+`recipient` : Required to **identify** the profile to transfer the item to. This is optional if the username is provided.
+
+`expires` : This optional field allows callers to specify an **expiration** for the transfer transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+
+#### Return value JSON object:
+
+```
+{
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+}
+```
+
+#### Return values:
+
+`txid` : The ID (hash) of the transaction that includes the name transfer.
+
+`address` : The register address for this name.
+
+## `claim`
+
+This method will claim ownership of the specified noun by the recipient to complete the transaction.
+
+```
+assets/claim/noun
+```
+
+This command only supports the `asset` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`txid` : Required the **transaction ID** (hash) of the item transfer transaction for which is being claimed.
+
+`name` : Optional field allows the user to **rename** an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+
+#### Return value JSON object:
+
+```
+{
+    "claimed":
+    [
+        "25428293b6631d2ff55b3a931926fec920e407a56f7759495e36089914718d68",
+        "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2"
+    ],
+    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+}
+```
+
+#### Return values:
+
+`claimed`: Array of addresses for each name that was claimed by the transaction
+
+`txid` : The ID (hash) of the transaction that includes the name transfer.
+
+***
+
+## `history`
+
+This will get the history of changes to an item, including both the data and it's ownership.
+
+```
+supply/history/noun
+```
+
+This command only supports the `asset` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : The name **identifying** the `item`.  This is optional if the address is provided.
+
+`address` : The **register address** of the item. This is optional if the name is provided.
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "type": "CREATE",
+        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
+        "modified": 1560492280,
+        "checksum": 5612332250743384100,
+        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
+        "name": "paul",
+        "namespace": "test",
+        "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+    }
+
+]
+```
+
+####

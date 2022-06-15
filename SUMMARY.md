@@ -92,6 +92,7 @@
   * [Page 1](under-construction/under-construction-pages/page-1/README.md)
     * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
     * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
+    * [SUPPLY METHODS](under-construction/under-construction-pages/page-1/supply-methods.md)
     * [c-OBJECTS](under-construction/under-construction-pages/page-1/c-objects.md)
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
