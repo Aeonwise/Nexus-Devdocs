@@ -2,7 +2,7 @@
 description: ASSETS API
 ---
 
-# c-ASSETS
+# ASSETS
 
 An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports several formats for defining the object data structures giving users and developers varying levels of functionality, including per-field type definition and mutability.
 
@@ -12,10 +12,10 @@ The `JSON`, `ANSI`, and `XML` \~formats allow callers to provide a detailed defi
 
 The `raw` format differs from the other formats in that the asset data is not stored in object register, but instead is stored in a read-only state register. The raw format is useful when developers wish to store arbitrary binary data on the Nexus blockchain, without incurring the overhead of defining an object.
 
-The full supported endpoint of the finance URI is as follows:
+The full supported endpoint of the assets URI is as follows:
 
 ```
-assets/verb/noun/filter/operator
+assets/verb/noun/filter
 ```
 
 The minimum required components of the URI are:
@@ -52,7 +52,7 @@ This command will return a sum of the balances for all accounts:
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-assets.md#create) - Generate a new object of supported type.\
+[`create`](assets.md#create) - Generate a new object of supported type.\
 `get` - Get object of supported type.\
 `list` - List all objects owned by given user.\
 `update` - Update a specified object.\
@@ -65,7 +65,12 @@ The following verbs are currently supported by this API command-set:
 
 The following nouns are supported for this API command-set:
 
-\[`items`] - The default profile that controls all sub-profiles.\
+\[`assets`] - The default profile that controls all sub-profiles.\
+\[`raw`] - Claim a specified object register.\
+\[`readonly`] - Claim a specified object register.\
+\[`any`] - Claim a specified object register.\
+\[`schema`] - Generate the history of all last states.\
+\
 
 
 **Example:**
@@ -74,26 +79,9 @@ The following nouns are supported for this API command-set:
 assets/list/asset
 ```
 
-The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
+The above command will list all the assets for an account.
 
-***
-
-### ``
-
-### `Direct Endpoints`
-
-The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
-
-[`get/balances`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#create)\
-[`get/stakeinfo`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#credit)\
-[`migrate/accounts`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#debit)\
-[`set/stake`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#get)
-
-Direct endpoints support filters and operators.
-
-***
-
-### `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
+## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
 
 The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
 
@@ -129,21 +117,15 @@ limit=100.10
 
 This above will map to the parameters of `limit=100` and `offset=10`.
 
-```
-finance/get/balances/balance/sum
-```
-
-***
-
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
 Create a new object register specified by given noun.
 
 ```
-finance/create/noun
+assets/create/noun
 ```
 
-This command does not support the `any` or `all` nouns.
+This command supports the `asset` noun.
 
 #### Parameters:
 

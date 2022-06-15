@@ -96,7 +96,7 @@
     * [c-OBJECTS](under-construction/under-construction-pages/page-1/c-objects.md)
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
-    * [c-ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
+    * [ASSETS](under-construction/under-construction-pages/page-1/assets.md)
     * [ASSET METHODS](under-construction/under-construction-pages/page-1/asset-methods.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
     * [FINANCE METHODS](under-construction/under-construction-pages/page-1/finance-methods/README.md)

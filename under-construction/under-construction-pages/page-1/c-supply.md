@@ -78,7 +78,9 @@ The following verbs are currently supported by this API command-set:
 The following nouns are supported for this API command-set:
 
 \[`item`] - The default profile that controls all sub-profiles.\
-
+\[`raw`] - Generate the history of all last states.\
+\[`readonly`] - Claim a specified object register.\
+\[`any`] - Claim a specified object register.
 
 ## `Sorting / Filtering`
 
