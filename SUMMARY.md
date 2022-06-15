@@ -77,9 +77,9 @@
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
       * [LEDGER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/ledger.md)
-      * [NAMES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/names.md)
-      * [SUPPLY](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/supply.md)
-      * [ASSETS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/assets.md)
+      * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
+      * [ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
+      * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
 
 ## Legacy
 

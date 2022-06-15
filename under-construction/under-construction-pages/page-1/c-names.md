@@ -7,7 +7,7 @@ description: NAMES API
 Names and Namespaces are special kinds of object registers that are used as locators to other object registers in the blockchain. The full supported endpoint of the Names URI is as follows:
 
 ```
-names/verb/noun/filter
+names/verb/noun/filter/opertor
 ```
 
 The minimum required components of the URI are:
@@ -62,14 +62,14 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](names.md#create) - Generate a new object of supported type.\
-[`get`](../../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`transfer`](names.md#transfer) - Transfer ownership of an object register to a recipient.\
-[`claim`](names.md#claim) - Claim ownership of an object register from a transfer.\
-[`history`](names.md#history) - Generate the history of all last states.\
-[`transactions`](names.md#transactions) - List all transactions that modified specified object.\
-[`update`](names.md#update) -  Update an object register\
+[`create`](c-names.md#create) - Generate a new object of supported type.\
+[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
+[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`transfer`](c-names.md#transfer) - Transfer ownership of an object register to a recipient.\
+[`claim`](c-names.md#claim) - Claim ownership of an object register from a transfer.\
+[`history`](c-names.md#history) - Generate the history of all last states.\
+[`transactions`](c-names.md#transactions) - List all transactions that modified specified object.\
+[`update`](c-names.md#update) -  Update an object register\
 
 
 ## `Supported Nouns`
@@ -470,7 +470,7 @@ This command supports the `account, trust and token` nouns.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-This method supports the [Sorting / Filtering](names.md#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](c-names.md#sorting-filtering) parameters.
 
 #### Return value JSON object:
 

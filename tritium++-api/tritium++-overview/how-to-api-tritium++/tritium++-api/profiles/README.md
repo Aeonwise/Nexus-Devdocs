@@ -463,7 +463,7 @@ This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 `confirmations` : The number of confirmations that this transaction obtained by the network.
 
-`genesis` : The signature chain genesis hash.
+`genesis` : The profile username hash.
 
 `nexthash` : The hash of the next transaction in the sequence.
 

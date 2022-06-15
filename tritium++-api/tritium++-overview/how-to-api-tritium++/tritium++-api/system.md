@@ -254,8 +254,6 @@ system/get/metrics
 &#x20;  `ambassador` : Amount of NXS in the prime channel reserves.\
 }
 
-***
-
 ## `list/peers`
 
 Returns a summary of information about the peers currently connected to this node. The return array is sorted by the peer `score` value.
@@ -323,8 +321,6 @@ system/list/peers
 `fails` : The number of failed connection attempts to this peer since this node started.
 
 `score` : The score value assigned to this peer based on latency and other connection statistics.
-
-***
 
 ## `list\lisp-eids`
 

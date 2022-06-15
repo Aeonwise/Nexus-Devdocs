@@ -83,8 +83,8 @@ The following verbs are currently supported by this API command-set:
 [`burn`](finance.md#user-content-create-2) - Remove a given token from circulation.\
 [`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
 [`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`history`](../../../getting-started/tritium++-api/broken-reference/) - Generate the history of all last states.\
-[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
+[`history`](finance.md#history) - Generate the history of all last states.\
+[`transactions`](finance.md#transactions) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 

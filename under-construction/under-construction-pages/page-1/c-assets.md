@@ -8,7 +8,7 @@ An asset is a user-defined data structure that is stored in an object register, 
 
 The `basic` format allows callers to define an asset in terms of simple key-value pairs. It assumes that all fields are read-only and all values are stored using the string data type. `basic` assets are always immutable and cannot be updated once created.
 
-The `JSON`, `ANSI`, and `XML` \~formats allow callers to provide a detailed definition of the asset data structure, with each field defined with a specific data type and mutability. Assets defined with one of the complex formats can be updated after their initial creation.
+The `readonly`, `raw`, `basic` and `JSON` formats allow callers to provide a detailed definition of the asset data structure, with each field defined with a specific data type and mutability. Assets defined with one of the complex formats can be updated after their initial creation.
 
 The `raw` format differs from the other formats in that the asset data is not stored in object register, but instead is stored in a read-only state register. The raw format is useful when developers wish to store arbitrary binary data on the Nexus blockchain, without incurring the overhead of defining an object.
 
@@ -52,15 +52,15 @@ This command will return a sum of the balances for all accounts:
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](assets.md#create) - Generate a new object of supported type.\
-`get` - Get object of supported type.\
-`list` - List all objects owned by given user.\
+[`create`](c-assets.md#create) - Generate a new object of supported type.\
+[`get`](c-assets.md#get) - Get object of supported type.\
+[`list`](c-assets.md#list) - List all objects owned by given user.\
 `update` - Update a specified object.\
-`transfer` - Transfer a specified object register.\
-`claim` - Claim ownership of an object register from a transfer.\
-`tokenize` - To represent ownership of an asset object with a token object.\
+[`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
+[`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
+[`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
 `transactions` - List all transactions that modified specified object.\
-`history` - Generate the history of all last states.\
+[`history`](c-assets.md#history) - Generate the history of all last states.\
 
 
 ## `Supported Nouns`
@@ -304,6 +304,53 @@ This command only supports the `asset` noun.
 
 `txid` : The ID (hash) of the transaction that includes the claimed asset.
 
+## `tokenize`
+
+This method will tokenize an asset into fungible tokens that represent ownership
+
+```
+assets/tokenize/noun
+```
+
+This command only supports the `asset` noun.
+
+#### Parameters:
+
+`pin` : Required if **authenticate**. The PIN for this profile.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`name` : Optional field allows the user to **rename** an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+
+`name` : The name identifying the asset to be tokenized. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+
+`address` : The register address of the asset to be tokenized. This is optional if the name is provided.
+
+`token_name` : The name of a token to use to tokenize the asset. The name should be in username:token name format. `token` can be supplied as an alternative to `token_name`.
+
+{% hint style="info" %}
+Create the token beforehand and use the token\_name or token address to tokenize the asset
+{% endhint %}
+
+`token` : The register address of a token to use to tokenize the asset. `token_name` can be supplied as an alternative to `token`.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "01f35304d41d00b002ca02d3bd9cf6cfeb134f5c454d4b6f5a355e35ffc557cfb3756834f3cf5cbeaf98da6773adcaaeca80154d15e449d4876ddf35c0b895cf"
+}
+[Completed in 4978.949420 ms]
+
+```
+
+#### Return values:
+
+`success` : Boolean flag indicating that the asset tokenization  was successful.
+
+`txid` : The ID (hash) of the transaction that includes the claimed asset.
+
 ## `history`
 
 This will get the history of changes to an item, including both the data and it's ownership.
@@ -342,4 +389,138 @@ This command only supports the `asset` noun.
 ]
 ```
 
-####
+#### Return values:
+
+## `transactions`
+
+This will list off all of the transactions for the specified noun.
+
+```
+assets/transactions/noun
+```
+
+This command supports the `account, trust and token` nouns.
+
+#### ``
+
+#### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
+
+* `default` : hash
+* `summary` : type, version, sequence, timestamp, operation, and confirmations.
+* `detail` : genesis, nexthash, prevhash, pubkey and signature.
+
+This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) parameters.
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "txid": "0123517ca0f1ca110c7b07de9e3c9b33ccbe717f96911e1449b7c73bb9695fbc9c14a58f01f5fb7e9b64756f658af91daec9f0f579df2fad8df61843defae833",
+        "type": "tritium user",
+        "version": 4,
+        "sequence": 23,
+        "timestamp": 1655061950,
+        "blockhash": "8b206ab2ee4b46a835f74af0ff5d4e0b395acdb94d66468a24083f2a5fd01a07a93956774001bab1a801d53d7bf6ed60ee84a573650eef1a9feaf6fa9beb308bd20b567663cc7ec4f85796b261164ef3452ebfaa13a60141b42fc49d6d2eb2792440925b1b19248ad9fe65e01d3742f2d3dec2817c56c8e4f6e03a10f4147308",
+        "confirmations": 4,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "DEBIT",
+                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
+                "amount": 1.0,
+                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "ticker": "XYZ",
+                "reference": 57891358795
+            }
+        ]
+    },
+    {
+        "txid": "01f1a3f9227a69382f9811a5b1497a865ace17ad83b03118b24f875f6ade83117887c35d08375c259aa1076b91f42206110314756a11a943760bb5c0dd0523d7",
+        "type": "tritium user",
+        "version": 4,
+        "sequence": 21,
+        "timestamp": 1655060214,
+        "blockhash": "048f3b308e8bd8c1aa31ec1ec2e136a9ccc91ec4498283d07fc5d0a00c8576e2c199567a44058222961f474626c6f2c5d7e774eee34c34f98acafaeb50b7abaaade7e9c641fe9727fe62533b1ec6bf2f75ffbf19d17d74671e2458bd73b6407b4bba1951fc84e1af11c2c4fbce1d05d7739e910fdb8a37197c1c422521e2e9f3",
+        "confirmations": 6,
+        "contracts": [
+            {
+                "id": 0,
+                "OP": "DEBIT",
+                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
+                "amount": 1.0,
+                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "ticker": "XYZ",
+                "reference": 0
+            }
+        ]
+    }
+]
+[Completed in 2.187165 ms]
+```
+
+#### Return values:
+
+`txid` : The transaction hash.
+
+`type` : The description of the transaction (`legacy` | `tritium base` | `trust` | `genesis` | `user`).
+
+`version` : The serialization version of the transaction.
+
+`sequence` : The sequence number of this transaction within the signature chain.
+
+`timestamp` : The Unix timestamp of when the transaction was created.
+
+`blockhash` : The hash of the block that this transaction is included in. Blank if not yet included in a block.
+
+`confirmations` : The number of confirmations that this transaction obtained by the network.
+
+`genesis` : The signature chain genesis hash.
+
+`nexthash` : The hash of the next transaction in the sequence.
+
+`prevhash` : the hash of the previous transaction in the sequence.
+
+`pubkey` : The public key.
+
+`signature` : The signature hash.
+
+`contracts` : The array of contracts bound to this transaction and their details with opcodes.\
+{\
+`id` : The sequential ID of this contract within the transaction.
+
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+
+`for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
+
+`txid` : The transaction that was credited / claimed.
+
+`contract` : The ID of the contract within the transaction that was credited / claimed.
+
+`proof` : The register address proving the credit.
+
+`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
+
+`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
+
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+
+`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
+
+`amount` : the token amount of the transaction.
+
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+
+`token_name` : The name of the token that the transaction relates to.
+
+`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
+
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+
+***

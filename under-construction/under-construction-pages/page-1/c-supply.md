@@ -64,13 +64,14 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](supply.md#create) - Generate a new object of supported type.\
+[`create`](c-supply.md#create) - Generate a new object of supported type.\
 `get` - Get object of supported type.\
 `list` - List all objects owned by given user.\
 `update` - Update a specified object.\
 `transfer` - Transfer a specified object register.\
 `claim` - Claim ownership of an object register from a transfer.\
 `history` - Generate the history of all last states.\
+`transactions` - List all transactions that modified specified object.\
 
 
 ## `Supported Nouns`
