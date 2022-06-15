@@ -582,3 +582,31 @@ This method supports the [Sorting / Filtering](c-names.md#sorting-filtering) par
 `object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
 
 ***
+
+## `update`
+
+This method provides the user with the ability to update fields specified by the noun
+
+```
+names/update/noun
+```
+
+This command does not support the `master` or `auth` nouns.
+
+#### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+}
+[Completed in 18533.182336 ms]
+```
+
+#### Return values:

@@ -18,7 +18,7 @@ The minimum required components of the URI are:
 system/verb/noun
 ```
 
-### `Direct Endpoints`
+## `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
@@ -29,9 +29,9 @@ The following commands are direct endpoints and thus do not support the above `v
 [`list/lisp-eids`](broken-reference)\
 [`validate/address`](broken-reference)
 
-***
+Direct endpoints support filters and operators.
 
-### `stop`
+## `stop`
 
 Initiate node shutdown sequence.
 
@@ -47,7 +47,7 @@ system/stop
 
 ***
 
-### `get/info`
+## `get/info`
 
 Returns a summary of information about this node
 
@@ -127,7 +127,7 @@ system/get/metrics
 
 ***
 
-### `get/metrics`
+## `get/metrics`
 
 Returns metrics and statistics for the ledger, registers, etc
 
@@ -256,7 +256,7 @@ system/get/metrics
 
 ***
 
-### `list/peers`
+## `list/peers`
 
 Returns a summary of information about the peers currently connected to this node. The return array is sorted by the peer `score` value.
 
@@ -326,7 +326,7 @@ system/list/peers
 
 ***
 
-### `list\lisp-eids`
+## `list\lisp-eids`
 
 This will return the LISP Endpoint Indentifers (EID's) currently configured for this node. If the lispers.net API is not running / available then this will return an empty array.
 
@@ -381,7 +381,7 @@ system/list/lisp-eids
 
 ***
 
-### `validate/address`
+## `validate/address`
 
 Validates a register / legacy address .
 

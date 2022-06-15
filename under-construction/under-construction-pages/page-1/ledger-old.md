@@ -2,7 +2,7 @@
 description: LEDGER API
 ---
 
-# LEDGER
+# Ledger old
 
 The Ledger API provides users with access to data held by the ledger such as blocks and transactions. This API does not need  the user to be logged in except for the `void` verb. The full supported endpoint of the ledger URI is as follows:
 
@@ -98,8 +98,8 @@ The following verbs are currently supported by this API command-set:
 
 [`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
 [`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#list) - List all objects owned by given session.\
-[`submit`](c-ledger.md#submit) - To submit the modified object state to the mempool.\
-[`void`](c-ledger.md#void) - To void a debit transaction and credit it back to the same account.
+[`submit`](ledger-old.md#submit) - To submit the modified object state to the mempool.\
+[`void`](ledger-old.md#void) - To void a debit transaction and credit it back to the same account.
 
 ### `Supported Nouns`
 
@@ -280,7 +280,7 @@ Retrieves information for a specified token address.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-The parameters used are [Query DSL](c-ledger.md#query-dsl), along with the [sorting / filtering](c-ledger.md#user-content-create)
+The parameters used are [Query DSL](ledger-old.md#query-dsl), along with the [sorting / filtering](ledger-old.md#user-content-create)
 
 #### `list/blocks`
 
@@ -423,8 +423,8 @@ This command  supports the `transaction` noun.
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/info`](c-ledger.md#get-info)\
-[`sync/headers`](c-ledger.md#sync-headers)\
+[`get/info`](ledger-old.md#get-info)\
+[`sync/headers`](ledger-old.md#sync-headers)\
 Direct endpoints support filters and operators.
 
 ### `get/info`

@@ -76,7 +76,7 @@
       * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/README.md)
       * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
       * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
-      * [LEDGER](under-construction/under-construction-pages/page-1/c-ledger.md)
+      * [LEDGER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/ledger.md)
 
 ## Legacy
 
@@ -96,7 +96,7 @@
     * [c-OBJECTS](under-construction/under-construction-pages/page-1/c-objects.md)
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
-    * [ASSETS](under-construction/under-construction-pages/page-1/assets.md)
+    * [ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
     * [ASSET METHODS](under-construction/under-construction-pages/page-1/asset-methods.md)
     * [C-MARKET](under-construction/under-construction-pages/page-1/c-market.md)
     * [FINANCE METHODS](under-construction/under-construction-pages/page-1/finance-methods/README.md)
@@ -108,6 +108,7 @@
     * [NAMES METHODS](under-construction/under-construction-pages/page-1/names-methods.md)
     * [LEDGER METHODS](under-construction/under-construction-pages/page-1/ledger-methods.md)
     * [SYSTEM METHODS](<tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system (1).md>)
+    * [Ledger old](under-construction/under-construction-pages/page-1/ledger-old.md)
   * [SYSTEM METHODS](under-construction/under-construction-pages/system.md)
   * [SSL Configuration](under-construction/api-ssl-configuration.md)
     * [Let's Encrypt (Wildcard)](under-construction/lets-encrypt-wildcard.md)

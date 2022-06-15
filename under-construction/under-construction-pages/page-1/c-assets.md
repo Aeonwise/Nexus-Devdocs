@@ -52,7 +52,7 @@ This command will return a sum of the balances for all accounts:
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](assets.md#create) - Generate a new object of supported type.\
+[`create`](c-assets.md#create) - Generate a new object of supported type.\
 `get` - Get object of supported type.\
 `list` - List all objects owned by given user.\
 `update` - Update a specified object.\
