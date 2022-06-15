@@ -224,11 +224,25 @@ This command only supports the `asset` noun.
 
 #### Parameters:
 
-`pin` : Required if **authenticate**. The PIN for this profile.
-
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 #### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1655272802,
+        "modified": 1655278668,
+        "type": "OBJECT",
+        "data": "{Name: Asset1, Owner: John, Registration No: BC87456123, Location: Mangalore, Address: 1021, Avenue Street}",
+        "address": "87VmNhitFJv3WA3Yrovt9A3hts2MoXcfExyy9LiXyhK1sdThwYM",
+        "name": "local:Asset1"
+    }
+]
+[Completed in 0.285125 ms]
+```
 
 ## `transfer`
 
@@ -256,16 +270,20 @@ assets/transfer/noun
 
 ```
 {
-    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
-    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse"
+    "success": true,
+    "address": "87VmNhitFJv3WA3Yrovt9A3hts2MoXcfExyy9LiXyhK1sdThwYM",
+    "txid": "01bc48f80792fd4b97d43555d5993f0edfb0998ab14bcf159404f52e34a64abd6769f61014f006703100aa040a27aca65227133b2b5a71617efac3bc5640e361"
 }
+[Completed in 4998.999748 ms]
 ```
 
 #### Return values:
 
-`txid` : The ID (hash) of the transaction that includes the name transfer.
+`success` : Boolean flag indicating that the asset transfer was successful.
 
-`address` : The register address for this name.
+`address` : The register address for this asset.
+
+`txid` : The ID (hash) of the transaction that includes the asset transfer.
 
 ## `claim`
 
@@ -291,22 +309,18 @@ This command only supports the `asset` noun.
 
 ```
 {
-    "claimed":
-    [
-        "25428293b6631d2ff55b3a931926fec920e407a56f7759495e36089914718d68",
-        "1ff463e036cbde3595fbe2de9dff15721a89e99ef3e2e9bfa7ce48ed825e9ec2"
-    ],
-    "txid": "27ef3f31499b6f55482088ba38b7ec7cb02bd4383645d3fd43745ef7fa3db3d1"
+    "success": true,
+    "txid": "01f35304d41d00b002ca02d3bd9cf6cfeb134f5c454d4b6f5a355e35ffc557cfb3756834f3cf5cbeaf98da6773adcaaeca80154d15e449d4876ddf35c0b895cf"
 }
+[Completed in 4978.949420 ms]
+
 ```
 
 #### Return values:
 
-`claimed`: Array of addresses for each name that was claimed by the transaction
+`success` : Boolean flag indicating that the asset claim was successful.
 
-`txid` : The ID (hash) of the transaction that includes the name transfer.
-
-***
+`txid` : The ID (hash) of the transaction that includes the claimed asset.
 
 ## `history`
 
