@@ -112,10 +112,6 @@ limit=100.10
 
 This above will map to the parameters of `limit=100` and `offset=10`.
 
-```
-finance/get/balances/balance/sum
-```
-
 ### `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.

@@ -98,8 +98,8 @@ The following verbs are currently supported by this API command-set:
 
 [`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
 [`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#list) - List all objects owned by given session.\
-[`submit`](ledger-old.md#submit) - To submit the modified object state to the mempool.\
-[`void`](ledger-old.md#void) - To void a debit transaction and credit it back to the same account.
+[`submit`](c-ledger.md#submit) - To submit the modified object state to the mempool.\
+[`void`](c-ledger.md#void) - To void a debit transaction and credit it back to the same account.
 
 ### `Supported Nouns`
 
@@ -280,7 +280,7 @@ Retrieves information for a specified token address.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-The parameters used are [Query DSL](ledger-old.md#query-dsl), along with the [sorting / filtering](ledger-old.md#user-content-create)
+The parameters used are [Query DSL](c-ledger.md#query-dsl), along with the [sorting / filtering](c-ledger.md#user-content-create)
 
 #### `list/blocks`
 
@@ -423,8 +423,8 @@ This command  supports the `transaction` noun.
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/info`](ledger-old.md#get-info)\
-[`sync/headers`](ledger-old.md#sync-headers)\
+[`get/info`](c-ledger.md#get-info)\
+[`sync/headers`](c-ledger.md#sync-headers)\
 Direct endpoints support filters and operators.
 
 ### `get/info`
