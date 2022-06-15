@@ -2,7 +2,7 @@
 description: LEDGER API
 ---
 
-# Ledger old
+# LEDGER
 
 The Ledger API provides users with access to data held by the ledger such as blocks and transactions. This API does not need  the user to be logged in except for the `void` verb. The full supported endpoint of the ledger URI is as follows:
 

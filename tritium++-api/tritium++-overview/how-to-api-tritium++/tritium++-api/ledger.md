@@ -2,7 +2,7 @@
 
 The Ledger API provides users with access to data held by the ledger such as blocks and transactions.
 
-### `Supported Operators`
+## `Supported Operators`
 
 The following operators are supported for this API command-set:
 
@@ -35,7 +35,7 @@ This command will return a sum of the balances for all accounts:
 [Completed in 0.624417 ms]
 ```
 
-### `Supported Filters`
+## `Supported Filters`
 
 This command-set supports single or csv field-name filters.
 
@@ -112,7 +112,7 @@ limit=100.10
 
 This above will map to the parameters of `limit=100` and `offset=10`.
 
-### `Direct Endpoints`
+## `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
