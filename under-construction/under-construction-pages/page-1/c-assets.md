@@ -125,7 +125,15 @@ Create a new object register specified by given noun.
 assets/create/noun
 ```
 
-This command supports the `asset` noun.
+This command supports the `readonly`, `raw` and `asset` nouns.
+
+#### create/asset
+
+#### create/readonly
+
+#### create/raw
+
+#### create/any
 
 #### Parameters:
 
@@ -134,8 +142,6 @@ This command supports the `asset` noun.
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
-
-`format` : The format the caller is using to define the asset. Values can be `basic` (the default), `readonly`, `raw`, `JSON.` This is an optional field and the value `basic` is assumed if omitted.
 
 `data` : Optional for **any** noun, allows caller to add arbitrary data to object.
 
@@ -180,7 +186,7 @@ Retrieves information for a single object for a type specified by the noun
 assets/get/noun
 ```
 
-This command only supports the `asset` noun.
+This command supports the `readonly`, `raw`, `asset` and `any` nouns.
 
 #### Parameters:
 

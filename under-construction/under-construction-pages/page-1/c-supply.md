@@ -20,12 +20,12 @@ supply/verb/noun
 
 ## `Supported Filters`
 
-The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
+The filters only work with the supply `transactions` verbs. This command-set supports single or csv field-name filters.&#x20;
 
 **Example:**
 
 ```
-supply/list/items/address,name
+supply/transactions/item
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
