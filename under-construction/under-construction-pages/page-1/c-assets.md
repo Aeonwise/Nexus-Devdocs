@@ -48,6 +48,48 @@ This command will return a sum of the balances for all accounts:
 }
 ```
 
+## `Supported Filters`
+
+The filters only work with the asset `transactions` verb. This command-set supports single or csv field-name filters.&#x20;
+
+**Example:**
+
+```
+supply/transactions/item
+```
+
+The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
+
+#### `Recursive Filtering`
+
+Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+
+```
+supply/list/items/contracts.OP
+```
+
+When using recursive filtering, the nested hierarchy is retained.
+
+```
+[
+    {
+        "contracts": [
+            {
+                "OP": "DEBIT"
+            }
+        ]
+    },
+    {
+        "contracts": [
+            {
+                "OP": "WRITE"
+            }
+        ]
+    }
+]
+[Completed in 0.722042 ms]
+```
+
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
@@ -133,7 +175,7 @@ This command supports the `readonly`, `raw` and `asset` nouns.
 
 #### create/raw
 
-#### create/any
+####
 
 #### Parameters:
 
@@ -186,11 +228,21 @@ Retrieves information for a single object for a type specified by the noun
 assets/get/noun
 ```
 
-This command supports the `readonly`, `raw`, `asset` and `any` nouns.
+This command supports the `readonly`, `raw`, and `asset`  nouns.
+
+#### get/asset
+
+Lists all the assets for register type object.
+
+#### get/readonly
+
+Lists all assets for register type readonly.
+
+#### get/raw
+
+Lists all assets for register type raw.
 
 #### Parameters:
-
-`pin` : Required if **authenticate**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -208,7 +260,23 @@ Retrieves information for a single object for a type specified by the noun
 assets/list/noun
 ```
 
-This command only supports the `asset` noun.
+This command supports the `asset`, `readonly`, `raw`,   and `any` nouns.
+
+#### list/asset
+
+Lists all the assets for register type object.
+
+#### list/readonly
+
+Lists all assets for register type readonly.
+
+#### list/raw
+
+Lists all assets for register type raw.
+
+#### list/any
+
+Lists all assets for register type raw.
 
 #### Parameters:
 
