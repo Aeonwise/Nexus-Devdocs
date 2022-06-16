@@ -318,6 +318,8 @@ This will initiate ownership transfer of the specified noun.
 assets/transfer/noun
 ```
 
+This command supports the `readonly`, `raw`, and `asset`  nouns.
+
 #### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
@@ -359,7 +361,7 @@ This method will claim ownership of the specified noun by the recipient to compl
 assets/claim/noun
 ```
 
-This command only supports the `asset` noun.
+This command supports the `readonly`, `raw`, and `asset`  nouns.
 
 #### Parameters:
 
