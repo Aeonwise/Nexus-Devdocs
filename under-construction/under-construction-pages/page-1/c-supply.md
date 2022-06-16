@@ -20,7 +20,7 @@ supply/verb/noun
 
 ## `Supported Filters`
 
-The filters only work with the supply `transactions` verbs. This command-set supports single or csv field-name filters.&#x20;
+The filters only work with the supply `transactions` verb. This command-set supports single or csv field-name filters.&#x20;
 
 **Example:**
 
