@@ -48,48 +48,6 @@ This command will return a sum of the balances for all accounts:
 }
 ```
 
-## `Supported Filters`
-
-The filters only work with the asset `transactions` verb. This command-set supports single or csv field-name filters.&#x20;
-
-**Example:**
-
-```
-supply/transactions/item
-```
-
-The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
-
-#### `Recursive Filtering`
-
-Nested JSON objects and arrays can be filtered recursively using the `.` operator.
-
-```
-supply/list/items/contracts.OP
-```
-
-When using recursive filtering, the nested hierarchy is retained.
-
-```
-[
-    {
-        "contracts": [
-            {
-                "OP": "DEBIT"
-            }
-        ]
-    },
-    {
-        "contracts": [
-            {
-                "OP": "WRITE"
-            }
-        ]
-    }
-]
-[Completed in 0.722042 ms]
-```
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:

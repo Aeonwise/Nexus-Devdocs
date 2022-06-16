@@ -116,13 +116,13 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`get/blockhash`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#getblockhash)\
-[`get/block`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#getblock)\
-[`list/blocks`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#listblocks)\
-[`get/transaction`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#gettransaction)\
-[`submit/transaction`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#submittransaction)\
-[`void/transaction`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#voidtransaction)\
-[`get/mininginfo`](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/LEDGER.MD#getmininginfo)
+[`get/blockhash`](ledger.md#get-blockhash)\
+[`get/block`](ledger.md#get-block)\
+[`list/blocks`](ledger.md#list-blocks)\
+[`get/transaction`](ledger.md#get-transaction)\
+[`submit/transaction`](ledger.md#submit-transaction)\
+[`void/transaction`](ledger.md#void-transaction)\
+[`get/info`](ledger.md#get-info)``
 
 Direct endpoints support filters and operators.
 
@@ -134,9 +134,9 @@ Retrieving block data by height is only possible if the daemon has been configur
 
 Retrieves the hash of the block for the given height.
 
-#### Endpoint:
-
-`/ledger/get/blockhash`
+```
+ledger/get/blockhash
+```
 
 #### Parameters:
 
@@ -159,9 +159,9 @@ Retrieves the hash of the block for the given height.
 
 Retrieves block data for the given block hash or height.
 
-#### Endpoint:
-
-`/ledger/get/block`
+```
+// Some codeledger/get/block
+```
 
 #### Parameters:
 
@@ -294,15 +294,13 @@ Retrieves block data for the given block hash or height.
 
 }
 
-***
-
 ## `list/blocks`
 
 Retrieves an array of block data for a sequential range of blocks from a given hash or height.
 
-#### Endpoint:
-
-`/ledger/list/blocks`
+```
+ledger/list/blocks
+```
 
 #### Parameters:
 
@@ -471,9 +469,9 @@ Retrieving block data by height is only allowed if the daemon has been configure
 
 Retrieves transaction data for a given transaction hash.
 
-#### Endpoint:
-
-`/ledger/get/transaction`
+```
+ledger/get/transaction
+```
 
 #### Parameters:
 
@@ -582,9 +580,9 @@ Retrieves transaction data for a given transaction hash.
 
 Submits a transaction to be included in the mempool and broadcast to the network.
 
-#### Endpoint:
-
-`/ledger/submit/transaction`
+```
+ledger/submit/transaction
+```
 
 #### Parameters:
 
@@ -608,9 +606,9 @@ Voids (reverses) a debit or transfer transaction that you have previously made, 
 
 For debits that were made to a tokenized asset as part of a split payment transaction, the reversing credit will be made for the debit amount minus any partial amounts that have already been credited by the token holders.
 
-#### Endpoint:
-
-`/ledger/void/transaction`
+```
+ledger/void/transaction
+```
 
 #### Parameters:
 
@@ -630,15 +628,15 @@ For debits that were made to a tokenized asset as part of a split payment transa
 
 #### Return values:
 
-`hash` : The transaction hash of the credit/claim transaction, if successfully committed to the mempool / broadcast.
+`hash` : The transaction hash of the credit transaction, if successfully committed to the mempool / broadcast.
 
 ## `get/info`
 
 Retrieves mining related data for the ledger.
 
-#### Endpoint:
-
-`/ledger/get/info`
+```
+ledger/get/info
+```
 
 #### Parameters:
 
