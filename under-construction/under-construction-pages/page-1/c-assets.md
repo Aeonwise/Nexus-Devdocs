@@ -406,13 +406,11 @@ This command only supports the `asset` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : Optional field allows the user to **rename** an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
-
 `name` : The name identifying the asset to be tokenized. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
 `address` : The register address of the asset to be tokenized. This is optional if the name is provided.
 
-`token_name` : The name of a token to use to tokenize the asset. The name should be in username:token name format. `token` can be supplied as an alternative to `token_name`.
+`token` : The name of a token to use to tokenize the asset. The name should be in username:token name format. `token` can be supplied as an alternative to `token_name`.
 
 {% hint style="info" %}
 Create the token beforehand and use the token\_name or token address to tokenize the asset
