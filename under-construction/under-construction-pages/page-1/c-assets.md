@@ -167,15 +167,23 @@ Create a new object register specified by given noun.
 assets/create/noun
 ```
 
-This command supports the `readonly`, `raw` and `asset` nouns.
+This command supports the `asset`, `readonly`, `raw`,   and `any` nouns.
 
 #### create/asset
 
+Creates a new asset in an object register. &#x20;
+
 #### create/readonly
+
+Creates a new asset in an readonly register. &#x20;
 
 #### create/raw
 
-####
+Creates a new asset in a raw register. &#x20;
+
+#### create/any
+
+Creates a new asset specified by the format object register. &#x20;
 
 #### Parameters:
 
@@ -185,7 +193,9 @@ This command supports the `readonly`, `raw` and `asset` nouns.
 
 `name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
 
-`data` : Optional for **any** noun, allows caller to add arbitrary data to object.
+`format` : The format the caller is using to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`. <mark style="color:green;">This is an optional field and the value</mark> <mark style="color:green;"></mark><mark style="color:green;">`basic`</mark> <mark style="color:green;"></mark><mark style="color:green;">is assumed if omitted.</mark>
+
+`data` : Optional for `readonly`, `raw` and `any` noun, allows caller to add arbitrary data to object.
 
 `<fieldname>=<value>` : If format is `basic`, then the caller can provide additional = pairs for each piece of data to store in the asset.
 
