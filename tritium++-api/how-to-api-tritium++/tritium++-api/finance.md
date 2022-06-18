@@ -234,11 +234,11 @@ This deducts an amount of tokens from a token address to send to a token account
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`from` : The name **identifying** the account to debit. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name.
+`from` : Required to **identify** the account to debit, this can be the name or the register address. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name.
 
 `amount` : The **amount** of NXS to debit.
 
-`to` : The name or register address **identifying** the receiving account. This is optional if address\_to is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+`to` : Required to  **identify** the receiving account, this can be the account name or the register address. This is optional if address\_to is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
 `address_to` : The **register address** of the account to send to. This is optional if `to` is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
