@@ -9,7 +9,7 @@ The Supply API provides functionality to support the ownership transfer requirem
 The full supported endpoint of the supply URI is as follows:
 
 ```
-supply/verb/noun/filter
+supply/verb/noun/filter/operator
 ```
 
 The minimum required components of the URI are:
@@ -25,7 +25,7 @@ This command-set supports single or csv field-name filters.&#x20;
 **Example:**
 
 ```
-supply/transactions/item
+supply/transactions/item/
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
@@ -35,7 +35,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-supply/list/items/contracts.OP
+supply/tranasctions/item/contracts.OP
 ```
 
 When using recursive filtering, the nested hierarchy is retained.
@@ -45,7 +45,7 @@ When using recursive filtering, the nested hierarchy is retained.
     {
         "contracts": [
             {
-                "OP": "DEBIT"
+                "OP": "CREATE"
             }
         ]
     },
@@ -182,9 +182,9 @@ This command only supports the `item` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : Optional to  **identify** the item to update.  This is optional if the `address` is provided.
+`name` : Required to  **identify** the item to update by name.  This is optional if the `address` is provided.
 
-`address` : Optional **register address** to identify the `item` to update. This is optional if the `name` is provided.
+`address` : Required to **identify** the item to update by register address. This is optional if the `name` is provided.
 
 `data` : The new value of the data field in this item
 
