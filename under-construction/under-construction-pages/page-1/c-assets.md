@@ -101,7 +101,7 @@ The following verbs are currently supported by this API command-set:
 [`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
 [`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
 [`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
-`transactions` - List all transactions that modified specified object.\
+[`transactions`](c-assets.md#transactions) - List all transactions that modified specified object.\
 [`history`](c-assets.md#history) - Generate the history of all last states.\
 
 
@@ -309,6 +309,38 @@ Lists all assets for register type raw.
 ]
 [Completed in 0.285125 ms]
 ```
+
+## `update`
+
+This method provides the user with the ability to update fields specified by the noun
+
+```
+assets/update/noun
+```
+
+This command does not support the `asset`, `raw` or `readonly` nouns.
+
+#### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+}
+[Completed in 18533.182336 ms]
+```
+
+#### Return values:
+
+`success` : Boolean flag indicating that the asset was saved successfully.
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
 
 ## `transfer`
 
