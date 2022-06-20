@@ -195,7 +195,9 @@ Creates a new asset specified by the format object register. &#x20;
 
 `format` : The format the caller is using to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`. <mark style="color:green;">This is an optional field and the value</mark> <mark style="color:green;"></mark><mark style="color:green;">`basic`</mark> <mark style="color:green;"></mark><mark style="color:green;">is assumed if omitted.</mark>
 
-`data` : Optional for `readonly`, `raw` and `any` noun, allows caller to add arbitrary data to object.
+`data` : Required for format type's `readonly`, `raw` and `any` noun, allows caller to add arbitrary data to object.
+
+`data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
 
 `<fieldname>=<value>` : If format is `basic`, then the caller can provide additional = pairs for each piece of data to store in the asset.
 
