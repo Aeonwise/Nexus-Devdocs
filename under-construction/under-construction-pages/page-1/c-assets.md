@@ -297,18 +297,38 @@ Lists all assets for register type raw.
 ```
 [
     {
-        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "owner": "b7392196b83aca438567558462cd0c5d982569c7cefa668500c4bf3e61a03b7a",
         "version": 1,
-        "created": 1655272802,
-        "modified": 1655278668,
+        "created": 1655279431,
+        "modified": 1655279431,
         "type": "OBJECT",
-        "data": "{Name: Asset1, Owner: John, Registration No: BC87456123, Location: Mangalore, Address: 1021, Avenue Street}",
-        "address": "87VmNhitFJv3WA3Yrovt9A3hts2MoXcfExyy9LiXyhK1sdThwYM",
-        "name": "local:Asset1"
+        "Location": "Margoa",
+        "Owner Name": "Ageon",
+        "Registration Details": "MRG/05/478564",
+        "address": "87Wai2JoS4hNAEVXZVmejLS6pK21XQWKoLAkaep5aXFdrYnJJyk",
+        "name": "local:Asset2"
     }
 ]
-[Completed in 0.285125 ms]
+[Completed in 2.838543 ms]
 ```
+
+#### Return Values:
+
+`owner` : The username hash of the profile that owns this asset.
+
+`created` : The UNIX timestamp when the asset was created.
+
+`modified` : The UNIX timestamp when the asset was last modified.
+
+`type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY`
+
+`<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.
+
+`address` : The register address of the asset.
+
+`name` : The name identifying the asset. For privacy purposes, this is only included in the response if the caller is the owner of the asset
+
+`ownership` : Only included for tokenized assets, this is the percentage of the asset owned by the caller, based on the number of tokens owned
 
 ## `update`
 
@@ -515,19 +535,21 @@ This will list off all of the transactions for the specified noun.
 assets/transactions/noun
 ```
 
-This command supports the `account, trust and token` nouns.
-
-#### ``
+This command supports the `asset`, `raw`, `readonly` and `any` nouns.
 
 #### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
+`name` : Required to **identify** the asset to get the transactions. This is optional if the address is provided.
+
+`address` : Required to **identify t**he register address of the asset to get the transactions. This is optional if the name is provided.
+
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 
-* `default` : hash
-* `summary` : type, version, sequence, timestamp, operation, and confirmations.
-* `detail` : genesis, nexthash, prevhash, pubkey and signature.
+* `default` : `summary`
+* `summary` : type, version, sequence, timestamp, blockhash, confirmations and contracts.
+* `detail` : All in `summary` + genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) parameters.
 
@@ -536,49 +558,30 @@ This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) pa
 ```
 [
     {
-        "txid": "0123517ca0f1ca110c7b07de9e3c9b33ccbe717f96911e1449b7c73bb9695fbc9c14a58f01f5fb7e9b64756f658af91daec9f0f579df2fad8df61843defae833",
+        "txid": "01c85ab5327ecdda7b0f9175434d2c72f4584bbabca1f047a651502927bdabdf4d8dd090e5a4b9bc5e8968f4934b27bde4f32a3e8c4e8092030986f9d44402c2",
         "type": "tritium user",
         "version": 4,
-        "sequence": 23,
-        "timestamp": 1655061950,
-        "blockhash": "8b206ab2ee4b46a835f74af0ff5d4e0b395acdb94d66468a24083f2a5fd01a07a93956774001bab1a801d53d7bf6ed60ee84a573650eef1a9feaf6fa9beb308bd20b567663cc7ec4f85796b261164ef3452ebfaa13a60141b42fc49d6d2eb2792440925b1b19248ad9fe65e01d3742f2d3dec2817c56c8e4f6e03a10f4147308",
-        "confirmations": 4,
+        "sequence": 13,
+        "timestamp": 1655370792,
+        "blockhash": "6e8de5c3ad3dd93f86ca19373956ecef28c1f909ea87943a019227bcb5dc1df2ba66ca87ff36d4f9f0b51a06fa246829d0b6373fb5ecb2e75081a207a199e4e179cda6cf0ef8b85119266c9a158db8789be37175fbef80bf796b98dd4dc0408283191378ae01bea06acc239ac36d1cdbab3bb72e00762c2395c11dcdbe0c9966",
+        "confirmations": 27,
+        "genesis": "b7392196b83aca438567558462cd0c5d982569c7cefa668500c4bf3e61a03b7a",
+        "nexthash": "db41981709d77bef5ae3fcff1df314ef42d0765d877347e594b47bafe81c6871",
+        "prevhash": "014aca566b7ef248af6d795433ad225d651c07f09361055b6d23e810873326d3a98a3b72b7557752a6eb8b26ebc0c146dc1787e690aadf400c258bb89023af94",
+        "pubkey": "020318bad0e53936b80ee1a0f63ff0e0e206e38f76e1356a5e7db20ec40ca63267653db2907bb8d41ed3cd27905ccbc4ff89f45ebf596f7067237292bb5573ad94",
+        "signature": "30818402400b91313bf9878553753f8d4a50717d9cd6669c0a75fce174cfd8fede887b9b0a34f9359ed2153fd5d5949f73d2d0680886aaaafcfc6979772e0be8a01692cf840240243556b3c5fc4af7ac80411bf15fdc3430b96e429bf50be455f92301144e57513633f696f7365829d1731f225789e5ea7901f80e0a5440783cecd31d05f9402f",
         "contracts": [
             {
                 "id": 0,
-                "OP": "DEBIT",
-                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
-                "amount": 1.0,
-                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "ticker": "XYZ",
-                "reference": 57891358795
-            }
-        ]
-    },
-    {
-        "txid": "01f1a3f9227a69382f9811a5b1497a865ace17ad83b03118b24f875f6ade83117887c35d08375c259aa1076b91f42206110314756a11a943760bb5c0dd0523d7",
-        "type": "tritium user",
-        "version": 4,
-        "sequence": 21,
-        "timestamp": 1655060214,
-        "blockhash": "048f3b308e8bd8c1aa31ec1ec2e136a9ccc91ec4498283d07fc5d0a00c8576e2c199567a44058222961f474626c6f2c5d7e774eee34c34f98acafaeb50b7abaaade7e9c641fe9727fe62533b1ec6bf2f75ffbf19d17d74671e2458bd73b6407b4bba1951fc84e1af11c2c4fbce1d05d7739e910fdb8a37197c1c422521e2e9f3",
-        "confirmations": 6,
-        "contracts": [
-            {
-                "id": 0,
-                "OP": "DEBIT",
-                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
-                "amount": 1.0,
-                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "ticker": "XYZ",
-                "reference": 0
+                "OP": "CREATE",
+                "address": "86bZsES4snbyB43VKviUchvYHxKcguFVM9zbAjX9vaRfvSmrpGi",
+                "type": "RAW",
+                "data": "{Name:Daffodil, Owner Name:John, Registration Details:BNGL/09/987564, Location:Bangalore}"
             }
         ]
     }
 ]
-[Completed in 2.187165 ms]
+[Completed in 0.740542 ms]
 ```
 
 #### Return values:
@@ -615,28 +618,10 @@ This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) pa
 
 `for` : For `CREDIT` transactions, the contract that this credit was created for . Can be `COINBASE`, `DEBIT`, or`LEGACY`.
 
-`txid` : The transaction that was credited / claimed.
+`address` : The register address for this asset.
 
-`contract` : The ID of the contract within the transaction that was credited / claimed.
+`type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY.`
 
-`proof` : The register address proving the credit.
-
-`from` : For `DEBIT`, `CREDIT`, `FEE` transactions, the register address of the account that the debit is being made from.
-
-`from_name` : For `DEBIT`, `CREDIT`, `FEE` transactions, the name of the account that the debit is being made from. Only included if the name can be resolved.
-
-`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
-
-`to_name` : For `DEBIT` and `CREDIT` transactions, the name of the recipient account. Only included if the name can be resolved.
-
-`amount` : the token amount of the transaction.
-
-`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
-
-`token_name` : The name of the token that the transaction relates to.
-
-`reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
-
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+standard:
 
 ***
