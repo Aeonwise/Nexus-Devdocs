@@ -65,12 +65,12 @@ When using recursive filtering, the nested hierarchy is retained.
 The following verbs are currently supported by this API command-set:
 
 [`create`](c-supply.md#create) - Generate a new object of supported type.\
-`get` - Get object of supported type.\
-`list` - List all objects owned by given user.\
-`update` - Update a specified object.\
-`transfer` - Transfer a specified object register.\
-`claim` - Claim ownership of an object register from a transfer.\
-`history` - Generate the history of all last states.\
+[`get`](c-supply.md#get) - Get object of supported type.\
+[`list`](c-supply.md#list) - List all objects owned by given user.\
+[`update`](c-supply.md#update) - Update a specified object.\
+[`transfer`](c-supply.md#transfer) - Transfer a specified object register.\
+[`claim`](c-supply.md#claim) - Claim ownership of an object register from a transfer.\
+[`history`](c-supply.md#history) - Generate the history of all last states.\
 `transactions` - List all transactions that modified specified object.\
 
 
