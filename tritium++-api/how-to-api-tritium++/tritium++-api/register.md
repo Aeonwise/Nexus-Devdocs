@@ -125,13 +125,16 @@ The above command will list all the token information created on the Nexus block
 
 The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
 
-`limit`: The number of records to return. _Default: 100_.
+`limit`: The number of records to return.&#x20;
+
+* _Default: 100_
+* _None_
 
 `page`: Zero-indexed page number that depends on `limit` for page boundaries.
 
 `offset`: Alternative to `page`, offset can be used to page the results by index.
 
-`order`: Descending **desc** or ascending **asc** as only permitted values.
+`order`: Descending **desc** or ascending **asc** are only permitted values.
 
 `sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
 
@@ -165,17 +168,45 @@ This method provides the user with the ability to directly access the object reg
 register/list/noun
 ```
 
+#### `list/account`
+
+Returns a list of all NXS and token accounts.
+
+#### `list/trust`
+
+Returns a list of all the trust accounts on the blockchain.
+
+#### `list/token`
+
+Returns a list of all the token address issued on the blockchain.
+
+#### `list/name`
+
+Returns a list of all the names.
+
+#### `list/namespace`
+
+Returns a list of all the namespaces.
+
 #### `list/crypto`
+
+Returns a list of all the crypto object registers.
 
 #### `list/object`
 
+Returns a list of all the object registers.
+
 #### `list/readonly`
+
+Returns a list of all the readonly registers.
 
 #### `list/raw`
 
+Returns a list of all the raw registers.
+
 #### `list/append`
 
-
+Returns a list of all the append registers.
 
 #### Parameters:
 
@@ -207,6 +238,34 @@ Retrieves information for a specified `trust` account.
 
 Retrieves information for a specified token address.
 
+#### `get/name`
+
+Retrieves information for a specified name.
+
+#### `get/namespace`
+
+Retrieves information for a specified namespace.
+
+#### `get/crypto`
+
+Retrieves information for a specified profile crypto object register.
+
+#### `get/object`
+
+Retrieves information for a specified object register.
+
+#### `get/readonly`
+
+Retrieves information for a specified readonly register.
+
+#### `get/raw`
+
+Retrieves information for a specified raw register.
+
+#### `get/append`
+
+Retrieves information for a specified append register.
+
 #### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
@@ -234,15 +293,43 @@ This command supports the `account, trust and token` nouns.
 
 #### history/account
 
-This lists all the NXS except '`trust` and token accounts for the logged in user.
+This will get the history and ownership of the specified NXS or token account.
 
 #### history/trust
 
-This lists the '`trust` account for the logged in user.
+This will get the history and ownership of the specified trust account.&#x20;
 
 #### history/token
 
-This lists all the token addresses for the logged in user.
+This will get the history and ownership of the specified token addresses.
+
+#### `history/name`
+
+This will get the history and ownership of the specified name.
+
+#### `history/namespace`
+
+This will get the history and ownership of the specified namespace.
+
+#### `history/crypto`
+
+This will get the history of the specified crypto object register.
+
+#### `history/object`
+
+This will get the history and ownership of the specified object register.
+
+#### `history/readonly`
+
+This will get the history and ownership of the specified readonly register.
+
+#### `history/raw`
+
+This will get the history and ownership of the specified raw register.
+
+#### `history/append`
+
+This will get the history and ownership of the specified append register.
 
 #### Parameters:
 
