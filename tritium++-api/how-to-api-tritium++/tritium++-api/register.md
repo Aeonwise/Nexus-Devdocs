@@ -20,7 +20,7 @@ register/verb/noun
 
 ## `Supported Operators`
 
-The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
+The operators only work with the register `transactions` verb. The following operators are supported for this API command-set:&#x20;
 
 [`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
 [`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
