@@ -262,6 +262,42 @@ Lists all assets for register type raw.
 
 #### Return value JSON object:
 
+```
+[
+    {
+        "owner": "b7392196b83aca438567558462cd0c5d982569c7cefa668500c4bf3e61a03b7a",
+        "version": 1,
+        "created": 1655279431,
+        "modified": 1655279431,
+        "type": "OBJECT",
+        "Location": "Margoa",
+        "Owner Name": "Ageon",
+        "Registration Details": "MRG/05/478564",
+        "address": "87Wai2JoS4hNAEVXZVmejLS6pK21XQWKoLAkaep5aXFdrYnJJyk",
+        "name": "local:Asset2"
+    }
+]
+[Completed in 2.838543 ms]
+```
+
+#### Return Values:
+
+`owner` : The username hash of the profile that owns this asset.
+
+`created` : The UNIX timestamp when the asset was created.
+
+`modified` : The UNIX timestamp when the asset was last modified.
+
+`type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY`
+
+`<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.
+
+`address` : The register address of the asset.
+
+`name` : The name identifying the asset. For privacy purposes, this is only included in the response if the caller is the owner of the asset
+
+`ownership` : Only included for tokenized assets, this is the percentage of the asset owned by the caller, based on the number of tokens owned
+
 ## list
 
 Retrieves information for a single object for a type specified by the noun
