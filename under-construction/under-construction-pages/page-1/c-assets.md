@@ -97,7 +97,7 @@ The following verbs are currently supported by this API command-set:
 [`create`](c-assets.md#create) - Generate a new object of supported type.\
 [`get`](c-assets.md#get) - Get object of supported type.\
 [`list`](c-assets.md#list) - List all objects owned by given user.\
-`update` - Update a specified object.\
+[`update`](c-assets.md#update) - Update a specified object.\
 [`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
 [`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
 [`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
@@ -381,6 +381,16 @@ This command does not support the `asset`, `raw` or `readonly` nouns.
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`name` : Optional name **identifying** the item to be transferred. This is optional if the address is provided.
+
+`address` : Optional register address to **identify** the item to be transferred. This is optional if the name is provided.
+
+`format` : Required to specify the format to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`.&#x20;
+
+`data` : If format is `raw`, or `readonly` then this field contains the hex-encoded data to be stored in this asset.&#x20;
+
+`<fieldname>=<value>` : The caller can provide = pairs for each piece of data to update in the asset.
 
 #### Return value JSON object:
 
