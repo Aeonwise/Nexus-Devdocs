@@ -9,7 +9,7 @@ The Supply API provides functionality to support the ownership transfer requirem
 The full supported endpoint of the supply URI is as follows:
 
 ```
-supply/verb/noun/filter/operator
+supply/verb/noun/filter
 ```
 
 The minimum required components of the URI are:
@@ -25,7 +25,7 @@ This command-set supports single or csv field-name filters.&#x20;
 **Example:**
 
 ```
-supply/transactions/item/
+supply/transactions/item
 ```
 
 The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
@@ -35,7 +35,7 @@ The above command will return an array of objects with only the `balance` and `t
 Nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-supply/tranasctions/item/contracts.OP
+supply/list/items/contracts.OP
 ```
 
 When using recursive filtering, the nested hierarchy is retained.
@@ -45,7 +45,7 @@ When using recursive filtering, the nested hierarchy is retained.
     {
         "contracts": [
             {
-                "OP": "CREATE"
+                "OP": "DEBIT"
             }
         ]
     },

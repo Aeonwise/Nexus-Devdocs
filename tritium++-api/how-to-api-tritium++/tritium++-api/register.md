@@ -387,15 +387,43 @@ This command supports the `account, trust and token` nouns.
 
 #### `transactions/account`
 
-List out all the transactions for the  NXS account or token account.
+List out all the transactions for the specified NXS account or token account.
 
 #### `transactions/trust`
 
-List out all the transactions for the trust account
+List out all the transactions for the specified trust account
 
-#### `tranactions/token`
+#### `transactions/token`
 
-List out all the transactions for the token address.
+List out all the transactions for the specified token address.
+
+#### `transactions/name`
+
+List out all the transactions for the specified name.
+
+#### `transactions/namespace`
+
+List out all the transactions for the specified namespace.
+
+#### `transactions/crypto`
+
+List out all the transactions for the specified crypto object register.
+
+#### `transactions/object`
+
+List out all the transactions for the specified object register.
+
+#### `transactions/readonly`
+
+List out all the transactions for the specified readonly register.
+
+#### `transactions/raw`
+
+List out all the transactions for the specified raw register.
+
+#### `transactions/append`
+
+List out all the transactions for the specified append register.
 
 #### Parameters:
 
