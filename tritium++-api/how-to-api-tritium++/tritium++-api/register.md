@@ -20,7 +20,7 @@ register/verb/noun
 
 ## `Supported Operators`
 
-The operators only work with the register `get` and `list`  verbs. The following operators are supported for this API command-set:&#x20;
+The following operators are supported for this API command-set:&#x20;
 
 [`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
 [`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
@@ -45,7 +45,7 @@ This command will return a sum of the balances for all accounts:
 
 ## `Supported Filters`
 
-The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
+This command-set supports single or csv field-name filters.&#x20;
 
 **Example:**
 
@@ -57,7 +57,7 @@ The above command will return an array of objects with only the `balance` and `t
 
 #### `Recursive Filtering`
 
-Nested JSON objects and arrays can be filtered recursively using the `.` operator.
+This only works for nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
 register/list/tokens

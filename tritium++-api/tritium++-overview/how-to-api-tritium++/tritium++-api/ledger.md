@@ -37,7 +37,7 @@ This command will return a sum of the balances for all accounts:
 
 ## `Supported Filters`
 
-The filters only work with the ledger `transactions` verb. This command-set supports single or csv field-name filters.&#x20;
+This command-set supports single or csv field-name filters.&#x20;
 
 **Example:**
 

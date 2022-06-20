@@ -18,7 +18,7 @@ names/verb/noun
 
 ## `Supported Filters`
 
-The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
+This command-set supports single or csv field-name filters.&#x20;
 
 **Example:**
 
