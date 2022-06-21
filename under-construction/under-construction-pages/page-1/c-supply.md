@@ -4,7 +4,11 @@ description: SUPPLY API
 
 # SUPPLY
 
-The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a `data` value and this value can be updated over time. Items are stored in an APPEND register, meaning that changes to the item are recorded in sequence in the register. This in turn means that a history of changes to the `data` field, as well as the history of ownership of the item, can be obtained.
+The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a `data` value and this value can be updated over time.&#x20;
+
+The `readonly`, `raw`, `basic` and `JSON` formats allow callers to provide a detailed definition of the asset data structure
+
+Items are stored in an APPEND register, meaning that changes to the item are recorded in sequence in the register. This in turn means that a history of changes to the `data` field, as well as the history of ownership of the item, can be obtained.
 
 The full supported endpoint of the supply URI is as follows:
 
@@ -139,7 +143,7 @@ This command only supports the `readonly`, `raw`, `basic` and `json` nouns..
 
 `format` : Required to **identify** the format used to define the asset. Values can be `readonly`, `raw`, `basic` and`JSON`.
 
-`data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
+`data` : Required if format is `readonly` or `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
 
 `<fieldname>=<value>` : If format is `basic`, then the caller can provide additional = pairs for each piece of data to store in the asset.
 
@@ -155,14 +159,18 @@ This command only supports the `readonly`, `raw`, `basic` and `json` nouns..
 
 ```
 {
-    "success": true,
-    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+    "success": true,
+    "address": "87PUYqzvL73Ta81VfNMWuNyVjAqy3ZzE2iiX6FawibeNY56XC1u",
+    "txid": "012d0190164584f6174c0c5b1cfa7c155a7faeb453b050ee4cc520681b47e52402d9aab5cdf327ee614752c4f40647d4bd3b32364db19da2bacb83c5f71a9144"
 }
+[Completed in 4970.165011 ms]
 ```
 
 #### Return values:
 
 `success` : Boolean flag indicating that the item was saved successfully.
+
+`address` : The register address for this new created item. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
 `txid` : The ID (hash) of the transaction that includes the created object.
 

@@ -80,7 +80,7 @@ The following nouns are supported for this API command-set:
 \[`namespace`] - An object register containing a namespace object. \
 \[`global`] - An object register which is recognised globally on the network. \
 \[`local`] - An object register which is recognised only within the context of a user profile.\
-\[`any`] - An object selection noun allowing mixed names and namespaces.
+\[`any`] - An object selection noun allowing mixed `names` nouns.
 
 ## `Sorting / Filtering`
 
