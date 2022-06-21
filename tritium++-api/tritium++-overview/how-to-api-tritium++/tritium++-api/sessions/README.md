@@ -4,9 +4,7 @@ description: SESSIONS API
 
 # SESSIONS
 
-The Sessions API provides methods for creating and managing sessions. A session is synonymous with a user login into the signature chain.
-
-The full supported endpoint of the `sessions` URI is as follows:
+The Sessions API provides methods for creating and managing sessions. A session is synonymous with a user login into the signature chain. The full supported endpoint of the `sessions` URI is as follows:
 
 ```
 sessions/verb/noun

@@ -127,7 +127,7 @@ Create a new object register specified by given noun.
 supply/create/noun
 ```
 
-This command only supports the `item` noun.
+This command only supports the `readonly`, `raw`, `basic` and `json` nouns..
 
 #### Parameters:
 
@@ -137,7 +137,7 @@ This command only supports the `item` noun.
 
 `name` : Optional **name** to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address.
 
-`format` : Required to **identify** the format used to define the asset. Values can be `basic` (the default), `raw`, `JSON`, `ANSI` (not currently supported), or `XML` (not currently supported). This is an optional field and the value `basic` is assumed if omitted.
+`format` : Required to **identify** the format used to define the asset. Values can be `readonly`, `raw`, `basic` and`JSON`.
 
 `data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
 
@@ -174,7 +174,7 @@ Update an object register specified by given noun.
 supply/update/noun
 ```
 
-This command only supports the `item` noun.
+This command only supports the `raw`, `basic` and `json` nouns.
 
 #### Parameters:
 

@@ -4,7 +4,7 @@ description: FINANCE API
 
 # FINANCE
 
-The Finance API provides methods for sending and receiving NXS or other tokens between users / accounts, creating accounts, and managing staking. The full supported endpoint of the finance URI is as follows:
+The Finance API provides methods for creating NXS accounts, issuing tokens, creating token accounts, sending and receiving NXS or other tokens between user / accounts and managing staking. The Tokens API has been depreciated and functionality merged with the Finance API. The full supported endpoint of the finance URI is as follows:
 
 ```
 finance/verb/noun/filter/operator

@@ -4,9 +4,7 @@ description: REGISTER API
 
 # REGISTER
 
-The Register API gives direct access to the register data and this allows network wide information requested to be presented and does not need the user to be logged in.&#x20;
-
-The full supported endpoint of the profiles URI is as follows:
+The Register API gives access to the register data and this allows network wide information to be presented. The full supported endpoint of the profiles URI is as follows:
 
 ```
 register/verb/noun/filter/operator
@@ -60,7 +58,7 @@ The above command will return an array of objects with only the `balance` and `t
 This only works for nested JSON objects and arrays can be filtered recursively using the `.` operator.
 
 ```
-register/list/tokens
+register/transactions/token
 ```
 
 When using recursive filtering, the nested hierarchy is retained.
