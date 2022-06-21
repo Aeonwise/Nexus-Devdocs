@@ -15,7 +15,7 @@ The `raw` format differs from the other formats in that the asset data is not st
 The full supported endpoint of the assets URI is as follows:
 
 ```
-assets/verb/noun/filter
+assets/verb/noun/filter/operator
 ```
 
 The minimum required components of the URI are:
@@ -24,7 +24,7 @@ The minimum required components of the URI are:
 assets/verb/noun
 ```
 
-### `Supported Operators`
+## `Supported Operators`
 
 The following operators are supported for this API command-set:
 
