@@ -4,11 +4,15 @@ description: SUPPLY API
 
 # SUPPLY
 
-The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a `data` value and this value can be updated over time.&#x20;
+The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a value and this value can be updated over time. The supply API supports several formats for defining the object data structures giving users and developers varying levels of functionality, including per-field type definition and mutability.
 
-The `readonly`, `raw`, `basic` and `JSON` formats allow callers to provide a detailed definition of the asset data structure
+The `readonly`, `raw`, `basic` and `JSON` are the available formats and user has to specify the format. The `JSON` format allows callers to provide a detailed definition of the supply data structure, with each field defined with a specific data type and mutability. Items defined with one of the complex formats can be updated after their initial creation. The `basic` format allows callers to define an asset in terms of simple key-value pairs. It assumes  all values are stored using the string data type.&#x20;
 
-Items are stored in an APPEND register, meaning that changes to the item are recorded in sequence in the register. This in turn means that a history of changes to the `data` field, as well as the history of ownership of the item, can be obtained.
+The `readonly` and `raw` formats are useful when developers wish to store arbitrary binary data on the Nexus blockchain, without incurring the overhead of defining an object. The values have to be provided with the `data` parameter. The `readonly` format cannot be updated and is stored in a readonly register.&#x20;
+
+The `raw` format differs from the other formats in that the asset data is not stored in object register, but instead is stored in a read-only state register.&#x20;
+
+The supply API also provides a history of changes to the data values, as well as the history of ownership of the item.
 
 The full supported endpoint of the supply URI is as follows:
 

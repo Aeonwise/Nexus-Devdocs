@@ -1,4 +1,10 @@
-# C-MARKET
+---
+description: MARKET API
+---
+
+# MARKET
+
+The market API creates an on-chain order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a marketplace for token1/token2 and other users&#x20;
 
 The full supported endpoint of the finance URI is as follows:
 
@@ -12,7 +18,7 @@ The minimum required components of the URI are:
 markets/verb/noun
 ```
 
-### `Supported Operators`
+## `Supported Operators`
 
 The following operators are supported for this API command-set:
 
@@ -36,21 +42,21 @@ This command will return a sum of the balances for all accounts:
 }
 ```
 
-### `Supported Verbs`
+## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
 
-`create` - Generate a new object of supported type.\
-`user` - Claim funds issued to account from debit.\
-`list` - List all objects owned by given user.\
-`execute` - \
-`cancel` -&#x20;
+`create` - Creates a new market place or becomes part of an existing one.\
+`list` - List all orders for a specified marketplace.\
+`execute` - To full-fill the selected market order.\
+`cancel` - To cancel a specified market order\
+`user` -&#x20;
 
-### `Supported Nouns`
+## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`bid`] - An object register containing a token-id and balance.\
+\[`bid`] - \
 \[`ask`] - An object register containing a token-id, balance, and trust.\
 \[`order`] - An object register containing a token-id, balance, supply, and decimals.\
 \[`executed`] - An object selection noun allowing mixed accounts of different tokens.\
@@ -64,9 +70,7 @@ marekts/debit/any
 
 The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
 
-***
-
-### `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
+## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
 
 The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
 
@@ -102,27 +106,25 @@ limit=100.10
 
 This above will map to the parameters of `limit=100` and `offset=10`.
 
-```
-finance/get/balances/balance/sum
-```
-
-***
-
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
-Create a new object register specified by given noun.
+This method creates a new market or becomes part of an existing market represented by the market pair token1/token2. Market pair token2/token1 is also part of the same market.
 
 ```
 finance/create/noun
 ```
 
-This command does not support the `any` or `all` nouns.
+This command supports the `bid` or `ask` nouns.
 
 #### `create/bid`
 
+This creates a bid market order when market=token1/token2
+
 #### `create/ask`
 
-### Parameters:
+This creates a ask market order when market=token2/token1
+
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -132,7 +134,7 @@ This command does not support the `any` or `all` nouns.
 
 `price` : The price of the token
 
-`amount` : The amount of tokens to be exchanged
+`amount` : The amount of token2 to be exchanged
 
 `to` : This is the receiving account name or register address to credit token1.
 
@@ -167,7 +169,7 @@ market/list/noun
 
 This command supports the `any` wildcard noun.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -249,13 +251,17 @@ market/list/noun
 
 This command supports the `any` wildcard noun.
 
-### Parameters:
+#### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+`txid`: The transactionID of the bid /ask which is being executed.
+
+`to` : This is the receiving account name or register address to credit token1.
+
+`from` : This is the sending account name or register address to debit the token2
 
 #### Return value JSON object:
 
@@ -292,22 +298,23 @@ This command supports the `any` wildcard noun.
 
 `market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
+`txid` : The transaction hash for the order to be cancelled.
+
 #### Return value JSON object:
 
 ```
 {
-    "success": true,
-    "address": "8CupQ2dym1CZGZZ7U3F8UQ2xR2fr2PZmtEqB5Ds2EJsG1jA3JZw",
-    "txid": "012bc5f80460a9605706e643f9364722e97ffe3dd4e94bce8e41ea6ae70b3336fe6274cfe74583bf72cf77d8bbdc951ae1b25c706253590e0c6d74fa4f78f4df"
+    "success": true,
+    "txid": "010b0dbb226835c59b62d0761feac027cceb75ceb7d8d52abbd8072158415cf8c210af810f4d41ee6ad86dc6d754a17a0269db9025ba47becdb87a19ee71e99f"
 }
-[Completed in 4991.918611 ms]
+[Completed in 4976.551936 ms]
 ```
 
 #### Return Values:
 
-`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+`success` : Boolean flag indicating that cancelling the order was successful.&#x20;
 
-`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+`txid` : The hash of the transaction that was generated for cancelling the order. If using `-autotx` this field will be ommitted.
 
 ## `user` <a href="#user-content-credit" id="user-content-credit"></a>
 
