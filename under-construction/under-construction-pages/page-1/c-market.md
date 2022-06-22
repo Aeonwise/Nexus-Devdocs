@@ -128,15 +128,15 @@ This command does not support the `any` or `all` nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : token1/token2 - The token pair for which the order is created. (This implies you want to buy token 1 while giving token 2 in exchange&#x20;
+`market` : token1/token2 - The token pair for which the order is created. (This implies you want to buy/bid  token 1 while ask/give token 2 in exchange&#x20;
 
 `price` : The price of the token
 
 `amount` : The amount of tokens to be exchanged
 
-`to` : This is the receiving account name or register address to credit token1
+`to` : This is the receiving account name or register address to credit token1.
 
-`from` : This is the sending account name or register address to debit the token2&#x20;
+`from` : This is the sending account name or register address to debit the token2.&#x20;
 
 
 
