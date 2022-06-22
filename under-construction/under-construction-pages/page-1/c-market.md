@@ -18,7 +18,7 @@ The current price is the last traded price and has nothing to do with the bid or
 * If the NXS/XYZ exchange rate is 1.2, that means 1 NXS will buy 1.20 XYZ (or, put another way, it will cost 1.20 XYZ to buy 1 NXS).
 * When the market rate rises, that means the base token has risen in value relative to the quote token (because 1 NXS will buy more XYZ tokens) and conversely, if the market rate falls, that means the base token has fallen in value.
 
-A quick note: Market pairs are usually presented with the base currency first and the quote currency second, The market API allows to use the reverse XYZ/NXS and its treated as an ask order.
+Note: Market pairs are usually presented with the base token first and the quote token second, The market API allows to use the reverse XYZ/NXS and its treated as an ask order.
 
 The full supported endpoint of the finance URI is as follows:
 
