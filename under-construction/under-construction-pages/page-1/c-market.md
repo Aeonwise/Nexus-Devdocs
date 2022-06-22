@@ -128,42 +128,41 @@ This command does not support the `any` or `all` nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
+`market` : token1/token2 - The token pair for which the order is created. (This implies you want to buy token 1 while giving token 2 in exchange&#x20;
 
-`data` : Optional for **any** noun, allows caller to add arbitrary data to object.
+`price` : The price of the token
 
-**create/token**
+`amount` : The amount of tokens to be exchanged
 
-`supply` : Required by **noun** `token` that sets the maximum token supply.
+`to` : This is the receiving account name or register address to credit token1
 
-`decimals` : Required by **noun** `token` that sets the total number of significant figures. Defaults to 2.
+`from` : This is the sending account name or register address to debit the token2&#x20;
 
-**create/account**
 
-`token` : Required by **noun** `account` as a _Base58_ encoded address or ticker name. Defaults to `NXS`.
 
-### Results:
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "address": "8CupQ2dym1CZGZZ7U3F8UQ2xR2fr2PZmtEqB5Ds2EJsG1jA3JZw",
+    "txid": "012bc5f80460a9605706e643f9364722e97ffe3dd4e94bce8e41ea6ae70b3336fe6274cfe74583bf72cf77d8bbdc951ae1b25c706253590e0c6d74fa4f78f4df"
+}
+[Completed in 4991.918611 ms]
+```
+
+#### Return Values:
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
-```
-{
-    "success": true,
-    "address": "8ESvYizqdApiuKEBjZMF1hnB8asDqECaDwAstcH3UtJ4Z6ceCn2",
-    "txid": "0131e17af8029b414814283a3d90813d12c238db6ddab213440249b795090a9cd77079d5804ec38303a59414d87108d4e44bf31f54a6c176285281a88ab5d737"
-}
-```
-
-***
-
-## `credit` <a href="#user-content-credit" id="user-content-credit"></a>
+## `list` <a href="#user-content-credit" id="user-content-credit"></a>
 
 Create a new object register specified by given noun.
 
 ```
-finance/credit/noun
+market/list/noun
 ```
 
 This command supports the `any` wildcard noun.
@@ -174,22 +173,173 @@ This command supports the `any` wildcard noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
-#### Return values:
+#### Return value JSON object:
 
-`txid` : The ID (hash) of the transaction that includes the account creation.
+```
+{
+    "bids": [
+        {
+            "txid": "012bc5f80460a9605706e643f9364722e97ffe3dd4e94bce8e41ea6ae70b3336fe6274cfe74583bf72cf77d8bbdc951ae1b25c706253590e0c6d74fa4f78f4df",
+            "timestamp": 1655815697,
+            "owner": "b7392196b83aca438567558462cd0c5d982569c7cefa668500c4bf3e61a03b7a",
+            "market": "XYZ/BIT",
+            "price": 1.0,
+            "type": "bid",
+            "contract": {
+                "OP": "DEBIT",
+                "from": "8CupQ2dym1CZGZZ7U3F8UQ2xR2fr2PZmtEqB5Ds2EJsG1jA3JZw",
+                "amount": 10.0,
+                "token": "8EdBM41i1MAgb7w2tjEsdd7DeKntUcsw4JWK1LswW457e2jDa8a",
+                "ticker": "BIT"
+            },
+            "order": {
+                "OP": "DEBIT",
+                "to": "8Cu9QHELK6ofHzbAwtWGnUcfkDz3zvGoSf7eDGZfh81AeMuqcYY",
+                "amount": 10.0,
+                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "ticker": "XYZ"
+            }
+        }
+    ],
+    "asks": [
+        {
+            "txid": "016d62c69f05a82eefb463604325dd0331aeee787748a06619d6ca665c5a0576705c62de29f20c3eccfb8cbb25c4df169a53baa1e55493f5293fbbf864af7389",
+            "timestamp": 1655817006,
+            "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+            "market": "XYZ/BIT",
+            "price": 1.0,
+            "type": "ask",
+            "contract": {
+                "OP": "DEBIT",
+                "from": "8B9adrgaFX8hZvH1vQGjibHVYhsLuDTDu2Kn1FM25RZQtuUFyiE",
+                "amount": 10.0,
+                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
+                "ticker": "XYZ"
+            },
+            "order": {
+                "OP": "DEBIT",
+                "to": "8C3AiDrbDmbkeza1eBeeEJ2r5wqrnWGr9D1kewKqHfPzdY7jRkF",
+                "amount": 10.0,
+                "token": "8EdBM41i1MAgb7w2tjEsdd7DeKntUcsw4JWK1LswW457e2jDa8a",
+                "ticker": "BIT"
+            }
+        }
+    ]
+}
+
+```
+
+#### Return Values:
+
+`order` : `bid` or `ask`
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
-\
-`Direct Endpoints`
+## `execute` <a href="#user-content-credit" id="user-content-credit"></a>
 
-The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
+Create a new object register specified by given noun.
 
-[`get/balances`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#create)\
-[`get/stakeinfo`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#credit)\
-[`migrate/accounts`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#debit)\
-[`set/stake`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#get)
+```
+market/list/noun
+```
 
-Direct endpoints support filters and operators.
+This command supports the `any` wildcard noun.
+
+### Parameters:
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "address": "8CupQ2dym1CZGZZ7U3F8UQ2xR2fr2PZmtEqB5Ds2EJsG1jA3JZw",
+    "txid": "012bc5f80460a9605706e643f9364722e97ffe3dd4e94bce8e41ea6ae70b3336fe6274cfe74583bf72cf77d8bbdc951ae1b25c706253590e0c6d74fa4f78f4df"
+}
+[Completed in 4991.918611 ms]
+```
+
+#### Return Values:
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+## `cancel` <a href="#user-content-credit" id="user-content-credit"></a>
+
+Create a new object register specified by given noun.
+
+```
+market/list/noun
+```
+
+This command supports the `any` wildcard noun.
+
+### Parameters:
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "address": "8CupQ2dym1CZGZZ7U3F8UQ2xR2fr2PZmtEqB5Ds2EJsG1jA3JZw",
+    "txid": "012bc5f80460a9605706e643f9364722e97ffe3dd4e94bce8e41ea6ae70b3336fe6274cfe74583bf72cf77d8bbdc951ae1b25c706253590e0c6d74fa4f78f4df"
+}
+[Completed in 4991.918611 ms]
+```
+
+#### Return Values:
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
+
+## `user` <a href="#user-content-credit" id="user-content-credit"></a>
+
+Create a new object register specified by given noun.
+
+```
+market/list/noun
+```
+
+This command supports the `any` wildcard noun.
+
+### Parameters:
+
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+
+#### Return value JSON object:
+
+```
+{
+    "success": true,
+    "address": "8CupQ2dym1CZGZZ7U3F8UQ2xR2fr2PZmtEqB5Ds2EJsG1jA3JZw",
+    "txid": "012bc5f80460a9605706e643f9364722e97ffe3dd4e94bce8e41ea6ae70b3336fe6274cfe74583bf72cf77d8bbdc951ae1b25c706253590e0c6d74fa4f78f4df"
+}
+[Completed in 4991.918611 ms]
+```
+
+#### Return Values:
+
+`txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
