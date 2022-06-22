@@ -6,6 +6,20 @@ description: MARKET API
 
 The market API creates an on-chain order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a marketplace for token1/token2 and other users&#x20;
 
+#### How market places Are quoted
+
+Each market pair represents the current exchange rate for the two tokens. Here’s how to interpret that information, using NXS/XYZ—or the Nexus-to-XYZ exchange rate—as an example:
+
+The current price is the last traded price and has nothing to do with the bid or ask price.&#x20;
+
+* The token on the left (NXS) is the base token.
+* The token on the right (XYZ) is the quote token.
+* The price quoted represents how much of the quote token is needed to buy 1 unit of the base token. As a result, the base token is always expressed as 1 unit while the quote currency varies based on the current market and how much is needed to buy 1 unit of the base currency.
+* If the NXS/XYZ exchange rate is 1.2, that means 1 NXS will buy 1.20 XYZ (or, put another way, it will cost 1.20 XYZ to buy 1 NXS).
+* When the market rate rises, that means the base token has risen in value relative to the quote token (because 1 NXS will buy more XYZ tokens) and conversely, if the market rate falls, that means the base token has fallen in value.
+
+A quick note: Market pairs are usually presented with the base currency first and the quote currency second, The market API allows to use the reverse XYZ/NXS and its treated as an ask order when the first as&#x20;
+
 The full supported endpoint of the finance URI is as follows:
 
 ```
@@ -108,7 +122,7 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
-This method creates a new market or becomes part of an existing market represented by the market pair token1/token2. Market pair token2/token1 is also part of the same market.
+This method creates a new market or becomes part of an existing market represented by the token or asset pair token1/token2. Market pair token2/token1 is also part of the same market.
 
 ```
 finance/create/noun
@@ -175,7 +189,7 @@ This command supports the `any` wildcard noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+`market` : Required to **identify** the token pairs or market whose orders are to be listed.
 
 #### Return value JSON object:
 

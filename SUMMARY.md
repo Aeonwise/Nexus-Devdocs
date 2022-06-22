@@ -98,7 +98,7 @@
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
     * [c-INVOICES](under-construction/under-construction-pages/page-1/c-invoices.md)
     * [ASSET METHODS](under-construction/under-construction-pages/page-1/asset-methods.md)
-    * [MARKET](under-construction/under-construction-pages/page-1/market.md)
+    * [MARKET](under-construction/under-construction-pages/page-1/c-market.md)
     * [Market Methods](under-construction/under-construction-pages/page-1/market-methods.md)
     * [FINANCE METHODS](under-construction/under-construction-pages/page-1/finance-methods/README.md)
       * [Page 3](under-construction/under-construction-pages/page-1/finance-methods/page-3.md)
