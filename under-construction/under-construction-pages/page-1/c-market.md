@@ -4,7 +4,7 @@ description: MARKET API
 
 # MARKET
 
-The market API creates an on-chain order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
+The market API creates an on-chain order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
 
 #### How market places Are quoted
 
