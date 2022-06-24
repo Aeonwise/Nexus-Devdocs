@@ -4,13 +4,15 @@ description: ASSETS API
 
 # ASSETS
 
-An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports several formats for defining the object data structures giving users and developers varying levels of functionality, including per-field type definition and mutability.
+An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.&#x20;
 
-The `basic` format allows callers to define an asset in terms of simple key-value pairs. It assumes that all fields are read-only and all values are stored using the string data type. `basic` assets are always immutable and cannot be updated once created.
+The `readonly` and `raw` formats are useful when developers wish to store arbitrary data, without incurring the overhead of defining an object. The value will be provided with the `data` parameter. The `readonly` format cannot be updated and is stored in a readonly register. The `raw` format is stored in a raw register and allows the data to be updated.
 
-The `readonly`, `raw`, `basic` and `JSON` formats allow callers to provide a detailed definition of the asset data structure, with each field defined with a specific data type and mutability. Assets defined with one of the complex formats can be updated after their initial creation.
+The `basic` format allows callers to define an asset in terms of simple key=value pairs. It assumes all values are stored using the string data type. The key=value pairs can be updated.
 
-The `raw` format differs from the other formats in that the asset data is not stored in object register, but instead is stored in a read-only state register. The raw format is useful when developers wish to store arbitrary binary data on the Nexus blockchain, without incurring the overhead of defining an object.
+The `JSON` format allows callers to provide a detailed definition of the supply data structure, with each field defined with a specific data type and mutability. Items defined with one of the complex formats can be updated after their initial creation. &#x20;
+
+The assets API also provides a history of changes to the values, as well as the history of ownership of the item.
 
 The full supported endpoint of the assets URI is as follows:
 
