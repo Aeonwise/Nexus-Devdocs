@@ -139,19 +139,15 @@ This command only supports the `item`, raw and `readonly` nouns..
 
 #### create/item
 
-Creates a new item on an object register.
+This creates a new item on an object register.
 
 #### create/raw
 
-Creates a new item on a raw register.
+This creates a new item on a raw register.
 
 #### create/readonly
 
-Creates a new item on a readonly register.
-
-#### create/any
-
-Creates a new item specified by the format parameter. &#x20;
+This creates a new item on a readonly register.
 
 #### Parameters:
 
@@ -290,18 +286,6 @@ supply/transfer/noun
 
 This command supports the `item`,  `raw` and `readonly` nouns.
 
-#### transfer/item
-
-This initiates transfer for an item to a recipient.
-
-#### transfer/raw
-
-This initiates transfer for a raw item to a recipient.
-
-#### transfer/readonly
-
-This initiates transfer for a readonly item to a recipient.
-
 #### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
@@ -340,18 +324,6 @@ supply/claim/noun
 ```
 
 This command supports the `item`,  `raw` and `readonly` nouns.
-
-#### claim/item
-
-This claims ownership of an item which has been transferred.
-
-#### claim/raw
-
-This claims ownership of a raw item which has been transferred.
-
-#### claim/readonly
-
-This claims ownership of a readonly item which has been transferred.
 
 #### Parameters:
 

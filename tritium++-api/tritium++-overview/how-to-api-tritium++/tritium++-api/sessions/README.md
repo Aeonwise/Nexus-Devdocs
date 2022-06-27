@@ -20,13 +20,11 @@ sessions/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#create) - Generate a new session type specified by the noun.\
-[`unlock`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#unlock) - Unlock the session to carry out specified operations.\
-[`lock`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#lock) - Lock the session to stop a specified operations.\
-[`save`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#save) - Save a specified session to the local database.\
-[`load`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#load) - Load a specified session from the local database.\
-[`terminate`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#terminate) - Terminates a session specified by the noun.\
-[`status`](https://file+.vscode-resource.vscode-cdn.net/Users/arun/LLL-TAO/docs/API/COMMANDS/SESSIONS.MD#status) - Returns status information for the session specified by the noun.
+[`create`](./#create) - Generate a new session type specified by the noun.\
+[`unlock/lock`](./#unlock-lock) - Unlock/lock the session to carry out specified operations.\
+[`save/load`](./#save-load) - Save/load the session to the local database.\
+[`terminate`](./#terminate) - Terminates a session specified by the noun.\
+[`status`](./#status) - Returns status information for the session type specified by the noun.
 
 ## `Supported Nouns`
 
@@ -35,7 +33,7 @@ The following nouns are supported for this API command-set:
 \[`local`] - The location of the session.\
 
 
-## `create` <a href="#a-namecreatea-create" id="a-namecreatea-create"></a>
+## `create`
 
 Create a new session specified by given noun.
 
@@ -43,89 +41,39 @@ Create a new session specified by given noun.
 sessions/create/noun
 ```
 
-This command only supports the local noun.
+This command only supports the `local` noun.
 
-### Parameters: <a href="#parameters" id="parameters"></a>
+#### Parameters:
 
-`username` : Required to **identify** the profile to create the session for.
+`username` : Required to **identify.** The username to create the session for.
 
-`password` : Required to **authenticate** the password for creating the session.
+`password` : Required to **authenticate.** The password for this profile.
 
-`pin` : Required to **authenticate** the `pin` for creating the session.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-### Results: <a href="#results" id="results"></a>
-
-**Return value JSON object:**
+#### Return value JSON object:
 
 ```
 {
-    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
-    "session": "0aad63e028dd9e0f31f0b566831fea9dfc7db68fc2ba482a8ce975656971a67e"
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "session": "0aad63e028dd9e0f31f0b566831fea9dfc7db68fc2ba482a8ce975656971a67e"
 }
 [Completed in 1659.509829 ms]
 ```
 
-**Return values:**
+#### Return values:
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
+`genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
 
 `session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
 
-## `unlock` <a href="#a-nameunlocka-unlock" id="a-nameunlocka-unlock"></a>
+## `unlock/lock`
 
-This will unlock the session specified by given noun and cache the PIN in encrypted memory to be used for all subsequent API calls for the specified operations.
+This will unlock/lock the session specified by given noun and cache/purge the PIN in encrypted memory to be used for all subsequent API calls for the specified operations.
 
 ```
 sessions/unlock/noun
 ```
-
-These commands only supports the local noun.
-
-### Parameters: <a href="#parameters-1" id="parameters-1"></a>
-
-`pin` : Required if authenticate. The PIN for this profile.
-
-`session` : Required by argument -multiuser=1 to be supplied to identify the user session that is creating the transaction.
-
-`mining` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for mining.
-
-`notifications` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for processing notifications.
-
-`staking` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for staking.
-
-`transactions` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
-
-### Returns: <a href="#returns" id="returns"></a>
-
-**Return value JSON object:**
-
-```
-{
-    "unlocked": {
-        "mining": false,
-        "notifications": true,
-        "staking": true,
-        "transactions": false
-    }
-}
-[Completed in 1664.238652 ms]
-```
-
-**Return values:**
-
-`unlocked` : This will contain child elements describing which functions the session is currently unlocked for
-
-`mining` : Boolean flag indicating whether the users sig chain is unlocked for mining.
-
-`notifications` : Boolean flag indicating whether the users sig chain is unlocked for processing notifications.
-
-`staking` : Boolean flag indicating whether the users sig chain is unlocked for staking.
-
-`transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
-
-## `lock` <a href="#lock" id="lock"></a>
-
-This will lock the session specified by given noun and purge the PIN stored in the encrypted memory.
 
 ```
 sessions/lock/noun
@@ -133,37 +81,35 @@ sessions/lock/noun
 
 These commands only supports the `local` noun.
 
-### Parameters: <a href="#parameters-2" id="parameters-2"></a>
+#### Parameters:
 
-`pin` : Required if authenticate. The PIN for this profile.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by argument -multiuser=1 to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`mining` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for mining.
+`mining` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for mining.
 
-`notifications` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for processing notifications.
+`notifications` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for processing notifications.
 
-`staking` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for staking.
+`staking` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for staking.
 
-`transactions` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
+`transactions` : Required for **unlocking**. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
 
-### Returns: <a href="#returns-1" id="returns-1"></a>
-
-**Return value JSON object:**
+#### Return value JSON object:
 
 ```
 {
-    "unlocked": {
-        "mining": false,
-        "notifications": true,
-        "staking": true,
-        "transactions": false
-    }
+    "unlocked": {
+        "mining": false,
+        "notifications": true,
+        "staking": true,
+        "transactions": false
+    }
 }
 [Completed in 1664.238652 ms]
 ```
 
-**Return values:**
+#### Return values:
 
 `unlocked` : This will contain child elements describing which functions the session is currently unlocked for
 
@@ -175,25 +121,29 @@ These commands only supports the `local` noun.
 
 `transactions` : Boolean flag indicating whether the users sig chain is unlocked for creating any transactions (except those automatically created through mining/processing notifications if those are unlocked).
 
-## `save` <a href="#save" id="save"></a>
+## `save/load`
 
-This will save the users session to the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
+This will save/load the users session to/from the local database, allowing the session to be resumed at a later time without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to encrypt the session data before persisting it to the local database.
 
 ```
 sessions/save/noun
 ```
 
+```
+sessions/load/noun
+```
+
 These commands only supports the `local` noun.
 
-### Parameters: <a href="#parameters-3" id="parameters-3"></a>
+#### Parameters:
 
-`pin` : Required if authenticate. The PIN for this profile.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by argument -multiuser=1 to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-### Results: <a href="#results-1" id="results-1"></a>
+#### `save/local`
 
-**Return value JSON object:**
+#### Return value JSON object:
 
 ```
 {
@@ -203,43 +153,27 @@ These commands only supports the `local` noun.
 [Completed in 2.962459 ms]
 ```
 
-**Return values:**
+#### Return values:
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
+`genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
 
 `success` : Boolean flag indicating that the session was saved successfully .
 
-## `load` <a href="#load" id="load"></a>
+#### `load/local`
 
-This will load the users session from the local database, allowing a saved session to be resumed without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to decrypt the session data.
-
-```
-sessions/load/noun
-```
-
-These commands only supports the `local` noun.
-
-### Parameters: <a href="#parameters-4" id="parameters-4"></a>
-
-`pin` : Required if **authenticate**. The PIN for this profile.
-
-`session` : Required by argument `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
-
-### Results: <a href="#results-2" id="results-2"></a>
-
-**Return value JSON object:**
+#### Return value JSON object:
 
 ```
 {
-    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
-    "session": "2ef9de11b19af82984ddf93275e7ba22c11fe9659d0667f79311c46732bbb7a4"
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "session": "2ef9de11b19af82984ddf93275e7ba22c11fe9659d0667f79311c46732bbb7a4"
 }
 [Completed in 0.072625 ms]
 ```
 
-**Return values:**
+#### Return values:
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
+`genesis` : The signature chain genesis hash. This is a hash of the username used to create the `profile`.
 
 `session` : When using multi-user API mode, an additional session value is returned to identify the sessions.
 
