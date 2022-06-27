@@ -198,7 +198,15 @@ Update an object register specified by given noun.
 supply/update/noun
 ```
 
-This command only supports the `raw`, `basic` and `json` nouns.
+This command only supports the `item` and `raw` nouns.
+
+#### update/item
+
+This updates the values of basic and JSON formats with the item noun.
+
+#### update/raw
+
+This updates the data value of the raw item.
 
 #### Parameters:
 
@@ -236,7 +244,7 @@ Retrieves information for a single object for a type specified by the noun
 supply/get/noun
 ```
 
-This command only supports the `item` noun.
+This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
 #### Parameters:
 
@@ -258,7 +266,7 @@ Retrieves information for a single object for a type specified by the noun
 supply/list/noun
 ```
 
-This command only supports the `item` noun.
+This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
 #### Parameters:
 
@@ -276,7 +284,7 @@ This will initiate ownership transfer of the specified noun.
 supply/transfer/noun
 ```
 
-This command only supports the `item` noun.
+This command supports the `item`,  `raw` and `readonly` nouns.
 
 #### Parameters:
 
@@ -315,7 +323,7 @@ This method will claim ownership of the specified noun by the recipient to compl
 supply/claim/noun
 ```
 
-This command only supports the `item` noun.
+This command supports the `item`,  `raw` and `readonly` nouns.
 
 #### Parameters:
 
@@ -356,7 +364,7 @@ This will get the history of changes to an item, including both the data and it'
 supply/history/noun
 ```
 
-This command only supports the `item` noun.
+This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
 #### Parameters:
 
@@ -396,7 +404,7 @@ This will list off all of the transactions for the specified noun.
 supply/transactions/noun
 ```
 
-This command supports the `account, trust and token` nouns.
+This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
 #### Parameters:
 
