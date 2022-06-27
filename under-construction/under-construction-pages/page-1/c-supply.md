@@ -135,7 +135,19 @@ Create a new object register specified by given noun.
 supply/create/noun
 ```
 
-This command only supports the `readonly`, `raw`, `basic` and `json` nouns..
+This command only supports the `item`, raw and `readonly` nouns..
+
+#### create/item
+
+This creates a new item on an object register.
+
+#### create/raw
+
+This creates a new item on a raw register.
+
+#### create/readonly
+
+This creates a new item on a readonly register.
 
 #### Parameters:
 
