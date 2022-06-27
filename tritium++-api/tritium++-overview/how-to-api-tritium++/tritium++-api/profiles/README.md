@@ -157,7 +157,7 @@ This will create a new master profile specified by given noun, for use on the ne
 
 This method will initialize a `auth` crypto object register for login auth for signature chains created with the early release of Tritium, to be compatible with profiles with Tritium++. Existing users need to first convert their Tritium accounts to be compatible to login with Tritium++ profiles.&#x20;
 
-### Parameters:
+#### Parameters:
 
 `username` : Required to **authenticate.** The username to be associated with this profile. The  `profileID` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
@@ -169,8 +169,6 @@ This method will initialize a `auth` crypto object register for login auth for s
 Username is part of the profile credentials, is case-sensitive and cannot be changed. Choose the username carefully and make a point to back it up along with the password and pin. \
 Don't use the colon ' : ' at the end of the username.
 {% endhint %}
-
-### Results:
 
 #### Return value JSON object:
 
