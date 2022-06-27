@@ -185,7 +185,7 @@ Creates a new asset in a raw register. &#x20;
 
 #### create/any
 
-Creates a new asset specified by the format object register. &#x20;
+Creates a new asset specified by the format parameter. &#x20;
 
 #### Parameters:
 
