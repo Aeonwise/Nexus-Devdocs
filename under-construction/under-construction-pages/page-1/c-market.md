@@ -20,16 +20,16 @@ The current price is the last traded price and has nothing to do with the bid or
 
 Note: Market pairs are usually presented with the base token first and the quote token second, The market API allows to use the reverse XYZ/NXS and its treated as an ask order.
 
-The full supported endpoint of the finance URI is as follows:
+The full supported endpoint of the market URI is as follows:
 
 ```
-markets/verb/noun/filter/operator
+market/verb/noun/filter/operator
 ```
 
 The minimum required components of the URI are:
 
 ```
-markets/verb/noun
+market/verb/noun
 ```
 
 ## `Supported Operators`
@@ -62,7 +62,7 @@ The following verbs are currently supported by this API command-set:
 
 `create` - Creates a new market place or becomes part of an existing one.\
 `list` - List all orders for a specified marketplace.\
-`execute` - To full-fill the selected market order.\
+`execute` - To full-fill a specified market order.\
 `cancel` - To cancel a specified market order\
 `user` -&#x20;
 
@@ -70,19 +70,19 @@ The following verbs are currently supported by this API command-set:
 
 The following nouns are supported for this API command-set:
 
-\[`bid`] - \
-\[`ask`] - An object register containing a token-id, balance, and trust.\
-\[`order`] - An object register containing a token-id, balance, supply, and decimals.\
-\[`executed`] - An object selection noun allowing mixed accounts of different tokens.\
-\[`all`] - An object selection noun to collect all accounts for given token type.
+\[`bid`] - A market order placed to buy a token or asset\
+\[`ask`] - A market order placed to sell a token or asset\
+\[`order`] - A market order which can be a bid or ask\
+\[`executed`] - A market order which has been full-filled.\
+\[`all`] - An object selection noun to collect all nouns for the market API.
 
 **Example:**
 
 ```
-marekts/debit/any
+market/list/any
 ```
 
-The above command will create a debit contract withdrawing from a random sample of your accounts, for all tokens you own.
+The above command will list all market orders for the specified market.
 
 ## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
 
