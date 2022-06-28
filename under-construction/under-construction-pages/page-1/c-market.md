@@ -4,7 +4,7 @@ description: MARKET API
 
 # MARKET
 
-The market API creates an on-chain order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
+The market API creates an on-chain, order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
 
 #### How market places Are quoted
 
@@ -136,9 +136,9 @@ This creates a bid market order when market=token1/token2
 
 #### `create/ask`
 
-This creates a ask market order when market=token2/token1
+To creates a reverse market order when market=token2/token1
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -146,15 +146,15 @@ This creates a ask market order when market=token2/token1
 
 `market` : token1/token2 - The token pair for which the order is created. (This implies you want to buy/bid  token 1 while ask/give token 2 in exchange&#x20;
 
-`price` : The price of the token
+`price` : The price of the token2 in relation to token1.
 
-`amount` : The amount of token2 to be exchanged
+`amount` : The amount of token2 to be exchanged.
 
 `to` : This is the receiving account name or register address to credit token1.
 
 `from` : This is the sending account name or register address to debit the token2.&#x20;
 
-
+### Results:
 
 #### Return value JSON object:
 
@@ -183,13 +183,15 @@ market/list/noun
 
 This command supports the `any` wildcard noun.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `market` : Required to **identify** the token pairs or market whose orders are to be listed.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -249,9 +251,35 @@ This command supports the `any` wildcard noun.
 
 #### Return Values:
 
-`order` : `bid` or `ask`
+`order` : The array for different types of orders `bid` or `ask.`
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
+
+`timestamp` : The Unix timestamp of when the transaction was created.
+
+`owner` : The username hash of the profile that owns this account.
+
+`market` : The market for which the orders are listed.
+
+`price` : The price for that particular order.
+
+`type`  : The type of order `bid` or `ask`
+
+`contracts` : The array of contracts bound to this transaction and their details with opcodes.
+
+`{`
+
+`OP` :  The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+
+`from` : For `DEBIT` and `CREDIT` transactions, the register address of the senders account.
+
+`to` : For `DEBIT` and `CREDIT` transactions, the register address of the recipient account.
+
+`amount` : the token amount of the transaction.
+
+`token` :  the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+
+`ticker` :  The global name assigned to the token.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
@@ -289,6 +317,8 @@ This command supports the `any` wildcard noun.
 ```
 
 #### Return Values:
+
+`success` :  Boolean flag indicating that the order was executed successfully.
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
 
