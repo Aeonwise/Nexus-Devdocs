@@ -99,6 +99,7 @@ The following verbs are currently supported by this API command-set:
 [`create`](c-assets.md#create) - Generate a new object of supported type.\
 [`get`](c-assets.md#get) - Get object of supported type.\
 [`list`](c-assets.md#list) - List all objects owned by given user.\
+`list/partial` - List all objects owned by given user.\
 [`update`](c-assets.md#update) - Update a specified object.\
 [`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
 [`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
@@ -185,7 +186,7 @@ Creates a new asset in a raw register. &#x20;
 
 #### create/any
 
-Creates a new asset specified by the format object register. &#x20;
+Creates a new asset specified by the format parameter. &#x20;
 
 #### Parameters:
 
