@@ -20,6 +20,8 @@ The current price is the last traded price and has nothing to do with the bid or
 
 Note: Market pairs are usually presented with the base token first and the quote token second, The market API allows to use the reverse XYZ/NXS and its treated as an ask order.
 
+The asking price is for the token XYZ and you are want to buy NXS
+
 The full supported endpoint of the market URI is as follows:
 
 ```
