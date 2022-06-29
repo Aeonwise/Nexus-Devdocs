@@ -157,26 +157,29 @@ This will create a new master profile specified by given noun, for use on the ne
 
 This method will initialize a `auth` crypto object register for login auth for signature chains created with the early release of Tritium, to be compatible with profiles with Tritium++. Existing users need to first convert their Tritium accounts to be compatible to login with Tritium++ profiles.&#x20;
 
-#### Parameters:
+### Parameters:
 
 `username` : Required to **authenticate.** The username to be associated with this profile. The  `profileID` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
-`password` : Required to **authenticate.** The password to be associated with this profile.
+`password` : Required to **set** a password to be associated with this profile.
 
-`pin` : Required to **authenticate.** The PIN to be associated with this profile
+`pin` : Required to **set**  the PIN to be associated with this profile
 
 {% hint style="danger" %}
 Username is part of the profile credentials, is case-sensitive and cannot be changed. Choose the username carefully and make a point to back it up along with the password and pin. \
 Don't use the colon ' : ' at the end of the username.
 {% endhint %}
 
+### Results:
+
 #### Return value JSON object:
 
 ```
 {
-    "success": true,
-    "txid": "01d872456b966a14796d80f1687fe59a107fe6c3b6edd3558dce146d08f3093837136634022734d9d9b5e877311fd68f847f226ae276a12b8bc3f246513ccd08"
+    "success": true,
+    "txid": "01f1d335591bc1b96bfdb2b115fbda97114c3fda7bd3ac6c8c7f10eb007a645b95906069a50032edeac23f691b8c3735aedd74cb30483d59733715240f9076b1"
 }
+[Completed in 21201.048989 ms]
 ```
 
 #### Return values:
@@ -203,7 +206,7 @@ This method provides the user with the ability to change the password, pin for t
 
 This method provides the user with the ability to set or change the restore seed for this signature chain.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -231,6 +234,8 @@ NOTE
 * Make sure to backup and recheck the recovery seed and create multiple offline backups. &#x20;
 {% endhint %}
 
+### Results:
+
 #### Return value JSON object:
 
 ```
@@ -257,7 +262,7 @@ profiles/recover/noun
 
 This command only supports the `master` noun.
 
-#### Parameters:
+### Parameters:
 
 `username` : Required to **identify.** The username identifying the profile for recovery.
 
@@ -266,6 +271,8 @@ This command only supports the `master` noun.
 `pin` : Required to **set** a new pin**.** The new PIN to be associated with this profile.
 
 `recovery` : Required to **authenticate**. The existing recovery seed for this profile.&#x20;
+
+### Results:
 
 #### Return value JSON object:
 
@@ -293,9 +300,11 @@ profiles/status/noun
 
 This command only supports the `master` noun.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -316,11 +325,11 @@ This command only supports the `master` noun.
 
 `confirmed` : Boolean flag indicating whether the genesis transaction for this profile has at least one confirmation.
 
-`recovery` : Flag indicating whether the recovery seed has been set for this profile.
+`recovery` : Boolean flag indicating whether the recovery seed has been set for this profile.
 
-`crypto` : Flag indicating whether the crypto object register has been set for this profile.
+`crypto` : Boolean flag indicating whether the crypto object register has been set for this profile.
 
-`transactions` : The total transaction count in this profile
+`transactions` : The total transactions count in this profile
 
 ## `notifications`
 
@@ -398,7 +407,7 @@ profiles/transactions/noun
 
 This command only supports the `master` noun.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -409,6 +418,8 @@ This command only supports the `master` noun.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
+
+### Results:
 
 #### Return value JSON object:
 
