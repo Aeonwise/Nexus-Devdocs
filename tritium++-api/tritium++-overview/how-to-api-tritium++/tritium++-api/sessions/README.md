@@ -83,17 +83,17 @@ These commands only supports the local noun.
 
 ### Parameters: <a href="#parameters-1" id="parameters-1"></a>
 
-`pin` : Required if authenticate. The PIN for this profile.
+`pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by argument -multiuser=1 to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`mining` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for mining.
+`mining` : Required for **unlocking** mining transactions. This boolean value unlocks the session for mining.
 
-`notifications` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for processing notifications.
+`notifications` : Required for **unlocking** notifications. This boolean value unlocks the session to automatically process incoming notifications.
 
-`staking` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for staking.
+`staking` : Required for **unlocking** staking transactions. This boolean value unlocks the session for staking.
 
-`transactions` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
+`transactions` : Required for **unlocking** transactions. This boolean value unlocks the session to allow creating or claiming transactions.
 
 ### Returns: <a href="#returns" id="returns"></a>
 
@@ -135,17 +135,17 @@ These commands only supports the `local` noun.
 
 ### Parameters: <a href="#parameters-2" id="parameters-2"></a>
 
-`pin` : Required if authenticate. The PIN for this profile.
+`pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by argument -multiuser=1 to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** -multiuser=1 to be supplied to identify the user session that is creating the transaction.
 
-`mining` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for mining.
+`mining` : Required for **locking** mining transactions. This boolean value locks the session for mining.
 
-`notifications` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for processing notifications.
+`notifications` : Required for **locking** notifications. This boolean value determines locks the session from processing incoming notifications.
 
-`staking` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for staking.
+`staking` : Required for **locking** staking transactions. This boolean value locks the session for staking.
 
-`transactions` : Required for unlocking. This boolean value determines whether the logged in users profile can be used for creating or claiming transactions.
+`transactions` : Required for **locking** transactions. This boolean value locks the session for creating or claiming transactions.
 
 ### Returns: <a href="#returns-1" id="returns-1"></a>
 
@@ -187,9 +187,9 @@ These commands only supports the `local` noun.
 
 ### Parameters: <a href="#parameters-3" id="parameters-3"></a>
 
-`pin` : Required if authenticate. The PIN for this profile.
+`pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by argument -multiuser=1 to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 ### Results: <a href="#results-1" id="results-1"></a>
 
