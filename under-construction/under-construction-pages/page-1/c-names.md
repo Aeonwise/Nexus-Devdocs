@@ -223,7 +223,7 @@ This will create a new name.
 names/get/namespace
 ```
 
-#### Parameters:
+### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
@@ -239,7 +239,26 @@ names/get/namespace
 
 `address` : The r**egister address** to search for. If provided then the Names owned by the callers signature chain are searched to find a match. This parameter is ignored if `name` is provided.
 
-#### Results:
+### Results:
+
+#### `get/name`
+
+#### Return value JSON object:
+
+```
+{
+    "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "version": 1,
+    "created": 1656571493,
+    "modified": 1656571493,
+    "type": "OBJECT",
+    "register": "8BJ747ASK45oU7UC5e2dePXeMviskmU1t5Kd4iyKLdSiCgKtLcJ",
+    "name": "UPS-Token",
+    "namespace": "",
+    "address": "8HeR7kxrk9zsAcEAqaQaD2juMnZ73m4WDb4sW16pW93qd7i2Q3G"
+}
+[Completed in 0.418167 ms]
+```
 
 #### `get/namespace`
 
@@ -252,48 +271,10 @@ names/get/namespace
     "created": 1654698239,
     "modified": 1654698239,
     "type": "OBJECT",
-    "namespace": "valkeryie",
+    "namespace": "valkyrie",
     "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5"
 }
 [Completed in 0.174417 ms]
-
-```
-
-#### Return values:
-
-`owner` : The genesis hash of the signature chain that owns this namespace.
-
-`version` : The serialization version of the namespace.
-
-`created` : The UNIX timestamp when the namespace was created.
-
-`modified` : The UNIX timestamp when the namespace was last modified.
-
-`type` : The description of the register `OBJECT`
-
-`namespace` : The name identifying the object register.&#x20;
-
-`address` : The register address of the namespace.
-
-#### `get/name`
-
-#### Return value JSON object:
-
-```
-[
-    {
-        "owner": "b743770768128f7ca2c15cb859b01583c2d5c5c772dc5564b3e7e48c4d0d54f4",
-        "version": 1,
-        "created": 1654620478,
-        "modified": 1654620478,
-        "type": "OBJECT",
-        "register": "8C96zrYqeyYYiRDQ9pWZkxgzMhmV7nxDUEeE8fBCufgWfJ4cnJ1",
-        "name": "Nex_Token",
-        "namespace": "",
-        "address": "8HXCoGDXsYBxQeGJUTvTX3HpjtNZYu5h75yetyjradHRwczw3FV"
-    }
-]
-[Completed in 0.291792 ms]
 ```
 
 #### Return values:
@@ -306,15 +287,81 @@ names/get/namespace
 
 `modified` : The UNIX timestamp when the Name was last modified.
 
-`type` : The description of the register `OBJECT`
+`type` : The type of register - OBJECT | READONLY | RAW
 
-`register` : The register address of the the object that this Name points to.
+`register` : The register address of the the object that this Name or namespace points to.
 
 `name` : The name identifying the object register.
 
-`namespace` : The namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
+`namespace` : The name identifying the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
 
 `address` : The register address of the Name.
+
+## list
+
+This will list off all of the object register details specified by the noun.
+
+```
+names/list/noun
+```
+
+This command supports all the nouns.
+
+### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+### Results:
+
+#### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+        "version": 1,
+        "created": 1656571493,
+        "modified": 1656571493,
+        "type": "OBJECT",
+        "register": "8BJ747ASK45oU7UC5e2dePXeMviskmU1t5Kd4iyKLdSiCgKtLcJ",
+        "name": "UPS-Token",
+        "namespace": "",
+        "address": "8HeR7kxrk9zsAcEAqaQaD2juMnZ73m4WDb4sW16pW93qd7i2Q3G"
+    },
+    {
+        "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+        "version": 1,
+        "created": 1656571181,
+        "modified": 1656571181,
+        "type": "OBJECT",
+        "register": "8DS2qGLhuEC2reKrzxyWaXXwtVq2KmGWGQCWKBQwrCQc4XS2b8V",
+        "name": "UPS",
+        "namespace": "~GLOBAL~",
+        "address": "8H5tcBwU31FBTzokw3gDhz7e1k3mGytk26MBbKeAfjJbFHoXo7Y"
+    }
+]
+[Completed in 0.781230 ms]
+```
+
+#### Return Values:
+
+The return value is a JSON array of objects for each entry in the namespaces history:
+
+`owner` : The genesis hash of the signature chain that owned the namespace.
+
+`version` :  The serialization version of the namespace.
+
+`created` : The UNIX timestamp when the object was created.
+
+`modified` : The Unix timestamp when the object was updated.
+
+`type` : The type of register - OBJECT | READONLY | RAW
+
+`name` : The name of the Name object.
+
+`namespace` :  The name of the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
+
+`address` : The register address of the object.
 
 ## `transfer`
 

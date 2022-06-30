@@ -77,12 +77,12 @@ When using recursive filtering, the nested hiearchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](../../../getting-started/tritium++-api/broken-reference/) - Generate a new object of supported type.\
-[`debit`](../../../getting-started/tritium++-api/broken-reference/) - Issue funds from supported type.\
-[`credit`](../../../getting-started/tritium++-api/broken-reference/) - Claim funds issued to account from debit.\
+[`create`](finance.md#user-content-create-1) - Generate a new object of supported type.\
+[`debit`](finance.md#debit) - Issue funds from supported type.\
+[`credit`](finance.md#user-content-credit) - Claim funds issued to account from debit.\
 [`burn`](finance.md#user-content-create-2) - Remove a given token from circulation.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
+[`get`](finance.md#get) - Get object of supported type.\
+[`list`](finance.md#list) - List all objects owned by given user.\
 [`history`](finance.md#history) - Generate the history of all last states.\
 [`transactions`](finance.md#transactions) - List all transactions that modified specified object.
 
