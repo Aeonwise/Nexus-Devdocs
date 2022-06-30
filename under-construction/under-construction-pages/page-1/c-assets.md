@@ -275,11 +275,11 @@ Lists all assets for register type raw.
         "created": 1655279431,
         "modified": 1655279431,
         "type": "OBJECT",
-        "Location": "Margoa",
-        "Owner Name": "Ageon",
+        "Location": "Metaworld",
+        "Owner Name": "John Doe",
         "Registration Details": "MRG/05/478564",
         "address": "87Wai2JoS4hNAEVXZVmejLS6pK21XQWKoLAkaep5aXFdrYnJJyk",
-        "name": "local:Asset2"
+        "name": "local:Metaworld-0001 "
     }
 ]
 [Completed in 2.838543 ms]
@@ -563,17 +563,23 @@ This command only supports the `asset` noun.
 ```
 [
     {
-        "type": "CREATE",
-        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-        "modified": 1560492280,
-        "checksum": 5612332250743384100,
-        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
-        "name": "paul",
-        "namespace": "test",
-        "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1656614448,
+        "modified": 1656614448,
+        "type": "OBJECT",
+        "Assetname": " Buggati Veryon",
+        "Chassis_No": "BV45648784634546",
+        "DOP": "22/06/2022",
+        "Engine_No": "BVE54864660",
+        "Owner": "Alice",
+        "Registration_No": "DL01EK0001",
+        "address": "88NcYcKtMTRwtwDgfXFkZ4TbrHvkRGzsQkqVZco77Hqx1WRgCyi",
+        "name": "local:Asset0001",
+        "action": "CREATE"
     }
-
 ]
+[Completed in 0.870644 ms]
 ```
 
 #### Return values:

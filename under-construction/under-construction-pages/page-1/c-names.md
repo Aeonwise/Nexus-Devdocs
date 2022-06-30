@@ -463,15 +463,21 @@ This will get the history and ownership of the specified noun.
 names/history/noun
 ```
 
-This command supports the `name`, `namespace`, `global` and `local` nouns.
+#### history/name
+
+This will get the history of a name as well as it's ownership.&#x20;
+
+#### history/namespace
+
+This will get the history of a namespace as well as it's ownership.&#x20;
 
 ### Parameters:
 
 `session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name.
 
-`name` : Optional to **identify** the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
+`name` : The name identifying the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
 
-`address` : Optional to **identify** the name using the register address. This is optional if the name is provided.
+`address` : The register address of the name. This is optional if the name is provided.
 
 ### Results:
 
@@ -527,13 +533,9 @@ names/transactions/noun
 
 This command supports the `account, trust and token` nouns.
 
-### Parameters:
+#### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
-
-`name` : Optional to **identify** the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
-
-`address` : Optional to **identify** the name using the register address. This is optional if the name is provided.
 
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 
@@ -542,8 +544,6 @@ This command supports the `account, trust and token` nouns.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](c-names.md#sorting-filtering) parameters.
-
-### Results:
 
 #### Return value JSON object:
 
