@@ -379,7 +379,7 @@ This will transfer ownership of global names or names created in a namespace (a 
 
 This will transfer ownership of an namespace&#x20;
 
-#### Parameters:
+### Parameters:
 
 `pin` : The PIN for this signature chain.
 
@@ -394,6 +394,8 @@ This will transfer ownership of an namespace&#x20;
 `recipient` : The username of the profile to transfer the the name to. This is optional if the username is provided.
 
 `expires` : This optional field allows callers to specify an expiration for the transfer transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -422,13 +424,15 @@ Names that have been transferred need to be claimed by the recipient before the 
 
 Namespaces that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
 
-#### Parameters:
+### Parameters:
 
 `pin` : The PIN for this signature chain.
 
 `session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied.
 
 `txid` : The transaction ID (hash) of the corresponding name transfer transaction for which you are claiming.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -467,7 +471,7 @@ This will get the history of a name as well as it's ownership.&#x20;
 
 This will get the history of a namespace as well as it's ownership.&#x20;
 
-#### Parameters:
+### Parameters:
 
 `session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name.
 
@@ -475,43 +479,49 @@ This will get the history of a namespace as well as it's ownership.&#x20;
 
 `address` : The register address of the name. This is optional if the name is provided.
 
+### Results:
+
 #### Return value JSON object:
 
 ```
 [
     {
-        "type": "CREATE",
-        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-        "modified": 1560492280,
-        "checksum": 5612332250743384100,
-        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
-        "name": "paul",
-        "namespace": "test",
-        "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+        "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+        "version": 1,
+        "created": 1656571181,
+        "modified": 1656571181,
+        "type": "OBJECT",
+        "register": "8DS2qGLhuEC2reKrzxyWaXXwtVq2KmGWGQCWKBQwrCQc4XS2b8V",
+        "name": "UPS",
+        "namespace": "~GLOBAL~",
+        "address": "8H5tcBwU31FBTzokw3gDhz7e1k3mGytk26MBbKeAfjJbFHoXo7Y",
+        "action": "CREATE"
     }
-
 ]
+[Completed in 1.097269 ms]
 ```
 
 #### Return values:
 
 The return value is a JSON array of objects for each entry in the names history:
 
-`type` : The action that occurred - CREATE | MODIFY | TRANSFER | CLAIM
+`owner` : The genesis hash of the signature chain that owned the namespace.
 
-`owner` : The genesis hash of the signature chain that owned the name.
+`version` :  The serialization version of the namespace.
 
-`modified` : The Unix timestamp of when the name was updated.
+`created` : The UNIX timestamp when the object was created.
 
-`checksum` : A checksum of the state register used for pruning.
+`modified` : The Unix timestamp when the object was updated.
 
-`address` : The register address of the name
+`type` : The type of register - OBJECT | READONLY | RAW
 
-`name` : The name
+`name` : The name of the Name object.
 
-`namespace` : The namespace name
+`namespace` :  The name of the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
 
-`register_address` : The register address that this name points to at this point in history
+`address` : The register address of the object.
+
+`action` : The action that occurred - CREATE | MODIFY | TRANSFER | CLAIM
 
 ## `transactions`
 
