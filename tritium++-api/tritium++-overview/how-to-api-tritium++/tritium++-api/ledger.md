@@ -160,7 +160,7 @@ ledger/get/blockhash
 Retrieves block data for the given block hash or height.
 
 ```
-// Some codeledger/get/block
+ledger/get/block
 ```
 
 #### Parameters:

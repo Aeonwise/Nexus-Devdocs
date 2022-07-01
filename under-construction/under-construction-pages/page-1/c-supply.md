@@ -139,15 +139,19 @@ This command only supports the `item`, raw and `readonly` nouns..
 
 #### create/item
 
-This creates a new item on an object register.
+Creates a new item on an object register.
 
 #### create/raw
 
-This creates a new item on a raw register.
+Creates a new item on a raw register.
 
 #### create/readonly
 
-This creates a new item on a readonly register.
+Creates a new item on a readonly register.
+
+#### create/any
+
+Creates a new item specified by the format parameter. &#x20;
 
 #### Parameters:
 
@@ -268,11 +272,11 @@ supply/list/noun
 
 This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
-#### Parameters:
-
-`pin` : Required if **authenticate**. The PIN for this profile.
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -285,6 +289,18 @@ supply/transfer/noun
 ```
 
 This command supports the `item`,  `raw` and `readonly` nouns.
+
+#### transfer/item
+
+This initiates transfer for an item to a recipient.
+
+#### transfer/raw
+
+This initiates transfer for a raw item to a recipient.
+
+#### transfer/readonly
+
+This initiates transfer for a readonly item to a recipient.
 
 #### Parameters:
 
@@ -324,6 +340,18 @@ supply/claim/noun
 ```
 
 This command supports the `item`,  `raw` and `readonly` nouns.
+
+#### claim/item
+
+This claims ownership of an item which has been transferred.
+
+#### claim/raw
+
+This claims ownership of a raw item which has been transferred.
+
+#### claim/readonly
+
+This claims ownership of a readonly item which has been transferred.
 
 #### Parameters:
 
