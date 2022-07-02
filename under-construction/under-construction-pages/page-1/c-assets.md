@@ -188,7 +188,7 @@ Creates a new asset in a raw register. &#x20;
 
 Creates a new asset specified by the format parameter. &#x20;
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -196,11 +196,11 @@ Creates a new asset specified by the format parameter. &#x20;
 
 `name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
 
-`format` : The format the caller is using to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`. <mark style="color:green;">This is an optional field and the value</mark> <mark style="color:green;"></mark><mark style="color:green;">`basic`</mark> <mark style="color:green;"></mark><mark style="color:green;">is assumed if omitted.</mark>
+`format` : The format the caller is using to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`.  If the noun is `raw or readonly` the format has to be the same as the noun.
 
-`data` : Required for format type's `readonly`, `raw` and `any` noun, allows caller to add arbitrary data to object.
+`data` : Required for format type's `readonly` or `raw` and `any` noun, allows caller to add arbitrary data to object.
 
-`data` : If format is `raw`, then this field contains the hex-encoded data to be stored in this asset. Raw assets are always read-only. All other preceding fields are ignored.
+`data` : If noun and format is `raw or readonly`, then this field is used to specify the data values.
 
 `<fieldname>=<value>` : If format is `basic`, then the caller can provide additional = pairs for each piece of data to store in the asset.
 
