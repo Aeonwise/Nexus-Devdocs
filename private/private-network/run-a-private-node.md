@@ -122,7 +122,7 @@ To move the nexus executable to the /usr/bin folder:
 
 `sudo mv ˜ /LLL-TAO/nexus /usr/bin`
 
-`Configure the Core`
+### Configure the Core
 
 Create Nexus core directory (it’s a hidden directory, Nexus daemon creates it automatically on first start. We are creating it manually to create the configuration file. If you have the directory you can skip this step.)
 

@@ -155,7 +155,7 @@ Creates a new item specified by the format parameter. &#x20;
 
 #### Parameters:
 
-`pin` : Required if **authenticate**. The PIN for this profile.
+`pin` : Required if **locked**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -250,7 +250,7 @@ supply/get/noun
 
 This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 

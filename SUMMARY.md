@@ -80,6 +80,7 @@
       * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
       * [ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
       * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
+      * [INVOICES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/invoices.md)
 
 ## Legacy
 
@@ -96,7 +97,6 @@
     * [SUPPLY METHODS](under-construction/under-construction-pages/page-1/supply-methods.md)
     * [c-OBJECTS](under-construction/under-construction-pages/page-1/c-objects.md)
     * [c-CRYPTO](under-construction/under-construction-pages/page-1/c-crypto.md)
-    * [INVOICES](under-construction/under-construction-pages/page-1/invoices.md)
     * [INVOICE METHODS](under-construction/under-construction-pages/page-1/invoice-methods.md)
     * [ASSET METHODS](under-construction/under-construction-pages/page-1/asset-methods.md)
     * [MARKET](under-construction/under-construction-pages/page-1/c-market.md)

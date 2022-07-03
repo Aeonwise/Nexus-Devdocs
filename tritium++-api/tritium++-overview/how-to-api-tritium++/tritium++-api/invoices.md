@@ -84,13 +84,13 @@ invoices/get/balances/balance/sum
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#create) - Generate a new object of supported type.\
-[`get`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#get) - Get object of supported type.\
-[`list`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#list) - List all objects owned by given user.\
-`pay` - Issue funds from supported type.\
-`cancel` - To cancel the created invoice\
-[`history`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#history) - Generate the history of all last states.\
-[`transactions`](../../../getting-started/tritium++-api/broken-reference/) - List all transactions that modified specified object.
+[`create`](invoices.md#user-content-create) - Generate a new object of supported type.\
+[`get`](invoices.md#get) - Get object of supported type.\
+[`list`](invoices.md#list) - List all objects owned by given user.\
+[`pay`](invoices.md#user-content-create-2) - Issue funds from supported type.\
+[`cancel`](invoices.md#user-content-create-3) - To cancel the created invoice\
+[`history`](invoices.md#user-content-create-4) - Generate the history of all last states.\
+[`transactions`](invoices.md#transactions) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -122,9 +122,9 @@ This command only supports the `invoice` noun.
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the invoice should be created with. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `recipient` : The genesis hash of the signature chain to issue the invoice to. This is optional if the recipient\_username is provided.
 
@@ -175,19 +175,13 @@ This command only supports the `invoice` noun.
 
 ### Parameters:
 
-`genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`username` : The username identifying the signature chain (optional if genesis is supplied).
+`name` : Optional to **identify** the invoice using the name. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
-`status` : Optional filter by invoice status. Values can be `OUTSTANDING` (the invoice has been issued but not paid), `PAID` (the invoice has been paid by the recipient), or `CANCELLED` (the invoice was cancelled by the issuer before payment)
+`address` : Optional to **identify** the invoice using register address. This is optional if the name is provided.
 
-`limit` : The number of records to return for the current page. The default is 100.
-
-`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
-
-`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
-
-`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+### Results:
 
 #### Return value JSON object:
 
@@ -269,6 +263,8 @@ This command only supports the `invoice` noun.
 
 ### Parameters:
 
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
 `genesis` : The genesis hash identifying the signature chain (optional if username is supplied).
 
 `username` : The username identifying the signature chain (optional if genesis is supplied).
@@ -282,6 +278,8 @@ This command only supports the `invoice` noun.
 `offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
 
 `where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here Filtering Results
+
+### Results:
 
 #### Return value JSON object:
 
@@ -365,9 +363,9 @@ This command only supports the `invoice` noun.
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : The name identifying the invoice to pay. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
@@ -403,9 +401,9 @@ This command only supports the `invoice` noun.
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : The name identifying the invoice to cancel. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
@@ -437,7 +435,7 @@ This command only supports the `invoice` noun.
 
 ### Parameters:
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) the account owner. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : The name identifying the invoice. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
