@@ -168,17 +168,17 @@ This will create a new namespace.
 
 #### create/name
 
-`name` : The name of the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
+`name` : Required a name to be created for the object that this name will point to. The name can contain any characters, but must not START with a colon `:`
 
-`namespace` : Optional field allows callers to specify the **namespace** that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone elses namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global).
+`namespace` : Optional field allows callers to specify the **namespace** that the name should be created in. If the namespace is provided then the caller must also be the owner of the namespace. i.e. you cannot create a name in someone else's namespace. If the namespace is left blank (the default) then the Name will be created in the users local namespace (unless specifically flagged as global).
 
 `global` : Optional, boolean field indicates that the Name should be created in the global namespace, i.e. it will be globally unique. If the caller sets this field to true, the namespace parameter is ignored.
 
-`register_address` : The 256-bit hexadecimal register address of the object that this Name will point to.
+`register_address` : Optional, the 256-bit hexadecimal register address of the object that this Name will point to.
 
 #### `create/namespace`
 
-`namespace` : A name to **identify** the namespace. A hash of the name will determine the register address.
+`namespace` : Required name to **create** a namespace object. A hash of the name will determine the register address.
 
 ### Results:
 
@@ -383,9 +383,9 @@ This will transfer ownership of an namespace&#x20;
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : The name identifying the name to be transferred. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
 
@@ -428,9 +428,9 @@ Namespaces that have been transferred need to be claimed by the recipient before
 
 ### Parameters:
 
-`pin` : The PIN for this signature chain.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `txid` : The transaction ID (hash) of the corresponding name transfer transaction for which you are claiming.
 
@@ -469,7 +469,7 @@ This command supports the `name`, `namespace`, `global` and `local` nouns.
 
 ### Parameters:
 
-`session` : For multi-user API mode (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the name.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : Optional to **identify** the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
 
@@ -669,9 +669,9 @@ This command does not support the `name` or `namespace` nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
-
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 ### Results:
 

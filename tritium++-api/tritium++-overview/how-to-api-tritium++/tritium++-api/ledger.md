@@ -610,11 +610,11 @@ For debits that were made to a tokenized asset as part of a split payment transa
 ledger/void/transaction
 ```
 
-#### Parameters:
+Parameters:
 
-`pin` : The PIN for the signature chain voiding the transaction.
+`pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) created the transaction being voided. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `txid` : The transaction ID (hash) of the debit or transfer transaction that you wish to void.
 
