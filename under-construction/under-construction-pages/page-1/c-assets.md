@@ -216,6 +216,8 @@ Creates a new asset specified by the format parameter. &#x20;
 There is a limit of 1KB for asset data to be saved in the register, excluding the Asset Name
 {% endhint %}
 
+### Results:
+
 #### Return value JSON object:
 
 ```
@@ -257,13 +259,15 @@ Lists all assets for register type readonly.
 
 Lists all assets for register type raw.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `name` : The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
 `address` : The register address of the item. This is optional if the name is provided.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -329,9 +333,11 @@ Lists all assets for register type raw.
 
 Lists all assets for register type raw.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -381,7 +387,7 @@ assets/update/noun
 
 This command does not support the `asset`, `raw` or `readonly` nouns.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -396,6 +402,8 @@ This command does not support the `asset`, `raw` or `readonly` nouns.
 `data` : If format is `raw`, or `readonly` then this field contains the hex-encoded data to be stored in this asset.&#x20;
 
 `<fieldname>=<value>` : The caller can provide = pairs for each piece of data to update in the asset.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -423,7 +431,7 @@ assets/transfer/noun
 
 This command supports the `readonly`, `raw`, and `asset`  nouns.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -436,6 +444,8 @@ This command supports the `readonly`, `raw`, and `asset`  nouns.
 `recipient` : Required to **identify** the profile to transfer the item to. This is optional if the username is provided.
 
 `expires` : This optional field allows callers to specify an **expiration** for the transfer transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -466,7 +476,7 @@ assets/claim/noun
 
 This command supports the `readonly`, `raw`, and `asset`  nouns.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -475,6 +485,8 @@ This command supports the `readonly`, `raw`, and `asset`  nouns.
 `txid` : Required the **transaction ID** (hash) of the item transfer transaction for which is being claimed.
 
 `name` : Optional field allows the user to **rename** an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -503,7 +515,7 @@ assets/tokenize/noun
 
 This command only supports the `asset` noun.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -520,6 +532,8 @@ Create the token beforehand and use the token\_name or token address to tokenize
 {% endhint %}
 
 `token` : The register address of a token to use to tokenize the asset. `token_name` can be supplied as an alternative to `token`.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -548,7 +562,7 @@ supply/history/noun
 
 This command only supports the `asset` noun.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -557,6 +571,8 @@ This command only supports the `asset` noun.
 `name` : The name **identifying** the `item`.  This is optional if the address is provided.
 
 `address` : The **register address** of the item. This is optional if the name is provided.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -583,6 +599,26 @@ This command only supports the `asset` noun.
 ```
 
 #### Return values:
+
+The return value is a JSON array of objects for each entry in the names history:
+
+`owner` : The username hash of the profile that owned the name.
+
+`created` : The UNIX timestamp when the account was created.
+
+`modified` : The Unix timestamp of when the name was updated.
+
+`type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY`.
+
+`<fieldname>=<value>` : If format is `basic`, then the caller can provide additional = pairs for each piece of data to store in the asset.
+
+`data` : If noun is raw or readonly then this represents the data values.
+
+`address` : The register address of the name object.
+
+`name` : The name of the object.
+
+`action` : The action that occurred - CREATE | MODIFY | TRANSFER | CLAIM
 
 ## `transactions`
 
