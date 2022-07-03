@@ -341,11 +341,13 @@ profiles/notifications/noun
 
 This command only supports the `master` noun.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
+
+### Results:
 
 #### Return value JSON object:
 

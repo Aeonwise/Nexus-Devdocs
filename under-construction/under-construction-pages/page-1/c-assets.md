@@ -630,7 +630,7 @@ assets/transactions/noun
 
 This command supports the `asset`, `raw`, `readonly` and `any` nouns.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -645,6 +645,8 @@ This command supports the `asset`, `raw`, `readonly` and `any` nouns.
 * `detail` : All in `summary` + genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) parameters.
+
+### Results:
 
 #### Return value JSON object:
 

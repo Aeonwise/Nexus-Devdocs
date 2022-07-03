@@ -253,11 +253,13 @@ sessions/create/noun
 
 This command only supports the `local` noun.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -282,9 +284,11 @@ sessions/status/noun
 
 This command only supports the `local` noun.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+
+### Results:
 
 #### Return value JSON object:
 

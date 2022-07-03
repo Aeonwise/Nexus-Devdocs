@@ -206,9 +206,11 @@ Returns a list of all the raw registers.
 
 Returns a list of all the append registers.
 
-#### Parameters:
+### Parameters:
 
 The parameters used are Filtering -Query DSL, along with the [sorting / filtering](register.md#user-content-create)
+
+### Results:
 
 #### Return values:
 
@@ -264,13 +266,15 @@ Retrieves information for a specified raw register.
 
 Retrieves information for a specified append register.
 
-#### Parameters:
+### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
 `address` : The register address of the account/trust//token to be transferred. This is optional if the name is provided.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -329,13 +333,15 @@ This will get the history and ownership of the specified raw register.
 
 This will get the history and ownership of the specified append register.
 
-#### Parameters:
+### Parameters:
 
 `session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
 `address` : The register address of the account/trust//token to be transferred. This is optional if the name is provided.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -423,7 +429,7 @@ List out all the transactions for the specified raw register.
 
 List out all the transactions for the specified append register.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -434,6 +440,8 @@ List out all the transactions for the specified append register.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](register.md#sorting-filtering) parameters.
+
+### Results:
 
 #### Return value JSON object:
 

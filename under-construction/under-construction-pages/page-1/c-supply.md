@@ -302,7 +302,7 @@ This initiates transfer for a raw item to a recipient.
 
 This initiates transfer for a readonly item to a recipient.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -315,6 +315,8 @@ This initiates transfer for a readonly item to a recipient.
 `recipient` : Required to **identify** the profile to transfer the item to. This is optional if the username is provided.
 
 `expires` : This optional field allows callers to specify an **expiration** for the transfer transaction. The expires value is the `number of seconds` from the transaction creation time after which the transaction can no longer be claimed by the recipient. Conversely, when you apply an expiration to a transaction, you are unable to void the transaction until after the expiration time. If expires is set to 0, the transaction will never expire, making the sender unable to ever void the transaction. If omitted, a default expiration of 7 days (604800 seconds) is applied.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -353,7 +355,7 @@ This claims ownership of a raw item which has been transferred.
 
 This claims ownership of a readonly item which has been transferred.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -362,6 +364,8 @@ This claims ownership of a readonly item which has been transferred.
 `txid` : Required the **transaction ID** (hash) of the item transfer transaction for which is being claimed.
 
 `name` : Optional field allows the user to **rename** an item when it is claimed. By default the name is copied from the previous owner and a Name record is created for the item in your user namespace. If you already have an object for this name then you will need to provide a new name in order for the claim to succeed.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -394,7 +398,7 @@ supply/history/noun
 
 This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -403,6 +407,8 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 `name` : The name **identifying** the `item`.  This is optional if the address is provided.
 
 `address` : The **register address** of the item. This is optional if the name is provided.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -434,7 +440,7 @@ supply/transactions/noun
 
 This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
-#### Parameters:
+### Parameters:
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -445,6 +451,8 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
 This method supports the [Sorting / Filtering](c-supply.md#sorting-filtering) parameters.
+
+### Results:
 
 #### Return value JSON object:
 
