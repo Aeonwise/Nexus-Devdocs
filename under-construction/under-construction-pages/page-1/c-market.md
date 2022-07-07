@@ -76,12 +76,12 @@ The following nouns are supported for this API command-set:
 \[`ask`] - A market order placed to sell a token or asset\
 \[`order`] - A market order which can be a bid or ask\
 \[`executed`] - A market order which has been full-filled.\
-\[`all`] - An object selection noun to collect all nouns for the market API.
+
 
 **Example:**
 
 ```
-market/list/any
+market/list/orders
 ```
 
 The above command will list all market orders for the specified market.
@@ -183,7 +183,7 @@ Create a new object register specified by given noun.
 market/list/noun
 ```
 
-This command supports the `any` wildcard noun.
+This command supports all the nouns.
 
 ### Parameters:
 
@@ -293,9 +293,9 @@ Create a new object register specified by given noun.
 market/list/noun
 ```
 
-This command supports the `any` wildcard noun.
+This command supports the `bid`, `ask` and `order` nouns.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -306,6 +306,8 @@ This command supports the `any` wildcard noun.
 `to` : This is the receiving account name or register address to credit token1.
 
 `from` : This is the sending account name or register address to debit the token2
+
+### Results:
 
 #### Return value JSON object:
 
@@ -334,7 +336,7 @@ Create a new object register specified by given noun.
 market/list/noun
 ```
 
-This command supports the `any` wildcard noun.
+This command supports the `bid`, `ask` and `order` nouns.
 
 ### Parameters:
 
@@ -345,6 +347,8 @@ This command supports the `any` wildcard noun.
 `market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
 `txid` : The transaction hash for the order to be cancelled.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -370,7 +374,7 @@ Create a new object register specified by given noun.
 market/list/noun
 ```
 
-This command supports the `any` wildcard noun.
+This command supports all the nouns.
 
 ### Parameters:
 
@@ -379,6 +383,8 @@ This command supports the `any` wildcard noun.
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
 `market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+
+### Results:
 
 #### Return value JSON object:
 
