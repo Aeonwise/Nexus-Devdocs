@@ -4,7 +4,7 @@ description: MARKET API
 
 # MARKET
 
-The market API creates an on-chain, order book based P2P marketplace for trading of tokens, assets on the Nexus blockchain. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
+The market API creates an on-chain, order book based P2P marketplace for trading of tokens and assets. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
 
 #### How market places Are quoted
 
@@ -66,7 +66,7 @@ The following verbs are currently supported by this API command-set:
 `list` - List all orders for a specified marketplace.\
 `execute` - To full-fill a specified market order.\
 `cancel` - To cancel a specified market order\
-`user` -&#x20;
+`user` -  Retrieves all market orders for a user or profile..
 
 ## `Supported Nouns`
 
