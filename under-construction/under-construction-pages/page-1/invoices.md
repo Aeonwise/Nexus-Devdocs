@@ -259,7 +259,7 @@ This will list all invoices issued or received by the signature chain.
 invoices/list/noun
 ```
 
-This command only supports the `invoice` noun.
+This command supports all the nouns.
 
 ### Parameters:
 
@@ -348,8 +348,6 @@ This command only supports the `invoice` noun.
 `token` : The register address of the token that this invoice should be paid in. Set to 0 for NXS transactions
 
 `status` : The current status of this invoice. Values can be `OUTSTANDING` (the invoice has been issued but not paid), `PAID` (the invoice has been paid by the recipient), or `CANCELLED` (the invoice was cancelled by the issuer before payment).
-
-## `` <a href="#user-content-create" id="user-content-create"></a>
 
 ## `pay` <a href="#user-content-create" id="user-content-create"></a>
 

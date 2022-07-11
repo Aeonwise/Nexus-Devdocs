@@ -43,7 +43,7 @@ Create a new session specified by given noun.
 sessions/create/noun
 ```
 
-This command only supports the local noun.
+This command only supports the `local` noun.
 
 ### Parameters: <a href="#parameters" id="parameters"></a>
 
@@ -79,11 +79,11 @@ This will unlock the session specified by given noun and cache the PIN in encryp
 sessions/unlock/noun
 ```
 
-These commands only supports the local noun.
+These commands only supports the `local` noun.
 
 ### Parameters: <a href="#parameters-1" id="parameters-1"></a>
 
-`pin` : Required if **authenticate**. The PIN for this profile.
+`pin` : Required if **locked**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -135,7 +135,7 @@ These commands only supports the `local` noun.
 
 ### Parameters: <a href="#parameters-2" id="parameters-2"></a>
 
-`pin` : Required to **authenticate**. The PIN for this profile.
+`pin` : Required if **locked**. The PIN for this profile.
 
 `session` : Required by **argument** -multiuser=1 to be supplied to identify the user session that is creating the transaction.
 
@@ -187,7 +187,7 @@ These commands only supports the `local` noun.
 
 ### Parameters: <a href="#parameters-3" id="parameters-3"></a>
 
-`pin` : Required to **authenticate**. The PIN for this profile.
+`pin` : Required if **locked**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -221,7 +221,7 @@ These commands only supports the `local` noun.
 
 ### Parameters: <a href="#parameters-4" id="parameters-4"></a>
 
-`pin` : Required if **authenticate**. The PIN for this profile.
+`pin` : Required if **locked**. The PIN for this profile.
 
 `session` : Required by argument `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
@@ -255,7 +255,7 @@ This command only supports the `local` noun.
 
 ### Parameters:
 
-`pin` : Required if **authenticate**. The PIN for this profile.
+`pin` : Required if **locked**. The PIN for this profile.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
