@@ -6,7 +6,7 @@ description: MARKET API
 
 The market API creates an on-chain, order book based P2P marketplace for trading of tokens and assets. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
 
-#### How market places Are quoted
+#### How market prices Are quoted
 
 Each market pair represents the current exchange rate for the two tokens. Here’s how to interpret that information, using NXS/XYZ—or the Nexus-to-XYZ exchange rate—as an example:
 
@@ -124,7 +124,7 @@ This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
-This method creates a new market or becomes part of an existing market represented by the token or asset pair token1/token2. Market pair token2/token1 is also part of the same market.
+This method creates a new market pair or becomes part of an existing market represented by the token or asset pair token1/token2. Market pair token2/token1 is also part of the same market.
 
 ```
 finance/create/noun
@@ -134,11 +134,11 @@ This command supports the `bid` or `ask` nouns.
 
 #### `create/bid`
 
-This creates a bid market order when market=token1/token2
+This creates a bid market order for market=token1/token2, ask for market=token2/token1
 
 #### `create/ask`
 
-To creates a reverse market order when market=token2/token1
+To creates a ask market order for market=token1/token2, bid for market=token2/token1
 
 ### Parameters:
 
@@ -146,11 +146,11 @@ To creates a reverse market order when market=token2/token1
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : token1/token2 - The token pair for which the order is created. (This implies you want to buy/bid  token 1 while ask/give token 2 in exchange&#x20;
-
-`price` : The price of the token2 in relation to token1.
+`market` : token1/token2 - The token pair for which the order is created.
 
 `amount` : The amount of token2 to be exchanged.
+
+`price` : The price of the token2 in relation to token1.
 
 `to` : This is the receiving account name or register address to credit token1.
 
