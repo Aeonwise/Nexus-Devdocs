@@ -716,7 +716,3 @@ This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) pa
 `address` : The register address for this asset.
 
 `type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY.`
-
-standard:
-
-***

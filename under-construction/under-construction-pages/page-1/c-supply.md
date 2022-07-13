@@ -260,7 +260,27 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
 `address` : The register address of the item. This is optional if the name is provided.
 
+### Results:
+
 #### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1656664801,
+        "modified": 1656665317,
+        "type": "OBJECT",
+        "ABW": "DH0001222145565",
+        "Address": "Marks street, PO Box:7887",
+        "Item": "Samsung Watch",
+        "address": "87wQAJ6nTWqVhGB423mKqtAJyF4B6S5WUXMqzYQWRcH9rJZxZup",
+        "name": "local:Item0002"
+    }
+]
+[Completed in 34.175112 ms]
+```
 
 ## list
 
@@ -279,6 +299,36 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 ### Results:
 
 #### Return value JSON object:
+
+```
+[
+    {
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1656664801,
+        "modified": 1656665317,
+        "type": "OBJECT",
+        "ABW": "DH0001222145565",
+        "Address": "Marks street, PO Box:7887",
+        "Item": "Samsung Watch",
+        "address": "87wQAJ6nTWqVhGB423mKqtAJyF4B6S5WUXMqzYQWRcH9rJZxZup",
+        "name": "local:Item0002"
+    },
+    {
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1656662631,
+        "modified": 1656663298,
+        "type": "OBJECT",
+        "ABW": "FED456315463135",
+        "Address": "Avenue street, PO Box:4587",
+        "Item": "Mobile Holder",
+        "address": "87nyrW2TiKX9gZwRi61q3JNoVQK3GGTpZxBJBwR634au1A8Arc3",
+        "name": "local:Item0001"
+    }
+]
+[Completed in 34.175112 ms]
+```
 
 ## `transfer`
 
@@ -415,17 +465,33 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 ```
 [
     {
-        "type": "CREATE",
-        "owner": "2be51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-        "modified": 1560492280,
-        "checksum": 5612332250743384100,
-        "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
-        "name": "paul",
-        "namespace": "test",
-        "register_address": "8CvLySLAWEKDB9SJSUDdRgzAG6ALVcXLzPQREN9Nbf7AzuJkg5P"
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1656662631,
+        "modified": 1656663298,
+        "type": "OBJECT",
+        "ABW": "FED456315463135",
+        "Address": "Avenue street, PO Box:4587",
+        "Item": "Mobile Holder",
+        "address": "87nyrW2TiKX9gZwRi61q3JNoVQK3GGTpZxBJBwR634au1A8Arc3",
+        "name": "local:Item0001",
+        "action": "CLAIM"
+    },
+    {
+        "owner": "b7392196b83aca438567558462cd0c5d982569c7cefa668500c4bf3e61a03b7a",
+        "version": 1,
+        "created": 1656662631,
+        "modified": 1656662631,
+        "type": "OBJECT",
+        "ABW": "FED456315463135",
+        "Address": "Avenue street, PO Box:4587",
+        "Item": "Mobile Holder",
+        "address": "87nyrW2TiKX9gZwRi61q3JNoVQK3GGTpZxBJBwR634au1A8Arc3",
+        "name": "local:Item0001",
+        "action": "CREATE"
     }
-
 ]
+[Completed in 9.872044 ms]
 ```
 
 #### Return values:
@@ -459,49 +525,48 @@ This method supports the [Sorting / Filtering](c-supply.md#sorting-filtering) pa
 ```
 [
     {
-        "txid": "0123517ca0f1ca110c7b07de9e3c9b33ccbe717f96911e1449b7c73bb9695fbc9c14a58f01f5fb7e9b64756f658af91daec9f0f579df2fad8df61843defae833",
+        "txid": "017bf6e36b6986f268a5bb7e7cca6dec5fdbe4ab2b5000d758dc7220bd2e455df487b3b6703fee449b96f5305205df3f93fb31a65261906a64698a9e0702e5f6",
         "type": "tritium user",
         "version": 4,
-        "sequence": 23,
-        "timestamp": 1655061950,
-        "blockhash": "8b206ab2ee4b46a835f74af0ff5d4e0b395acdb94d66468a24083f2a5fd01a07a93956774001bab1a801d53d7bf6ed60ee84a573650eef1a9feaf6fa9beb308bd20b567663cc7ec4f85796b261164ef3452ebfaa13a60141b42fc49d6d2eb2792440925b1b19248ad9fe65e01d3742f2d3dec2817c56c8e4f6e03a10f4147308",
-        "confirmations": 4,
+        "sequence": 5,
+        "timestamp": 1656663298,
+        "blockhash": "3a4405e03279480c34ec6b8319591bb0974e238f207f3a18576d0c0182dab7dcae3736d322354be9796d80071151358a521f5289b8d859a99bb474431922d93a8ab9ac1b59aa03a21568fdb9b6c7921d908a2b4ff1622023b443425cc983be96da0d93be22623258ca87d537e1cc3cb055e76c19aaed3c81de9c028355564e9d",
+        "confirmations": 39,
         "contracts": [
             {
                 "id": 0,
-                "OP": "DEBIT",
-                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
-                "amount": 1.0,
-                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "ticker": "XYZ",
-                "reference": 57891358795
+                "OP": "CLAIM",
+                "txid": "0127324285cf5c57751dd20b5d8c7d17f204101dc1625230a8199d53d0059c3e3ad1a36330d56b2442b80bed1bb65aef9b049d671d800308d807a29174db4663",
+                "contract": 0,
+                "address": "87nyrW2TiKX9gZwRi61q3JNoVQK3GGTpZxBJBwR634au1A8Arc3"
             }
         ]
     },
     {
-        "txid": "01f1a3f9227a69382f9811a5b1497a865ace17ad83b03118b24f875f6ade83117887c35d08375c259aa1076b91f42206110314756a11a943760bb5c0dd0523d7",
+        "txid": "01f5ab29bd8df00da8354d67ca337beb5091406c5d9356787ee9a1197662587ce46622fb3b3173b8d9071de4240073d87a5e2fcb4f5637abd6bad9deb2fb0072",
         "type": "tritium user",
         "version": 4,
-        "sequence": 21,
-        "timestamp": 1655060214,
-        "blockhash": "048f3b308e8bd8c1aa31ec1ec2e136a9ccc91ec4498283d07fc5d0a00c8576e2c199567a44058222961f474626c6f2c5d7e774eee34c34f98acafaeb50b7abaaade7e9c641fe9727fe62533b1ec6bf2f75ffbf19d17d74671e2458bd73b6407b4bba1951fc84e1af11c2c4fbce1d05d7739e910fdb8a37197c1c422521e2e9f3",
-        "confirmations": 6,
+        "sequence": 2,
+        "timestamp": 1656662631,
+        "blockhash": "fa0b6c7b3d58b38a5fd3d3ad5d1fd3e03d225e69cf8a3b1ef72c6a30caf9f46056b5094482c4e8b1966b313954a367e60a804451f72895dd6fd169efe4d6e6db981941e4f3203890d3e07cc1d111cf5c77136095959ee15ca552109949f88026f38f838ac30841d8491cd071493761de19248b7ff7001f4b43cd2585f5b08570",
+        "confirmations": 41,
         "contracts": [
             {
                 "id": 0,
-                "OP": "DEBIT",
-                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
-                "amount": 1.0,
-                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "ticker": "XYZ",
-                "reference": 0
+                "OP": "CREATE",
+                "address": "87nyrW2TiKX9gZwRi61q3JNoVQK3GGTpZxBJBwR634au1A8Arc3",
+                "type": "OBJECT",
+                "standard": "NONSTANDARD",
+                "object": {
+                    "ABW": "FED456315463135",
+                    "Address": "Avenue street, PO Box:4587",
+                    "Item": "Mobile Holder"
+                }
             }
         ]
     }
 ]
-[Completed in 2.187165 ms]
+[Completed in 8.149978 ms]
 ```
 
 #### Return values:
