@@ -153,7 +153,7 @@ Creates a new item on a readonly register.
 
 Creates a new item specified by the format parameter. &#x20;
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **locked**. The PIN for this profile.
 
@@ -174,6 +174,8 @@ Creates a new item specified by the format parameter. &#x20;
 * `value` : The default value of the field.
 * `mutable` : The boolean field to indicate whether the field is writable (true) or read-only (false).
 * `maxlength`: Only applicable to `string` or `bytes` fields where `mutable`=true, this is the maximum number of characters (bytes) that can be stored in the field. If no maxlength parameter is provided then we will default the field size to the length of the default value rounded up to the nearest 64 bytes.
+
+### Results:
 
 #### Return value JSON object:
 
@@ -212,7 +214,7 @@ This updates the values of basic and JSON formats with the item noun.
 
 This updates the data value of the raw item.
 
-#### Parameters:
+### Parameters:
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
@@ -223,6 +225,8 @@ This updates the data value of the raw item.
 `address` : Required to **identify** the item to update by register address. This is optional if the `name` is provided.
 
 `data` : The new value of the data field in this item
+
+### Results:
 
 #### Return value JSON object:
 
@@ -282,6 +286,24 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 [Completed in 34.175112 ms]
 ```
 
+#### Return Values:
+
+`owner` : The username hash of the profile that owns this asset.
+
+`created` : The UNIX timestamp when the asset was created.
+
+`modified` : The UNIX timestamp when the asset was last modified.
+
+`type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY`
+
+`<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.`name` : The name identifying the item. For privacy purposes, this is only included in the response if the caller is the owner of the item
+
+`data` : The data stored in the item.
+
+`address` : The register address of the item.
+
+`name` : The name identifying the asset. For privacy purposes, this is only included in the response if the caller is the owner of the asset
+
 ## list
 
 Retrieves information for a single object for a type specified by the noun
@@ -329,6 +351,24 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 ]
 [Completed in 34.175112 ms]
 ```
+
+#### Return Values:
+
+`owner` : The username hash of the profile that owns this asset.
+
+`created` : The UNIX timestamp when the asset was created.
+
+`modified` : The UNIX timestamp when the asset was last modified.
+
+`type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY`
+
+`<fieldname>=<value>` : The key-value pair for each piece of data stored in the asset.`name` : The name identifying the item. For privacy purposes, this is only included in the response if the caller is the owner of the item
+
+`data` : The data stored in the item.
+
+`address` : The register address of the item.
+
+`name` : The name identifying the asset. For privacy purposes, this is only included in the response if the caller is the owner of the asset
 
 ## `transfer`
 
