@@ -22,7 +22,7 @@ Note: Market pairs are usually presented with the base token first and the quote
 
 The asking price is for the token XYZ and you are want to buy NXS.
 
-
+![](<../../../../.gitbook/assets/Price Quote.png>)
 
 The full supported endpoint of the market URI is as follows:
 
