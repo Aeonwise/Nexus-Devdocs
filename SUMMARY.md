@@ -68,10 +68,9 @@
 
 * [⚙ Tritium++ Overview](tritium++-api/tritium++-overview.md)
   * [How-to-API: Tritium++](tritium++-api/how-to-api-tritium++/README.md)
-    * [API Template](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template/README.md)
-      * [Operators](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template/operators.md)
+    * [API Template](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template.md)
     * [Page 2](tritium++-api/tritium++-overview/how-to-api-tritium++/page-2.md)
-    * [🗄 Filtering -Query DSL](tritium++-api/how-to-api-tritium++/register.md)
+    * [🗄 Queries](tritium++-api/how-to-api-tritium++/register.md)
     * [⚙ Tritium++ API](tritium++-api/how-to-api-tritium++/tritium++-api/README.md)
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
       * [PROFILES](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/README.md)
@@ -84,6 +83,9 @@
       * [SUPPLY](under-construction/under-construction-pages/page-1/c-supply.md)
       * [INVOICES](under-construction/under-construction-pages/page-1/invoices.md)
       * [MARKET](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/market.md)
+    * [Operators](tritium++-api/tritium++-overview/how-to-api-tritium++/operators.md)
+    * [Filtering](tritium++-api/tritium++-overview/how-to-api-tritium++/filtering.md)
+    * [Sorting](tritium++-api/tritium++-overview/how-to-api-tritium++/sorting.md)
 
 ## Legacy
 
