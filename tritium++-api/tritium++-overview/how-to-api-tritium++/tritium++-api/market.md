@@ -139,7 +139,7 @@ This command supports all the nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : Required to **identify** the token pairs or market whose orders are to be listed.
+`market` : Required to **identify** the market token pair.
 
 ### Results:
 
@@ -292,8 +292,6 @@ This command supports the `bid`, `ask` and `order` nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
-
 `txid` : The transaction hash for the order to be cancelled.
 
 ### Results:
@@ -316,7 +314,7 @@ This command supports the `bid`, `ask` and `order` nouns.
 
 ## `user` <a href="#user-content-credit" id="user-content-credit"></a>
 
-Create a new object register specified by given noun.
+Retrieves a users market orders based on the noun.
 
 ```
 market/list/noun
@@ -330,7 +328,7 @@ This command supports all the nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`market` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
+`market` : Required to **identify** the market token pair.
 
 ### Results:
 
