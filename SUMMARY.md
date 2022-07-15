@@ -68,7 +68,9 @@
 
 * [⚙ Tritium++ Overview](tritium++-api/tritium++-overview.md)
   * [How-to-API: Tritium++](tritium++-api/how-to-api-tritium++/README.md)
-    * [API Template](tritium++-api/how-to-api-tritium++/api-template.md)
+    * [API Template](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template/README.md)
+      * [Operators](tritium++-api/tritium++-overview/how-to-api-tritium++/api-template/operators.md)
+    * [Page 2](tritium++-api/tritium++-overview/how-to-api-tritium++/page-2.md)
     * [🗄 Filtering -Query DSL](tritium++-api/how-to-api-tritium++/register.md)
     * [⚙ Tritium++ API](tritium++-api/how-to-api-tritium++/tritium++-api/README.md)
       * [SYSTEM](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/system.md)
