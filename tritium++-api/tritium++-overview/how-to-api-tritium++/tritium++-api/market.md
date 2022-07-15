@@ -83,7 +83,9 @@ This creates a bid market order for market=token1/token2, ask for market=token2/
 To creates a ask market order for market=token1/token2, bid for market=token2/token1
 
 {% hint style="info" %}
-When market=token1/token2  is reversed to market=token2/token1 the price has to be changed accordingly. Check the image below:
+When market=token1/token2  is reversed to market=token2/token1 the price has to be changed accordingly. But the market price is determined by the first order which creates the market pair.
+
+Check the image below:
 {% endhint %}
 
 ![Market price quote](<../../../../.gitbook/assets/Price Quote.png>)
