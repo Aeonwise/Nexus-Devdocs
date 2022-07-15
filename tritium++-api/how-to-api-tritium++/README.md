@@ -66,8 +66,8 @@ The Profiles API is responsible for maintaining user account level functions. DO
 
 The Profiles API can be found in the link below:
 
-{% content-ref url="tritium++-api/profiles.md" %}
-[profiles.md](tritium++-api/profiles.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/" %}
+[profiles](../tritium++-overview/how-to-api-tritium++/tritium++-api/profiles/)
 {% endcontent-ref %}
 
 {% hint style="info" %}
@@ -80,8 +80,8 @@ The Sessions API is responsible for maintaining user account level functions. DO
 
 The Users API can be found in the following repo path:
 
-{% content-ref url="tritium++-api/sessions.md" %}
-[sessions.md](tritium++-api/sessions.md)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/" %}
+[sessions](../tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/)
 {% endcontent-ref %}
 
 ### Finance API
@@ -140,8 +140,8 @@ The System API provides public access to information about this node. This inclu
 
 The System API can be found in the link below:
 
-{% content-ref url="how-to-api-tritium++/tritium++-api/system (1).md" %}
-[system (1).md](<how-to-api-tritium++/tritium++-api/system (1).md>)
+{% content-ref url="../tritium++-overview/how-to-api-tritium++/tritium++-api/system (1).md" %}
+[system (1).md](<../tritium++-overview/how-to-api-tritium++/tritium++-api/system (1).md>)
 {% endcontent-ref %}
 
 ### Invoices API

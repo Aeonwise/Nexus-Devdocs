@@ -16,83 +16,16 @@ The minimum required components of the URI are:
 profiles/verb/noun
 ```
 
-## `Supported Operators`
-
-The operators only work with the profiles `transactions` and `notifications` verbs. The following operators are supported for this API command-set:&#x20;
-
-[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
-[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
-
-**Example:**
-
-```
-profile/transactions/master/contracts.amount/sum
-```
-
-**Result:**
-
-This command will return a sum of the balances for all accounts:
-
-```
-{
-    "amount": 5150.0
-}
-[Completed in 2.440583 ms]
-```
-
-## `Supported Filters`
-
-The filters only work with the profiles `transactions` and `notifications` verbs. This command-set supports single or csv field-name filters.&#x20;
-
-**Example:**
-
-```
-profiles/notifications/master/amount,ticker
-```
-
-The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
-
-#### `Recursive Filtering`
-
-Nested JSON objects and arrays can be filtered recursively using the `.` operator.
-
-```
-profiles/transactions/master/contracts.OP
-```
-
-When using recursive filtering, the nested hierarchy is retained.
-
-```
-[
-    {
-        "contracts": [
-            {
-                "OP": "DEBIT"
-            }
-        ]
-    },
-    {
-        "contracts": [
-            {
-                "OP": "WRITE"
-            }
-        ]
-    }
-]
-[Completed in 0.722042 ms]
-```
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](profiles.md#create) - Generate a new object of supported type.\
-[`update`](profiles.md#update) - Updates the specified object registers.\
-[`recover`](profiles.md#recover) - Recovers a profile account.\
-[`status`](profiles.md#status) - Status information of a profile.\
-[`notifications`](profiles.md#notifications) - List all notifications that modified specified object.\
-[`transactions`](profiles.md#notifications-1) - List all transactions that modified specified object.
+[`create`](./#create) - Generate a new object of supported type.\
+[`update`](./#update) - Updates the specified object registers.\
+[`recover`](./#recover) - Recovers a profile account.\
+[`status`](./#status) - Status information of a profile.\
+[`notifications`](./#notifications) - List all notifications that modified specified object.\
+[`transactions`](./#notifications-1) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
@@ -102,42 +35,6 @@ The following nouns are supported for this API command-set:
 \[`auth`] - A crypto object register for login auth.\
 \[`credentials`] -  Credentials used to secure profiles.\
 \[`recovery`] - An object which represents recovery for the profile.
-
-## `Sorting / Filtering`
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_.
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create`
 
@@ -345,7 +242,7 @@ This command only supports the `master` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-This method supports the [Sorting / Filtering](profiles.md#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 ### Results:
 
@@ -419,7 +316,7 @@ This command only supports the `master` noun.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-This method supports the [Sorting / Filtering](profiles.md#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 ### Results:
 

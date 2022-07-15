@@ -32,60 +32,18 @@ The minimum required components of the URI are:
 names/verb/noun
 ```
 
-## `Supported Filters`
-
-This command-set supports single or csv field-name filters.&#x20;
-
-**Example:**
-
-```
-names/list/name/created,address
-```
-
-The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
-
-#### `Recursive Filtering`
-
-Nested JSON objects and arrays can be filtered recursively using the `.` operator.
-
-```
-names/list/name/contracts.OP
-```
-
-When using recursive filtering, the nested hierarchy is retained.
-
-```
-[
-    {
-        "contracts": [
-            {
-                "OP": "DEBIT"
-            }
-        ]
-    },
-    {
-        "contracts": [
-            {
-                "OP": "WRITE"
-            }
-        ]
-    }
-]
-[Completed in 0.722042 ms]
-```
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](names.md#create) - Generate a new object of supported type.\
+[`create`](c-names.md#create) - Generate a new object of supported type.\
 [`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
 [`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`transfer`](names.md#transfer) - Transfer ownership of an object register to a recipient.\
-[`claim`](names.md#claim) - Claim ownership of an object register from a transfer.\
-[`history`](names.md#history) - Generate the history of all last states.\
-[`transactions`](names.md#transactions) - List all transactions that modified specified object.\
-[`update`](names.md#update) -  Update an object register\
+[`transfer`](c-names.md#transfer) - Transfer ownership of an object register to a recipient.\
+[`claim`](c-names.md#claim) - Claim ownership of an object register from a transfer.\
+[`history`](c-names.md#history) - Generate the history of all last states.\
+[`transactions`](c-names.md#transactions) - List all transactions that modified specified object.\
+[`update`](c-names.md#update) -  Update an object register\
 
 
 ## `Supported Nouns`
@@ -97,46 +55,6 @@ The following nouns are supported for this API command-set:
 \[`global`] - An object register which is recognised globally on the network. \
 \[`local`] - An object register which is recognised only within the context of a user profile.\
 \[`any`] - An object selection noun allowing mixed `names` nouns.
-
-## `Sorting / Filtering`
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_.
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
-
-```
-finance/get/balances/balance/sumreate
-```
 
 ## `create`
 
@@ -543,7 +461,7 @@ This command supports the `account, trust and token` nouns.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-This method supports the [Sorting / Filtering](names.md#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](c-names.md#sorting-filtering) parameters.
 
 ### Results:
 

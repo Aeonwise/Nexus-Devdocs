@@ -96,16 +96,16 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](assets.md#create) - Generate a new object of supported type.\
-[`get`](assets.md#get) - Get object of supported type.\
-[`list`](assets.md#list) - List all objects owned by given user.\
+[`create`](c-assets.md#create) - Generate a new object of supported type.\
+[`get`](c-assets.md#get) - Get object of supported type.\
+[`list`](c-assets.md#list) - List all objects owned by given user.\
 `list/partial` - List all objects owned by given user.\
-[`update`](assets.md#update) - Update a specified object.\
-[`transfer`](assets.md#transfer) - Transfer a specified object register.\
-[`claim`](assets.md#claim) - Claim ownership of an object register from a transfer.\
-[`tokenize`](assets.md#claim-1) - To represent ownership of an asset object with a token object.\
-[`transactions`](assets.md#transactions) - List all transactions that modified specified object.\
-[`history`](assets.md#history) - Generate the history of all last states.\
+[`update`](c-assets.md#update) - Update a specified object.\
+[`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
+[`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
+[`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
+[`transactions`](c-assets.md#transactions) - List all transactions that modified specified object.\
+[`history`](c-assets.md#history) - Generate the history of all last states.\
 
 
 ## `Supported Nouns`
@@ -644,7 +644,7 @@ This command supports the `asset`, `raw`, `readonly` and `any` nouns.
 * `summary` : type, version, sequence, timestamp, blockhash, confirmations and contracts.
 * `detail` : All in `summary` + genesis, nexthash, prevhash, pubkey and signature.
 
-This method supports the [Sorting / Filtering](assets.md#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) parameters.
 
 ### Results:
 

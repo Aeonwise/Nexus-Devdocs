@@ -80,8 +80,8 @@ Dive a little deeper and start exploring our API reference to get an idea of eve
 Tritium++ will be launched in three phases, the first update 5.1 will come with the new overhauled API. The code is available in merging branch for testing.
 {% endhint %}
 
-{% content-ref url="tritium++-api/tritium++-overview/tritium++-api/" %}
-[tritium++-api](tritium++-api/tritium++-overview/tritium++-api/)
+{% content-ref url="tritium++-api/how-to-api-tritium++/tritium++-api/" %}
+[tritium++-api](tritium++-api/how-to-api-tritium++/tritium++-api/)
 {% endcontent-ref %}
 
 ## Fees
