@@ -2,7 +2,7 @@
 description: Query DSL (Domain specific Language)
 ---
 
-# 🗄 Queries
+# Queries
 
 The Query DSL(Domian Specific Language) allows to sort and filter recursively to any logical depth. This DSL can be used in conjunction with operators to sort, filter, and compute data in real-time.
 

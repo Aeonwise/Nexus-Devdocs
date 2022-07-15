@@ -6,18 +6,6 @@ description: SYSTEM API
 
 The System API provides public access to information about this node. This includes data such as the version of software the node is running, ledger and mempool state, node IP address, and connected peers.
 
-The full supported endpoint of the profiles URI is as follows:
-
-```
-system/verb/noun/filter/operator
-```
-
-The minimum required components of the URI are:
-
-```
-system/verb/noun
-```
-
 ## `Direct Endpoints`
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.

@@ -2,7 +2,7 @@
 description: Tritium++ API Template
 ---
 
-# API Template
+# Templates
 
 A lot of the current commands available in the API operate on generic templated code that allows insertion of any object type without the need for repeated functions to handle each object type. The following list of generic endpoints have default parameters that can be useful to know outside of each individual command-set.
 

@@ -72,14 +72,14 @@ When using recursive filtering, the nested hierarchy is retained.
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-supply.md#create) - Generate a new object of supported type.\
-[`get`](c-supply.md#get) - Get object of supported type.\
-[`list`](c-supply.md#list) - List all objects owned by given user.\
-[`update`](c-supply.md#update) - Update a specified object.\
-[`transfer`](c-supply.md#transfer) - Transfer a specified object register.\
-[`claim`](c-supply.md#claim) - Claim ownership of an object register from a transfer.\
-[`history`](c-supply.md#history) - Generate the history of all last states.\
-[`transactions`](c-supply.md#transactions) - List all transactions that modified specified object.\
+[`create`](supply.md#create) - Generate a new object of supported type.\
+[`get`](supply.md#get) - Get object of supported type.\
+[`list`](supply.md#list) - List all objects owned by given user.\
+[`update`](supply.md#update) - Update a specified object.\
+[`transfer`](supply.md#transfer) - Transfer a specified object register.\
+[`claim`](supply.md#claim) - Claim ownership of an object register from a transfer.\
+[`history`](supply.md#history) - Generate the history of all last states.\
+[`transactions`](supply.md#transactions) - List all transactions that modified specified object.\
 
 
 ## `Supported Nouns`
@@ -556,7 +556,7 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 * `summary` : type, version, sequence, timestamp, operation, and confirmations.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-This method supports the [Sorting / Filtering](c-supply.md#sorting-filtering) parameters.
+This method supports the [Sorting / Filtering](supply.md#sorting-filtering) parameters.
 
 ### Results:
 
