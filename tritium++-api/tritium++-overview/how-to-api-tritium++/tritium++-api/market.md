@@ -132,7 +132,7 @@ This method creates a new market pair or becomes part of an existing market repr
 finance/create/noun
 ```
 
-This command supports the `bid` or `ask` nouns.
+This command supports the `bid`,  `ask` nouns.
 
 #### `create/bid`
 
@@ -141,6 +141,12 @@ This creates a bid market order for market=token1/token2, ask for market=token2/
 #### `create/ask`
 
 To creates a ask market order for market=token1/token2, bid for market=token2/token1
+
+{% hint style="info" %}
+When market=token1/token2  is reversed to market=token2/token1 the price has to be changed accordingly. Check the image below:
+{% endhint %}
+
+![Market price quote](<../../../../.gitbook/assets/Price Quote.png>)
 
 ### Parameters:
 
