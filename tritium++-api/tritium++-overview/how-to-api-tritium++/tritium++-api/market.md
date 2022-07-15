@@ -8,9 +8,11 @@ The market API creates an on-chain, order book based P2P marketplace for trading
 
 #### How market prices Are quoted
 
-Each market pair represents the current exchange rate for the two tokens. Here’s how to interpret that information, using NXS/XYZ—or the Nexus-to-XYZ exchange rate—as an example:
+Each market pair represents the current exchange rate for the two tokens. Here’s how to interpret that information, using market=NXS/XYZ—or the Nexus-to-XYZ exchange rate—as an example:
 
+{% hint style="info" %}
 The current price is the last traded price and has nothing to do with the bid or ask price.&#x20;
+{% endhint %}
 
 * The token on the left (NXS) is the base token.
 * The token on the right (XYZ) is the quote token.
@@ -18,11 +20,9 @@ The current price is the last traded price and has nothing to do with the bid or
 * If the NXS/XYZ exchange rate is 1.2, that means 1 NXS will buy 1.20 XYZ (or, put another way, it will cost 1.20 XYZ to buy 1 NXS).
 * When the market rate rises, that means the base token has risen in value relative to the quote token (because 1 NXS will buy more XYZ tokens) and conversely, if the market rate falls, that means the base token has fallen in value.
 
-Note: Market pairs are usually presented with the base token first and the quote token second, The market API allows to use the reverse XYZ/NXS and its treated as an ask order.
-
-The asking price is for the token XYZ and you are want to buy NXS.
-
-![](<../../../../.gitbook/assets/Price Quote.png>)
+{% hint style="info" %}
+**Note:** Market pairs are usually presented with the base token first and the quote token second, The market API allows to use the reverse market=XYZ/NXS and its treated as bid/ask depending on the noun.
+{% endhint %}
 
 The full supported endpoint of the market URI is as follows:
 
