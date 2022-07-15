@@ -26,72 +26,6 @@ The minimum required components of the URI are:
 assets/verb/noun
 ```
 
-## `Supported Operators`
-
-The following operators are supported for this API command-set:
-
-[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
-[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
-
-**Example:**
-
-```
-assets/list/accounts/balance/sum
-```
-
-**Result:**
-
-This command will return a sum of the balances for all accounts:
-
-```
-{
-    "balance": 333.376
-}
-```
-
-## `Supported Filters`
-
-This command-set supports single or csv field-name filters.&#x20;
-
-**Example:**
-
-```
-supply/transactions/item
-```
-
-The above command will return an array of objects with only the `balance` and `ticker` JSON keys.
-
-#### `Recursive Filtering`
-
-Nested JSON objects and arrays can be filtered recursively using the `.` operator.
-
-```
-supply/list/items/contracts.OP
-```
-
-When using recursive filtering, the nested hierarchy is retained.
-
-```
-[
-    {
-        "contracts": [
-            {
-                "OP": "DEBIT"
-            }
-        ]
-    },
-    {
-        "contracts": [
-            {
-                "OP": "WRITE"
-            }
-        ]
-    }
-]
-[Completed in 0.722042 ms]
-```
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
@@ -125,42 +59,6 @@ assets/list/asset
 ```
 
 The above command will list all the assets for a user account.
-
-## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_.
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 

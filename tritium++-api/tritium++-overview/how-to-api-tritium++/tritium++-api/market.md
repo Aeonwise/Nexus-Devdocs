@@ -36,39 +36,15 @@ The minimum required components of the URI are:
 market/verb/noun
 ```
 
-## `Supported Operators`
-
-The following operators are supported for this API command-set:
-
-[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
-[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
-
-**Example:**
-
-```
-markets/list/accounts/balance/sum
-```
-
-**Result:**
-
-This command will return a sum of the balances for all accounts:
-
-```
-{
-    "balance": 333.376
-}
-```
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
 
-`create` - Creates a new market place or becomes part of an existing one.\
-`list` - List all orders for a specified marketplace.\
-`execute` - To full-fill a specified market order.\
-`cancel` - To cancel a specified market order\
-`user` -  Retrieves all market orders for a user or profile..
+[`create`](market.md#user-content-create) - Creates a new market place or becomes part of an existing one.\
+[`list`](market.md#user-content-credit) - List all orders for a specified marketplace.\
+[`execute`](market.md#user-content-credit-1) - To full-fill a specified market order.\
+[`cancel`](market.md#user-content-credit-2) - To cancel a specified market order\
+[`user`](market.md#user-content-credit-3) -  Retrieves all market orders for a user or profile.
 
 ## `Supported Nouns`
 
@@ -87,42 +63,6 @@ market/list/orders
 ```
 
 The above command will list all market orders for the specified market.
-
-## `Sorting / Filtering` <a href="#user-content-create" id="user-content-create"></a>
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_.
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 

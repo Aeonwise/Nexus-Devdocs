@@ -16,70 +16,6 @@ The minimum required components of the URI are:
 invoices/verb/noun
 ```
 
-## `Supported Operators`
-
-The following operators are supported for this API command-set:
-
-[`array`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#array) - Generate a list of values given from a set of filtered results.\
-[`mean`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#mean) - Calculate the mean or average value across a set of filtered results.\
-[`sum`](https://github.com/Nexusoft/LLL-TAO/blob/merging-sessions/docs/API/COMMANDS/FINANCE.MD#sum) - Compute a sum of a set of values derived from filtered results.
-
-**Example:**
-
-```
-invoices/list/invoice/balance/sum
-```
-
-**Result:**
-
-This command will return a sum of the balances for all accounts:
-
-```
-{
-    "balance": 333.376
-}
-```
-
-## `Sorting / Filtering`
-
-The following parameters can be used to apply **sorting** and **filtering** to the returned data-set.
-
-`limit`: The number of records to return. _Default: 100_. limit=none is allowed
-
-`page`: Zero-indexed page number that depends on `limit` for page boundaries.
-
-`offset`: Alternative to `page`, offset can be used to page the results by index.
-
-`order`: Descending **desc** or ascending **asc** as only permitted values.
-
-`sort`: The column or field-name to apply the sorting logic to. This parameter supports moving up levels of JSON keys by using `.`, such as `sort=json.date` would apply a sort to a nested JSON object:
-
-```
-{
-    "modified": 1621782289,
-    "json": {
-        "account": "8Cdr874GBd8t6MaQ4BVK8fXVVpzVHrGwZpQquUVzUXZroruYdeR",
-        "date": "12-21-2020"
-    }
-}
-```
-
-`where`: Apply a boolean statement to the results of command, following the SQL-DSL syntax.
-
-#### Alternative input
-
-The `limit` and `offset` parameters can be given with the following format:
-
-```
-limit=100.10
-```
-
-This above will map to the parameters of `limit=100` and `offset=10`.
-
-```
-invoices/get/balances/balance/sum
-```
-
 ## `Supported Verbs`
 
 The following verbs are currently supported by this API command-set:
@@ -101,14 +37,6 @@ The following nouns are supported for this API command-set:
 \[`paid`] - Claim a specified object register.\
 \[`cancelled`] - Claim a specified object register.\
 
-
-**Example:**
-
-```
-invocies/list/paid
-```
-
-The above command will list all the invoices that have been paid.
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
