@@ -363,9 +363,9 @@ This command only supports the `invoice` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : The name identifying the invoice. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
+`name` : Optional for **identifying** the invoice. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the invoice was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
-`address` : The register address of the invoice. This is optional if the name is provided.
+`address` : Optional for **identifying** the invoice with register address. This is optional if the name is provided.
 
 ### Results:
 
@@ -374,33 +374,67 @@ This command only supports the `invoice` noun.
 ```
 [
     {
-        "type": "CLAIM",
-        "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
-        "modified": 1581389015,
-        "checksum": 2752588510729237979,
-        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
-        "created": 1581389015,
-        "data": "{\"account\":\"8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N\",\"recipient\":\"a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440\",\"number\":\"0004\",\"PO\":\"Purch1234\",\"contact\":\"paul@nexus.io\",\"items\":[{\"description\":\"item1 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":1},{\"description\":\"item2 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":3}],\"amount\":4.4,\"token\":\"8DC5b4uRPYmfF8DWJy6ja2qPbtN7kNpdonHQeKx1nfauRAWDMUG\"}"
+        "owner": "b7a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1658006314,
+        "modified": 1658006314,
+        "type": "READONLY",
+        "json": {
+            "account": "8CAJbt8MJUXsUzd5J4VVnhtcHuLqeV27Tixs3arGewAic7ZZQmE",
+            "recipient": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+            "items": [
+                {
+                    "amount": 2.0,
+                    "units": 1
+                },
+                {
+                    "amount": 0.24,
+                    "units": 3
+                }
+            ],
+            "address": "8CAJbt8MJUXsUzd5J4VVnhtcHuLqeV27Tixs3arGewAic7ZZQmE",
+            "reference": "Rado ",
+            "description": "rado Aviator 2",
+            "number": "2",
+            "sender_detail": "Alice",
+            "amount": 2.72,
+            "token": "8DS2qGLhuEC2reKrzxyWaXXwtVq2KmGWGQCWKBQwrCQc4XS2b8V"
+        },
+        "address": "82UKk7weRui3d8HuZrMuoD5h49anQgpKUJm8CPkbsGNHwuu3FVv",
+        "action": "CREATE"
     },
     {
-        "type": "TRANSFER",
-        "owner": "a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440",
-        "modified": 1581389015,
-        "checksum": 3200103280975089335,
-        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
-        "created": 1581389015,
-        "data": "{\"account\":\"8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N\",\"recipient\":\"a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440\",\"number\":\"0004\",\"PO\":\"Purch1234\",\"contact\":\"paul@nexus.io\",\"items\":[{\"description\":\"item1 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":1},{\"description\":\"item2 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":3}],\"amount\":4.4,\"token\":\"8DC5b4uRPYmfF8DWJy6ja2qPbtN7kNpdonHQeKx1nfauRAWDMUG\"}"
-    },
-    {
-        "type": "CREATE",
-        "owner": "a2e51edcd41a8152bfedb24e3c22ee5a65d6d7d524146b399145bced269aeff0",
-        "modified": 1581389015,
-        "checksum": 3200103280975089335,
-        "address": "822G7ZSsHh1ncTj4AJt6FnZ6MTWG3Q9NNTZ9KvG3CWA1SP3aq97",
-        "created": 1581389015,
-        "data": "{\"account\":\"8Bx6ZmCev3DsGjoWuhfQSNmycdZT4cyKKJNc36NWTMik6Zkqh7N\",\"recipient\":\"a2056d518d6e6d65c6c2e05af7fe2d3182a93def20e960fcfa0d35777a082440\",\"number\":\"0004\",\"PO\":\"Purch1234\",\"contact\":\"paul@nexus.io\",\"items\":[{\"description\":\"item1 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":1},{\"description\":\"item2 description\",\"base_price\":1.0,\"tax\":0.1,\"unit_amount\":\"1.1\",\"units\":3}],\"amount\":4.4,\"token\":\"8DC5b4uRPYmfF8DWJy6ja2qPbtN7kNpdonHQeKx1nfauRAWDMUG\"}"
+        "owner": "00a57ddfb001d5d83ab5b25c0eaa0521e6b367784a30025114d07c444aa455c0",
+        "version": 1,
+        "created": 1658006314,
+        "modified": 1658006314,
+        "type": "READONLY",
+        "json": {
+            "account": "8CAJbt8MJUXsUzd5J4VVnhtcHuLqeV27Tixs3arGewAic7ZZQmE",
+            "recipient": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+            "items": [
+                {
+                    "amount": 2.0,
+                    "units": 1
+                },
+                {
+                    "amount": 0.24,
+                    "units": 3
+                }
+            ],
+            "address": "8CAJbt8MJUXsUzd5J4VVnhtcHuLqeV27Tixs3arGewAic7ZZQmE",
+            "reference": "Rado ",
+            "description": "rado Aviator 2",
+            "number": "2",
+            "sender_detail": "Alice",
+            "amount": 2.72,
+            "token": "8DS2qGLhuEC2reKrzxyWaXXwtVq2KmGWGQCWKBQwrCQc4XS2b8V"
+        },
+        "address": "82UKk7weRui3d8HuZrMuoD5h49anQgpKUJm8CPkbsGNHwuu3FVv",
+        "action": "TRANSFER"
     }
 ]
+[Completed in 1.392150 ms]
 ```
 
 #### Return values:
@@ -450,49 +484,52 @@ This method supports the [Sorting / Filtering](invoices.md#sorting-filtering) pa
 ```
 [
     {
-        "txid": "0123517ca0f1ca110c7b07de9e3c9b33ccbe717f96911e1449b7c73bb9695fbc9c14a58f01f5fb7e9b64756f658af91daec9f0f579df2fad8df61843defae833",
+        "txid": "010522657fcf6ee72a5f0b5769419a87c61fa897c7c6d56443feb0ab8bb859bee0d3ba1a9420f16b2a4b20ddd9dcb0873e42be66d7a8654494e257c7d2ee7dbc",
         "type": "tritium user",
         "version": 4,
-        "sequence": 23,
-        "timestamp": 1655061950,
-        "blockhash": "8b206ab2ee4b46a835f74af0ff5d4e0b395acdb94d66468a24083f2a5fd01a07a93956774001bab1a801d53d7bf6ed60ee84a573650eef1a9feaf6fa9beb308bd20b567663cc7ec4f85796b261164ef3452ebfaa13a60141b42fc49d6d2eb2792440925b1b19248ad9fe65e01d3742f2d3dec2817c56c8e4f6e03a10f4147308",
-        "confirmations": 4,
+        "sequence": 16,
+        "timestamp": 1658006314,
+        "blockhash": "53c4017e1ed53cd00e95f63288652d46831601c892dd9a802c4a28ccad51e4c7c35e3940be5c518512ec9186ee88708c4d1c5e0c44716280b26d21e40d809ceb8b7f81351df6ad9d4eef13cb7afa48c15477c1a0880466e14771ab4a3faca332e827a3786f87a153b0c5ad14b17816eec83368293062307e5b600885349400f3",
+        "confirmations": 1,
         "contracts": [
             {
                 "id": 0,
-                "OP": "DEBIT",
-                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
-                "amount": 1.0,
-                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "ticker": "XYZ",
-                "reference": 57891358795
-            }
-        ]
-    },
-    {
-        "txid": "01f1a3f9227a69382f9811a5b1497a865ace17ad83b03118b24f875f6ade83117887c35d08375c259aa1076b91f42206110314756a11a943760bb5c0dd0523d7",
-        "type": "tritium user",
-        "version": 4,
-        "sequence": 21,
-        "timestamp": 1655060214,
-        "blockhash": "048f3b308e8bd8c1aa31ec1ec2e136a9ccc91ec4498283d07fc5d0a00c8576e2c199567a44058222961f474626c6f2c5d7e774eee34c34f98acafaeb50b7abaaade7e9c641fe9727fe62533b1ec6bf2f75ffbf19d17d74671e2458bd73b6407b4bba1951fc84e1af11c2c4fbce1d05d7739e910fdb8a37197c1c422521e2e9f3",
-        "confirmations": 6,
-        "contracts": [
+                "OP": "CREATE",
+                "address": "82UKk7weRui3d8HuZrMuoD5h49anQgpKUJm8CPkbsGNHwuu3FVv",
+                "type": "READONLY",
+                "json": {
+                    "account": "8CAJbt8MJUXsUzd5J4VVnhtcHuLqeV27Tixs3arGewAic7ZZQmE",
+                    "recipient": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+                    "items": [
+                        {
+                            "amount": 3500.00,
+                            "units": 1
+                        },
+                        {
+                            "amount": 185.00,
+                            "units": 4
+                        }
+                    ],
+                    "address": "8CAJbt8MJUXsUzd5J4VVnhtcHuLqeV27Tixs3arGewAic7ZZQmE",
+                    "reference": "Car Maintenance Invoice ",
+                    "description": "July 2022",
+                    "number": "2",
+                    "sender_detail": "Alice",
+                    "amount": 4240,
+                    "token": "8DS2qGLhuEC2reKrzxyWaXXwtVq2KmGWGQCWKBQwrCQc4XS2b8V"
+                }
+            },
             {
-                "id": 0,
-                "OP": "DEBIT",
-                "from": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "to": "8Bk5PxsecfXWpbHsDXeZ47MCgDF7qDLsU4Y4MJw2VB29LsTR98z",
-                "amount": 1.0,
-                "token": "8DXmAmkTtysSZUxM3ePA8wRmbSUofuHKSoCyDpN28aLuSrm1nDG",
-                "ticker": "XYZ",
-                "reference": 0
+                "id": 1,
+                "OP": "TRANSFER",
+                "address": "82UKk7weRui3d8HuZrMuoD5h49anQgpKUJm8CPkbsGNHwuu3FVv",
+                "recipient": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+                "forced": false
             }
         ]
     }
 ]
-[Completed in 2.187165 ms]
+[Completed in 0.961164 ms]
 ```
 
 #### Return values:
