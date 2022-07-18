@@ -56,14 +56,6 @@ The following nouns are supported for this API command-set:
 \[`executed`] - A market order which has been full-filled.\
 
 
-**Example:**
-
-```
-market/list/orders
-```
-
-The above command will list all market orders for the specified market.
-
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
 This method creates a new market pair or becomes part of an existing market represented by the token or asset pair token1/token2. Market pair token2/token1 is also part of the same market.
@@ -72,7 +64,7 @@ This method creates a new market pair or becomes part of an existing market repr
 finance/create/noun
 ```
 
-This command supports the `bid`,  `ask` nouns.
+This command supports the `bid and` `ask` nouns.
 
 #### `create/bid`
 
