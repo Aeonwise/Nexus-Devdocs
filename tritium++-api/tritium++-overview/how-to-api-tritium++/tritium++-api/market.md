@@ -316,6 +316,26 @@ market/list/noun
 
 This command supports all the nouns.
 
+**user/bid**
+
+This retrieves all the bid orders for the user.
+
+**user/ask**
+
+This retrieves all the ask orders for the user.
+
+**user/orders**
+
+This retrieves all the orders for the user.
+
+**user/executed**
+
+This retrieves all the executed orders for the user.
+
+**user/cancel**
+
+This retrieves all the cancelled orders for the user.
+
 ### Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
