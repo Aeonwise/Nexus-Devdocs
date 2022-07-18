@@ -470,7 +470,7 @@ ledger/get/transaction
 
 ## `list/transactions`
 
-Retrieves transaction data for a given transaction hash.
+Retrieves transaction data for a given profile.
 
 ```
 ledger/get/transaction
@@ -478,11 +478,9 @@ ledger/get/transaction
 
 #### Parameters:
 
-`format` : Determines the format of the return value. Parameter value can be `JSON` (the default) or `raw`. If `raw` is specified then the method returns a serialized, hex-encoded transaction that can subsequently be broadcast to the network via `/ledger/submit/transaction`.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`hash` : The block hash to retrieve the block data for. This is ignored if `raw` format is requested. `txid` : The block hash to retrieve the block data for. This is an alias for `hash`.
-
-`verbose` : Optional, determines how much transaction data to include in the response. This is ignored if `raw` format is requested. Supported values are :
+`verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 
 * `summary` : hash, type, version, sequence, timestamp, and contracts.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
