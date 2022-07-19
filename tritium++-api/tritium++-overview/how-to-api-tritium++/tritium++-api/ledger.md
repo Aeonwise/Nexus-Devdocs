@@ -12,7 +12,6 @@ The following commands are direct endpoints and thus do not support the above `v
 [`get/transaction`](ledger.md#get-transaction)\
 [`list/transactions`](ledger.md#get-transaction-1)\
 [`submit/transaction`](ledger.md#submit-transaction)\
-[`void/transaction`](ledger.md#void-transaction)\
 [`get/info`](ledger.md#get-info)\
 [`sync/headers`](ledger.md#sync-headers)``
 
@@ -600,40 +599,6 @@ ledger/submit/transaction
 #### Return values:
 
 `hash` : The tranaction hash, if successfully committed to the mempool / broadcast.
-
-## `void/transaction`
-
-{% hint style="info" %}
-`Depreciated. Check finance/void/transaction`
-{% endhint %}
-
-Voids (reverses) a debit or transfer transaction that you have previously made, that has not yet been credited or claimed by the recipient. The method creates a corresponding credit or claim transaction but back to the originating account/signature chain. This means that any applicable fees will apply, as will conditions on the debit/transfer transaction (such as expiration conditions).
-
-For debits that were made to a tokenized asset as part of a split payment transaction, the reversing credit will be made for the debit amount minus any partial amounts that have already been credited by the token holders.
-
-```
-ledger/void/transaction
-```
-
-Parameters:
-
-`pin` : Required if **locked**. The `PIN` to authorize the transaction.
-
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
-
-`txid` : The transaction ID (hash) of the debit or transfer transaction that you wish to void.
-
-#### Return value JSON object:
-
-```
-{
-    "hash": "47959e245f45aab773c0ce5320a5454f49ac15f63e15acb36855ac654d54d6314fe36b61dd64ec7a9a546bcc439a628e9badcdccb6e5f8072d04a0a3b67f8679"
-}
-```
-
-#### Return values:
-
-`hash` : The transaction hash of the credit transaction, if successfully committed to the mempool / broadcast.
 
 ## `get/info`
 

@@ -223,7 +223,9 @@ These commands only supports the `local` noun.
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by argument `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`username` : To **identify** the profile to load the session for. Optional if genesis is specified.
+
+`genesis` :  To **identify** the profile to load the session for. Optional if username is specified.
 
 ### Results: <a href="#results-2" id="results-2"></a>
 
