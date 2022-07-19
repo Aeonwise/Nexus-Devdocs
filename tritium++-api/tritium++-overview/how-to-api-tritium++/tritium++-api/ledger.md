@@ -603,6 +603,10 @@ ledger/submit/transaction
 
 ## `void/transaction`
 
+{% hint style="info" %}
+`Depreciated. Check finance/void/transaction`
+{% endhint %}
+
 Voids (reverses) a debit or transfer transaction that you have previously made, that has not yet been credited or claimed by the recipient. The method creates a corresponding credit or claim transaction but back to the originating account/signature chain. This means that any applicable fees will apply, as will conditions on the debit/transfer transaction (such as expiration conditions).
 
 For debits that were made to a tokenized asset as part of a split payment transaction, the reversing credit will be made for the debit amount minus any partial amounts that have already been credited by the token holders.
