@@ -12,8 +12,7 @@ The following commands are direct endpoints and thus do not support the above `v
 [`get/transaction`](ledger.md#get-transaction)\
 [`list/transactions`](ledger.md#get-transaction-1)\
 [`submit/transaction`](ledger.md#submit-transaction)\
-[`get/info`](ledger.md#get-info)\
-[`sync/headers`](ledger.md#sync-headers)``
+[`get/info`](ledger.md#get-info)
 
 Direct endpoints support filters and operators.
 
@@ -667,30 +666,4 @@ ledger/get/info
 
 `hashPerSecond` : The average number of hashes per second currently being calculated by the whole network.
 
-`totalConnections` : The number of connections to the mining LLP of this node.
-
-## `sync/headers`
-
-Synchronizes the block header data from a peer, only applicable for lite mode.
-
-```
-ledger/sync/headers
-```
-
-#### Parameters:
-
-\-None-
-
-#### Return value JSON object:
-
-```
-{
-    "success": true
-}
-```
-
-#### Return values:
-
-`success` : Boolean flag indicating that the block headers were synchronised successfully.
-
-#### &#x20;
+`totalConnections` : The number of connections to the mining LLP of this node.\
