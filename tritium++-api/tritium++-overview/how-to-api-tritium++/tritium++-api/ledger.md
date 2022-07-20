@@ -671,7 +671,7 @@ ledger/get/info
 
 ## `sync/headers`
 
-Sync headers for lite mode.
+Synchronizes the block header data from a peer, only applicable for lite mode.
 
 ```
 ledger/sync/headers
@@ -684,6 +684,13 @@ ledger/sync/headers
 #### Return value JSON object:
 
 ```
+{
+    "success": true
+}
 ```
 
-#### Return values: 
+#### Return values:
+
+`success` : Boolean flag indicating that the block headers were synchronised successfully.
+
+#### &#x20;

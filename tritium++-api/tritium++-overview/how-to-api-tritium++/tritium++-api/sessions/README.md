@@ -207,7 +207,7 @@ These commands only supports the `local` noun.
 
 `genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
 
-`success` : Boolean flag indicating that the session was saved successfully .
+`success` : Boolean flag indicating that the session was saved successfully.
 
 ## `load` <a href="#load" id="load"></a>
 
