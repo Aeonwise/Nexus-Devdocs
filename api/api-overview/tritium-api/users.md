@@ -46,7 +46,7 @@ This will create a new user account (signature chain) for use on the network. Th
 {% hint style="info" %}
 **NOTE:**&#x20;
 
-&#x20;_username_ must be a minimum of 3 characters\
+&#x20;_username_ must be a minimum of 2 characters\
 &#x20;_password_ must be a minimum of 8 characters\
 &#x20;_pin_ must be a minimum of 4 characters
 {% endhint %}

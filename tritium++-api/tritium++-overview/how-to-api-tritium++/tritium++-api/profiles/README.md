@@ -48,11 +48,21 @@ This command only supports the `master` and `auth` nouns.
 
 #### create/master
 
-This will create a new master profile specified by given noun, for use on the network. The master profile is secured by a combination of username, password, and PIN.
+This will create a new profile specified by given noun. The profile is secured by a combination of `username`, `password`, and `PIN`.
+
+{% hint style="info" %}
+**NOTE:**&#x20;
+
+* _username_ must be a minimum of 2 characters
+* &#x20;_password_ must be a minimum of 8 characters
+* &#x20;_PIN_ must be a minimum of 4 characters
+{% endhint %}
+
+****
 
 #### create/auth
 
-This method will initialize a `auth` crypto object register for login auth for signature chains created with the early release of Tritium, to be compatible with profiles with Tritium++. Existing users need to first convert their Tritium accounts to be compatible to login with Tritium++ profiles.&#x20;
+This method will initialize a `auth` crypto object register for signature chains created with the early release of Tritium. This makes these signature chain compatible with profiles on Tritium++. Existing users may have to convert their old signature chains to be compatible to login with Tritium++ profiles if they are not able to create a session.&#x20;
 
 ### Parameters:
 
