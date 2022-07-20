@@ -220,7 +220,7 @@ These commands only supports the `local` noun.
 
 ## `load` <a href="#load" id="load"></a>
 
-This will load a saved session from the local database, allowing a saved session to be resumed without the need to login or unlock. The profile username/genesis and PIN is required as this is used
+This will load a saved session from the local database, allowing a saved session to be resumed without the need to login or unlock. The profile username or genesis and PIN is required as this is used.
 
 &#x20;to decrypt the session data.
 
