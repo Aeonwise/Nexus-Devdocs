@@ -190,7 +190,7 @@ These commands only supports the `local` noun.
 {% hint style="info" %}
 **NOTE:**
 
-* Save session saves the session to the local disk.
+* Save session saves the specified session to the local disk.
 * Saved sessions can be loaded even after a core or node restart.
 {% endhint %}
 
@@ -243,9 +243,9 @@ These commands only supports the `local` noun.
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`username` : To **identify** the profile to load the session for. Optional if genesis is specified.
+`username` : Optional for **identifying** the profile to load the session for. Required if genesis is not specified.
 
-`genesis` :  To **identify** the profile to load the session for. Optional if username is specified.
+`genesis` :  Optional for  **identifying** the profile to load the session for. Required if username is not specified.
 
 ### Results: <a href="#results-2" id="results-2"></a>
 
