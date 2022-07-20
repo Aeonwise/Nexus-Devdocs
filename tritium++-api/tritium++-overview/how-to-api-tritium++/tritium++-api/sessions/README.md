@@ -185,6 +185,15 @@ sessions/save/noun
 
 These commands only supports the `local` noun.
 
+
+
+{% hint style="info" %}
+**NOTE:**
+
+* Save session saves the session to the local disk.
+* Saved sessions can be loaded even after a core or node restart.
+{% endhint %}
+
 ### Parameters: <a href="#parameters-3" id="parameters-3"></a>
 
 `pin` : Required to **authenticate**. The PIN for this profile.
@@ -211,13 +220,24 @@ These commands only supports the `local` noun.
 
 ## `load` <a href="#load" id="load"></a>
 
-This will load the users session from the local database, allowing a saved session to be resumed without the need to login or unlock. The users PIN is required as this is used (in conjunction with the genesis) to decrypt the session data.
+This will load a saved session from the local database, allowing a saved session to be resumed without the need to login or unlock. The profile username/genesis and PIN is required as this is used
+
+&#x20;to decrypt the session data.
 
 ```
 sessions/load/noun
 ```
 
 These commands only supports the `local` noun.
+
+{% hint style="info" %}
+**NOTE:**
+
+* If there is an existing active session, it will not load a saved session.
+* Only a saved session can be loaded. &#x20;
+* When a saved session is loaded, it creates a new session ID.
+* Saved sessions can be loaded after a core or node restart.
+{% endhint %}
 
 ### Parameters: <a href="#parameters-4" id="parameters-4"></a>
 
