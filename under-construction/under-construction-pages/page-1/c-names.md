@@ -43,16 +43,15 @@ The following verbs are currently supported by this API command-set:
 [`claim`](c-names.md#claim) - Claim ownership of an object register from a transfer.\
 [`history`](c-names.md#history) - Generate the history of all last states.\
 [`transactions`](c-names.md#transactions) - List all transactions that modified specified object.\
-[`update`](c-names.md#update) -  Update an object register\
-
+[`update`](c-names.md#update) - Update an object register\\
 
 ## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
-\[`name`] -  An object register containing a name object. \
-\[`namespace`] - An object register containing a namespace object. \
-\[`global`] - An object register which is recognised globally on the network. \
+\[`name`] - An object register containing a name object.\
+\[`namespace`] - An object register containing a namespace object.\
+\[`global`] - An object register which is recognised globally on the network.\
 \[`local`] - An object register which is recognised only within the context of a user profile.\
 \[`any`] - An object selection noun allowing mixed `names` nouns.
 
@@ -64,7 +63,7 @@ This will create a new object register specified by given noun.
 names/create/noun
 ```
 
-This command supports the  `name` and `namespace` nouns.
+This command supports the `name` and `namespace` nouns.
 
 `create/name`
 
@@ -104,9 +103,9 @@ This will create a new namespace.
 
 ```
 {
-    "success": true,
-    "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5",
-    "txid": "01dc4d11a9b3418832796ad6c9ca90ba18897b0ec24be44667f0fb0172481775925fa5fc568d54d8cac1e18a81beb552cbbb8cf242210a70233a79355e5a056f"
+    "success": true,
+    "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5",
+    "txid": "01dc4d11a9b3418832796ad6c9ca90ba18897b0ec24be44667f0fb0172481775925fa5fc568d54d8cac1e18a81beb552cbbb8cf242210a70233a79355e5a056f"
 }
 [Completed in 4981.591417 ms]
 ```
@@ -186,13 +185,13 @@ names/get/namespace
 
 ```
 {
-    "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
-    "version": 1,
-    "created": 1654698239,
-    "modified": 1654698239,
-    "type": "OBJECT",
-    "namespace": "valkyrie",
-    "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5"
+    "owner": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "version": 1,
+    "created": 1654698239,
+    "modified": 1654698239,
+    "type": "OBJECT",
+    "namespace": "valkyrie",
+    "address": "8LBEGF1Yo3UR2HPtVVokZMpmAespLfDdPdt99cpKiFJ7VSufsJ5"
 }
 [Completed in 0.174417 ms]
 ```
@@ -269,7 +268,7 @@ The return value is a JSON array of objects for each entry in the namespaces his
 
 `owner` : The genesis hash of the signature chain that owned the namespace.
 
-`version` :  The serialization version of the namespace.
+`version` : The serialization version of the namespace.
 
 `created` : The UNIX timestamp when the object was created.
 
@@ -279,7 +278,7 @@ The return value is a JSON array of objects for each entry in the namespaces his
 
 `name` : The name of the Name object.
 
-`namespace` :  The name of the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
+`namespace` : The name of the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
 
 `address` : The register address of the object.
 
@@ -293,11 +292,11 @@ names/transfer/noun
 
 #### transfer/name
 
-This will transfer ownership of global names or names created in a namespace (a name in the format of mynamespace::myname) can be transferred.&#x20;
+This will transfer ownership of global names or names created in a namespace (a name in the format of mynamespace::myname) can be transferred.
 
 #### transfer/namespace
 
-This will transfer ownership of an namespace&#x20;
+This will transfer ownership of an namespace
 
 ### Parameters:
 
@@ -338,11 +337,11 @@ This method will claim ownership of the specified noun by the recipient to compl
 
 #### claim/name
 
-Names that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
+Names that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .
 
 #### claim/namespace
 
-Namespaces that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .&#x20;
+Namespaces that have been transferred need to be claimed by the recipient before the transfer is complete. This method creates the claim transaction .
 
 ### Parameters:
 
@@ -421,7 +420,7 @@ The return value is a JSON array of objects for each entry in the names history:
 
 `owner` : The genesis hash of the signature chain that owned the namespace.
 
-`version` :  The serialization version of the namespace.
+`version` : The serialization version of the namespace.
 
 `created` : The UNIX timestamp when the object was created.
 
@@ -431,7 +430,7 @@ The return value is a JSON array of objects for each entry in the names history:
 
 `name` : The name of the Name object.
 
-`namespace` :  The name of the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
+`namespace` : The name of the namespace or the namespace that the name was created in. For global names, this will be set to `~GLOBAL~`.
 
 `address` : The register address of the object.
 
@@ -571,7 +570,7 @@ This method supports the [Sorting / Filtering](c-names.md#sorting-filtering) par
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys\*\*`(`\*\*`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign` and `verify).`
 
 ***
 
@@ -591,14 +590,20 @@ This command does not support the `name` or `namespace` nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
+`name` : The name identifying the Name object to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
+
+`address` : The register address of the name to update. This is optional if the name is provided.
+
+`register_address` : The new register address that this Name should point to.
+
 ### Results:
 
 #### Return value JSON object:
 
 ```
 {
-    "success": true,
-    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
 }
 [Completed in 18533.182336 ms]
 ```
