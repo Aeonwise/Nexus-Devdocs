@@ -338,7 +338,7 @@ system/list/peers
 
 `score` : The score value assigned to this peer based on latency and other connection statistics.
 
-## `list\lisp-eids`
+## `list/lisp-eids`
 
 This will return the LISP Endpoint Identifiers (EID's) currently configured for this node. If the lispers.net API is not running / available then this will return an empty array.
 
@@ -379,6 +379,7 @@ system/list/lisp-eids
         ]
     }
 ]
+[Completed in 1004.256167 ms]
 ```
 
 #### Return values:
