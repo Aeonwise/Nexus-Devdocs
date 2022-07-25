@@ -10,12 +10,12 @@ The System API provides public access to information about this node. This inclu
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`stop`](broken-reference)\
-[`get/info`](broken-reference)\
-[`get/metrics`](broken-reference)\
-[`list/peers`](broken-reference)\
-[`list/lisp-eids`](broken-reference)\
-[`validate/address`](broken-reference)
+[`stop`](broken-reference/)\
+[`get/info`](broken-reference/)\
+[`get/metrics`](broken-reference/)\
+[`list/peers`](broken-reference/)\
+[`list/lisp-eids`](broken-reference/)\
+[`validate/address`](broken-reference/)
 
 Direct endpoints support filters and operators.
 
@@ -27,13 +27,24 @@ Initiate node shutdown sequence.
 system/stop
 ```
 
-#### Parameters:
+### Parameters:
 
-`password`: Provide a password in the configuration file which will help prevent accidental remote shutdown (optional). Use the password to authenticate the shutdown.
+`password`: Required to **authenticate** before initiating core shutdown. This password is the one provided in the configuration file which will help prevent accidental remote shutdown (optional).
+
+{% hint style="info" %}
+**NOTE:**
+
+The shutdown authentication password has to be provided in the configuration file with the flag `system/stop=<password>`
+{% endhint %}
+
+### Results:
 
 #### Return value JSON object:
 
-***
+```
+"Nexus server stopping"
+[Completed in 0.039270 ms]
+```
 
 ## `get/info`
 
@@ -43,34 +54,35 @@ Returns a summary of information about this node
 system/get/metrics
 ```
 
-#### Parameters:
+### Parameters:
+
+\-none-
+
+### Results:
 
 #### Return value JSON object:
 
 ```
 {
-    "version": "0.3.0.0 Tritium CLI [LLD][ECC][x64] Beta",
-    "protocolversion": 20000,
-    "walletversion": 10000,
-    "hostname": "myhost",
-    "ipaddress": "121.155.32.70",
-    "testnet": 100,
+    "version": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
+    "protocolversion": 3010000,
+    "walletversion": 10001,
+    "timestamp": 1658759654,
+    "hostname": "localhost",
+    "directory": "/home/nexus/.Nexus/",
+    "address": "11.79.25.105",
     "private": false,
-    "multiuser": true,
-    "sessions": 1,
-    "clientmode": true,
-    "legacywallet": true,
-    "blocks": 380,
-    "synchronizing": true,
-    "synccomplete": 31,
-    "syncprogress": 3,
+    "hybrid": false,
+    "multiuser": false,
+    "litemode": false,
+    "blocks": 4553990,
+    "synchronizing": false,
+    "synccomplete": 100,
+    "syncprogress": 100,
     "txtotal": 0,
-    "connections": 1,
-    "eids": [
-        "240.139.76.244",
-        "fe::139:76:244"
-    ]
+    "connections": 41
 }
+[Completed in 0.070190 ms]
 ```
 
 #### Return values:
@@ -123,123 +135,127 @@ Returns metrics and statistics for the ledger, registers, etc
 system/get/metrics
 ```
 
-#### Parameters:
+### Parameters:
+
+\-none
+
+### Results:
 
 #### Return value JSON object:
 
 ```
 {
     "registers": {
-        "total": 54732,
-        "account": 14190,
+        "total": 182682,
+        "account": 90923,
         "append": 0,
-        "crypto": 13375,
-        "name": 26847,
-        "name_global": 2,
-        "name_namespaced": 1,
-        "namespace": 5,
-        "object": 3,
-        "object_tokenized": 1,
+        "crypto": 30128,
+        "name": 60176,
+        "name_global": 37,
+        "name_namespaced": 29,
+        "namespace": 14,
+        "object": 123,
+        "object_tokenized": 51,
         "raw": 0,
-        "readonly": 0,
-        "token": 32
+        "readonly": 684,
+        "token": 133
     },
-    "sig_chains": 13375,
+    "sig_chains": 29574,
     "trust": {
-        "total": 280,
-        "stake": 21939510.0,
-        "trust": 3004859583
+        "total": 501,
+        "stake": 28787821.0,
+        "trust": 8516437127
     },
     "supply": {
-        "total": 65177607.726929,
-        "target": 64175336.948024,
-        "inflationrate": 1.5617694063947738,
-        "minute": 6.97545,
-        "hour": 418.519742,
-        "day": 10040.397562,
-        "week": 70104.681744,
-        "month": 277954.775646
+        "total": 73922936.520124,
+        "target": 71182005.111246,
+        "inflation": 0.4732,
+        "minute": 3.694196,
+        "hour": 221.649544,
+        "day": 5318.383926,
+        "week": 37176.017892,
+        "month": 147974.463274
     },
     "reserves": {
-        "ambassador": 671.554894,
-        "developer": 510.261963,
-        "fee": 10946.79,
-        "hash": 156.374712,
-        "prime": 100.545744
+        "ambassador": 534.479033,
+        "developer": 109.45359,
+        "fee": 106019.147,
+        "hash": 88.774623,
+        "prime": 54.161507
     }
 }
-
+[Completed in 6372.608306 ms]
 ```
 
 #### Return values:
 
 `registers` : Statistics on the register database.\
 {\
-&#x20;  `total` : Total number of registers in the register database.
+`total` : Total number of registers in the register database.
 
-&#x20;  `account` : Number of account registers. This includes both NXS and other token accounts.
+`account` : Number of account registers. This includes both NXS and other token accounts.
 
-&#x20;  `append` : Number of append registers.
+`append` : Number of append registers.
 
-&#x20;  `crypto` : Number of crypto registers.
+`crypto` : Number of crypto registers.
 
-&#x20;  `name` : Total number of name registers, including user local, global, and namespaced.
+`name` : Total number of name registers, including user local, global, and namespaced.
 
-&#x20;  `name_global` : Number of names that have been created in the global namespace.
+`name_global` : Number of names that have been created in the global namespace.
 
-&#x20;  `name_namespaced` : Number of names that have been created in a namespace.
+`name_namespaced` : Number of names that have been created in a namespace.
 
-&#x20;  `object` : Number of non-standard object registers. These include assets, items, and any other derived object register
+`object` : Number of non-standard object registers. These include assets, items, and any other derived object register
 
-&#x20;  `object_tokenized` : Number of object registers that have been tokenized (where the object owner is a token rather than a signature chain).
+`object_tokenized` : Number of object registers that have been tokenized (where the object owner is a token rather than a signature chain).
 
-&#x20;  `raw` : Number of raw registers.
+`raw` : Number of raw registers.
 
-&#x20;  `readonly` : Number of read only registers.
+`readonly` : Number of read only registers.
 
-&#x20;  `token` : Number of token registers.\
+`token` : Number of token registers.\
 }
 
 `sig_chains` : Total number of signature chains in the ledger.
 
 `trust` : Statistics on active trust accounts.\
 {\
-&#x20;  `total` : Total number trust accounts that are active (have a non-zero stake balance).
+`total` : Total number trust accounts that are active (have a non-zero stake balance).
 
-&#x20;  `stake` : Total amount of NXS currently being staked network-wide).
+`stake` : Total amount of NXS currently being staked network-wide).
 
-&#x20;  `trust` : Total trust score of all trust accounts being staked. }
+`trust` : Total trust score of all trust accounts being staked. }
 
 `supply` : Metrics on NXS supply rates.\
 {\
-&#x20;  `total` : Total amount of NXS in existence.
+`total` : Total amount of NXS in existence.
 
-&#x20;  `target` : The target supply rate for this point in time.
+`target` : The target supply rate for this point in time.
 
-&#x20;  `inflationrate` : The current inflation rate percentage based on the last year of data.
+`inflationrate` : The current inflation rate percentage based on the last year of data.
 
-&#x20;  `minute` : The increase in supply rate within the last minute.
+`minute` : The increase in supply rate within the last minute.
 
-&#x20;  `hour` : The increase in supply rate within the last hour.
+`hour` : The increase in supply rate within the last hour.
 
-&#x20;  `day` : The increase in supply rate within the last day.
+`day` : The increase in supply rate within the last day.
 
-&#x20;  `week` : The increase in supply rate within the last week.
+`week` : The increase in supply rate within the last week.
 
-&#x20;  `month` : The increase in supply rate within the last 30 days.\
+`month` : The increase in supply rate within the last 30 days.\
 }
 
 `reserves` : Information on the amount of NXS currently in the various reserves.\
 {\
-&#x20;  `ambassador` : Amount of NXS in the ambassador reserves, waiting to be paid to the ambassador sig chains.
+`ambassador` : Amount of NXS in the ambassador reserves, waiting to be paid to the ambassador sig chains.
 
-&#x20;  `developer` : Amount of NXS in the developer reserves, waiting to be paid to the developer sig chains.
+`developer` : Amount of NXS in the developer reserves, waiting to be paid to the developer sig chains.
 
-&#x20;  `fee` : Amount of NXS in the fee reserves.
+`fee` : Amount of NXS in the fee reserves.
 
-&#x20;  `hash` : Amount of NXS in the hash channel reserves.
+`hash` : Amount of NXS in the hash channel reserves.
 
-&#x20;  `ambassador` : Amount of NXS in the prime channel reserves.\
+`ambassador` : Amount of NXS in the prime channel reserves.\
 }
 
 ## `list/peers`
@@ -250,36 +266,48 @@ Returns a summary of information about the peers currently connected to this nod
 system/list/peers
 ```
 
-#### Parameters:
+### Parameters:
+
+\-none-
+
+### Results:
 
 #### Return value JSON object:
 
 ```
 [
     {
-        "address": "144.76.165.123:8898",
-        "version": "IPv4",
-        "height": 498,
-        "latency": "877 ms",
-        "lastseen": 1557884710351,
-        "connects": 2,
+        "address": "45.180.14.231:9888",
+        "type": "5.0.5 Tritium CLI [LLD][x64]",
+        "version": 30000,
+        "session": 8412734217501590516,
+        "outgoing": true,
+        "height": 0,
+        "best": "00000000000000000000",
+        "latency": 4294967295,
+        "lastseen": 1658762086,
+        "connects": 3,
         "drops": 0,
         "fails": 0,
-        "score": 200.0
+        "score": 8850.0
     },
     {
-        "address": "132.45.165.111:8898",
-        "version": "IPv4",
-        "height": 498,
-        "latency": "125 ms",
-        "lastseen": 1557884710352,
+        "address": "29.19.192.168:9888",
+        "type": "5.1.0-rc2 Tritium++ CLI [LLD][x64]",
+        "version": 3010000,
+        "session": 10774729209155580028,
+        "outgoing": true,
+        "height": 0,
+        "best": "00000000000000000000",
+        "latency": 4294967295,
+        "lastseen": 1658762098,
         "connects": 3,
         "drops": 1,
         "fails": 0,
-        "score": 100.0
+        "score": 10195.0
     }
 ]
-
+[Completed in 0.409770 ms]
 ```
 
 #### Return values:
@@ -312,13 +340,17 @@ system/list/peers
 
 ## `list\lisp-eids`
 
-This will return the LISP Endpoint Indentifers (EID's) currently configured for this node. If the lispers.net API is not running / available then this will return an empty array.
+This will return the LISP Endpoint Identifiers (EID's) currently configured for this node. If the lispers.net API is not running / available then this will return an empty array.
 
 ```
 system/list/lisp-eids
 ```
 
-#### Parameters:
+### Parameters:
+
+\-none-
+
+### Results:
 
 #### Return value JSON object:
 
@@ -375,7 +407,7 @@ system/validate/address
 
 #### Parameters:
 
-`address` : The base58 encoded register or legacy address to check.
+`address` : Required to **validate** the base58 encoded register or legacy address to check.
 
 #### Return value JSON object:
 
