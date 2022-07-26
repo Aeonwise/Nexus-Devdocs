@@ -680,36 +680,70 @@ ledger/get/info
 
 #### Return values:
 
-`blocks` : The current block height.
+`Stake` : This is the stake details
 
-`timestamp` : The Unix timestamp of the last block.
+{
 
-`stakeDifficulty` : The current difficulty of the stake channel.
+`height` : The current number of blocks for the stake channel.
 
-`primeDifficulty` : The current difficulty of the prime channel.
+`weight` :&#x20;
 
-`hashDifficulty` : The current difficulty of the hash channel.
+`timespan` : The time between the stake blocks&#x20;
 
-`stakeHeight` : The current number of blocks for the stake channel.
+`fees` :&#x20;
 
-`primeHeight` : The current number of blocks for the prime channel.
+`difficulty` : The current difficulty of the stake channel.
 
-`hashHeight` : The current number of blocks for the hash channel.
+}
 
-`primeReserve` : The amount of NXS in the reserve balance for the prime channel.
+`prime` : This is the prime channel details
 
-`hashReserve` : The amount of NXS in the reserve balance for the hash channel.
+{
 
-`primeValue` : The block reward for the next prime block to be found.
+`height` : The current number of blocks for the prime channel.
 
-`hashValue` : The block reward for the next hash block to be found.
+`weight` :&#x20;
 
-`pooledtx` : The number of transactions currently in the mempool.
+`timespan` :&#x20;
 
-`primesPerSecond` : The average number of primes per second currently being calculated by the whole network.
+`fees` :&#x20;
 
-`hashPerSecond` : The average number of hashes per second currently being calculated by the whole network.
+`difficulty` : The current difficulty of the prime channel.
 
-`totalConnections` : The number of connections to the mining LLP of this node.
+`reserve` : The amount of NXS in the reserve balance for the prime channel.
+
+`reward` : The block reward for the next prime block to be found.
+
+`hashes` :&#x20;
+
+}
+
+`hash` : This is the prime channel details
+
+{
+
+`height` : The current number of blocks for the hash channel.
+
+`weight` :&#x20;
+
+`timespan` :&#x20;
+
+`fees` :&#x20;
+
+`difficulty` : The current difficulty of the hash channel.
+
+`reserve` : The amount of NXS in the reserve balance for the hash channel.
+
+`reward` : The block reward for the next hash block to be found.
+
+`hashes` :&#x20;
+
+}
+
+`height` : The block height when the information is retrieved.
+
+`timestamp` :  The Unix timestamp of the block mentioned in `height`.
+
+`checkpoint` :&#x20;
 
 ####
