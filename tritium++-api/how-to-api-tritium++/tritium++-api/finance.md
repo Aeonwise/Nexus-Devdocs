@@ -112,7 +112,7 @@ The following commands are direct endpoints and thus do not support the above `v
 [`get/stakeinfo`](../../../getting-started/tritium++-api/broken-reference/)\
 [`set/stake`](finance.md#set-stake)\
 [`void/transaction`](finance.md#void-transaction)\
-[`migrate/accounts`](finance.md#migrate-accounts)``
+[`migrate/accounts`](finance.md#migrate-accounts)
 
 Direct endpoints support filters and operators.
 
@@ -160,7 +160,7 @@ Create a new object register specified by given noun.
 finance/create/noun
 ```
 
-This command does not support the  `trust,` `any` or `all` nouns.
+This command does not support the `trust,` `any` or `all` nouns.
 
 #### create/account
 
@@ -184,11 +184,11 @@ Create a new token object.
 
 `supply` : Required by **noun** `token` that sets the maximum token supply.
 
-`decimals` : Required by **noun** `token` that sets the total number of significant figures. Defaults to    2.
+`decimals` : Required by **noun** `token` that sets the total number of significant figures. Defaults to 2.
 
 #### **`create/account`**
 
-`name` : Optional for **noun** `account` as a _UTF-8_ encoded string that will generate a name object register that points to new object.&#x20;
+`name` : Optional for **noun** `account` as a _UTF-8_ encoded string that will generate a name object register that points to new object.
 
 `token` : Required by **noun** `account` as a _Base58_ encoded address or ticker name. Defaults to `NXS`.
 
@@ -196,16 +196,16 @@ Create a new token object.
 
 ```
 {
-    "success": true,
-    "address": "8BfLgEprhbHs82LxUkJR9jhQufRZf49g73Nt8XTGevfiyy7ijhb",
-    "txid": "01854fe4fdf0d59aebb3a880141484f0542af061cbebfd468db3fcecd13f63a986d990cf669ca4a60822a82b2d4fc7e7e474801a01bff86a35fd0a147a5a62da"
+    "success": true,
+    "address": "8BfLgEprhbHs82LxUkJR9jhQufRZf49g73Nt8XTGevfiyy7ijhb",
+    "txid": "01854fe4fdf0d59aebb3a880141484f0542af061cbebfd468db3fcecd13f63a986d990cf669ca4a60822a82b2d4fc7e7e474801a01bff86a35fd0a147a5a62da"
 }
 [Completed in 4973.117685 ms]
 ```
 
 #### Return values: <a href="#user-content-credit" id="user-content-credit"></a>
 
-`success` : Boolean flag indicating that creating the new object register was successful.&#x20;
+`success` : Boolean flag indicating that creating the new object register was successful.
 
 `address` : The register address for the newly created account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
@@ -239,7 +239,7 @@ This deducts an amount of tokens from a token address to send to a token account
 
 `amount` : The **amount** of NXS to debit.
 
-`to` : Required to  **identify** the receiving account, this can be the account name or the register address. This is optional if address\_to is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
+`to` : Required to **identify** the receiving account, this can be the account name or the register address. This is optional if address\_to is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
 `address_to` : The **register address** of the account to send to. This is optional if `to` is provided. The address\_to can also contain a legacy UTXO address if sending from a signature chain account to a legacy address.
 
@@ -251,15 +251,15 @@ This deducts an amount of tokens from a token address to send to a token account
 
 ```
 {
-    "success": true,
-    "txid": "01f51d6b23b871fc8da848afa57cf066cb9e3b8fb845a666335e8c678ef5249e98d4f3e477659098918e4bb590472a63d0ed0a17fa87904fcff6316158e9edfd"
+    "success": true,
+    "txid": "01f51d6b23b871fc8da848afa57cf066cb9e3b8fb845a666335e8c678ef5249e98d4f3e477659098918e4bb590472a63d0ed0a17fa87904fcff6316158e9edfd"
 }
 [Completed in 4979.735275 ms]
 ```
 
 #### Return values:
 
-`success` : Boolean flag indicating that the debit was successful.&#x20;
+`success` : Boolean flag indicating that the debit was successful.
 
 `txid` : The ID (hash) of the transaction that includes the debit.
 
@@ -293,15 +293,15 @@ Increment an amount of tokens received from a token account.
 
 ```
 {
-    "success": true,
-    "txid": "01f51d6b23b871fc8da848afa57cf066cb9e3b8fb845a666335e8c678ef5249e98d4f3e477659098918e4bb590472a63d0ed0a17fa87904fcff6316158e9edfd"
+    "success": true,
+    "txid": "01f51d6b23b871fc8da848afa57cf066cb9e3b8fb845a666335e8c678ef5249e98d4f3e477659098918e4bb590472a63d0ed0a17fa87904fcff6316158e9edfd"
 }
 [Completed in 4979.735275 ms]
 ```
 
 #### Return values:
 
-`success` : Boolean flag indicating that the debit was successful.&#x20;
+`success` : Boolean flag indicating that the debit was successful.
 
 `txid` : The ID (hash) of the transaction that includes the credit.
 
@@ -321,9 +321,9 @@ This command only supports the `account` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : Optional for i**dentifying** the account to debit the tokens from to be burnt. This is optional if the `address` is provided.&#x20;
+`name` : Optional for i**dentifying** the account to debit the tokens from to be burnt. This is optional if the `address` is provided.
 
-`address` :  Optional for **identifying** the register address of the account to debit the tokens from the be burnt. This is optional if the `name` is provided.
+`address` : Optional for **identifying** the register address of the account to debit the tokens from the be burnt. This is optional if the `name` is provided.
 
 `amount` : The amount of **tokens** to burn.
 
@@ -333,9 +333,9 @@ This command only supports the `account` noun.
 
 ```
 {
-    "success": true,
-    "address": "8BfLgEprhbHs82LxUkJR9jhQufRZf49g73Nt8XTGevfiyy7ijhb",
-    "txid": "01854fe4fdf0d59aebb3a880141484f0542af061cbebfd468db3fcecd13f63a986d990cf669ca4a60822a82b2d4fc7e7e474801a01bff86a35fd0a147a5a62da"
+    "success": true,
+    "address": "8BfLgEprhbHs82LxUkJR9jhQufRZf49g73Nt8XTGevfiyy7ijhb",
+    "txid": "01854fe4fdf0d59aebb3a880141484f0542af061cbebfd468db3fcecd13f63a986d990cf669ca4a60822a82b2d4fc7e7e474801a01bff86a35fd0a147a5a62da"
 }
 [Completed in 4973.117685 ms]
 ```
@@ -356,7 +356,7 @@ Retrieves information for a single object for a type specified by the noun
 finance/get/noun
 ```
 
-This command  supports the `account`, `trust` and `token` nouns.
+This command supports the `account`, `trust` and `token` nouns.
 
 #### `get/account`
 
@@ -403,13 +403,13 @@ Retrieves information for a specified token address.
 
 ## `list`
 
-This will list off all of the object register details specified by the noun.&#x20;
+This will list off all of the object register details specified by the noun.
 
 ```
 finance/list/noun
 ```
 
-This command  supports the `account`, `trust` and `token` nouns.
+This command supports the `account`, `trust` and `token` nouns.
 
 #### list/account
 
@@ -451,7 +451,7 @@ The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorti
 [Completed in 0.473708 ms]
 ```
 
-#### Return values:&#x20;
+#### Return values:
 
 `owner` : The genesis hash of the profile that owns this account.
 
@@ -559,7 +559,7 @@ This command supports the `account, trust and token` nouns.
 
 #### `transactions/account`
 
-List out all the transactions for the  NXS account or token account.
+List out all the transactions for the NXS account or token account.
 
 #### `transactions/trust`
 
@@ -687,7 +687,7 @@ This method supports the [Sorting / Filtering](finance.md#sorting-filtering) par
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys\*\*`(`\*\*`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign` and `verify).`
 
 ## `get/balances`
 
