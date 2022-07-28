@@ -679,13 +679,13 @@ ledger/get/info
 
 #### Return values:
 
-`Stake` : This is the stake details
+`Stake` : This is the stake channel details.
 
 {
 
 `height` : The current number of blocks for the stake channel.
 
-`weight` : The total work completed for the stake channel
+`weight` : The total work completed for the stake channel.
 
 `timespan` : It is the average block time for the stake channel.
 
@@ -695,13 +695,13 @@ ledger/get/info
 
 }
 
-`prime` : This is the prime channel details
+`prime` : This is the prime channel details.
 
 {
 
 `height` : The current number of blocks for the prime channel.
 
-`weight` : The total work completed for prime channel
+`weight` : The total work completed for prime channel.
 
 `timespan` : It is the average block time for the prime channel.
 
@@ -717,7 +717,7 @@ ledger/get/info
 
 }
 
-`hash` : This is the prime channel details
+`hash` : This is the prime channel details.
 
 {
 
