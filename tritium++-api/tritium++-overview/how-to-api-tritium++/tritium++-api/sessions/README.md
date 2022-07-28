@@ -32,8 +32,7 @@ The following verbs are currently supported by this API command-set:
 
 The following nouns are supported for this API command-set:
 
-\[`local`] - The location of the session.\
-
+\[`local`] - The location of the session.\\
 
 ## `create` <a href="#a-namecreatea-create" id="a-namecreatea-create"></a>
 
@@ -67,7 +66,7 @@ This command only supports the `local` noun.
 
 **Return values:**
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
+`genesis` : The profile genesis hash. This is a hash of the profile username.
 
 `session` : When using multi-user API mode, an additional session value is returned and must be supplied in subsequent API calls, to allow the managing of multiple login sessions.
 
@@ -125,7 +124,7 @@ These commands only supports the `local` noun.
 
 ## `lock` <a href="#lock" id="lock"></a>
 
-This will lock the session specified by given noun and purge the PIN stored in the encrypted memory.
+This will lock the specified session by purging the PIN stored in encrypted memory, making it unavailable for use unless it is either unlocked or the PIN is passed in to all API requests.
 
 ```
 sessions/lock/noun
@@ -185,13 +184,12 @@ sessions/save/noun
 
 These commands only supports the `local` noun.
 
-
-
 {% hint style="info" %}
 **NOTE:**
 
-* Save session saves the specified session to the local disk.
-* Saved sessions can be loaded even after a core or node restart.
+* Save session, saves the specified active session to the local disk.
+* Saved sessions are saved permanent until deleted manually.
+* Saved sessions will be resumed in the same condition (locked or unlocked) as it was saved.
 {% endhint %}
 
 ### Parameters: <a href="#parameters-3" id="parameters-3"></a>
@@ -214,15 +212,15 @@ These commands only supports the `local` noun.
 
 **Return values:**
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
+`genesis` : The profile genesis hash. This is a hash of the profile username.
 
 `success` : Boolean flag indicating that the session was saved successfully.
 
 ## `load` <a href="#load" id="load"></a>
 
-This will load a saved session from the local database, allowing a saved session to be resumed without the need to login or unlock. The profile username or genesis and PIN is required as this is used.
+This will resume a saved session from the local database, allowing a saved session to be resumed without the need to login or unlock. The profile username or genesis and PIN is required to decrypt and resume the saved session.
 
-&#x20;to decrypt the session data.
+
 
 ```
 sessions/load/noun
@@ -234,18 +232,18 @@ These commands only supports the `local` noun.
 **NOTE:**
 
 * If there is an existing active session, it will not load a saved session.
-* Only a saved session can be loaded. &#x20;
-* When a saved session is loaded, it creates a new session ID.
-* Saved sessions can be loaded after a core or node restart.
+* Only a previously saved session can be loaded.
+* When a saved session is resumed, it creates a new session ID.
+* Saved sessions can be resumed even after a core or node restart.
 {% endhint %}
 
 ### Parameters: <a href="#parameters-4" id="parameters-4"></a>
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`username` : Optional for **identifying** the profile to load the session for. Required if genesis is not specified.
+`username`: Required to **identify** the profile to load the session for. This is optional if the `genesis` is provided.
 
-`genesis` :  Optional for  **identifying** the profile to load the session for. Required if username is not specified.
+`genesis` : Required to **identify** the profile to load the session for. This is optional if the `username` is provided.
 
 ### Results: <a href="#results-2" id="results-2"></a>
 
@@ -261,7 +259,7 @@ These commands only supports the `local` noun.
 
 **Return values:**
 
-`genesis` : The signature chain genesis hash. This is a hash of the username used to create the profile.
+`genesis` : The profile genesis hash. This is a hash of the profile username.
 
 `session` : When using multi-user API mode, an additional session value is returned to identify the sessions.
 
@@ -275,6 +273,10 @@ sessions/create/noun
 
 This command only supports the `local` noun.
 
+{% hint style="info" %}
+**Note:** This does not delete a saved session
+{% endhint %}
+
 ### Parameters:
 
 `pin` : Required to **authenticate**. The PIN for this profile.
@@ -287,7 +289,7 @@ This command only supports the `local` noun.
 
 ```
 {
-    "success": true
+    "success": true
 }
 [Completed in 1656.089478 ms]
 ```
@@ -298,7 +300,7 @@ This command only supports the `local` noun.
 
 ## `status`
 
-Get the profile status specified by given noun.
+Retrieve the session status specified by given noun.
 
 ```
 sessions/status/noun
@@ -316,15 +318,15 @@ This command only supports the `local` noun.
 
 ```
 {
-    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
-    "accessed": 1653680627,
-    "location": "local",
-    "unlocked": {
-        "mining": false,
-        "notifications": true,
-        "staking": false,
-        "transactions": false
-    }
+    "genesis": "b7fa11647c02a3a65a72970d8e703d8804eb127c7e7c41d565c3514a4d3fdf13",
+    "accessed": 1653680627,
+    "location": "local",
+    "unlocked": {
+        "mining": false,
+        "notifications": true,
+        "staking": false,
+        "transactions": false
+    }
 }
 [Completed in 0.080333 ms]
 ```
