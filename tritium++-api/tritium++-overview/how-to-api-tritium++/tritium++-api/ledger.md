@@ -12,8 +12,7 @@ The following commands are direct endpoints and thus do not support the above `v
 [`get/transaction`](ledger.md#get-transaction)\
 [`list/transactions`](ledger.md#get-transaction-1)\
 [`submit/transaction`](ledger.md#submit-transaction)\
-[`get/info`](ledger.md#get-info)\
-[`sync/headers`](ledger.md#sync-headers)\`\`
+[`get/info`](ledger.md#get-info)
 
 Direct endpoints support filters and operators.
 
@@ -686,11 +685,11 @@ ledger/get/info
 
 `height` : The current number of blocks for the stake channel.
 
-`weight` :&#x20;
+`weight` : The total work completed for the stake channel
 
-`timespan` : The time between the stake blocks&#x20;
+`timespan` : It is the average block time for the stake channel.
 
-`fees` :&#x20;
+`fees` : It is the total NXS accumulated on the stake channel.
 
 `difficulty` : The current difficulty of the stake channel.
 
@@ -702,11 +701,11 @@ ledger/get/info
 
 `height` : The current number of blocks for the prime channel.
 
-`weight` :&#x20;
+`weight` : The total work completed for prime channel
 
-`timespan` :&#x20;
+`timespan` : It is the average block time for the prime channel.
 
-`fees` :&#x20;
+`fees` : It is the total NXS accumulated on the prime channel.
 
 `difficulty` : The current difficulty of the prime channel.
 
@@ -714,7 +713,7 @@ ledger/get/info
 
 `reward` : The block reward for the next prime block to be found.
 
-`hashes` :&#x20;
+`hashes` : It is total network hash rate for prime channel.
 
 }
 
@@ -724,11 +723,11 @@ ledger/get/info
 
 `height` : The current number of blocks for the hash channel.
 
-`weight` :&#x20;
+`weight` : The total work completed for hash channel.
 
-`timespan` :&#x20;
+`timespan` : It is the average block time for the hash channel.
 
-`fees` :&#x20;
+`fees` : It is the total NXS accumulated on the hash channel.
 
 `difficulty` : The current difficulty of the hash channel.
 
@@ -736,14 +735,14 @@ ledger/get/info
 
 `reward` : The block reward for the next hash block to be found.
 
-`hashes` :&#x20;
+`hashes` : It is total network hash rate for the hash channel.
 
 }
 
 `height` : The block height when the information is retrieved.
 
-`timestamp` :  The Unix timestamp of the block mentioned in `height`.
+`timestamp` :  The Unix timestamp of the most recent block in the blockchain.
 
-`checkpoint` :&#x20;
+`checkpoint` : It is the most recent checkpoint that blocks can’t be reorganized before, so everything before that hash is finalized.
 
 ####
