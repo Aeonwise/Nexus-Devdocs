@@ -33,7 +33,7 @@ The following nouns are supported for this API command-set:
 
 \[`master`] - The default profile that controls all sub-profiles.\
 \[`auth`] - A crypto object register for login auth.\
-\[`credentials`] -  Credentials used to secure profiles.\
+\[`credentials`] - Credentials used to secure profiles.\
 \[`recovery`] - An object which represents recovery for the profile.
 
 ## `create`
@@ -52,23 +52,23 @@ This will create a new profile specified by given noun. The profile is secured b
 
 #### create/auth
 
-This method will initialize a `auth` crypto object register for signature chains created with the early release of Tritium. This makes these signature chain compatible with profiles on Tritium++. Existing users may have to convert their old signature chains to be compatible to login with Tritium++ profiles if they are not able to create a session.&#x20;
+This method will initialize a `auth` crypto object register for signature chains created with the early release of Tritium. This makes these signature chain compatible with profiles on Tritium++. Existing users may have to convert their old signature chains to be compatible to login with Tritium++ profiles if they are not able to create a session.
 
 ### Parameters:
 
-`username` : Required to **authenticate.** The username to be associated with this profile. The  `profileID` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
+`username` : Required to **authenticate.** The username to be associated with this profile. The `profileID` (used to uniquely identify profiles) is a hash of this username, therefore the username must be unique on the blockchain.
 
 `password` : Required to **set** a password to be associated with this profile.
 
-`pin` : Required to **set**  the PIN to be associated with this profile
+`pin` : Required to **set** the PIN to be associated with this profile
 
 {% hint style="info" %}
-**NOTE:**&#x20;
+**NOTE:**
 
 * `username` must be a minimum of 2 characters.
-* &#x20;`password` __ must be a minimum of 8 characters.
-* &#x20;__ `PIN` must be a minimum of 4 characters.
-* `Username` is case-sensitive and cannot be changed. Choose the username carefully and make a point to back it up along with the password and pin.
+* `password` \_\_ must be a minimum of 8 characters.
+* \_\_ `PIN` must be a minimum of 4 characters.
+* `Username` is case-sensitive and cannot be changed. Choose the username carefully and make it a point to back it up along with the password and pin.
 * Don't use the colon ' : ' at the end of the username.
 {% endhint %}
 
@@ -86,7 +86,7 @@ This method will initialize a `auth` crypto object register for signature chains
 
 #### Return values:
 
-`success` : Boolean flag indicating that the session was saved successfully.
+`success` : Boolean flag indicating that the profile was created successfully.
 
 `txid` : The ID (hash) of the transaction that includes the created object.
 
@@ -133,7 +133,7 @@ NOTE
 
 * The recovery phrase is case-sensitive.
 * Make sure to type in the recovery phrase correctly and not copy paste which can add spaces if not done correctly.
-* Make sure to backup and recheck the recovery seed and create multiple offline backups. &#x20;
+* Make sure to backup and recheck the recovery seed and create multiple offline backups.
 {% endhint %}
 
 ### Results:
@@ -142,8 +142,8 @@ NOTE
 
 ```
 {
-    "success": true,
-    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
 }
 [Completed in 18533.182336 ms]
 ```
@@ -156,7 +156,7 @@ NOTE
 
 ## `recover`
 
-This recovers the profile specified by the noun, in case of lost password and pin. The user has to be logged out to recover his profile.&#x20;
+This recovers the profile specified by the noun, in case of lost password and pin. The user has to be logged out to recover his profile.
 
 ```
 profiles/recover/noun
@@ -168,11 +168,11 @@ This command only supports the `master` noun.
 
 `username` : Required to **identify.** The username identifying the profile for recovery.
 
-`password` : Required to **set** a new password**.** The new password to be associated with this profile.
+`password` : Required to **set** a new password\*\*.\*\* The new password to be associated with this profile.
 
-`pin` : Required to **set** a new pin**.** The new PIN to be associated with this profile.
+`pin` : Required to **set** a new pin\*\*.\*\* The new PIN to be associated with this profile.
 
-`recovery` : Required to **authenticate**. The existing recovery seed for this profile.&#x20;
+`recovery` : Required to **authenticate**. The existing recovery seed for this profile.
 
 ### Results:
 
@@ -180,21 +180,21 @@ This command only supports the `master` noun.
 
 ```
 {
-    "success": true,
-    "txid": "017fbb86583c0e15c0fb994a1f4c70d97f2c084533748ccfd25cd36e5aef9c2e7f89f15f2ec9f2d73769fef9d7a8a28cd018c9907ebf1bf74e4f89837c900091"
+    "success": true,
+    "txid": "017fbb86583c0e15c0fb994a1f4c70d97f2c084533748ccfd25cd36e5aef9c2e7f89f15f2ec9f2d73769fef9d7a8a28cd018c9907ebf1bf74e4f89837c900091"
 }
 [Completed in 15242.801822 ms]
 ```
 
 #### Return values:
 
-`success` : Boolean flag indicating that the session was saved successfully.
+`success` : Boolean flag indicating that the profile was recovered successfully.
 
 `txid` : The ID (hash) of the transaction for the recovered object.
 
 ## `status`
 
-Return status information for the requested signature chain.
+Returns status information for the requested profile.
 
 ```
 profiles/status/noun
@@ -223,7 +223,7 @@ This command only supports the `master` noun.
 
 #### Return values:
 
-`genesis` : The profile hash for the currently logged in profile.
+`genesis` : The profile genesis hash. This is a hash of the profile username.
 
 `confirmed` : Boolean flag indicating whether the genesis transaction for this profile has at least one confirmation.
 
@@ -231,7 +231,7 @@ This command only supports the `master` noun.
 
 `crypto` : Boolean flag indicating whether the crypto object register has been set for this profile.
 
-`transactions` : The total transactions count in this profile
+`transactions` : The total transactions count for this profile
 
 ## `notifications`
 
@@ -303,7 +303,7 @@ This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 ## `transactions`
 
-This will list off all of the transactions for the requested signature chain.
+This will list off all of the transactions for the requested profile.
 
 ```
 profiles/transactions/noun
@@ -378,7 +378,7 @@ This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 `confirmations` : The number of confirmations that this transaction obtained by the network.
 
-`genesis` : The profile username hash.
+`genesis` : The profile genesis hash. This is a hash of the profile username.
 
 `nexthash` : The hash of the next transaction in the sequence.
 
@@ -418,6 +418,6 @@ This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys\*\*`(`\*\*`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign` and `verify).`
 
 }
