@@ -385,7 +385,7 @@ ledger/get/transaction
 
 `format` : Determines the format of the return value. Parameter value can be `JSON` (the default) or `raw`. If `raw` is specified then the method returns a serialized, hex-encoded transaction that can subsequently be broadcast to the network via `/ledger/submit/transaction`.
 
-`hash` : The block hash to retrieve the block data for. This is ignored if `raw` format is requested. `txid` : The block hash to retrieve the block data for. This is an alias for `hash`.
+`txid` : Required to **identify** the txid to retrieve the transaction data for.&#x20;
 
 `verbose` : Optional, determines how much transaction data to include in the response. This is ignored if `raw` format is requested. Supported values are :
 
