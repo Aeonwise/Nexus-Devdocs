@@ -29,7 +29,7 @@ system/stop
 
 ### Parameters:
 
-`password`: Required to **authenticate** before initiating core shutdown. This password is the one provided in the configuration file which will help prevent accidental remote shutdown (optional).
+`password`: Optional to **authenticate** before initiating core shutdown. This password is the one provided in the configuration file which will help prevent accidental remote shutdown.
 
 {% hint style="info" %}
 **NOTE:**
@@ -207,7 +207,7 @@ system/get/metrics
 
 `object` : Number of non-standard object registers. These include assets, items, and any other derived object register
 
-`object_tokenized` : Number of object registers that have been tokenized (where the object owner is a token rather than a signature chain).
+`object_tokenized` : Number of object registers that have been tokenized (where the object owner is a token rather than a profile).
 
 `raw` : Number of raw registers.
 

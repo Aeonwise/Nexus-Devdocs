@@ -17,7 +17,7 @@ The following commands are direct endpoints and thus do not support the above `v
 Direct endpoints support filters and operators.
 
 {% hint style="info" %}
-Retrieving block data by height is only possible if the daemon has been configured with --`indexheight=1`.
+Retrieving block data by height is only possible if the core has been configured with --`indexheight=1`.
 {% endhint %}
 
 ## `get/blockhash`
@@ -66,6 +66,8 @@ ledger/get/block
 * `default` : hash
 * `summary` : type, version, sequence, timestamp, and contracts.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
+
+This method supports the Sorting / Filtering parameters.
 
 ### Results:
 
@@ -217,23 +219,19 @@ ledger/list/blocks
 
 ### Parameters:
 
-`hash` : The block hash to retrieve the block data for.
+`hash` : Required to **identify** the block to retrieve the block data for. This is optional if the `height` is provided
 
-`height` : The block height to retrieve the block data for.
+`height` : Required to **identify** the block to retrieve the block data for. This is optional if the **hash** is provided
 
-`verbose` : This is optional, determines how much transaction data to include in the response. Supported values are :
+`verbose` : This is optional, determines how much **transaction data** to include in the response. Supported values are :
 
 * `default` : hash
 * `summary` : type, version, sequence, timestamp, and operation.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
-`limit` : The number of records to return for the current page. The default is 100.
+`where` : An array of clauses to **filter** the JSON results. More information on filtering the results from /list/xxx API methods can be found here [**`Queries`**](../../../how-to-api-tritium++/register.md)**``**
 
-`page` : Allows the results to be returned by page (zero based). E.g. passing in page=1 will return the second set of (limit) records. The default value is 0 if not supplied.
-
-`offset` : An alternative to `page`, offset can be used to return a set of (limit) results from a particular index.
-
-`where` : An array of clauses to filter the JSON results. More information on filtering the results from /list/xxx API methods can be found here [Filtering Results](https://github.com/Nexusoft/LLL-TAO/blob/merging/docs/API/filtering-results.md)
+This method supports the Sorting / Filtering parameters.
 
 **NOTE** : Either the hash or the height needs to be supplied, but not both.\
 Retrieving block data by height is only allowed if the daemon has been configured with `indexheight=1`.
@@ -394,6 +392,8 @@ ledger/get/transaction
 * `summary` : hash, type, version, sequence, timestamp, and contracts.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
 
+This method supports the Sorting / Filtering parameters.
+
 ### Results:
 
 #### Return value JSON object:
@@ -503,6 +503,8 @@ ledger/get/transaction
 
 * `summary` : hash, type, version, sequence, timestamp, and contracts.
 * `detail` : genesis, nexthash, prevhash, pubkey and signature.
+
+This method supports the Sorting / Filtering parameters.
 
 ### Results:
 
