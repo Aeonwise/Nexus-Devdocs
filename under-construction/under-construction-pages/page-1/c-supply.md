@@ -4,13 +4,13 @@ description: SUPPLY API
 
 # SUPPLY
 
-The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a value and this value can be updated over time. The supply API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.&#x20;
+The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a value and this value can be updated over time. The supply API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.
 
 The `readonly` and `raw` formats are useful when developers wish to store arbitrary data, without incurring the overhead of defining an object. The value will be provided with the `data` parameter. The `readonly` format cannot be updated and is stored in a readonly register. The `raw` format is stored in a raw register and allows the data to be updated.
 
 The `basic` format allows callers to define an asset in terms of simple key=value pairs. It assumes all values are stored using the string data type. The key=value pairs can be updated.
 
-The `JSON` format allows callers to provide a detailed definition of the supply data structure, with each field defined with a specific data type and mutability. Items defined with one of the complex formats can be updated after their initial creation. &#x20;
+The `JSON` format allows callers to provide a detailed definition of the supply data structure, with each field defined with a specific data type and mutability. Items defined with one of the complex formats can be updated after their initial creation.
 
 The supply API also provides a history of changes to the values, as well as the history of ownership of the item.
 
@@ -30,15 +30,14 @@ supply/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-supply.md#create) - Generate a new object of supported type.\
-[`get`](c-supply.md#get) - Get object of supported type.\
-[`list`](c-supply.md#list) - List all objects owned by given user.\
+[`create`](c-supply.md#create) - Generate a new item object specified by the noun.\
+[`get`](c-supply.md#get) - Get item information specified by the noun.\
+[`list`](c-supply.md#list) - List all Item objects owned by given user.\
 [`update`](c-supply.md#update) - Update a specified object.\
 [`transfer`](c-supply.md#transfer) - Transfer a specified object register.\
 [`claim`](c-supply.md#claim) - Claim ownership of an object register from a transfer.\
 [`history`](c-supply.md#history) - Generate the history of all last states.\
-[`transactions`](c-supply.md#transactions) - List all transactions that modified specified object.\
-
+[`transactions`](c-supply.md#transactions) - List all transactions that modified specified object.\\
 
 ## `Supported Nouns`
 
@@ -73,7 +72,7 @@ Creates a new item on a readonly register.
 
 #### create/any
 
-Creates a new item specified by the format parameter. &#x20;
+Creates a new item specified by the format parameter.
 
 ### Parameters:
 
@@ -142,7 +141,7 @@ This updates the data value of the raw item.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : Required to  **identify** the item to update by name.  This is optional if the `address` is provided.
+`name` : Required to **identify** the item to update by name. This is optional if the `address` is provided.
 
 `address` : Required to **identify** the item to update by register address. This is optional if the `name` is provided.
 
@@ -154,8 +153,8 @@ This updates the data value of the raw item.
 
 ```
 {
-    "success": true,
-    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
 }
 [Completed in 18533.182336 ms]
 ```
@@ -174,7 +173,7 @@ Retrieves information for a single object for a type specified by the noun
 supply/get/noun
 ```
 
-This command supports the `item`,  `raw`, `readonly` and `any` nouns.
+This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
@@ -234,7 +233,7 @@ Retrieves information for a single object for a type specified by the noun
 supply/list/noun
 ```
 
-This command supports the `item`,  `raw`, `readonly` and `any` nouns.
+This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
@@ -300,7 +299,7 @@ This will initiate ownership transfer of the specified noun.
 supply/transfer/noun
 ```
 
-This command supports the `item`,  `raw` and `readonly` nouns.
+This command supports the `item`, `raw` and `readonly` nouns.
 
 #### transfer/item
 
@@ -353,7 +352,7 @@ This method will claim ownership of the specified noun by the recipient to compl
 supply/claim/noun
 ```
 
-This command supports the `item`,  `raw` and `readonly` nouns.
+This command supports the `item`, `raw` and `readonly` nouns.
 
 #### claim/item
 
@@ -408,7 +407,7 @@ This will get the history of changes to an item, including both the data and it'
 supply/history/noun
 ```
 
-This command supports the `item`,  `raw`, `readonly` and `any` nouns.
+This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
@@ -416,7 +415,7 @@ This command supports the `item`,  `raw`, `readonly` and `any` nouns.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : The name **identifying** the `item`.  This is optional if the address is provided.
+`name` : The name **identifying** the `item`. This is optional if the address is provided.
 
 `address` : The **register address** of the item. This is optional if the name is provided.
 
@@ -466,7 +465,7 @@ This will list off all of the transactions for the specified noun.
 supply/transactions/noun
 ```
 
-This command supports the `item`,  `raw`, `readonly` and `any` nouns.
+This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
@@ -587,6 +586,6 @@ This method supports the [Sorting / Filtering](c-supply.md#sorting-filtering) pa
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify)`
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys\*\*`(`\*\*`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign` and `verify)`
 
 ***
