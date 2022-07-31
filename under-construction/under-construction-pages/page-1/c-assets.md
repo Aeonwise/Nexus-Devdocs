@@ -4,13 +4,13 @@ description: ASSETS API
 
 # ASSETS
 
-An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.&#x20;
+An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.
 
 The `readonly` and `raw` formats are useful when developers wish to store arbitrary data, without incurring the overhead of defining an object. The value will be provided with the `data` parameter. The `readonly` format cannot be updated and is stored in a readonly register. The `raw` format is stored in a raw register and allows the data to be updated.
 
 The `basic` format allows callers to define an asset in terms of simple key=value pairs. It assumes all values are stored using the string data type. The key=value pairs can be updated.
 
-The `JSON` format allows callers to provide a detailed definition of the supply data structure, with each field defined with a specific data type and mutability. Items defined with one of the complex formats can be updated after their initial creation. &#x20;
+The `JSON` format allows callers to provide a detailed definition of the supply data structure, with each field defined with a specific data type and mutability. Items defined with one of the complex formats can be updated after their initial creation.
 
 The assets API also provides a history of changes to the values, as well as the history of ownership of the item.
 
@@ -33,14 +33,12 @@ The following verbs are currently supported by this API command-set:
 [`create`](c-assets.md#create) - Generate a new object of supported type.\
 [`get`](c-assets.md#get) - Get object of supported type.\
 [`list`](c-assets.md#list) - List all objects owned by given user.\
-`list/partial` - List all objects owned by given user.\
 [`update`](c-assets.md#update) - Update a specified object.\
 [`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
 [`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
 [`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
 [`transactions`](c-assets.md#transactions) - List all transactions that modified specified object.\
-[`history`](c-assets.md#history) - Generate the history of all last states.\
-
+[`history`](c-assets.md#history) - Generate the history of all last states.\\
 
 ## `Supported Nouns`
 
@@ -60,6 +58,12 @@ assets/list/asset
 
 The above command will list all the assets for a user account.
 
+## `Direct Endpoints`
+
+The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
+
+`list/partial` - List all objects owned by given user.
+
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
 Create a new object register specified by given noun.
@@ -68,23 +72,23 @@ Create a new object register specified by given noun.
 assets/create/noun
 ```
 
-This command supports the `asset`, `readonly`, `raw`,   and `any` nouns.
+This command supports the `asset`, `readonly`, `raw`, and `any` nouns.
 
 #### create/asset
 
-Creates a new asset in an object register. &#x20;
+Creates a new asset in an object register.
 
 #### create/readonly
 
-Creates a new asset in an readonly register. &#x20;
+Creates a new asset in an readonly register.
 
 #### create/raw
 
-Creates a new asset in a raw register. &#x20;
+Creates a new asset in a raw register.
 
 #### create/any
 
-Creates a new asset specified by the format parameter. &#x20;
+Creates a new asset specified by the format parameter.
 
 ### Parameters:
 
@@ -94,7 +98,7 @@ Creates a new asset specified by the format parameter. &#x20;
 
 `name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
 
-`format` : The format the caller is using to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`.  If the noun is `raw or readonly` the format has to be the same as the noun.
+`format` : The format the caller is using to define the asset. Values can be `readonly`, `raw`, `basic` and `JSON`. If the noun is `raw or readonly` the format has to be the same as the noun.
 
 `data` : Required for format type's `readonly` or `raw` and `any` noun, allows caller to add arbitrary data to object.
 
@@ -143,7 +147,7 @@ Retrieves information for a single object for a type specified by the noun
 assets/get/noun
 ```
 
-This command supports the `readonly`, `raw`, and `asset`  nouns.
+This command supports the `readonly`, `raw`, and `asset` nouns.
 
 #### get/asset
 
@@ -213,7 +217,7 @@ Retrieves information for a single object for a type specified by the noun
 assets/list/noun
 ```
 
-This command supports the `asset`, `readonly`, `raw`,   and `any` nouns.
+This command supports the `asset`, `readonly`, `raw`, and `any` nouns.
 
 #### list/asset
 
@@ -295,9 +299,9 @@ This command does not support the `asset`, `raw` or `readonly` nouns.
 
 `address` : Optional register address to **identify** the item to be transferred. This is optional if the name is provided.
 
-`format` : Required to specify the format to define the asset. Values can be `readonly`,  `raw`, `basic` and `JSON`.&#x20;
+`format` : Required to specify the format to define the asset. Values can be `readonly`, `raw`, `basic` and `JSON`.
 
-`data` : If format is `raw`, or `readonly` then this field contains the hex-encoded data to be stored in this asset.&#x20;
+`data` : If format is `raw`, or `readonly` then this field contains the hex-encoded data to be stored in this asset.
 
 `<fieldname>=<value>` : The caller can provide = pairs for each piece of data to update in the asset.
 
@@ -307,8 +311,8 @@ This command does not support the `asset`, `raw` or `readonly` nouns.
 
 ```
 {
-    "success": true,
-    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
+    "success": true,
+    "txid": "01947f824e9b117d618ed49a7dd84f0e7c4bb0896e40d0a95e04e27917e6ecb6b9a5ccfba7d0d5c308b684b95e98ada4f39bbac84db75e7300a09befd1ac0999"
 }
 [Completed in 18533.182336 ms]
 ```
@@ -327,7 +331,7 @@ This will initiate ownership transfer of the specified noun.
 assets/transfer/noun
 ```
 
-This command supports the `readonly`, `raw`, and `asset`  nouns.
+This command supports the `readonly`, `raw`, and `asset` nouns.
 
 ### Parameters:
 
@@ -372,7 +376,7 @@ This method will claim ownership of the specified noun by the recipient to compl
 assets/claim/noun
 ```
 
-This command supports the `readonly`, `raw`, and `asset`  nouns.
+This command supports the `readonly`, `raw`, and `asset` nouns.
 
 ### Parameters:
 
@@ -394,7 +398,6 @@ This command supports the `readonly`, `raw`, and `asset`  nouns.
     "txid": "01f35304d41d00b002ca02d3bd9cf6cfeb134f5c454d4b6f5a355e35ffc557cfb3756834f3cf5cbeaf98da6773adcaaeca80154d15e449d4876ddf35c0b895cf"
 }
 [Completed in 4978.949420 ms]
-
 ```
 
 #### Return values:
@@ -441,12 +444,11 @@ Create the token beforehand and use the token\_name or token address to tokenize
     "txid": "01f35304d41d00b002ca02d3bd9cf6cfeb134f5c454d4b6f5a355e35ffc557cfb3756834f3cf5cbeaf98da6773adcaaeca80154d15e449d4876ddf35c0b895cf"
 }
 [Completed in 4978.949420 ms]
-
 ```
 
 #### Return values:
 
-`success` : Boolean flag indicating that the asset tokenization  was successful.
+`success` : Boolean flag indicating that the asset tokenization was successful.
 
 `txid` : The ID (hash) of the transaction that includes the claimed asset.
 
@@ -466,7 +468,7 @@ This command only supports the `asset` noun.
 
 `session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
 
-`name` : The name **identifying** the `item`.  This is optional if the address is provided.
+`name` : The name **identifying** the `item`. This is optional if the address is provided.
 
 `address` : The **register address** of the item. This is optional if the name is provided.
 
