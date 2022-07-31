@@ -33,21 +33,21 @@ The following verbs are currently supported by this API command-set:
 [`create`](c-assets.md#create) - Generate a new asset specified by the noun.\
 [`get`](c-assets.md#get) - Get information on an asset specified by the noun.\
 [`list`](c-assets.md#list) - List all assets owned by a profile for the specified noun.\
-[`update`](c-assets.md#update) - Update information of a muatble field of an asset specified object.\
-[`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
-[`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
+[`update`](c-assets.md#update) - Update asset information specified by the noun.\
+[`transfer`](c-assets.md#transfer) - Transfer ownership of an asset to another profile.\
+[`claim`](c-assets.md#claim) - Claim ownership of a transferred asset object .\
 [`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
-[`transactions`](c-assets.md#transactions) - List all transactions that modified specified object.\
-[`history`](c-assets.md#history) - Generate the history of all last states of an asset.
+[`transactions`](c-assets.md#transactions) - List all transactions that modified specified asset object.\
+[`history`](c-assets.md#history) - Generate the history of all last states of the specified asset object.
 
 ## `Supported Nouns`
 
 The following nouns are supported for this API command-set:
 
 \[`asset`] - An object register containing an asset object.\
-\[`raw`] - An object register containing a raw object.\
-\[`readonly`] - An object register containing a read-only object.\
-\[`any`] - An object selection noun allowing mixed assets.\
+\[`raw`] - An object register containing a raw asset object.\
+\[`readonly`] - An object register containing a read-only asset object.\
+\[`any`] - An object selection noun allowing mixed asset objects.\
 \[`schema`] - An object register containing a user-defined asset object.\
 \
 **Example:**
