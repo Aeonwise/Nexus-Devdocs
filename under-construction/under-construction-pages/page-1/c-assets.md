@@ -30,15 +30,15 @@ assets/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-assets.md#create) - Generate a new object of supported type.\
-[`get`](c-assets.md#get) - Get object of supported type.\
-[`list`](c-assets.md#list) - List all objects owned by given user.\
-[`update`](c-assets.md#update) - Update a specified object.\
+[`create`](c-assets.md#create) - Generate a new asset specified by the noun.\
+[`get`](c-assets.md#get) - Get information on an asset specified by the noun.\
+[`list`](c-assets.md#list) - List all assets owned by a profile for the specified noun.\
+[`update`](c-assets.md#update) - Update information of a muatble field of an asset specified object.\
 [`transfer`](c-assets.md#transfer) - Transfer a specified object register.\
 [`claim`](c-assets.md#claim) - Claim ownership of an object register from a transfer.\
 [`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
 [`transactions`](c-assets.md#transactions) - List all transactions that modified specified object.\
-[`history`](c-assets.md#history) - Generate the history of all last states.\\
+[`history`](c-assets.md#history) - Generate the history of all last states of an asset.
 
 ## `Supported Nouns`
 
@@ -62,7 +62,7 @@ The above command will list all the assets for a user account.
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-`list/partial` - List all objects owned by given user.
+``[`list/partial`](c-assets.md#list-partial) -Retrieve information on a tokenised asset.
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
@@ -287,7 +287,7 @@ This method provides the user with the ability to update fields specified by the
 assets/update/noun
 ```
 
-This command does not support the `asset`, `raw` or `readonly` nouns.
+This command supports the `asset` and `raw`  nouns.
 
 ### Parameters:
 
@@ -616,3 +616,15 @@ This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) pa
 `address` : The register address for this asset.
 
 `type` : Asset register type. Can be `OBJECT`, `RAW` or `READONLY.`
+
+## list/partial
+
+This will retrieve information on a tokenized asset.
+
+### Parameters:
+
+### Results:
+
+#### Return value JSON object:
+
+#### Return values:
