@@ -708,32 +708,48 @@ This will retrieve a summary of balance information across all accounts belongin
 #### Return value JSON object:
 
 ```
-{
-    "token_name": "NXS",
-    "token": "0000000000000000000000000000000000000000000000000000000000000000",
-    "available": 1000,
-    "pending": 50,
-    "unconfirmed": 5,
-    "stake": 5000,
-    "immature": 100
-}
+[
+    {
+        "available": 1573155.354522,
+        "unclaimed": 0.0,
+        "unconfirmed": 0.0,
+        "decimals": 6,
+        "token": "0",
+        "ticker": "NXS",
+        "stake": 15000.0,
+        "immature": 0.0
+    },
+    {
+        "available": 10000.0,
+        "unclaimed": 0.0,
+        "unconfirmed": 0.0,
+        "decimals": 2,
+        "token": "8E61JVQENSGtFsr3ivscvC77Tvr3oLm8Zqnw3K4H4vbbTUBeGqW",
+        "ticker": "NEX"
+    }
+]
+[Completed in 6521.434131 ms]
 ```
 
 #### Return values:
 
-`token_name` : The name of the token that these balances are for, if known.
-
-`token` : The register address of the token that these balances are for.
-
 `available` : The current balance across all accounts that is available to be spent.
 
-`pending` : The sum of all debit and coinbase transactions made to your accounts that are confirmed but have not yet been credited. This does NOT include immature and unconfirmed amounts.
+`unclaimed`: The sum of all debit transactions made to other accounts that are not confirmed
 
 `unconfirmed` : The sum of all debit transactions made to your accounts that are not confirmed, or credits you have made to your accounts that are not yet confirmed (not yet included in a block).
 
-`immature` The sum of all coinbase transactions that have not yet reached maturity. Only included when returning NXS balances.
+`decimals` : The no of decimals for the token.
+
+`token` : The register address of the token that these balances are for.
+
+`ticker` : The name of the token that these balances are for, if known.
+
+`pending` : The sum of all debit and coinbase transactions made to your accounts that are confirmed but have not yet been credited. This does NOT include immature and unconfirmed amounts.
 
 `stake` : The amount of NXS currently staked in the trust account. Only included when returning NXS balances.
+
+`immature` : The sum of all coinbase transactions that have not yet reached maturity. Only included when returning NXS balances.
 
 ## `get/stakeinfo`
 
@@ -753,20 +769,19 @@ This will retrieve account values and staking metrics for the trust account belo
 
 ```
 {
-    "address": "8FJxzexVDUN5YiQYK4QjvfRNrAUym8FNu4B8yvYGXgKFJL8nBse",
-    "balance": 150,
-    "stake": 5000,
-    "trust": 54322,
-    "new": false,
-    "staking": true,
-    "pooled": false,
+    "address": "8EunQ82qVdnuQkX2gXKZr5P55kQRz4KbpaLdCVBjBNu8jeys4C4",
+    "balance": 337.362522,
+    "stake": 15000.0,
+    "trust": 338495,
     "onhold": false,
-    "stakerate": 1.97,
-    "trustweight": 58.97,
-    "blockweight": 47.62,
-    "stakeweight": 54.03,
+    "stakerate": 1.8052413746600344,
+    "trustweight": 53.440432749937834,
+    "blockweight": 15.358176013767272,
+    "stakeweight": 49.63220707632078,
+    "staking": true,
     "change": false
 }
+[Completed in 0.237830 ms]
 ```
 
 #### Return values:
