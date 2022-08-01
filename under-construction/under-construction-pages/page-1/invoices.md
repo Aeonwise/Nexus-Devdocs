@@ -24,7 +24,7 @@ The following verbs are currently supported by this API command-set:
 [`get`](invoices.md#get) - Get object of supported type.\
 [`list`](invoices.md#list) - List all objects owned by given user.\
 [`pay`](invoices.md#user-content-create-2) - Issue funds from supported type.\
-[`cancel`](invoices.md#user-content-create-3) - To cancel the created invoice\
+[`cancel`](invoices.md#user-content-create-3) - To cancel an invoice.\
 [`history`](invoices.md#user-content-create-4) - Generate the history of all last states.\
 [`transactions`](invoices.md#transactions) - List all transactions that modified specified object.
 
@@ -35,8 +35,7 @@ The following nouns are supported for this API command-set:
 \[`invoice`] - An object register containing a token-id and balance.\
 \[`outstanding`] - Generate the history of all last states.\
 \[`paid`] - Claim a specified object register.\
-\[`cancelled`] - Claim a specified object register.\
-
+\[`cancelled`] - Claim a specified object register.\\
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
@@ -93,7 +92,7 @@ This command only supports the `invoice` noun.
 
 ## `get`
 
-Retrieves information about an invoice.&#x20;
+Retrieves information about an invoice.
 
 ```
 invoices/get/noun
@@ -588,6 +587,6 @@ This method supports the [Sorting / Filtering](invoices.md#sorting-filtering) pa
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys\*\*`(`\*\*`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign` and `verify).`
 
 ***
