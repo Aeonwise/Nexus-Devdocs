@@ -37,13 +37,13 @@ names/verb/noun
 The following verbs are currently supported by this API command-set:
 
 [`create`](c-names.md#create) - Generate a new object of supported type.\
-[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object of supported type.\
-[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given user.\
-[`transfer`](c-names.md#transfer) - Transfer ownership of an object register to a recipient.\
-[`claim`](c-names.md#claim) - Claim ownership of an object register from a transfer.\
+[`get`](../../../getting-started/tritium++-api/broken-reference/) - Get object information of supported type.\
+[`list`](../../../getting-started/tritium++-api/broken-reference/) - List all objects owned by given profile.\
+[`transfer`](c-names.md#transfer) - Transfer ownership of an object register.\
+[`claim`](c-names.md#claim) - Claim ownership of an object register.\
 [`history`](c-names.md#history) - Generate the history of all last states.\
 [`transactions`](c-names.md#transactions) - List all transactions that modified specified object.\
-[`update`](c-names.md#update) - Update an object register\\
+[`update`](c-names.md#update) - Update an object register.
 
 ## `Supported Nouns`
 

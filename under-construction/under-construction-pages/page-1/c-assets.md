@@ -30,15 +30,15 @@ assets/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-assets.md#create) - Generate a new asset specified by the noun.\
-[`get`](c-assets.md#get) - Get information on an asset specified by the noun.\
-[`list`](c-assets.md#list) - List all assets owned by a profile for the specified noun.\
-[`update`](c-assets.md#update) - Update asset information specified by the noun.\
-[`transfer`](c-assets.md#transfer) - Transfer ownership of an asset to another profile.\
-[`claim`](c-assets.md#claim) - Claim ownership of a transferred asset object .\
+[`create`](c-assets.md#create) - Generate a new object of supported type.\
+[`get`](c-assets.md#get) -  Get object information of supported type.\
+[`list`](c-assets.md#list) - List all objects owned by given profile.\
+[`update`](c-assets.md#update) - Update an object register.\
+[`transfer`](c-assets.md#transfer) - Transfer ownership of an object register.\
+[`claim`](c-assets.md#claim) - Claim ownership of an object register.\
 [`tokenize`](c-assets.md#claim-1) - To represent ownership of an asset object with a token object.\
-[`transactions`](c-assets.md#transactions) - List all transactions that modified specified asset object.\
-[`history`](c-assets.md#history) - Generate the history of all last states of the specified asset object.
+[`transactions`](c-assets.md#transactions) - List all transactions that modified specified object.\
+[`history`](c-assets.md#history) - Generate the history of all last states.&#x20;
 
 ## `Supported Nouns`
 

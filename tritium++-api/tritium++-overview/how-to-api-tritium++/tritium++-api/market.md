@@ -11,7 +11,7 @@ The Market API is an on-chain, order book based P2P marketplace for trading toke
 Each market pair represents the current exchange rate for the two tokens. Here’s how to interpret that information, using market=NXS/XYZ—or the Nexus-to-XYZ exchange rate—as an example:
 
 {% hint style="info" %}
-The current price is the last traded price and has nothing to do with the bid or ask price.&#x20;
+The current price is the last traded price and has nothing to do with the bid or ask price.
 {% endhint %}
 
 * The token on the left (NXS) is the base token.
@@ -44,7 +44,7 @@ The following verbs are currently supported by this API command-set:
 [`list`](market.md#user-content-credit) - List all orders for a specified marketplace.\
 [`execute`](market.md#user-content-credit-1) - To full-fill a specified market order.\
 [`cancel`](market.md#user-content-credit-2) - To cancel a specified market order\
-[`user`](market.md#user-content-credit-3) -  Retrieves all market orders for a user or profile.
+[`user`](market.md#user-content-credit-3) - Retrieves all market orders for a profile.
 
 ## `Supported Nouns`
 
@@ -53,8 +53,7 @@ The following nouns are supported for this API command-set:
 \[`bid`] - A market order placed to buy a token or asset\
 \[`ask`] - A market order placed to sell a token or asset\
 \[`order`] - A market order which can be a bid or ask\
-\[`executed`] - A market order which has been full-filled.\
-
+\[`executed`] - A market order which has been full-filled.\\
 
 ## `create` <a href="#user-content-create" id="user-content-create"></a>
 
@@ -75,7 +74,7 @@ This creates a bid market order for market=token1/token2, ask for market=token2/
 To creates a ask market order for market=token1/token2, bid for market=token2/token1
 
 {% hint style="info" %}
-When market=token1/token2  is reversed to market=token2/token1 the price has to be changed accordingly. But the market price is determined by the first order which creates the market pair.
+When market=token1/token2 is reversed to market=token2/token1 the price has to be changed accordingly. But the market price is determined by the first order which creates the market pair.
 
 Check the image below:
 {% endhint %}
@@ -96,7 +95,7 @@ Check the image below:
 
 `to` : This is the receiving account name or register address to credit token1.
 
-`from` : This is the sending account name or register address to debit the token2.&#x20;
+`from` : This is the sending account name or register address to debit the token2.
 
 ### Results:
 
@@ -190,7 +189,6 @@ This command supports all the nouns.
         }
     ]
 }
-
 ```
 
 #### Return Values:
@@ -207,13 +205,13 @@ This command supports all the nouns.
 
 `price` : The price for that particular order.
 
-`type`  : The type of order `bid` or `ask`
+`type` : The type of order `bid` or `ask`
 
 `contracts` : The array of contracts bound to this transaction and their details with opcodes.
 
 `{`
 
-`OP` :  The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
+`OP` : The contract operation. Can be `APPEND`, `CLAIM`, `COINBASE`, `CREATE`, `CREDIT`, `DEBIT`, `FEE`, `GENESIS`, `LEGACY`, `TRANSFER`, `TRUST`, `STAKE`, `UNSTAKE`, `WRITE`.
 
 `from` : For `DEBIT` and `CREDIT` transactions, the register address of the senders account.
 
@@ -221,9 +219,9 @@ This command supports all the nouns.
 
 `amount` : the token amount of the transaction.
 
-`token` :  the register address of the token that the transaction relates to. Set to 0 for NXS transactions
+`token` : the register address of the token that the transaction relates to. Set to 0 for NXS transactions
 
-`ticker` :  The global name assigned to the token.
+`ticker` : The global name assigned to the token.
 
 `address` : The register address for this account. The address (or name that hashes to this address) is needed when creating crediting or debiting the account.
 
@@ -264,7 +262,7 @@ This command supports the `bid`, `ask` and `order` nouns.
 
 #### Return Values:
 
-`success` :  Boolean flag indicating that the order was executed successfully.
+`success` : Boolean flag indicating that the order was executed successfully.
 
 `txid` : The hash of the transaction that was generated for this tx. If using `-autotx` this field will be ommitted.
 
@@ -294,15 +292,15 @@ This command supports the `bid`, `ask` and `order` nouns.
 
 ```
 {
-    "success": true,
-    "txid": "010b0dbb226835c59b62d0761feac027cceb75ceb7d8d52abbd8072158415cf8c210af810f4d41ee6ad86dc6d754a17a0269db9025ba47becdb87a19ee71e99f"
+    "success": true,
+    "txid": "010b0dbb226835c59b62d0761feac027cceb75ceb7d8d52abbd8072158415cf8c210af810f4d41ee6ad86dc6d754a17a0269db9025ba47becdb87a19ee71e99f"
 }
 [Completed in 4976.551936 ms]
 ```
 
 #### Return Values:
 
-`success` : Boolean flag indicating that cancelling the order was successful.&#x20;
+`success` : Boolean flag indicating that cancelling the order was successful.
 
 `txid` : The hash of the transaction that was generated for cancelling the order. If using `-autotx` this field will be ommitted.
 

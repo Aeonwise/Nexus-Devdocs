@@ -30,14 +30,14 @@ supply/verb/noun
 
 The following verbs are currently supported by this API command-set:
 
-[`create`](c-supply.md#create) - Generate a new item object specified by the noun.\
-[`get`](c-supply.md#get) - Get item information specified by the noun.\
-[`list`](c-supply.md#list) - List all Item objects owned by given user.\
-[`update`](c-supply.md#update) - Update a specified object.\
-[`transfer`](c-supply.md#transfer) - Transfer a specified object register.\
-[`claim`](c-supply.md#claim) - Claim ownership of an object register from a transfer.\
+[`create`](c-supply.md#create) - Generate a new object of supported type\
+[`get`](c-supply.md#get) - Get object of supported type.\
+[`list`](c-supply.md#list) - List all objects owned by given profile.\
+[`update`](c-supply.md#update) - Update an object register.\
+[`transfer`](c-supply.md#transfer) - Transfer ownership of an object register.\
+[`claim`](c-supply.md#claim) - Claim ownership of an object register.\
 [`history`](c-supply.md#history) - Generate the history of all last states.\
-[`transactions`](c-supply.md#transactions) - List all transactions that modified specified object.\\
+[`transactions`](c-supply.md#transactions) - List all transactions that modified specified object.
 
 ## `Supported Nouns`
 
