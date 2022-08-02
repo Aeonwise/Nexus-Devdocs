@@ -4,6 +4,10 @@ description: NAMES API
 
 # NAMES
 
+{% hint style="warning" %}
+This page is still being updated.
+{% endhint %}
+
 Names and Namespaces are special kinds of object registers that are used as locators to other object registers in the blockchain. When an object register is first created (an asset for example) the caller can provide a name for the register. If a name is provided then a Name object register is also created with its register address based on a hash of the name. The Name object also has a address field, which is populated with the register address of the register (asset, token, account etc) that the Name "points" to. In this way, objects can be retrieved by name by first hashing the name to get the Name object's address, retrieving the Name object, and then using the address stored within it to retrieve the object register. A Name then, is best thought of as a named index to object registers.
 
 The TAO Naming System (TNS) allows Name objects to be created in one of three different contexts, - `local`, `namespaced`, and `global` and will be owned by a profile. Names must be unique within the profile in which it was defined.

@@ -4,6 +4,10 @@ description: INVOICES API
 
 # INVOICES
 
+{% hint style="warning" %}
+This page is still being updated.
+{% endhint %}
+
 The Invoices API provides users and application developers the ability to issue and pay invoices on the Nexus blockchain. The full supported endpoint of the invoices URI is as follows:
 
 ```

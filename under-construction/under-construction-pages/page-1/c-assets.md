@@ -4,6 +4,10 @@ description: ASSETS API
 
 # ASSETS
 
+{% hint style="warning" %}
+This page is still being updated.
+{% endhint %}
+
 An asset is a user-defined data structure that is stored in an object register, owned by a particular signature chain. Assets can hold one or more pieces of data and users can define the fields (name, data type, mutability) that data is stored in. The assets API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.
 
 The `readonly` and `raw` formats are useful when developers wish to store arbitrary data, without incurring the overhead of defining an object. The value will be provided with the `data` parameter. The `readonly` format cannot be updated and is stored in a readonly register. The `raw` format is stored in a raw register and allows the data to be updated.

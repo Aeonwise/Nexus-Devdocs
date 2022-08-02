@@ -4,6 +4,10 @@ description: SUPPLY API
 
 # SUPPLY
 
+{% hint style="warning" %}
+This page is still being updated.
+{% endhint %}
+
 The Supply API provides functionality to support the ownership transfer requirements typical of a supply chain process. Items in the supply chain can be given a value and this value can be updated over time. The supply API supports the `readonly`, `raw`, `basic` and `JSON` formats and the user is required to specify the format.
 
 The `readonly` and `raw` formats are useful when developers wish to store arbitrary data, without incurring the overhead of defining an object. The value will be provided with the `data` parameter. The `readonly` format cannot be updated and is stored in a readonly register. The `raw` format is stored in a raw register and allows the data to be updated.

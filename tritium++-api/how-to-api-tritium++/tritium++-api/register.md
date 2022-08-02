@@ -4,6 +4,10 @@ description: REGISTER API
 
 # REGISTER
 
+{% hint style="warning" %}
+This page is still being updated.
+{% endhint %}
+
 The Register API gives access to the register data and this allows network wide information to be presented. The full supported endpoint of the profiles URI is as follows:
 
 ```
@@ -36,12 +40,11 @@ The following nouns are supported for this API command-set:
 \[`namespace`] - An object register containing namespaces.\
 \[`crypto`] - An object register which holds public key hashes.\
 \[`object`] - An object register containing user-defined data structure.\
-\[`raw`] -  An object register containing raw data.\
+\[`raw`] - An object register containing raw data.\
 \[`readonly`] - An object register which is readonly.\
 \[`append`] - An object register which can be appended.\
 \[`any`] - An object selection noun allowing mixed accounts of different tokens.\
-\
-
+\\
 
 ## `list`
 
@@ -109,7 +112,7 @@ Retrieves information for a single object for a type specified by the noun
 register/get/noun
 ```
 
-This command  supports the `account`, `trust` and `token` nouns.
+This command supports the `account`, `trust` and `token` nouns.
 
 #### `get/account`
 
@@ -184,7 +187,7 @@ This will get the history and ownership of the specified NXS or token account.
 
 #### history/trust
 
-This will get the history and ownership of the specified trust account.&#x20;
+This will get the history and ownership of the specified trust account.
 
 #### history/token
 
@@ -434,20 +437,19 @@ This method supports the [Sorting / Filtering](register.md#sorting-filtering) pa
 
 `reference` : For `DEBIT` and `CREDIT` transactions this is the user supplied reference used by the recipient to relate the transaction to an order or invoice number.
 
-`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys**`(`**`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign`  and `verify).`
+`object` : Returns a list of all hashed public keys in the crypto object register for the specified profile. The object result will contain the nine default keys\*\*`(`\*\*`app1,` `app2, app3,` `auth, cert` `lisp,` `network,` `sign` and `verify).`
 
 ***
 
 ## Register API with Query DSL
 
-A few register API calls which will showcase the power of registers, LLD, which is the database and  Query-DSL. This is going to be a powerful tool for developers.\
-
+A few register API calls which will showcase the power of registers, LLD, which is the database and Query-DSL. This is going to be a powerful tool for developers.\\
 
 {% hint style="info" %}
 All these calls will require the latest build of the core and will not work with the current stable version.
 {% endhint %}
 
-#### &#x20;To calculate the sum of all NXS on the tritium chain.
+#### To calculate the sum of all NXS on the tritium chain.
 
 ```
 register/list/accounts,trust/total/sum sort=total order=desc limit=none where='object. token=0'

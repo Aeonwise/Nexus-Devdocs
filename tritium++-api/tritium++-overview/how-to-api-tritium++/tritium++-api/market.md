@@ -4,6 +4,10 @@ description: MARKET API
 
 # MARKET
 
+{% hint style="warning" %}
+This page is still being updated.
+{% endhint %}
+
 The Market API is an on-chain, order book based P2P marketplace for trading tokens and assets. Assets can include both digital and physical goods. Users start by creating a new market with a token pair (NXS/XYZ) and other users can participate in that particular market, execute a particular order or cancel a placed order.
 
 #### How market prices Are quoted

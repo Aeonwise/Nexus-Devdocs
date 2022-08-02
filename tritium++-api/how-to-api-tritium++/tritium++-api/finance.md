@@ -372,7 +372,7 @@ Retrieves information for a specified token address.
 
 #### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the profile.
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
