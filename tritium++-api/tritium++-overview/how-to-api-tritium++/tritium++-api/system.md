@@ -10,12 +10,12 @@ The System API provides public access to information about this node. This inclu
 
 The following commands are direct endpoints and thus do not support the above `verb` and `noun` structure available above.
 
-[`stop`](broken-reference/)\
-[`get/info`](broken-reference/)\
-[`get/metrics`](broken-reference/)\
-[`list/peers`](broken-reference/)\
-[`list/lisp-eids`](broken-reference/)\
-[`validate/address`](broken-reference/)
+[`stop`](system.md#stop)\
+[`get/info`](system.md#get-info)\
+[`get/metrics`](system.md#get-metrics)\
+[`list/peers`](system.md#list-peers)\
+[`list/lisp-eids`](system.md#list-lisp-eids)\
+[`validate/address`](system.md#validate-address)``
 
 Direct endpoints support filters and operators.
 

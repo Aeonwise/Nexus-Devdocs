@@ -98,7 +98,7 @@ Creates a new asset specified by the format parameter.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional for **noun** `name` as a _UTF-8_ encoded string that will generate a name object register that points to new object. If noun is `token` this will be created as a global name.
 
@@ -167,7 +167,7 @@ Lists all assets for register type raw.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
@@ -241,7 +241,7 @@ Lists all assets for register type raw.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results:
 
@@ -295,7 +295,7 @@ This command supports the `asset` and `raw`  nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
@@ -341,7 +341,7 @@ This command supports the `readonly`, `raw`, and `asset` nouns.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional name **identifying** the item to be transferred. This is optional if the address is provided.
 
@@ -386,7 +386,7 @@ This command supports the `readonly`, `raw`, and `asset` nouns.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid` : Required the **transaction ID** (hash) of the item transfer transaction for which is being claimed.
 
@@ -424,7 +424,7 @@ This command only supports the `asset` noun.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the asset to be tokenized. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
@@ -470,7 +470,7 @@ This command only supports the `asset` noun.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name **identifying** the `item`. This is optional if the address is provided.
 
@@ -536,7 +536,7 @@ This command supports the `asset`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Required to **identify** the asset to get the transactions. This is optional if the address is provided.
 
@@ -626,6 +626,8 @@ This method supports the [Sorting / Filtering](c-assets.md#sorting-filtering) pa
 This will retrieve information on a tokenized asset.
 
 ### Parameters:
+
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results:
 

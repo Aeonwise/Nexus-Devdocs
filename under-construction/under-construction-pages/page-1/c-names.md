@@ -85,7 +85,7 @@ This will create a new namespace.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 #### create/name
 
@@ -148,7 +148,7 @@ names/get/namespace
 
 ### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 #### get/namespace
 
@@ -232,7 +232,7 @@ This command supports all the nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results:
 
@@ -306,7 +306,7 @@ This will transfer ownership of an namespace
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the name to be transferred. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
 
@@ -351,7 +351,7 @@ Namespaces that have been transferred need to be claimed by the recipient before
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid` : The transaction ID (hash) of the corresponding name transfer transaction for which you are claiming.
 
@@ -390,7 +390,7 @@ This command supports the `name`, `namespace`, `global` and `local` nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional to **identify** the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
 
@@ -452,7 +452,7 @@ This command supports the `account, trust and token` nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional to **identify** the name. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). This is optional if the address is provided.
 
@@ -592,7 +592,7 @@ This command does not support the `name` or `namespace` nouns.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the Name object to update. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the asset was created in the callers namespace (their username), then the username can be omitted from the name if the session parameter is provided (as we can deduce the username from the session)
 

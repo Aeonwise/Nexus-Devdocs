@@ -82,7 +82,7 @@ Creates a new item specified by the format parameter.
 
 `pin` : Required if **locked**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional **name** to identify the asset. If provided a Name object will also be created in the users local namespace, allowing the asset to be accessed/retrieved by name. If no name is provided the asset will need to be accessed/retrieved by its 256-bit register address.
 
@@ -143,7 +143,7 @@ This updates the data value of the raw item.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Required to **identify** the item to update by name. This is optional if the `address` is provided.
 
@@ -183,7 +183,7 @@ This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the item. This is optional if the address is provided. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the item was created in the callers namespace (their username), then the username can be omitted from the name if the `session` parameter is provided (as we can deduce the username from the session)
 
@@ -241,7 +241,7 @@ This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results:
 
@@ -321,7 +321,7 @@ This initiates transfer for a readonly item to a recipient.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional name **identifying** the item to be transferred. This is optional if the address is provided.
 
@@ -374,7 +374,7 @@ This claims ownership of a readonly item which has been transferred.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid` : Required the **transaction ID** (hash) of the item transfer transaction for which is being claimed.
 
@@ -417,7 +417,7 @@ This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 `pin` : Required if **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name **identifying** the `item`. This is optional if the address is provided.
 
@@ -473,7 +473,7 @@ This command supports the `item`, `raw`, `readonly` and `any` nouns.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 

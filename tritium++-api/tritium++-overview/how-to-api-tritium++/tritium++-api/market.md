@@ -89,7 +89,7 @@ Check the image below:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `market` : token1/token2 - The token pair for which the order is created.
 
@@ -134,7 +134,7 @@ This command supports all the nouns.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `market` : Required to **identify** the market token pair.
 
@@ -243,7 +243,7 @@ This command supports the `bid`, `ask` and `order` nouns.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid`: The transactionID of the bid /ask which is being executed.
 
@@ -286,7 +286,7 @@ This command supports the `bid`, `ask` and `order` nouns.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid` : The transaction hash for the order to be cancelled.
 
@@ -342,7 +342,7 @@ This retrieves all the cancelled orders for the user.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `market` : Required to **identify** the market token pair.
 

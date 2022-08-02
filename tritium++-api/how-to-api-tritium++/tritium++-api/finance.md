@@ -174,7 +174,7 @@ Create a new token object.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `data` : Optional for `any` **noun**, allows caller to add arbitrary data to object.
 
@@ -233,7 +233,7 @@ This deducts an amount of tokens from a token address to send to a token account
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `from` : Required to **identify** the account to debit, this can be the name or the register address. The name should be in the format username:name (for local names) or namespace::name (for names in a namespace). However, if the account was created in the callers namespace (their username), then the username can be omitted from the name.
 
@@ -285,7 +285,7 @@ Increment an amount of tokens received from a token account.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid` : The hash in **hexadecimal** encoding of the transaction that we are crediting.
 
@@ -319,7 +319,7 @@ This command only supports the `account` noun.
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : Optional for i**dentifying** the account to debit the tokens from to be burnt. This is optional if the `address` is provided.
 
@@ -372,7 +372,7 @@ Retrieves information for a specified token address.
 
 #### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the profile.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
@@ -425,7 +425,7 @@ This lists all the token addresses for the logged in user.
 
 #### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 The parameters used are [Query DSL](finance.md#query-dsl), along with the [sorting / filtering](finance.md#user-content-create)
 
@@ -505,7 +505,7 @@ This lists all the token addresses for the logged in user.
 
 #### Parameters:
 
-`session` : When using multi-user API mode the session parameter must be supplied to identify which profile to update.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `name` : The name identifying the account/trust/token. This is optional if the address is provided.
 
@@ -571,7 +571,7 @@ List out all the transactions for the token address.
 
 #### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 
@@ -699,7 +699,7 @@ This will retrieve a summary of balance information across all accounts belongin
 
 #### Parameters:
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) to return data for. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `token_name` : Optional name of a token to return the balances for. `token` can be supplied as an alternative to `token_name`. Defaults to `NXS`.
 
@@ -761,7 +761,7 @@ This will retrieve account values and staking metrics for the trust account belo
 
 #### Parameters:
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `fieldname`: This optional field can be used to filter the response to return only a single field from the account.
 
@@ -840,7 +840,7 @@ To remove a stake change request, you can either set an expiration time, or set 
 
 `pin` : The PIN for the signature chain.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `amount` : The new amount of NXS to stake.
 
@@ -872,7 +872,7 @@ Parameters:
 
 `pin` : Required if **locked**. The `PIN` to authorize the transaction.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `txid` : The transaction ID (hash) of the debit or transfer transaction that you wish to void.
 
@@ -902,7 +902,7 @@ The method uses the arbitrary `data` field in the account object register to tra
 
 `pin` : The PIN for the signature chain.
 
-`session` : For multi-user API mode, (configured with multiuser=1) the session is required to identify which session (sig-chain) owns the trust account. For single-user API mode the session should not be supplied.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `walletpassphrase` : Optional field to provide the wallet passphrase. This value is required if the wallet is not currently unlocked.
 

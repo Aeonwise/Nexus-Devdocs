@@ -14,7 +14,7 @@
   * [Primitive Operators](why-nexus/advanced-contracts/primitive-operators.md)
   * [Conditional Operators](why-nexus/advanced-contracts/conditional-operators.md)
 
-## Nexus For Developers&#x20;
+## Nexus For Developers
 
 * [🤓 Understanding Nexus](nexus-for-developers/understanding-nexus/README.md)
   * [Ethereum to Nexus](nexus-for-developers/understanding-nexus/ethereum-to-nexus.md)
@@ -36,7 +36,7 @@
   * [Connect Node to Interface](mainnet/nodes/connect-node-to-interface.md)
   * [Update Mainnet CLI Node](mainnet/nodes/update-mainnet-node.md)
 
-## TESTNET&#x20;
+## TESTNET
 
 * [🛠 Testnet Node](testnet/testnet/README.md)
   * [Run a Testnet Node](testnet/testnet/run-a-testnet-node.md)
@@ -79,6 +79,7 @@
     * [SESSIONS](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/sessions/README.md)
     * [FINANCE](tritium++-api/how-to-api-tritium++/tritium++-api/finance.md)
     * [REGISTER](tritium++-api/how-to-api-tritium++/tritium++-api/register.md)
+    * [Page 2](tritium++-api/tritium++-overview/tritium++-api/page-2.md)
     * [LEDGER](tritium++-api/tritium++-overview/how-to-api-tritium++/tritium++-api/ledger.md)
     * [NAMES](under-construction/under-construction-pages/page-1/c-names.md)
     * [ASSETS](under-construction/under-construction-pages/page-1/c-assets.md)
