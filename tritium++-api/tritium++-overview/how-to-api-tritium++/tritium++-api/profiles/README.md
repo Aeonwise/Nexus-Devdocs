@@ -110,7 +110,7 @@ This method provides the user with the ability to set or change the restore seed
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the profile. For single-user API mode the `session` should not be supplied.&#x20;
 
 `password` : Required to **authenticate.** The existing password for this signature chain.
 
@@ -204,7 +204,7 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the profile. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results:
 
@@ -245,7 +245,7 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the profile. For single-user API mode the `session` should not be supplied.&#x20;
 
 This method supports the [Sorting / Filtering](./#sorting-filtering) parameters.
 
@@ -313,7 +313,7 @@ This command only supports the `master` noun.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the profile. For single-user API mode the `session` should not be supplied. .
 
 `verbose` : Optional, determines how much transaction data to include in the response. Supported values are :
 

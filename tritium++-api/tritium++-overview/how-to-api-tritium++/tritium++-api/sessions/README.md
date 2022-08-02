@@ -84,7 +84,7 @@ These commands only supports the `local` noun.
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `mining` : Required for **unlocking** mining transactions. This boolean value unlocks the session for mining.
 
@@ -136,7 +136,7 @@ These commands only supports the `local` noun.
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** -multiuser=1 to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 `mining` : Required for **locking** mining transactions. This boolean value locks the session for mining.
 
@@ -196,7 +196,7 @@ These commands only supports the `local` noun.
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results: <a href="#results-1" id="results-1"></a>
 
@@ -281,7 +281,7 @@ This command only supports the `local` noun.
 
 `pin` : Required to **authenticate**. The PIN for this profile.
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied. &#x20;
 
 ### Results:
 
@@ -310,7 +310,7 @@ This command only supports the `local` noun.
 
 ### Parameters:
 
-`session` : Required by **argument** `-multiuser=1` to be supplied to identify the user session that is creating the transaction.
+`session` : Required by **argument** `-multiuser=1` to be supplied to identify the session. For single-user API mode the `session` should not be supplied.&#x20;
 
 ### Results:
 
